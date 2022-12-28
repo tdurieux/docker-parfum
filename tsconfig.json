@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["es6"],
+    "target": "es5",
+    "sourceMap": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outDir": "./build"
+    // "moduleResolution": "node"
+  },
+  "include": ["lib/cli/index.ts", "lib/**/*.ts"],
+  "exclude": []
+}

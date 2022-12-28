@@ -1,0 +1,516 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en" ng-app="dinghy-website" ng-controller="mainController">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Docker Debloat Experiment</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/external/bootstrap.min.css" />
+
+    <!-- JS -->
+    <script src="js/external/angular.min.js"></script>
+    <script src="js/external/angular-animate.min.js"></script>
+    <script src="js/external/angular-touch.min.js"></script>
+    <script src="js/external/angular-route.js"></script>
+
+    <script src="js/external/jquery-3.4.1.min.js"></script>
+
+    <script src="js/external/popper.min.js"></script>
+    <script src="js/external/bootstrap.min.js"></script>
+    <script src="js/external/naturalSort.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js"></script>
+    <script src="js/external/process.js"></script>
+    <script>
+      process.argv.push("dockerSmellRepair");
+      __dirname = "";
+    </script>
+    <script src="js/dockerSmellRepair.js"></script>
+
+    <script src="js/external/monaco-editor/min/vs/loader.js"></script>
+    <script>
+      require.config({
+        paths: { vs: "js/external/monaco-editor/min/vs" },
+      });
+      require(["vs/editor/editor.main"], function () {
+        window.monacoEditor = monaco.editor.create(
+          document.querySelector(".editor"),
+          {
+            language: "dockerfile",
+            scrollBeyondLastLine: false,
+          }
+        );
+      });
+    </script>
+    <script type="module" src="js/dinghy.js"></script>
+
+    <style>
+      #wrapper,
+      #page-wrapper,
+      body,
+      html {
+        height: 100%;
+        width: 100%;
+      }
+      .editor {
+        height: 100%;
+      }
+      .scrollable {
+        position: relative;
+        max-height: 100%;
+        overflow: hidden;
+        overflow-y: scroll;
+        overflow-wrap: break-word;
+        margin: 0;
+        padding: 0;
+      }
+      pre {
+        font-size: 70.5%;
+        color: #212529;
+        background: #e5e5e5;
+        padding: 5px;
+        border-radius: 4px;
+        margin-top: 3px;
+      }
+      .ast-highlight {
+        background: #bcbcbc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="page-wrapper" class="row m-0">
+        <div class="col col-6 scrollable shadow">
+          <div class="editor"></div>
+        </div>
+        <div class="col col-6 scrollable">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item" ng-repeat="e in cursorPosition">
+                {{e}}
+              </li>
+            </ol>
+          </nav>
+          <div class="accordion m-2" id="accordionExample">
+            <div class="card" ng-if="results == null">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button
+                    class="btn btn-link btn-block text-left"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    What is this?
+                  </button>
+                </h2>
+              </div>
+
+              <div
+                id="collapseOne"
+                class="collapse show"
+                aria-labelledby="headingOne"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  Please copy past a Dockerfile in the editor on the left. The
+                  Dockerfile will be analyzed to indentify best-practice
+                  violations and repair suggestions. Note: The AST is fully
+                  reprint therefore there may have some slight differences in
+                  term of spacing. If you identify any other issue please report
+                  it.
+                </div>
+              </div>
+            </div>
+            <div class="card" ng-if="results == null">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button
+                    class="btn btn-link btn-block text-left"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseHow"
+                    aria-expanded="true"
+                    aria-controls="collapseHow"
+                  >
+                    How does it work?
+                  </button>
+                </h2>
+              </div>
+
+              <div
+                id="collapseHow"
+                class="collapse"
+                aria-labelledby="headingHow"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <ol class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      The Dockerfile is parsed into an AST representation.
+                    </li>
+                    <li class="list-group-item">
+                      The AST is anotated to indentify URLs, PATH in bash
+                      commands.
+                    </li>
+                    <li class="list-group-item">
+                      The AST is enriched with the stucture of frquent bash
+                      commands.
+                    </li>
+                    <li class="list-group-item">
+                      The violations are identified using template matching.
+                    </li>
+                    <li class="list-group-item">
+                      The violations are repaired by manipulating the AST.
+                    </li>
+                    <li class="list-group-item">
+                      The repaired Dockerfiles are reprinted.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="card" ng-if="results == null">
+              <div class="card-header" id="headingRules">
+                <h2 class="mb-0">
+                  <button
+                    class="btn btn-link btn-block text-left"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseRules"
+                    aria-expanded="true"
+                    aria-controls="collapseRules"
+                  >
+                    Rules
+                  </button>
+                </h2>
+              </div>
+
+              <div
+                id="collapseRules"
+                class="collapse"
+                aria-labelledby="headingRules"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Rule</th>
+                        <th scope="col">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>curlUseFlagF</td>
+                        <td>Use the -f flag when using curl.</td>
+                      </tr>
+                      <tr>
+                        <td>npmCacheCleanAfterInstall</td>
+                        <td>Run npm cache clean after npm install</td>
+                      </tr>
+                      <tr>
+                        <td>npmCacheCleanUseForce</td>
+                        <td>
+                          Use the --force flag when using npm cache clean.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>rmRecursiveAfterMktempD</td>
+                        <td>A rm -r should occur after a mktemp -d</td>
+                      </tr>
+                      <tr>
+                        <td>curlUseHttpsUrl</td>
+                        <td>Use https:// urls with curl</td>
+                      </tr>
+                      <tr>
+                        <td>wgetUseHttpsUrl</td>
+                        <td>Use https:// urls with wget</td>
+                      </tr>
+                      <tr>
+                        <td>pipUseNoCacheDir</td>
+                        <td>Use --no-cache-dir flag with pip</td>
+                      </tr>
+                      <tr>
+                        <td>mkdirUsrSrcThenRemove</td>
+                        <td>
+                          After running mkdir /usr/src* use rm -rf /usr/src* to
+                          clean up.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>configureShouldUseBuildFlag</td>
+                        <td>
+                          When using ./configure in a Dockerfile pass the
+                          --build flag.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>gemUpdateSystemRmRootGem</td>
+                        <td>
+                          After running gem update --system remove the
+                          /root/.gem directory.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>sha256sumEchoOneSpaces</td>
+                        <td>
+                          sha256sum takes an input on stdin with one space.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>gemUpdateNoDocument</td>
+                        <td>
+                          If you run gem update you should have previously added
+                          the --no-document flag to the .gemrc config.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>gpgVerifyAscRmAsc</td>
+                        <td>
+                          If you run gpg --verify X.asc you should remove the
+                          X.asc file.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>yumInstallForceYes</td>
+                        <td>Use the -y flag with yum install.</td>
+                      </tr>
+                      <tr>
+                        <td>yumInstallRmVarCacheYum</td>
+                        <td>
+                          If you run yum install ... you should remove the
+                          /var/cache/yum directory.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>tarSomethingRmTheSomething</td>
+                        <td>
+                          If you run tar X.tar you should remove the X.tar file.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>gpgUseBatchFlag</td>
+                        <td>
+                          Use the --batch flag when using gpg in a docker image.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>gpgUseHaPools</td>
+                        <td>Use ha.pool.* instead of pool.* with gpg.</td>
+                      </tr>
+                      <tr>
+                        <td>ruleAptGetInstallUseY</td>
+                        <td>
+                          Must use the -y flag to avoid apt-get install
+                          requesting user interaction.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ruleAptGetInstallUseNoRec</td>
+                        <td>
+                          Use the --no-install-recommends flag to save layer
+                          space and avoid hidden dependencies.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ruleAptGetUpdatePrecedesInstall</td>
+                        <td>
+                          apt-get update && apt-get install should happen in a
+                          single layer.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ruleAptGetInstallThenRemoveAptLists</td>
+                        <td>
+                          rm -rf /var/lib/apt/lists/* after apt-get install to
+                          save layer space.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>apkAddUseNoCache</td>
+                        <td>Use the --no-cache flag when using apk add.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="card" ng-if="results != null">
+              <div class="card-header" id="headingContent">
+                <h2 class="mb-0">
+                  <button
+                    class="btn btn-link btn-block text-left"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseContent"
+                    aria-expanded="true"
+                    aria-controls="collapseContent"
+                  >
+                    This Dockerfile contains
+                  </button>
+                </h2>
+              </div>
+
+              <div
+                id="collapseContent"
+                class="collapse show"
+                aria-labelledby="headingContent"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <div ng-if="results.queries.commands.length">
+                    <strong>{{results.queries.commands.length}} Commands</strong
+                    >: {{results.queries.commands.join(', ')}}
+                  </div>
+                  <div ng-if="results.queries.packages.length">
+                    <strong>{{results.queries.packages.length}} Packages</strong
+                    >: {{results.queries.packages.join(', ')}}
+                  </div>
+                  <div ng-if="results.queries.urls.length">
+                    <strong>{{results.queries.urls.length}} URLs</strong>:
+                    {{results.queries.urls.join(', ')}}
+                  </div>
+                  <div ng-if="results.queries.paths.length">
+                    <strong>{{results.queries.paths.length}} Paths</strong>:
+                    {{results.queries.paths.join(', ')}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" ng-show="results != null">
+              <div class="card-header" id="headingNode">
+                <h2 class="mb-0">
+                  <button
+                    class="btn btn-link btn-block text-left"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseNode"
+                    aria-expanded="true"
+                    aria-controls="collapseNode"
+                  >
+                    Dockerfile nodes
+                  </button>
+                </h2>
+              </div>
+
+              <div
+                id="collapseNode"
+                class="collapse"
+                aria-labelledby="headingContent"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-sm ml-1 mb-1"
+                    ng-repeat="n in nodes"
+                    ng-mouseenter="hoverNodeType(n[0])"
+                    ng-mouseleave="clearNodeType()"
+                  >
+                    {{n[0]}}
+                    <span class="badge bg-secondary">{{n[1]}}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card" ng-show="results != null">
+              <div class="card-header" id="headingQuery">
+                <h2 class="mb-0">
+                  <button
+                    class="btn btn-link btn-block text-left"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseQuery"
+                    aria-expanded="true"
+                    aria-controls="collapseQuery"
+                  >
+                    Query
+                  </button>
+                </h2>
+              </div>
+
+              <div
+                id="collapseQuery"
+                class="collapse"
+                aria-labelledby="headingQuery"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <p>
+                    Query the Dockerfile AST. Write a note type per line and
+                    represent the hierarchy with indentation or space.
+                  </p>
+                  <textarea
+                    ng-model="queryStr"
+                    style="width: 100%; height: 200px"
+                  ></textarea>
+                  <ul class="list-group">
+                    <li
+                      class="list-group-item"
+                      ng-repeat="r in queryResults"
+                      ng-mouseenter="hoverNodePosition(r.position)"
+                      ng-mouseleave="clearNodeType()"
+                    >
+                      <pre class="m-0"><code>{{r.toString(true)}}</code></pre>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="card" ng-if="results.violations.length > 0">
+              <div class="card-header" id="headingViolations">
+                <h2 class="mb-0">
+                  <button
+                    class="btn btn-link btn-block text-left"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseViolations"
+                    aria-expanded="true"
+                    aria-controls="collapseViolations"
+                  >
+                    {{results.violations.length}} Violations
+                  </button>
+                </h2>
+              </div>
+
+              <div
+                id="collapseViolations"
+                class="collapse show"
+                aria-labelledby="headingViolations"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <div
+                    class="card m-2"
+                    ng-repeat="(index, violation) in results.violations"
+                  >
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        {{index + 1}}. {{violation.rule.name}}
+                      </h5>
+                      <div
+                        class="card-text"
+                        ng-bind="violation.rule.description"
+                      ></div>
+                      <pre><code ng-bind-html="diff(violation.repaired)"></code></pre>
+                      <button
+                        class="btn btn-sm btn-outline-primary"
+                        ng-click="apply(violation.repaired)"
+                      >
+                        Apply fix
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

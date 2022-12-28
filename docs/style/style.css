@@ -1,0 +1,144 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+html,
+body,
+#wrapper,
+#page-wrapper,
+.container-fluid {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+#filters {
+  position: sticky;
+  top: 0;
+  height: 47px;
+  z-index: 1020;
+}
+#page-wrapper {
+  margin-top: -47px;
+  padding-top: 47px;
+}
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+h2 {
+  margin-top: 5px;
+}
+a {
+  color: #5a6b7d;
+}
+
+.scrollable {
+  position: relative;
+  max-height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+  margin: 0;
+  padding: 0;
+}
+
+.colHeader {
+  position: sticky;
+  text-align: center;
+  font-weight: bold;
+  background: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  top: 0;
+  z-index: 9999;
+}
+.list-group-item {
+  cursor: pointer;
+  padding: 4px 7px;
+}
+.list-group-item {
+  background-color: inherit;
+}
+.list-group-item.active {
+  color: #000000;
+  background-color: #ffffff;
+  border-color: #eeeeee;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.state {
+  content: " ";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: red;
+}
+.state.passing {
+  background: green;
+}
+.states .state {
+  margin-right: 5px;
+}
+.modal-dialog {
+  width: 80%;
+}
+.modal-content {
+  border-radius: 0;
+  border: 0;
+}
+
+.table {
+  margin-bottom: 0px;
+}
+table {
+  border: 0;
+}
+
+table tr {
+  cursor: pointer;
+}
+
+table tr:hover {
+  background: #ddd !important;
+}
+
+.categoriesSection {
+  position: sticky;
+  top: 0;
+  z-index: 99999;
+}
+.log {
+  max-height: 350px;
+  overflow-y: scroll;
+  border: 1px solid #dddddd;
+  padding: 3px;
+  margin: 7px 0;
+  font-family: "Fira Code", "Consolas", serif, sans-serif;
+}
+
+.log .info {
+  color: green;
+}
+.log .number {
+  color: blue;
+}
+.log .error {
+  color: red;
+}
+.log .warning {
+  color: orange;
+}
+.log .debug {
+  color: purple;
+}
+
+.categories .btn {
+  background: #dddddd;
+  font-size: 12px;
+  padding: 4px 7px;
+}
+.categories .btn.active {
+  background: #5a6b7d;
+}
