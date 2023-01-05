@@ -1,13 +1,13 @@
 {
-  "name": "docker-smell-repair",
+  "name": "@tdurieux/docker-parfum",
   "version": "1.0.0",
   "description": "",
   "main": "./build/index.js",
   "scripts": {
     "test": "jest --coverage",
     "build": "rm -rf ./build; tsc",
-    "doc": "rm -rf ./docs && typedoc --name Docker-Smell-Repair lib",
-    "browserify": "tsc && browserify build/browser.js -o docs/js/dockerSmellRepair.js --standalone dockerSmellRepair --igv __filename,__dirname,Buffer -g @browserify/uglifyify -p common-shakeify"
+    "doc": "rm -rf ./docs/api && typedoc --out docs/api --name Docker-Parfum lib",
+    "browserify": "tsc && browserify build/browser.js -o docs/js/dockerParfum.js --standalone dockerParfum --igv __filename,__dirname,Buffer -g @browserify/uglifyify -p common-shakeify"
   },
   "author": "Thomas Durieux",
   "license": "ISC",

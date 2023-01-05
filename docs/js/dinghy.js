@@ -120,12 +120,12 @@ angular
       function parseQuery(queryStr) {
         const lines = queryStr.split("\n");
         let parentStack = [
-          { indent: -1, query: dockerSmellRepair.dinghy.nodeType.Q("_") },
+          { indent: -1, query: dockerParfum.dinghy.nodeType.Q("_") },
         ];
         for (const line of lines) {
           if (line.trim().length == 0) continue;
           const indent = line.match(/^\s*/)[0].length;
-          const q = dockerSmellRepair.dinghy.nodeType.Q(line.trim());
+          const q = dockerParfum.dinghy.nodeType.Q(line.trim());
           if (indent > parentStack.at(-1).indent) {
             parentStack.at(-1).query.children.push(q);
             parentStack.push({
@@ -163,37 +163,37 @@ angular
       $scope.analyze = async function () {
         console.time("AST PARSING");
         const dockerParser =
-          new dockerSmellRepair.dinghy.dockerfileParser.DockerParser(
-            new dockerSmellRepair.dinghy.File(undefined, $scope.dockerfile)
+          new dockerParfum.dinghy.dockerfileParser.DockerParser(
+            new dockerParfum.dinghy.File(undefined, $scope.dockerfile)
           );
 
         const ast = await dockerParser.parse();
-        $scope.ast = ast;
-        const matcher = new dockerSmellRepair.Matcher(ast);
+        const matcher = new dockerParfum.Matcher(ast);
         const violations = matcher.matchAll();
 
+        $scope.ast = ast;
         const output = { queries: {}, violations: [] };
         output.queries.packages = ast
-          .find(dockerSmellRepair.dinghy.nodeType.Q("SC-APT-PACKAGE"))
+          .find(dockerParfum.dinghy.nodeType.Q("SC-APT-PACKAGE"))
           .map((n) => n.toString())
           .filter((v, i, a) => a.indexOf(v) === i);
         output.queries.urls = ast
-          .find(dockerSmellRepair.dinghy.nodeType.Q("ABS-PROBABLY-URL"))
+          .find(dockerParfum.dinghy.nodeType.Q("ABS-PROBABLY-URL"))
           .map((n) => n.toString())
           .filter((v, i, a) => a.indexOf(v) === i);
         output.queries.paths = ast
-          .find(dockerSmellRepair.dinghy.nodeType.Q("ABS-MAYBE-PATH"))
+          .find(dockerParfum.dinghy.nodeType.Q("ABS-MAYBE-PATH"))
           .map((n) => n.toString())
           .concat(
             ast
-              .find(dockerSmellRepair.dinghy.nodeType.Q("BASH-PATH"))
+              .find(dockerParfum.dinghy.nodeType.Q("BASH-PATH"))
               .map((n) => n.toString())
           )
           .filter((v, i, a) => a.indexOf(v) === i);
         output.queries.commands = ast
           .find(
-            dockerSmellRepair.dinghy.nodeType.Q(
-              dockerSmellRepair.dinghy.nodeType.BashCommandCommand
+            dockerParfum.dinghy.nodeType.Q(
+              dockerParfum.dinghy.nodeType.BashCommandCommand
             )
           )
           .map((n) => n.toString())
@@ -206,8 +206,7 @@ angular
             rule: v.rule,
             position: v.node.position,
             repaired: (
-              node.getParent(dockerSmellRepair.dinghy.nodeType.DockerFile) ||
-              node
+              node.getParent(dockerParfum.dinghy.nodeType.DockerFile) || node
             ).toString(true),
           });
           markers.push({

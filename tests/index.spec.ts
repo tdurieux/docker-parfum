@@ -1,5 +1,5 @@
 import { nodeType } from "@tdurieux/dinghy";
-import { Matcher } from "../lib/rule-matcher";
+import { Matcher } from "../lib";
 import {
   apkAddUseNoCache,
   configureShouldUseBuildFlag,
