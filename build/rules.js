@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RULES = exports.apkAddUseNoCache = exports.ruleAptGetInstallThenRemoveAptLists = exports.ruleAptGetInstallUseNoRec = exports.ruleAptGetUpdatePrecedesInstall = exports.ruleMoreThanOneInstall = exports.ruleAptGetInstallUseY = exports.gpgUseHaPools = exports.gpgUseBatchFlag = exports.tarSomethingRmTheSomething = exports.yumInstallRmVarCacheYum = exports.yumInstallForceYes = exports.gpgVerifyAscRmAsc = exports.gemUpdateNoDocument = exports.sha256sumEchoOneSpaces = exports.gemUpdateSystemRmRootGem = exports.configureShouldUseBuildFlag = exports.mkdirUsrSrcThenRemove = exports.pipUseNoCacheDir = exports.wgetUseHttpsUrl = exports.curlUseHttpsUrl = exports.rmRecursiveAfterMktempD = exports.npmCacheCleanUseForce = exports.npmCacheCleanAfterInstall = exports.curlUseFlagF = void 0;
+exports.RULES = exports.apkAddUseNoCache = exports.aptGetInstallThenRemoveAptLists = exports.aptGetInstallUseNoRec = exports.aptGetUpdatePrecedesInstall = exports.moreThanOneInstall = exports.aptGetInstallUseY = exports.gpgUseHaPools = exports.gpgUseBatchFlag = exports.tarSomethingRmTheSomething = exports.yumInstallRmVarCacheYum = exports.yumInstallForceYes = exports.gpgVerifyAscRmAsc = exports.gemUpdateNoDocument = exports.sha256sumEchoOneSpaces = exports.gemUpdateSystemRmRootGem = exports.configureShouldUseBuildFlag = exports.mkdirUsrSrcThenRemove = exports.pipUseNoCacheDir = exports.wgetUseHttpsUrl = exports.curlUseHttpsUrl = exports.rmRecursiveAfterMktempD = exports.npmCacheCleanUseForce = exports.npmCacheCleanAfterInstall = exports.curlUseFlagL = exports.curlUseFlagF = void 0;
 var dinghy_1 = require("@tdurieux/dinghy");
 var dinghy_enricher_1 = __importDefault(require("dinghy-enricher"));
 function postFixWith(node, toInsert) {
@@ -95,7 +95,7 @@ function postFixWith(node, toInsert) {
 exports.curlUseFlagF = {
     scope: "INTRA-DIRECTIVE",
     name: "curlUseFlagF",
-    description: "Use the -f flag when using curl.",
+    description: "The `-f` option in curl stands for \"fail silently.\" When this option is used, `curl` will return an exit code of `22` if the HTTP request returns an error code that is >= 400. This can be useful in a Dockerfile if you want to run a curl command to download a file from the internet, but you don't want the build to fail if the download fails. Instead, you can check the exit code of the curl command and handle the error in your script.\n\nFor example:\n\nCopy code:\n```dockerfile\nRUN curl -f -o file.tar.gz https://example.com/file.tar.gz ||   { echo \"Download failed\" && exit 1; }\n```",
     query: dinghy_1.nodeType.Q("SC-CURL"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-CURL-F-FAIL"),
@@ -112,10 +112,30 @@ exports.curlUseFlagF = {
         });
     }); },
 };
+exports.curlUseFlagL = {
+    scope: "INTRA-DIRECTIVE",
+    name: "curlUseFlagF",
+    description: "The `-L` option in `curl` stands for \"follow redirects.\" When this option is used, curl will follow any redirects that it encounters when making an HTTP request. This can be useful in a Dockerfile if you want to download a file from a URL that may redirect to another URL.",
+    query: dinghy_1.nodeType.Q("SC-CURL"),
+    consequent: {
+        inNode: dinghy_1.nodeType.Q("SC-CURL-F-LOCATION"),
+    },
+    source: "Implicit",
+    repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
+        var node;
+        return __generator(this, function (_a) {
+            node = violation;
+            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+                .setPosition(node.children[0].position)
+                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("-L"))));
+            return [2];
+        });
+    }); },
+};
 exports.npmCacheCleanAfterInstall = {
     scope: "INTRA-DIRECTIVE",
     name: "npmCacheCleanAfterInstall",
-    description: "Run npm cache clean after npm install",
+    description: "Running npm cache clean after npm install in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.",
     query: dinghy_1.nodeType.Q("SC-NPM-INSTALL"),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-NPM-CACHE-CLEAN"),
@@ -139,7 +159,7 @@ exports.npmCacheCleanAfterInstall = {
 exports.npmCacheCleanUseForce = {
     scope: "INTRA-DIRECTIVE",
     name: "npmCacheCleanUseForce",
-    description: "Use the --force flag when using npm cache clean.",
+    description: "Using the --force flag with npm cache clean can override the default behavior of npm and force the cache to be cleaned, even if it is not more than 3 days old or if npm is in a \"read-only\" state.",
     query: dinghy_1.nodeType.Q("SC-NPM-CACHE-CLEAN"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-NPM-F-FORCE"),
@@ -160,7 +180,7 @@ exports.npmCacheCleanUseForce = {
 exports.rmRecursiveAfterMktempD = {
     scope: "INTRA-DIRECTIVE",
     name: "rmRecursiveAfterMktempD",
-    description: "A rm -r should occur after a mktemp -d",
+    description: "Using mktemp -d followed by rm -r in a Dockerfile can create and delete a temporary directory, helping to keep the image small and clean up sensitive data.",
     query: dinghy_1.nodeType.Q("SC-MKTEMP", dinghy_1.nodeType.Q("SC-MKTEMP-F-DIRECTORY")),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-F-FORCE")),
@@ -186,7 +206,7 @@ exports.rmRecursiveAfterMktempD = {
 exports.curlUseHttpsUrl = {
     scope: "INTRA-DIRECTIVE",
     name: "curlUseHttpsUrl",
-    description: "Use https:// urls with curl",
+    description: "Using https instead of http with curl in a Dockerfile can provide an encrypted connection for transferring data and ensure that curl can access resources that may require https.",
     query: dinghy_1.nodeType.Q("SC-CURL", dinghy_1.nodeType.Q("SC-CURL-URL", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-URL-PROTOCOL-HTTP")))),
     consequent: {
         inNode: dinghy_1.nodeType.Q("ABS-URL-PROTOCOL-HTTPS"),
@@ -210,7 +230,7 @@ exports.curlUseHttpsUrl = {
 exports.wgetUseHttpsUrl = {
     scope: "INTRA-DIRECTIVE",
     name: "wgetUseHttpsUrl",
-    description: "Use https:// urls with wget",
+    description: "Using https instead of http with wget in a Dockerfile can provide an encrypted connection for transferring data and ensure that wget can access resources that may require https.",
     query: dinghy_1.nodeType.Q("SC-WGET", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-WGET-URL", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-URL-PROTOCOL-HTTP"))))),
     consequent: {
         inNode: dinghy_1.nodeType.Q("ABS-URL-PROTOCOL-HTTPS"),
@@ -234,7 +254,7 @@ exports.wgetUseHttpsUrl = {
 exports.pipUseNoCacheDir = {
     scope: "INTRA-DIRECTIVE",
     name: "pipUseNoCacheDir",
-    description: "Use --no-cache-dir flag with pip",
+    description: "Using the --no-cache-dir flag with pip in a Dockerfile can disable the package cache, ensuring that the latest version of a package and its dependencies are installed.",
     query: dinghy_1.nodeType.Q("SC-PIP-INSTALL"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-PIP-F-NO-CACHE-DIR"),
@@ -254,7 +274,7 @@ exports.pipUseNoCacheDir = {
 exports.mkdirUsrSrcThenRemove = {
     scope: "INTRA-DIRECTIVE",
     name: "mkdirUsrSrcThenRemove",
-    description: "After running mkdir /usr/src* use rm -rf /usr/src* to clean up.",
+    description: "Running rm -rf /usr/src* after creating the /usr/src directory in a Dockerfile helps keep the file system organized, reduce clutter, and free up space, but it is important to be cautious when using the rm -rf command.",
     query: dinghy_1.nodeType.Q("SC-MKDIR", dinghy_1.nodeType.Q("SC-MKDIR-PATH", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-USR-SRC-DIR")))),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-USR-SRC-DIR")))),
@@ -282,7 +302,7 @@ exports.mkdirUsrSrcThenRemove = {
 exports.configureShouldUseBuildFlag = {
     scope: "INTRA-DIRECTIVE",
     name: "configureShouldUseBuildFlag",
-    description: "When using ./configure in a Dockerfile pass the --build flag.",
+    description: "Passing the --build flag to ./configure in a Dockerfile can help to ensure that the configure script correctly detects the current build environment and generates the correct Makefiles.",
     query: dinghy_1.nodeType.Q("SC-CONFIGURE"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-CONFIGURE-BUILD"),
@@ -302,7 +322,7 @@ exports.configureShouldUseBuildFlag = {
 exports.gemUpdateSystemRmRootGem = {
     scope: "INTRA-DIRECTIVE",
     name: "gemUpdateSystemRmRootGem",
-    description: "After running gem update --system remove the /root/.gem directory.",
+    description: "Removing the /root/.gem directory after running gem update --system can ensure that all of the installed gems are compatible with the new version of gem and that the image starts with a clean slate.",
     query: dinghy_1.nodeType.Q("SC-GEM-UPDATE"),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ABS-PATH-ABSOLUTE"), dinghy_1.nodeType.Q("ABS-PATH-DOT-GEM"), dinghy_1.nodeType.Q("ABS-PATH-ROOT-DIR"))),
@@ -326,7 +346,7 @@ exports.gemUpdateSystemRmRootGem = {
 exports.sha256sumEchoOneSpaces = {
     scope: "INTRA-DIRECTIVE",
     name: "sha256sumEchoOneSpaces",
-    description: "sha256sum takes an input on stdin with one space.",
+    description: "The sha256sum command reads input from stdin with one space as a separator in order to distinguish the input from a filename.",
     query: dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinary, dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinaryLhs, dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-DOUBLE-SPACE"))))), dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinaryRhs, dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-SHA-256-SUM", dinghy_1.nodeType.Q("SC-SHA-256-SUM-F-CHECK"))))),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-SINGLE-SPACE"))),
@@ -357,7 +377,7 @@ exports.sha256sumEchoOneSpaces = {
 exports.gemUpdateNoDocument = {
     scope: "INTER-DIRECTIVE",
     name: "gemUpdateNoDocument",
-    description: "If you run gem update you should have previously added the --no-document flag to the .gemrc config.",
+    description: "Adding the --no-document flag to the .gemrc config file or using it with gem update can speed up the update process by skipping the installation of documentation for updated gems.",
     query: dinghy_1.nodeType.Q("SC-GEM-UPDATE"),
     consequent: {
         beforeNode: dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("SC-ECHO-ITEM", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-CONFIG-NO-DOCUMENT")))),
@@ -389,7 +409,7 @@ exports.gemUpdateNoDocument = {
 exports.gpgVerifyAscRmAsc = {
     scope: "INTRA-DIRECTIVE",
     name: "gpgVerifyAscRmAsc",
-    description: "If you run gpg --verify <X>.asc you should remove the <x>.asc file.",
+    description: "It is generally good practice to remove the .asc file after verifying its signature because the .asc file serves no further purpose once the signature has been verified.",
     query: dinghy_1.nodeType.Q("SC-GPG", dinghy_1.nodeType.Q("SC-GPG-VERIFY", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-EXTENSION-ASC")))),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH")),
@@ -413,7 +433,7 @@ exports.gpgVerifyAscRmAsc = {
 exports.yumInstallForceYes = {
     scope: "INTRA-DIRECTIVE",
     name: "yumInstallForceYes",
-    description: "Use the -y flag with yum install.",
+    description: "Using the -y flag with yum install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.",
     query: dinghy_1.nodeType.Q("SC-YUM-INSTALL"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-YUM-F-ASSUMEYES"),
@@ -433,7 +453,7 @@ exports.yumInstallForceYes = {
 exports.yumInstallRmVarCacheYum = {
     scope: "INTRA-DIRECTIVE",
     name: "yumInstallRmVarCacheYum",
-    description: "If you run yum install <...> you should remove the /var/cache/yum directory.",
+    description: "Removing the /var/cache/yum directory after running yum install in a Dockerfile helps reduce the size of the final image and can improve build times, as well as prevent issues caused by outdated or inconsistent cache data.",
     query: dinghy_1.nodeType.Q("SC-YUM-INSTALL"),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-F-RECURSIVE"), dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-VAR-CACHE-YUM")))),
@@ -458,7 +478,7 @@ exports.yumInstallRmVarCacheYum = {
 exports.tarSomethingRmTheSomething = {
     scope: "INTRA-DIRECTIVE",
     name: "tarSomethingRmTheSomething",
-    description: "If you run tar <X>.tar you should remove the <x>.tar file.",
+    description: "Removing the .tar file after extracting its contents in a Dockerfile helps reduce the size of the final image and can improve build times, as well as keep the file system organized and reduce clutter.",
     query: dinghy_1.nodeType.Q("SC-TAR", dinghy_1.nodeType.Q("SC-TAR-FILE", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-EXTENSION-TAR")))),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-EXTENSION-TAR")))),
@@ -490,7 +510,7 @@ exports.tarSomethingRmTheSomething = {
 exports.gpgUseBatchFlag = {
     scope: "INTRA-DIRECTIVE",
     name: "gpgUseBatchFlag",
-    description: "Use the --batch flag when using gpg in a docker image.",
+    description: "Using the --batch flag with gpg in a Dockerfile allows the command to run without user input, but it is important to carefully consider the implications of using the flag to ensure that it is appropriate for the task at hand.",
     query: dinghy_1.nodeType.Q("SC-GPG"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-GPG-F-BATCH"),
@@ -510,7 +530,7 @@ exports.gpgUseBatchFlag = {
 exports.gpgUseHaPools = {
     scope: "INTRA-DIRECTIVE",
     name: "gpgUseHaPools",
-    description: "Use ha.pool.* instead of pool.* with gpg.",
+    description: "Using ha.pool.* instead of pool.* with gpg in a Dockerfile improves key server access reliability and efficiency.",
     query: dinghy_1.nodeType.Q("SC-GPG", dinghy_1.nodeType.Q("SC-GPG-KEYSERVER", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-URL-POOL")))),
     consequent: {
         inNode: dinghy_1.nodeType.Q("ABS-URL-HA-POOL"),
@@ -528,10 +548,10 @@ exports.gpgUseHaPools = {
         });
     }); },
 };
-exports.ruleAptGetInstallUseY = {
+exports.aptGetInstallUseY = {
     scope: "INTRA-DIRECTIVE",
-    name: "ruleAptGetInstallUseY",
-    description: "Must use the -y flag to avoid apt-get install requesting user interaction.",
+    name: "aptGetInstallUseY",
+    description: "Using the -y flag with apt-get install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.",
     query: dinghy_1.nodeType.Q("SC-APT-INSTALL"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-APT-F-YES"),
@@ -548,7 +568,7 @@ exports.ruleAptGetInstallUseY = {
         });
     }); },
 };
-exports.ruleMoreThanOneInstall = {
+exports.moreThanOneInstall = {
     scope: "INTER-DIRECTIVE",
     name: "ruleMoreThanOneInstall",
     description: "all apt-get install should group into one.",
@@ -561,10 +581,10 @@ exports.ruleMoreThanOneInstall = {
         });
     }); },
 };
-exports.ruleAptGetUpdatePrecedesInstall = {
+exports.aptGetUpdatePrecedesInstall = {
     scope: "INTRA-DIRECTIVE",
-    name: "ruleAptGetUpdatePrecedesInstall",
-    description: "apt-get update && apt-get install should happen in a single layer.",
+    name: "aptGetUpdatePrecedesInstall",
+    description: "Running apt-get update and apt-get install in a single layer in a Dockerfile improves efficiency, reliability, and readability.",
     query: dinghy_1.nodeType.Q("SC-APT-INSTALL"),
     consequent: {
         beforeNode: dinghy_1.nodeType.Q("SC-APT-UPDATE"),
@@ -599,10 +619,10 @@ exports.ruleAptGetUpdatePrecedesInstall = {
         });
     }); },
 };
-exports.ruleAptGetInstallUseNoRec = {
-    name: "ruleAptGetInstallUseNoRec",
+exports.aptGetInstallUseNoRec = {
+    name: "aptGetInstallUseNoRec",
     scope: "INTRA-DIRECTIVE",
-    description: "Use the --no-install-recommends flag to save layer space and avoid hidden dependencies.",
+    description: "Using the --no-install-recommends flag with apt-get install in a Dockerfile helps save layer space, improve build times, and reduce the size and attack surface of the final image, as well as prevent hidden dependencies.",
     query: dinghy_1.nodeType.Q("SC-APT-INSTALL"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-APT-F-NO-INSTALL-RECOMMENDS"),
@@ -619,10 +639,10 @@ exports.ruleAptGetInstallUseNoRec = {
         });
     }); },
 };
-exports.ruleAptGetInstallThenRemoveAptLists = {
+exports.aptGetInstallThenRemoveAptLists = {
     scope: "INTRA-DIRECTIVE",
     name: "ruleAptGetInstallThenRemoveAptLists",
-    description: "rm -rf /var/lib/apt/lists/* after apt-get install to save layer space.",
+    description: "Running rm -rf /var/lib/apt/lists/* after apt-get install in a Dockerfile can improve efficiency and reduce the size of the image.",
     query: dinghy_1.nodeType.Q("SC-APT-INSTALL"),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ABS-GLOB-STAR"), dinghy_1.nodeType.Q("ABS-APT-LISTS"), dinghy_1.nodeType.Q("ABS-PATH-VAR"))),
@@ -646,10 +666,11 @@ exports.ruleAptGetInstallThenRemoveAptLists = {
 exports.apkAddUseNoCache = {
     scope: "INTRA-DIRECTIVE",
     name: "apkAddUseNoCache",
-    description: "Use the --no-cache flag when using apk add.",
+    description: "Using the --no-cache flag with apk add in a Dockerfile can help prevent issues caused by installing outdated packages and ensure that the latest version of a package is installed, but it can increase build times.",
     query: dinghy_1.nodeType.Q("SC-APK-ADD"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-APK-F-NO-CACHE"),
+        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ABS-VAR-CACHE-APK"))),
     },
     source: "https://github.com/docker-library/php/pull/228/commits/85d48c88b3e3dae303118275202327f14a8106f4",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -665,6 +686,7 @@ exports.apkAddUseNoCache = {
 };
 exports.RULES = [
     exports.curlUseFlagF,
+    exports.curlUseFlagL,
     exports.npmCacheCleanAfterInstall,
     exports.npmCacheCleanUseForce,
     exports.rmRecursiveAfterMktempD,
@@ -682,10 +704,10 @@ exports.RULES = [
     exports.tarSomethingRmTheSomething,
     exports.gpgUseBatchFlag,
     exports.gpgUseHaPools,
-    exports.ruleAptGetInstallUseY,
-    exports.ruleAptGetInstallUseNoRec,
-    exports.ruleAptGetUpdatePrecedesInstall,
-    exports.ruleAptGetInstallThenRemoveAptLists,
+    exports.aptGetInstallUseY,
+    exports.aptGetInstallUseNoRec,
+    exports.aptGetUpdatePrecedesInstall,
+    exports.aptGetInstallThenRemoveAptLists,
     exports.apkAddUseNoCache,
 ];
 //# sourceMappingURL=rules.js.map

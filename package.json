@@ -7,7 +7,7 @@
     "test": "jest --coverage",
     "build": "rm -rf ./build; tsc",
     "doc": "rm -rf ./docs && typedoc --name Docker-Smell-Repair lib",
-    "browserify": "tsc && browserify build/browser.js -o docs/js/dockerSmellRepair.js --standalone dockerSmellRepair --igv __filename,__dirname,Buffer"
+    "browserify": "tsc && browserify build/browser.js -o docs/js/dockerSmellRepair.js --standalone dockerSmellRepair --igv __filename,__dirname,Buffer -g @browserify/uglifyify -p common-shakeify"
   },
   "author": "Thomas Durieux",
   "license": "ISC",

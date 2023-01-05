@@ -79,7 +79,15 @@ async function postFixWith(
 export const curlUseFlagF: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "curlUseFlagF",
-  description: "Use the -f flag when using curl.",
+  description: `The \`-f\` option in curl stands for "fail silently." When this option is used, \`curl\` will return an exit code of \`22\` if the HTTP request returns an error code that is >= 400. This can be useful in a Dockerfile if you want to run a curl command to download a file from the internet, but you don't want the build to fail if the download fails. Instead, you can check the exit code of the curl command and handle the error in your script.
+
+For example:
+
+Copy code:
+\`\`\`dockerfile
+RUN curl -f -o file.tar.gz https://example.com/file.tar.gz || \
+  { echo "Download failed" && exit 1; }
+\`\`\``,
   query: nodeType.Q("SC-CURL"),
   consequent: {
     inNode: nodeType.Q("SC-CURL-F-FAIL"),
@@ -98,10 +106,31 @@ export const curlUseFlagF: Rule = {
   },
 };
 
+export const curlUseFlagL: Rule = {
+  scope: "INTRA-DIRECTIVE",
+  name: "curlUseFlagF",
+  description: `The \`-L\` option in \`curl\` stands for "follow redirects." When this option is used, curl will follow any redirects that it encounters when making an HTTP request. This can be useful in a Dockerfile if you want to download a file from a URL that may redirect to another URL.`,
+  query: nodeType.Q("SC-CURL"),
+  consequent: {
+    inNode: nodeType.Q("SC-CURL-F-LOCATION"),
+  },
+  source: "Implicit",
+  repair: async (violation) => {
+    const node = violation;
+    node.addChild(
+      new nodeType.BashCommandArgs()
+        .setPosition(node.children[0].position)
+        .addChild(
+          new nodeType.BashWord().addChild(new nodeType.BashLiteral("-L"))
+        )
+    );
+  },
+};
+
 export const npmCacheCleanAfterInstall: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "npmCacheCleanAfterInstall",
-  description: "Run npm cache clean after npm install",
+  description: `Running npm cache clean after npm install in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.`,
   query: nodeType.Q("SC-NPM-INSTALL"),
   consequent: {
     afterNode: nodeType.Q("SC-NPM-CACHE-CLEAN"),
@@ -116,7 +145,7 @@ export const npmCacheCleanAfterInstall: Rule = {
 export const npmCacheCleanUseForce: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "npmCacheCleanUseForce",
-  description: "Use the --force flag when using npm cache clean.",
+  description: `Using the --force flag with npm cache clean can override the default behavior of npm and force the cache to be cleaned, even if it is not more than 3 days old or if npm is in a "read-only" state.`,
   query: nodeType.Q("SC-NPM-CACHE-CLEAN"),
   consequent: {
     inNode: nodeType.Q("SC-NPM-F-FORCE"),
@@ -140,7 +169,7 @@ export const npmCacheCleanUseForce: Rule = {
 export const rmRecursiveAfterMktempD: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "rmRecursiveAfterMktempD",
-  description: "A rm -r should occur after a mktemp -d",
+  description: `Using mktemp -d followed by rm -r in a Dockerfile can create and delete a temporary directory, helping to keep the image small and clean up sensitive data.`,
   query: nodeType.Q("SC-MKTEMP", nodeType.Q("SC-MKTEMP-F-DIRECTORY")),
   consequent: {
     afterNode: nodeType.Q("SC-RM", nodeType.Q("SC-RM-F-FORCE")),
@@ -159,7 +188,7 @@ export const rmRecursiveAfterMktempD: Rule = {
 export const curlUseHttpsUrl: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "curlUseHttpsUrl",
-  description: "Use https:// urls with curl",
+  description: `Using https instead of http with curl in a Dockerfile can provide an encrypted connection for transferring data and ensure that curl can access resources that may require https.`,
   query: nodeType.Q(
     "SC-CURL",
     nodeType.Q(
@@ -189,7 +218,7 @@ export const curlUseHttpsUrl: Rule = {
 export const wgetUseHttpsUrl: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "wgetUseHttpsUrl",
-  description: "Use https:// urls with wget",
+  description: `Using https instead of http with wget in a Dockerfile can provide an encrypted connection for transferring data and ensure that wget can access resources that may require https.`,
   query: nodeType.Q(
     "SC-WGET",
     nodeType.Q(
@@ -222,7 +251,7 @@ export const wgetUseHttpsUrl: Rule = {
 export const pipUseNoCacheDir: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "pipUseNoCacheDir",
-  description: "Use --no-cache-dir flag with pip",
+  description: `Using the --no-cache-dir flag with pip in a Dockerfile can disable the package cache, ensuring that the latest version of a package and its dependencies are installed.`,
   query: nodeType.Q("SC-PIP-INSTALL"),
   consequent: {
     inNode: nodeType.Q("SC-PIP-F-NO-CACHE-DIR"),
@@ -247,7 +276,7 @@ export const mkdirUsrSrcThenRemove: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "mkdirUsrSrcThenRemove",
   description:
-    "After running mkdir /usr/src* use rm -rf /usr/src* to clean up.",
+    "Running rm -rf /usr/src* after creating the /usr/src directory in a Dockerfile helps keep the file system organized, reduce clutter, and free up space, but it is important to be cautious when using the rm -rf command.",
   query: nodeType.Q(
     "SC-MKDIR",
     nodeType.Q(
@@ -280,7 +309,7 @@ export const mkdirUsrSrcThenRemove: Rule = {
 export const configureShouldUseBuildFlag: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "configureShouldUseBuildFlag",
-  description: "When using ./configure in a Dockerfile pass the --build flag.",
+  description: `Passing the --build flag to ./configure in a Dockerfile can help to ensure that the configure script correctly detects the current build environment and generates the correct Makefiles.`,
   query: nodeType.Q("SC-CONFIGURE"),
   consequent: {
     inNode: nodeType.Q("SC-CONFIGURE-BUILD"),
@@ -307,7 +336,7 @@ export const gemUpdateSystemRmRootGem: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "gemUpdateSystemRmRootGem",
   description:
-    "After running gem update --system remove the /root/.gem directory.",
+    "Removing the /root/.gem directory after running gem update --system can ensure that all of the installed gems are compatible with the new version of gem and that the image starts with a clean slate.",
   query: nodeType.Q("SC-GEM-UPDATE"),
   consequent: {
     afterNode: nodeType.Q(
@@ -330,7 +359,8 @@ export const gemUpdateSystemRmRootGem: Rule = {
 export const sha256sumEchoOneSpaces: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "sha256sumEchoOneSpaces",
-  description: "sha256sum takes an input on stdin with one space.",
+  description:
+    "The sha256sum command reads input from stdin with one space as a separator in order to distinguish the input from a filename.",
   // query: nodeType.Q("SC-SHA-256-SUM", nodeType.Q("SC-SHA-256-SUM-F-CHECK")),
   query: nodeType.Q(
     nodeType.BashConditionBinary,
@@ -383,7 +413,7 @@ export const gemUpdateNoDocument: Rule = {
   scope: "INTER-DIRECTIVE",
   name: "gemUpdateNoDocument",
   description:
-    "If you run gem update you should have previously added the --no-document flag to the .gemrc config.",
+    "Adding the --no-document flag to the .gemrc config file or using it with gem update can speed up the update process by skipping the installation of documentation for updated gems.",
   query: nodeType.Q("SC-GEM-UPDATE"),
   consequent: {
     beforeNode: nodeType.Q(
@@ -423,8 +453,7 @@ export const gemUpdateNoDocument: Rule = {
 export const gpgVerifyAscRmAsc: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "gpgVerifyAscRmAsc",
-  description:
-    "If you run gpg --verify <X>.asc you should remove the <x>.asc file.",
+  description: `It is generally good practice to remove the .asc file after verifying its signature because the .asc file serves no further purpose once the signature has been verified.`,
   query: nodeType.Q(
     "SC-GPG",
     nodeType.Q(
@@ -450,7 +479,8 @@ export const gpgVerifyAscRmAsc: Rule = {
 export const yumInstallForceYes: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "yumInstallForceYes",
-  description: "Use the -y flag with yum install.",
+  description:
+    "Using the -y flag with yum install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.",
   query: nodeType.Q("SC-YUM-INSTALL"),
   consequent: {
     inNode: nodeType.Q("SC-YUM-F-ASSUMEYES"),
@@ -472,7 +502,7 @@ export const yumInstallRmVarCacheYum: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "yumInstallRmVarCacheYum",
   description:
-    "If you run yum install <...> you should remove the /var/cache/yum directory.",
+    "Removing the /var/cache/yum directory after running yum install in a Dockerfile helps reduce the size of the final image and can improve build times, as well as prevent issues caused by outdated or inconsistent cache data.",
   query: nodeType.Q("SC-YUM-INSTALL"),
   consequent: {
     afterNode: nodeType.Q(
@@ -496,7 +526,8 @@ export const yumInstallRmVarCacheYum: Rule = {
 export const tarSomethingRmTheSomething: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "tarSomethingRmTheSomething",
-  description: "If you run tar <X>.tar you should remove the <x>.tar file.",
+  description:
+    "Removing the .tar file after extracting its contents in a Dockerfile helps reduce the size of the final image and can improve build times, as well as keep the file system organized and reduce clutter.",
   query: nodeType.Q(
     "SC-TAR",
     nodeType.Q(
@@ -530,7 +561,8 @@ export const tarSomethingRmTheSomething: Rule = {
 export const gpgUseBatchFlag: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "gpgUseBatchFlag",
-  description: "Use the --batch flag when using gpg in a docker image.",
+  description:
+    "Using the --batch flag with gpg in a Dockerfile allows the command to run without user input, but it is important to carefully consider the implications of using the flag to ensure that it is appropriate for the task at hand.",
   query: nodeType.Q("SC-GPG"),
   consequent: {
     inNode: nodeType.Q("SC-GPG-F-BATCH"),
@@ -552,7 +584,8 @@ export const gpgUseBatchFlag: Rule = {
 export const gpgUseHaPools: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "gpgUseHaPools",
-  description: "Use ha.pool.* instead of pool.* with gpg.",
+  description:
+    "Using ha.pool.* instead of pool.* with gpg in a Dockerfile improves key server access reliability and efficiency.",
   query: nodeType.Q(
     "SC-GPG",
     nodeType.Q(
@@ -574,11 +607,11 @@ export const gpgUseHaPools: Rule = {
   },
 };
 
-export const ruleAptGetInstallUseY: Rule = {
+export const aptGetInstallUseY: Rule = {
   scope: "INTRA-DIRECTIVE",
-  name: "ruleAptGetInstallUseY",
+  name: "aptGetInstallUseY",
   description:
-    "Must use the -y flag to avoid apt-get install requesting user interaction.",
+    "Using the -y flag with apt-get install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.",
   query: nodeType.Q("SC-APT-INSTALL"),
   consequent: {
     inNode: nodeType.Q("SC-APT-F-YES"),
@@ -597,7 +630,7 @@ export const ruleAptGetInstallUseY: Rule = {
   },
 };
 
-export const ruleMoreThanOneInstall: Rule = {
+export const moreThanOneInstall: Rule = {
   scope: "INTER-DIRECTIVE",
   name: "ruleMoreThanOneInstall",
   description: "all apt-get install should group into one.",
@@ -613,11 +646,11 @@ export const ruleMoreThanOneInstall: Rule = {
   },
 };
 
-export const ruleAptGetUpdatePrecedesInstall: Rule = {
+export const aptGetUpdatePrecedesInstall: Rule = {
   scope: "INTRA-DIRECTIVE",
-  name: "ruleAptGetUpdatePrecedesInstall",
+  name: "aptGetUpdatePrecedesInstall",
   description:
-    "apt-get update && apt-get install should happen in a single layer.",
+    "Running apt-get update and apt-get install in a single layer in a Dockerfile improves efficiency, reliability, and readability.",
   query: nodeType.Q("SC-APT-INSTALL"),
   consequent: {
     beforeNode: nodeType.Q("SC-APT-UPDATE"),
@@ -659,11 +692,11 @@ export const ruleAptGetUpdatePrecedesInstall: Rule = {
   },
 };
 
-export const ruleAptGetInstallUseNoRec: Rule = {
-  name: "ruleAptGetInstallUseNoRec",
+export const aptGetInstallUseNoRec: Rule = {
+  name: "aptGetInstallUseNoRec",
   scope: "INTRA-DIRECTIVE",
   description:
-    "Use the --no-install-recommends flag to save layer space and avoid hidden dependencies.",
+    "Using the --no-install-recommends flag with apt-get install in a Dockerfile helps save layer space, improve build times, and reduce the size and attack surface of the final image, as well as prevent hidden dependencies.",
   query: nodeType.Q("SC-APT-INSTALL"),
   consequent: {
     inNode: nodeType.Q("SC-APT-F-NO-INSTALL-RECOMMENDS"),
@@ -684,11 +717,11 @@ export const ruleAptGetInstallUseNoRec: Rule = {
   },
 };
 
-export const ruleAptGetInstallThenRemoveAptLists: Rule = {
+export const aptGetInstallThenRemoveAptLists: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "ruleAptGetInstallThenRemoveAptLists",
   description:
-    "rm -rf /var/lib/apt/lists/* after apt-get install to save layer space.",
+    "Running rm -rf /var/lib/apt/lists/* after apt-get install in a Dockerfile can improve efficiency and reduce the size of the image.",
   query: nodeType.Q("SC-APT-INSTALL"),
   consequent: {
     afterNode: nodeType.Q(
@@ -711,10 +744,15 @@ export const ruleAptGetInstallThenRemoveAptLists: Rule = {
 export const apkAddUseNoCache: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "apkAddUseNoCache",
-  description: "Use the --no-cache flag when using apk add.",
+  description:
+    "Using the --no-cache flag with apk add in a Dockerfile can help prevent issues caused by installing outdated packages and ensure that the latest version of a package is installed, but it can increase build times.",
   query: nodeType.Q("SC-APK-ADD"),
   consequent: {
     inNode: nodeType.Q("SC-APK-F-NO-CACHE"),
+    afterNode: nodeType.Q(
+      "SC-RM",
+      nodeType.Q("SC-RM-PATH", nodeType.Q("ABS-VAR-CACHE-APK"))
+    ),
   },
   source:
     "https://github.com/docker-library/php/pull/228/commits/85d48c88b3e3dae303118275202327f14a8106f4",
@@ -734,6 +772,7 @@ export const apkAddUseNoCache: Rule = {
 
 export const RULES: Rule[] = [
   curlUseFlagF,
+  curlUseFlagL,
   npmCacheCleanAfterInstall,
   npmCacheCleanUseForce,
   rmRecursiveAfterMktempD,
@@ -751,10 +790,10 @@ export const RULES: Rule[] = [
   tarSomethingRmTheSomething,
   gpgUseBatchFlag,
   gpgUseHaPools,
-  ruleAptGetInstallUseY,
-  ruleAptGetInstallUseNoRec,
-  ruleAptGetUpdatePrecedesInstall,
-  ruleAptGetInstallThenRemoveAptLists,
+  aptGetInstallUseY,
+  aptGetInstallUseNoRec,
+  aptGetUpdatePrecedesInstall,
+  aptGetInstallThenRemoveAptLists,
   // ruleMoreThanOneInstall,
   apkAddUseNoCache,
 ];

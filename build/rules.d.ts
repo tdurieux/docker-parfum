@@ -14,6 +14,7 @@ export interface Rule {
     repair: (node: nodeType.DockerOpsNodeType) => Promise<void>;
 }
 export declare const curlUseFlagF: Rule;
+export declare const curlUseFlagL: Rule;
 export declare const npmCacheCleanAfterInstall: Rule;
 export declare const npmCacheCleanUseForce: Rule;
 export declare const rmRecursiveAfterMktempD: Rule;
@@ -31,10 +32,10 @@ export declare const yumInstallRmVarCacheYum: Rule;
 export declare const tarSomethingRmTheSomething: Rule;
 export declare const gpgUseBatchFlag: Rule;
 export declare const gpgUseHaPools: Rule;
-export declare const ruleAptGetInstallUseY: Rule;
-export declare const ruleMoreThanOneInstall: Rule;
-export declare const ruleAptGetUpdatePrecedesInstall: Rule;
-export declare const ruleAptGetInstallUseNoRec: Rule;
-export declare const ruleAptGetInstallThenRemoveAptLists: Rule;
+export declare const aptGetInstallUseY: Rule;
+export declare const moreThanOneInstall: Rule;
+export declare const aptGetUpdatePrecedesInstall: Rule;
+export declare const aptGetInstallUseNoRec: Rule;
+export declare const aptGetInstallThenRemoveAptLists: Rule;
 export declare const apkAddUseNoCache: Rule;
 export declare const RULES: Rule[];

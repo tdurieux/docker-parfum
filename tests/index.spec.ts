@@ -13,10 +13,10 @@ import {
   npmCacheCleanAfterInstall,
   pipUseNoCacheDir,
   rmRecursiveAfterMktempD,
-  ruleAptGetInstallThenRemoveAptLists,
-  ruleAptGetInstallUseNoRec,
-  ruleAptGetInstallUseY,
-  ruleAptGetUpdatePrecedesInstall,
+  aptGetInstallThenRemoveAptLists,
+  aptGetInstallUseNoRec,
+  aptGetInstallUseY,
+  aptGetUpdatePrecedesInstall,
   sha256sumEchoOneSpaces,
   tarSomethingRmTheSomething,
   wgetUseHttpsUrl,
@@ -33,9 +33,27 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
 
     const matcher = new Matcher(dockerfile);
 
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(0);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(0);
 
-    expect(matcher.match(ruleAptGetUpdatePrecedesInstall)).toHaveLength(0);
+    expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(0);
+  });
+  test("bors-ng-bors-ng.Dockerfile", async () => {
+    const dockerfile = await praseFile("bors-ng-bors-ng");
+    expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
+    const matcher = new Matcher(dockerfile);
+    expect(matcher.match(curlUseFlagF)).toHaveLength(1);
+    matcher.match(curlUseFlagF)[0].repair();
+    expect(dockerfile.toString(true)).toBe(`FROM elixir
+
+RUN curl -f -q https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+
+RUN if [ -d .git ]; then \\
+        mkdir /src/_build/prod/rel/bors/.git && \\
+        git rev-parse --short HEAD > /src/_build/prod/rel/bors/.git/HEAD; \\
+    elif [ -n \${SOURCE_COMMIT} ]; then \\
+        mkdir /src/_build/prod/rel/bors/.git && \\
+        echo \${SOURCE_COMMIT} > /src/_build/prod/rel/bors/.git/HEAD; \\
+    fi`);
   });
   test("1d8c362e7043d7b78836f06256d0ae9b82561af8", async () => {
     const dockerfile = await praseFile(
@@ -45,12 +63,12 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
 
     const matcher = new Matcher(dockerfile);
 
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(0);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(0);
 
-    expect(matcher.match(ruleAptGetUpdatePrecedesInstall)).toHaveLength(0);
+    expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(0);
 
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(1);
-    matcher.match(ruleAptGetInstallUseNoRec)[0].repair();
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
+    matcher.match(aptGetInstallUseNoRec)[0].repair();
   });
   test("0aa1cd6a00cfe247f17e680d5e2c394b5f0d3edc", async () => {
     const dockerfile = await praseFile(
@@ -72,7 +90,7 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     expect(matcher.match(rmRecursiveAfterMktempD)).toHaveLength(1);
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(1);
     expect(matcher.match(gpgUseBatchFlag)).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(8);
   });
   test("0f2e80905340ffc054e2d445a53c45c11069d30a", async () => {
@@ -83,7 +101,7 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
 
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(rmRecursiveAfterMktempD)).toHaveLength(2);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(1);
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(1);
     expect(matcher.match(curlUseHttpsUrl)).toHaveLength(1);
   });
@@ -96,8 +114,8 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(wgetUseHttpsUrl)).toHaveLength(1);
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(1);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(4);
   });
   test("0cfa5aeb451ed647696bf5b9f9cb5648fde8cbd8", async () => {
@@ -208,8 +226,8 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
 
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(9);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(10);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(10);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(10);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(10);
   });
   test("0b15d39cebd7afc18eded9d4f41d932b00770eed", async () => {
     const dockerfile = await praseFile(
@@ -277,7 +295,7 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     expect(matcher.match(curlUseFlagF)).toHaveLength(0);
     // TODO should not be the case, tmp folder is removed but the name is assigned to a variable
     expect(matcher.match(rmRecursiveAfterMktempD)).toHaveLength(2);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
 
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(3);
   });
@@ -375,8 +393,8 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     expect(matcher.match(curlUseFlagF)).toHaveLength(20);
     expect(matcher.match(npmCacheCleanAfterInstall)).toHaveLength(1);
     expect(matcher.match(wgetUseHttpsUrl)).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(1);
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(2);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(26);
   });
@@ -415,8 +433,8 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(3);
     expect(matcher.match(gpgVerifyAscRmAsc)).toHaveLength(2);
     expect(matcher.match(gpgUseBatchFlag)).toHaveLength(4);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(3);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(3);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(3);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(3);
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(4);
     expect(matcher.match(curlUseFlagF)).toHaveLength(2);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(21);
@@ -427,10 +445,10 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(5);
-    expect(matcher.match(ruleAptGetInstallUseY)).toHaveLength(3);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(3);
-    expect(matcher.match(ruleAptGetUpdatePrecedesInstall)).toHaveLength(2);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(5);
+    expect(matcher.match(aptGetInstallUseY)).toHaveLength(3);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(3);
+    expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(7);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(20);
   });
@@ -473,10 +491,10 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(curlUseHttpsUrl)).toHaveLength(2);
     expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(8);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(8);
-    expect(matcher.match(ruleAptGetUpdatePrecedesInstall)).toHaveLength(5);
-    expect(matcher.match(ruleAptGetInstallUseY)).toHaveLength(2);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(8);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(8);
+    expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(5);
+    expect(matcher.match(aptGetInstallUseY)).toHaveLength(2);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(26);
   });
   test("000938d73f02c45eeac641c817cf7146dac43cdf", async () => {
@@ -488,9 +506,9 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     expect(matcher.match(curlUseHttpsUrl)).toHaveLength(2);
     expect(matcher.match(curlUseFlagF)).toHaveLength(2);
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(6);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(6);
-    expect(matcher.match(ruleAptGetUpdatePrecedesInstall)).toHaveLength(2);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(6);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
+    expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(19);
   });
   test("845801df7b9c5ed80c8a27750129562f0439bfc4", async () => {
@@ -500,8 +518,8 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(npmCacheCleanAfterInstall)).toHaveLength(2);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(6);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(6);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(6);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(14);
   });
   test("1fd3f7693e00a8689ba6fa2d34a6d1803166bae6", async () => {
@@ -512,9 +530,9 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(curlUseHttpsUrl)).toHaveLength(2);
     expect(matcher.match(curlUseFlagF)).toHaveLength(2);
-    expect(matcher.match(ruleAptGetUpdatePrecedesInstall)).toHaveLength(2);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(6);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(6);
+    expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(6);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(19);
   });
   test("46ae47ac608f1b0bb5c1e66d0fd307542f1cd86c", async () => {
@@ -523,9 +541,9 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
-    expect(matcher.match(ruleAptGetUpdatePrecedesInstall)).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(1);
+    expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(1);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(3);
   });
   test("11150fc5dca650964185584bd9ec1bbd92669143", async () => {
@@ -547,9 +565,9 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     expect(matcher.match(curlUseFlagF)).toHaveLength(13);
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(1);
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(2);
-    expect(matcher.match(ruleAptGetUpdatePrecedesInstall)).toHaveLength(2);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(3);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(6);
+    expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(3);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(27);
   });
   test("c072531d6d374ef808eef795f6d54e48821de888", async () => {
@@ -562,8 +580,8 @@ describe("Testing the detecting of rule on real dockerfiles", () => {
     expect(matcher.match(wgetUseHttpsUrl)).toHaveLength(1);
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(2);
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(3);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(7);
-    expect(matcher.match(ruleAptGetInstallThenRemoveAptLists)).toHaveLength(8);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(7);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(8);
     expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(28);
   });
   test("fa8464148f8735f7c24b1d3e41fe88f36e09f8bd", async () => {

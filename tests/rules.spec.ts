@@ -16,11 +16,11 @@ import {
   npmCacheCleanUseForce,
   pipUseNoCacheDir,
   rmRecursiveAfterMktempD,
-  ruleAptGetInstallThenRemoveAptLists,
-  ruleAptGetInstallUseNoRec,
-  ruleAptGetInstallUseY,
-  ruleAptGetUpdatePrecedesInstall,
-  ruleMoreThanOneInstall,
+  aptGetInstallThenRemoveAptLists,
+  aptGetInstallUseNoRec,
+  aptGetInstallUseY,
+  aptGetUpdatePrecedesInstall,
+  moreThanOneInstall,
   sha256sumEchoOneSpaces,
   tarSomethingRmTheSomething,
   wgetUseHttpsUrl,
@@ -29,14 +29,14 @@ import {
 } from "../lib/rules";
 import { praseFile } from "./test-utils";
 
-describe("ruleMoreThanOneInstall", () => {
+describe("moreThanOneInstall", () => {
   test("valid", async () => {
     const root = await parseDocker(
       "RUN apt-get update\nRUN apt-get install test"
     );
     const matcher = new Matcher(root);
 
-    const rule = ruleMoreThanOneInstall;
+    const rule = moreThanOneInstall;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(0);
   });
@@ -47,7 +47,7 @@ describe("ruleMoreThanOneInstall", () => {
     );
     const matcher = new Matcher(root);
 
-    const rule = ruleMoreThanOneInstall;
+    const rule = moreThanOneInstall;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(1);
   });
@@ -425,53 +425,53 @@ describe("Testing rule matcher", () => {
     );
     expect(new Matcher(root).match(gpgUseHaPools)).toHaveLength(0);
   });
-  test("ruleAptGetUpdatePrecedesInstall valid", async () => {
+  test("aptGetUpdatePrecedesInstall valid", async () => {
     const root = await parseDocker(
       "RUN apt update ; apt upgrade -y ; apt-get -y install build-essential"
     );
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetUpdatePrecedesInstall;
+    const rule = aptGetUpdatePrecedesInstall;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(0);
   });
-  test("ruleAptGetUpdatePrecedesInstall valid 2", async () => {
+  test("aptGetUpdatePrecedesInstall valid 2", async () => {
     const root = await parseDocker(
       "RUN apt-get update && \\\n  apt-get install --no-install-recommends test\n"
     );
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetUpdatePrecedesInstall;
+    const rule = aptGetUpdatePrecedesInstall;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(0);
   });
-  test("ruleAptGetUpdatePrecedesInstall", async () => {
+  test("aptGetUpdatePrecedesInstall", async () => {
     const root = await parseDocker(
       "RUN apt-get update\nRUN apt-get install test"
     );
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetUpdatePrecedesInstall;
+    const rule = aptGetUpdatePrecedesInstall;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
 
     await violations[0].repair();
-    await matcher.match(ruleAptGetInstallUseNoRec)[0].repair();
+    await matcher.match(aptGetInstallUseNoRec)[0].repair();
     expect(matcher.node.toString(true)).toEqual(
       "RUN apt-get update && \\\napt-get install --no-install-recommends test"
     );
   });
-  test("ruleAptGetUpdatePrecedesInstall 2", async () => {
-    const root = await praseFile("ruleAptGetUpdatePrecedesInstall_fail");
+  test("aptGetUpdatePrecedesInstall 2", async () => {
+    const root = await praseFile("aptGetUpdatePrecedesInstall_fail");
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetUpdatePrecedesInstall;
+    const rule = aptGetUpdatePrecedesInstall;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(1);
-    expect(matcher.match(ruleAptGetInstallUseNoRec)).toHaveLength(1);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
 
-    await matcher.match(ruleAptGetInstallUseNoRec)[0].repair();
+    await matcher.match(aptGetInstallUseNoRec)[0].repair();
     await violations[0].repair();
     expect(
       root
@@ -511,26 +511,26 @@ describe("Testing rule matcher", () => {
     );
   });
 
-  test("ruleAptGetInstallUseY", async () => {
+  test("aptGetInstallUseY", async () => {
     const root = await parseDocker("RUN apt-get install test");
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetInstallUseY;
+    const rule = aptGetInstallUseY;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(1);
 
     await violations[0].repair();
     expect(matcher.node.toString(true)).toEqual("RUN apt-get install -y test");
   });
-  test("ruleAptGetInstallUseY valid", async () => {
+  test("aptGetInstallUseY valid", async () => {
     const root = await parseDocker("RUN apt-get install -y test");
-    expect(new Matcher(root).match(ruleAptGetInstallUseY)).toHaveLength(0);
+    expect(new Matcher(root).match(aptGetInstallUseY)).toHaveLength(0);
   });
-  test("ruleAptGetInstallUseNoRec", async () => {
+  test("aptGetInstallUseNoRec", async () => {
     const root = await parseDocker("RUN apt-get install test");
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetInstallUseNoRec;
+    const rule = aptGetInstallUseNoRec;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(1);
 
@@ -539,13 +539,13 @@ describe("Testing rule matcher", () => {
       "RUN apt-get install --no-install-recommends test"
     );
   });
-  test("ruleAptGetInstallUseNoRec real case", async () => {
+  test("aptGetInstallUseNoRec real case", async () => {
     const root = await parseDocker(
       "RUN DEBIAN_FRONTEND=noninteractive apt-get -y install z3"
     );
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetInstallUseNoRec;
+    const rule = aptGetInstallUseNoRec;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(1);
 
@@ -554,11 +554,11 @@ describe("Testing rule matcher", () => {
       "RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install z3"
     );
   });
-  test("ruleAptGetInstallThenRemoveAptLists", async () => {
+  test("aptGetInstallThenRemoveAptLists", async () => {
     const root = await parseDocker("RUN apt-get install test");
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetInstallThenRemoveAptLists;
+    const rule = aptGetInstallThenRemoveAptLists;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(1);
 
@@ -567,13 +567,13 @@ describe("Testing rule matcher", () => {
       "RUN apt-get install test && rm -rf /var/lib/apt/lists/*;"
     );
   });
-  test("2 ruleAptGetInstallThenRemoveAptLists", async () => {
+  test("2 aptGetInstallThenRemoveAptLists", async () => {
     const root = await parseDocker(
       "RUN apt-get install test && apt-get install test2"
     );
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetInstallThenRemoveAptLists;
+    const rule = aptGetInstallThenRemoveAptLists;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(2);
 
@@ -585,11 +585,11 @@ describe("Testing rule matcher", () => {
     );
   });
 
-  test("ruleAptGetInstallThenRemoveAptLists real scenario", async () => {
+  test("aptGetInstallThenRemoveAptLists real scenario", async () => {
     const root = await praseFile("complex-reprint");
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetInstallThenRemoveAptLists;
+    const rule = aptGetInstallThenRemoveAptLists;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(1);
 
@@ -600,13 +600,24 @@ describe("Testing rule matcher", () => {
     );
   });
 
-  test("ruleAptGetInstallThenRemoveAptLists valid", async () => {
+  test("aptGetInstallThenRemoveAptLists valid", async () => {
     const root = await parseDocker(
       "RUN apt-get install test && rm -rf /var/lib/apt/lists/*;"
     );
     const matcher = new Matcher(root);
 
-    const rule = ruleAptGetInstallThenRemoveAptLists;
+    const rule = aptGetInstallThenRemoveAptLists;
+    const violations = matcher.match(rule);
+    expect(violations).toHaveLength(0);
+  });
+  test("apkAddUseNoCache valid with rm /var/cache/apk/*", async () => {
+    const root = await parseDocker(
+      "RUN apk -v --update add ca-certificates bash make  bind-tools && \
+      rm /var/cache/apk/*"
+    );
+    const matcher = new Matcher(root);
+
+    const rule = apkAddUseNoCache;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(0);
   });
