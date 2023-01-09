@@ -462,6 +462,21 @@ describe("Testing rule matcher", () => {
       "RUN apt-get update && \\\napt-get install --no-install-recommends test"
     );
   });
+  test("aptGetUpdatePrecedesInstall with ;", async () => {
+    const root = await parseDocker(
+      "RUN apt-get update;\nRUN apt-get install test"
+    );
+    const matcher = new Matcher(root);
+
+    const rule = aptGetUpdatePrecedesInstall;
+    const violations = matcher.match(rule);
+    expect(violations).toHaveLength(1);
+
+    await violations[0].repair();
+    expect(matcher.node.toString(true)).toEqual(
+      "RUN apt-get update && \\\napt-get install test"
+    );
+  });
   test("aptGetUpdatePrecedesInstall 2", async () => {
     const root = await praseFile("aptGetUpdatePrecedesInstall_fail");
     const matcher = new Matcher(root);

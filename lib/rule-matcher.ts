@@ -14,6 +14,7 @@ export class Violation {
         if (parent == null) throw new Error("not in a nodeType.DockerFile");
         parent.traverse((n) => {
           if (
+            node.type == n.type &&
             node.position.equals(n.position) &&
             this.node.toString() == n.toString()
           ) {
@@ -72,9 +73,10 @@ export class Matcher {
 
     for (const candidate of candidates) {
       if (
-        !rule.consequent.inNode &&
-        !rule.consequent.beforeNode &&
-        !rule.consequent.afterNode
+        !rule.consequent ||
+        (!rule.consequent.inNode &&
+          !rule.consequent.beforeNode &&
+          !rule.consequent.afterNode)
       ) {
         // if no post-validation add the violation and continue to the next candidate
         violations.push(new Violation(rule, candidate));
@@ -136,7 +138,11 @@ export class Matcher {
   public matchAll() {
     const output: Violation[] = [];
     for (const rule of RULES) {
-      this.match(rule).forEach((e) => output.push(e));
+      try {
+        this.match(rule).forEach((e) => output.push(e));
+      } catch (error) {
+        console.error(`Error while matching rule ${rule.name}`, error);
+      }
     }
     return output;
   }

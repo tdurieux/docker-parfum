@@ -64,7 +64,8 @@ var Violation = (function () {
                             if (parent == null)
                                 throw new Error("not in a nodeType.DockerFile");
                             parent.traverse(function (n) {
-                                if (node_1.position.equals(n.position) &&
+                                if (node_1.type == n.type &&
+                                    node_1.position.equals(n.position) &&
                                     _this.node.toString() == n.toString()) {
                                     node_1 = n;
                                 }
@@ -107,9 +108,10 @@ var Matcher = (function () {
         var violations = [];
         var candidates = this._root.find(rule.query);
         var _loop_1 = function (candidate) {
-            if (!rule.consequent.inNode &&
-                !rule.consequent.beforeNode &&
-                !rule.consequent.afterNode) {
+            if (!rule.consequent ||
+                (!rule.consequent.inNode &&
+                    !rule.consequent.beforeNode &&
+                    !rule.consequent.afterNode)) {
                 violations.push(new Violation(rule, candidate));
                 return "continue";
             }
@@ -158,7 +160,12 @@ var Matcher = (function () {
         var output = [];
         for (var _i = 0, RULES_1 = rules_1.RULES; _i < RULES_1.length; _i++) {
             var rule = RULES_1[_i];
-            this.match(rule).forEach(function (e) { return output.push(e); });
+            try {
+                this.match(rule).forEach(function (e) { return output.push(e); });
+            }
+            catch (error) {
+                console.error("Error while matching rule ".concat(rule.name), error);
+            }
         }
         return output;
     };

@@ -2,8 +2,10 @@ process.argv.push("--browser");
 import { File, parseDocker } from "@tdurieux/dinghy";
 import { Matcher } from "./rule-matcher";
 
-export { RULES } from "./rules";
+export { RULES, BINNACLE_RULES } from "./rules";
 export * as rules from "./rules";
+export * as hadoling_rules from "./hadolint_rules";
+export { HADOLING_RULES } from "./hadolint_rules";
 
 export { Violation, Matcher } from "./rule-matcher";
 export * as dinghy from "@tdurieux/dinghy";

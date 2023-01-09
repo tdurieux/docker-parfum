@@ -15,6 +15,7 @@ export interface Rule {
 }
 export declare const curlUseFlagF: Rule;
 export declare const curlUseFlagL: Rule;
+export declare const yarnCacheCleanAfterInstall: Rule;
 export declare const npmCacheCleanAfterInstall: Rule;
 export declare const npmCacheCleanUseForce: Rule;
 export declare const rmRecursiveAfterMktempD: Rule;
@@ -38,4 +39,5 @@ export declare const aptGetUpdatePrecedesInstall: Rule;
 export declare const aptGetInstallUseNoRec: Rule;
 export declare const aptGetInstallThenRemoveAptLists: Rule;
 export declare const apkAddUseNoCache: Rule;
+export declare const BINNACLE_RULES: Rule[];
 export declare const RULES: Rule[];

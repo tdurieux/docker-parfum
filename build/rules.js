@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RULES = exports.apkAddUseNoCache = exports.aptGetInstallThenRemoveAptLists = exports.aptGetInstallUseNoRec = exports.aptGetUpdatePrecedesInstall = exports.moreThanOneInstall = exports.aptGetInstallUseY = exports.gpgUseHaPools = exports.gpgUseBatchFlag = exports.tarSomethingRmTheSomething = exports.yumInstallRmVarCacheYum = exports.yumInstallForceYes = exports.gpgVerifyAscRmAsc = exports.gemUpdateNoDocument = exports.sha256sumEchoOneSpaces = exports.gemUpdateSystemRmRootGem = exports.configureShouldUseBuildFlag = exports.mkdirUsrSrcThenRemove = exports.pipUseNoCacheDir = exports.wgetUseHttpsUrl = exports.curlUseHttpsUrl = exports.rmRecursiveAfterMktempD = exports.npmCacheCleanUseForce = exports.npmCacheCleanAfterInstall = exports.curlUseFlagL = exports.curlUseFlagF = void 0;
+exports.RULES = exports.BINNACLE_RULES = exports.apkAddUseNoCache = exports.aptGetInstallThenRemoveAptLists = exports.aptGetInstallUseNoRec = exports.aptGetUpdatePrecedesInstall = exports.moreThanOneInstall = exports.aptGetInstallUseY = exports.gpgUseHaPools = exports.gpgUseBatchFlag = exports.tarSomethingRmTheSomething = exports.yumInstallRmVarCacheYum = exports.yumInstallForceYes = exports.gpgVerifyAscRmAsc = exports.gemUpdateNoDocument = exports.sha256sumEchoOneSpaces = exports.gemUpdateSystemRmRootGem = exports.configureShouldUseBuildFlag = exports.mkdirUsrSrcThenRemove = exports.pipUseNoCacheDir = exports.wgetUseHttpsUrl = exports.curlUseHttpsUrl = exports.rmRecursiveAfterMktempD = exports.npmCacheCleanUseForce = exports.npmCacheCleanAfterInstall = exports.yarnCacheCleanAfterInstall = exports.curlUseFlagL = exports.curlUseFlagF = void 0;
 var dinghy_1 = require("@tdurieux/dinghy");
 var dinghy_enricher_1 = __importDefault(require("dinghy-enricher"));
 function postFixWith(node, toInsert) {
@@ -95,7 +95,7 @@ function postFixWith(node, toInsert) {
 exports.curlUseFlagF = {
     scope: "INTRA-DIRECTIVE",
     name: "curlUseFlagF",
-    description: "The `-f` option in curl stands for \"fail silently.\" When this option is used, `curl` will return an exit code of `22` if the HTTP request returns an error code that is >= 400. This can be useful in a Dockerfile if you want to run a curl command to download a file from the internet, but you don't want the build to fail if the download fails. Instead, you can check the exit code of the curl command and handle the error in your script.\n\nFor example:\n\nCopy code:\n```dockerfile\nRUN curl -f -o file.tar.gz https://example.com/file.tar.gz ||   { echo \"Download failed\" && exit 1; }\n```",
+    description: "Using curl -f in a Dockerfile can help to prevent the build from failing if the HTTP request returns an error code >= 400.",
     query: dinghy_1.nodeType.Q("SC-CURL"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-CURL-F-FAIL"),
@@ -114,7 +114,7 @@ exports.curlUseFlagF = {
 };
 exports.curlUseFlagL = {
     scope: "INTRA-DIRECTIVE",
-    name: "curlUseFlagF",
+    name: "curlUseFlagL",
     description: "The `-L` option in `curl` stands for \"follow redirects.\" When this option is used, curl will follow any redirects that it encounters when making an HTTP request. This can be useful in a Dockerfile if you want to download a file from a URL that may redirect to another URL.",
     query: dinghy_1.nodeType.Q("SC-CURL"),
     consequent: {
@@ -129,6 +129,30 @@ exports.curlUseFlagL = {
                 .setPosition(node.children[0].position)
                 .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("-L"))));
             return [2];
+        });
+    }); },
+};
+exports.yarnCacheCleanAfterInstall = {
+    scope: "INTRA-DIRECTIVE",
+    name: "yarnCacheCleanAfterInstall",
+    description: "yarn keeps a local cache of downloaded packages. This unnecessarily increases image size. It can be cleared by executing yarn cache clean.",
+    query: dinghy_1.nodeType.Q("SC-YARN-INSTALL"),
+    consequent: {
+        afterNode: dinghy_1.nodeType.Q("SC-YARN-CACHE-CLEAN"),
+    },
+    source: "https://github.com/hadolint/hadolint/wiki/DL3060",
+    repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
+        var _a, _b;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
+                case 0:
+                    _a = postFixWith;
+                    _b = [violation];
+                    return [4, (0, dinghy_1.parseShell)("yarn cache clean;")];
+                case 1:
+                    _a.apply(void 0, _b.concat([_c.sent()]));
+                    return [2];
+            }
         });
     }); },
 };
@@ -571,7 +595,7 @@ exports.aptGetInstallUseY = {
 exports.moreThanOneInstall = {
     scope: "INTER-DIRECTIVE",
     name: "ruleMoreThanOneInstall",
-    description: "all apt-get install should group into one.",
+    description: "All apt-get install should group into one.",
     source: "IMPLICIT --- slow down the build",
     query: dinghy_1.nodeType.Q("ANY", dinghy_1.nodeType.Q("SC-APT-INSTALL"), dinghy_1.nodeType.Q("SC-APT-INSTALL")),
     consequent: {},
@@ -607,12 +631,15 @@ exports.aptGetUpdatePrecedesInstall = {
             if (update.parent instanceof dinghy_1.nodeType.BashScript) {
                 update.getParent(dinghy_1.nodeType.DockerRun).remove();
                 update.setPosition(null);
+                if (update instanceof dinghy_1.nodeType.BashStatement) {
+                    update.semicolon = false;
+                }
                 script = install.getParent(dinghy_1.nodeType.BashScript);
                 child = script.children[0];
                 binary = new dinghy_1.nodeType.BashConditionBinary()
                     .addChild(new dinghy_1.nodeType.BashConditionBinaryOp().addChild(new dinghy_1.nodeType.BashOp("10")))
-                    .addChild(new dinghy_1.nodeType.BashConditionBinaryRhs().addChild(child.clone()))
-                    .addChild(new dinghy_1.nodeType.BashConditionBinaryLhs().addChild(update));
+                    .addChild(new dinghy_1.nodeType.BashConditionBinaryLhs().addChild(update))
+                    .addChild(new dinghy_1.nodeType.BashConditionBinaryRhs().addChild(child.clone()));
                 child.replace(binary);
             }
             return [2];
@@ -684,11 +711,11 @@ exports.apkAddUseNoCache = {
         });
     }); },
 };
-exports.RULES = [
+exports.BINNACLE_RULES = [
     exports.curlUseFlagF,
-    exports.curlUseFlagL,
     exports.npmCacheCleanAfterInstall,
     exports.npmCacheCleanUseForce,
+    exports.yarnCacheCleanAfterInstall,
     exports.rmRecursiveAfterMktempD,
     exports.curlUseHttpsUrl,
     exports.wgetUseHttpsUrl,
@@ -710,4 +737,7 @@ exports.RULES = [
     exports.aptGetInstallThenRemoveAptLists,
     exports.apkAddUseNoCache,
 ];
+exports.RULES = [
+    exports.curlUseFlagL,
+].concat(exports.BINNACLE_RULES);
 //# sourceMappingURL=rules.js.map

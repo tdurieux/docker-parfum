@@ -76,18 +76,18 @@ async function postFixWith(
   }
 }
 
+/**
+ * Using curl -f in a Dockerfile can help to prevent the build from failing if the HTTP request returns an error code >= 400.
+ * @example
+ * // bad
+ * RUN curl -sSL https://example.com/file.tar.gz | tar -xz -C /usr/src/myapp
+ * // good
+ * RUN curl -sSL -f https://example.com/file.tar.gz | tar -xz -C /usr/src/myapp
+ */
 export const curlUseFlagF: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "curlUseFlagF",
-  description: `The \`-f\` option in curl stands for "fail silently." When this option is used, \`curl\` will return an exit code of \`22\` if the HTTP request returns an error code that is >= 400. This can be useful in a Dockerfile if you want to run a curl command to download a file from the internet, but you don't want the build to fail if the download fails. Instead, you can check the exit code of the curl command and handle the error in your script.
-
-For example:
-
-Copy code:
-\`\`\`dockerfile
-RUN curl -f -o file.tar.gz https://example.com/file.tar.gz || \
-  { echo "Download failed" && exit 1; }
-\`\`\``,
+  description: `Using curl -f in a Dockerfile can help to prevent the build from failing if the HTTP request returns an error code >= 400.`,
   query: nodeType.Q("SC-CURL"),
   consequent: {
     inNode: nodeType.Q("SC-CURL-F-FAIL"),
@@ -106,9 +106,17 @@ RUN curl -f -o file.tar.gz https://example.com/file.tar.gz || \
   },
 };
 
+/**
+ * The \`-L\` option in \`curl\` stands for "follow redirects." When this option is used, curl will follow any redirects that it encounters when making an HTTP request. This can be useful in a Dockerfile if you want to download a file from a URL that may redirect to another URL.
+ * @example
+ * // bad
+ * RUN curl -sS https://example.com/file.tar.gz | tar -xz -C /usr/src/myapp
+ * // good
+ * RUN curl -sS -L https://example.com/file.tar.gz | tar -xz -C /usr/src/myapp
+ */
 export const curlUseFlagL: Rule = {
   scope: "INTRA-DIRECTIVE",
-  name: "curlUseFlagF",
+  name: "curlUseFlagL",
   description: `The \`-L\` option in \`curl\` stands for "follow redirects." When this option is used, curl will follow any redirects that it encounters when making an HTTP request. This can be useful in a Dockerfile if you want to download a file from a URL that may redirect to another URL.`,
   query: nodeType.Q("SC-CURL"),
   consequent: {
@@ -127,6 +135,35 @@ export const curlUseFlagL: Rule = {
   },
 };
 
+/**
+ * Running \`npm cache clean\` after \`npm install\` in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.
+ * @example
+ * // bad
+ * RUN yarn install
+ * // good
+ * RUN yarn install && yarn cache clean --force
+ */
+export const yarnCacheCleanAfterInstall: Rule = {
+  scope: "INTRA-DIRECTIVE",
+  name: "yarnCacheCleanAfterInstall",
+  description: `yarn keeps a local cache of downloaded packages. This unnecessarily increases image size. It can be cleared by executing yarn cache clean.`,
+  query: nodeType.Q("SC-YARN-INSTALL"),
+  consequent: {
+    afterNode: nodeType.Q("SC-YARN-CACHE-CLEAN"),
+  },
+  source: "https://github.com/hadolint/hadolint/wiki/DL3060",
+  repair: async (violation) => {
+    postFixWith(violation, await parseShell("yarn cache clean;"));
+  },
+};
+/**
+ * Running \`npm cache clean\` after \`npm install\` in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.
+ * @example
+ * // bad
+ * RUN npm install
+ * // good
+ * RUN npm install && npm cache clean --force
+ */
 export const npmCacheCleanAfterInstall: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "npmCacheCleanAfterInstall",
@@ -142,6 +179,15 @@ export const npmCacheCleanAfterInstall: Rule = {
   },
 };
 
+/**
+ * Using the \`--force\` flag with \`npm cache clean\` can override the default behavior of npm and force the cache to be cleaned, even if it is not more than 3 days old or if npm is in a "read-only" state.
+ * @example
+ * // bad
+ * RUN npm cache clean
+ * // good
+ * RUN npm cache clean --force
+ * @see https://docs.npmjs.com/cli/cache
+ */
 export const npmCacheCleanUseForce: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "npmCacheCleanUseForce",
@@ -166,6 +212,14 @@ export const npmCacheCleanUseForce: Rule = {
   },
 };
 
+/**
+ * Using \`mktemp -d\` followed by \`rm -r\` in a Dockerfile can create and delete a temporary directory, helping to keep the image small and clean up sensitive data.
+ * @example
+ * // bad
+ * RUN mktemp -d
+ * // good
+ * RUN mktemp -d && rm -rf /tmp/tmp.1234
+ */
 export const rmRecursiveAfterMktempD: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "rmRecursiveAfterMktempD",
@@ -185,6 +239,14 @@ export const rmRecursiveAfterMktempD: Rule = {
   },
 };
 
+/**
+ * Using https instead of http with curl in a Dockerfile can provide an encrypted connection for transferring data and ensure that curl can access resources that may require https.
+ * @example
+ * // bad
+ * RUN curl http://example.com
+ * // good
+ * RUN curl https://example.com
+ */
 export const curlUseHttpsUrl: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "curlUseHttpsUrl",
@@ -215,6 +277,14 @@ export const curlUseHttpsUrl: Rule = {
   },
 };
 
+/**
+ * Using https instead of http with wget in a Dockerfile can provide an encrypted connection for transferring data and ensure that wget can access resources that may require https.
+ * @example
+ * // bad
+ * RUN wget http://example.com
+ * // good
+ * RUN wget https://example.com
+ */
 export const wgetUseHttpsUrl: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "wgetUseHttpsUrl",
@@ -247,7 +317,14 @@ export const wgetUseHttpsUrl: Rule = {
     });
   },
 };
-
+/**
+ * Using the \`--no-cache-dir\` flag with pip in a Dockerfile can disable the package cache, ensuring that the latest version of a package and its dependencies are installed.
+ * @example
+ * // bad
+ * RUN pip install
+ * // good
+ * RUN pip install --no-cache-dir
+ */
 export const pipUseNoCacheDir: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "pipUseNoCacheDir",
@@ -272,6 +349,14 @@ export const pipUseNoCacheDir: Rule = {
   },
 };
 
+/**
+ * Running rm -rf /usr/src* after creating the /usr/src directory in a Dockerfile helps keep the file system organized, reduce clutter, and free up space, but it is important to be cautious when using the rm -rf command.
+ * @example
+ * // bad
+ * RUN mkdir -p /usr/src
+ * // good
+ * RUN mkdir -p /usr/src && rm -rf /usr/src*
+ */
 export const mkdirUsrSrcThenRemove: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "mkdirUsrSrcThenRemove",
@@ -306,6 +391,14 @@ export const mkdirUsrSrcThenRemove: Rule = {
   },
 };
 
+/**
+ * Using the \`--build\` flag with ./configure in a Dockerfile can help to ensure that the configure script correctly detects the current build environment and generates the correct Makefiles.
+ * @example
+ * // bad
+ * RUN ./configure
+ * // good
+ * RUN ./configure --build="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"
+ */
 export const configureShouldUseBuildFlag: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "configureShouldUseBuildFlag",
@@ -332,6 +425,14 @@ export const configureShouldUseBuildFlag: Rule = {
   },
 };
 
+/**
+ * Removing the \`/root/.gem\` directory after running \`gem update --system\` can ensure that all of the installed gems are compatible with the new version of gem and that the image starts with a clean slate.
+ * @example
+ * // bad
+ * RUN gem update --system
+ * // good
+ * RUN gem update --system && rm -rf /root/.gem
+ */
 export const gemUpdateSystemRmRootGem: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "gemUpdateSystemRmRootGem",
@@ -356,6 +457,9 @@ export const gemUpdateSystemRmRootGem: Rule = {
   },
 };
 
+/**
+ * The sha256sum command reads input from stdin with one space as a separator in order to distinguish the input from a filename.
+ */
 export const sha256sumEchoOneSpaces: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "sha256sumEchoOneSpaces",
@@ -409,6 +513,14 @@ export const sha256sumEchoOneSpaces: Rule = {
   },
 };
 
+/**
+ * Adding the \`--no-document\` flag to the .gemrc config file or using it with \`gem update\` can speed up the update process by skipping the installation of documentation for updated gems.
+ * @example
+ * // bad
+ * RUN gem update --system
+ * // good
+ * RUN mkdir -p /usr/local/etc && echo 'gem: --no-document' >> /usr/local/etc/gemrc && gem update --system
+ */
 export const gemUpdateNoDocument: Rule = {
   scope: "INTER-DIRECTIVE",
   name: "gemUpdateNoDocument",
@@ -450,6 +562,14 @@ export const gemUpdateNoDocument: Rule = {
   },
 };
 
+/**
+ * It is generally good practice to remove the .asc file after verifying its signature because the .asc file serves no further purpose once the signature has been verified.
+ * @example
+ * // bad
+ * RUN gpg --verify somefile.asc
+ * // good
+ * RUN gpg --verify somefile.asc && rm somefile.asc
+ */
 export const gpgVerifyAscRmAsc: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "gpgVerifyAscRmAsc",
@@ -476,6 +596,14 @@ export const gpgVerifyAscRmAsc: Rule = {
   },
 };
 
+/**
+ * Using the -y flag with yum install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.
+ * @example
+ * // bad
+ * RUN yum install somepackage
+ * // good
+ * RUN yum install -y somepackage
+ */
 export const yumInstallForceYes: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "yumInstallForceYes",
@@ -498,6 +626,14 @@ export const yumInstallForceYes: Rule = {
   },
 };
 
+/**
+ * Removing the /var/cache/yum directory after running yum install in a Dockerfile helps reduce the size of the final image and can improve build times, as well as prevent issues caused by outdated or inconsistent cache data.
+ * @example
+ * // bad
+ * RUN yum install somepackage
+ * // good
+ * RUN yum install somepackage && rm -rf /var/cache/yum
+ */
 export const yumInstallRmVarCacheYum: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "yumInstallRmVarCacheYum",
@@ -523,6 +659,14 @@ export const yumInstallRmVarCacheYum: Rule = {
   },
 };
 
+/**
+ * Removing the .tar file after extracting its contents in a Dockerfile helps reduce the size of the final image and can improve build times, as well as keep the file system organized and reduce clutter.
+ * @example
+ * // bad
+ * RUN tar -xzf somefile.tar.gz
+ * // good
+ * RUN tar -xzf somefile.tar.gz && rm somefile.tar.gz
+ */
 export const tarSomethingRmTheSomething: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "tarSomethingRmTheSomething",
@@ -558,6 +702,14 @@ export const tarSomethingRmTheSomething: Rule = {
   },
 };
 
+/**
+ * Using the --batch flag with gpg in a Dockerfile allows the command to run without user input, but it is important to carefully consider the implications of using the flag to ensure that it is appropriate for the task at hand.
+ * @example
+ * // bad
+ * RUN gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 0x4ED778F539E3634C779C87C6D7062848A1AB005C
+ * // good
+ * RUN gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 0x4ED778F539E3634C779C87C6D7062848A1AB005C
+ */
 export const gpgUseBatchFlag: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "gpgUseBatchFlag",
@@ -581,6 +733,14 @@ export const gpgUseBatchFlag: Rule = {
   },
 };
 
+/**
+ * Using ha.pool.* instead of pool.* with gpg in a Dockerfile improves key server access reliability and efficiency.
+ * @example
+ * // bad
+ * RUN gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 0x4ED778F539E3634C779C87C6D7062848A1AB005C
+ * // good
+ * RUN gpg --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 0x4ED778F539E3634C779C87C6D7062848A1AB005C
+ */
 export const gpgUseHaPools: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "gpgUseHaPools",
@@ -607,6 +767,14 @@ export const gpgUseHaPools: Rule = {
   },
 };
 
+/**
+ * Using the -y flag with apt-get install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.
+ * @example
+ * // bad
+ * RUN apt-get install --no-install-recommends ca-certificates
+ * // good
+ * RUN apt-get install --no-install-recommends -y ca-certificates
+ */
 export const aptGetInstallUseY: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "aptGetInstallUseY",
@@ -630,10 +798,19 @@ export const aptGetInstallUseY: Rule = {
   },
 };
 
+/**
+ * All apt-get install should group into one.
+ * @example
+ * // bad
+ * RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
+ * RUN apt-get install -y --no-install-recommends wget
+ * // good
+ * RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates wget
+ */
 export const moreThanOneInstall: Rule = {
   scope: "INTER-DIRECTIVE",
   name: "ruleMoreThanOneInstall",
-  description: "all apt-get install should group into one.",
+  description: "All apt-get install should group into one.",
   source: "IMPLICIT --- slow down the build",
   query: nodeType.Q(
     "ANY",
@@ -646,6 +823,15 @@ export const moreThanOneInstall: Rule = {
   },
 };
 
+/**
+ * Running apt-get update and apt-get install in a single layer in a Dockerfile improves efficiency, reliability, and readability.
+ * @example
+ * // bad
+ * RUN apt-get update
+ * RUN apt-get install -y --no-install-recommends ca-certificates
+ * // good
+ * RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
+ */
 export const aptGetUpdatePrecedesInstall: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "aptGetUpdatePrecedesInstall",
@@ -674,6 +860,9 @@ export const aptGetUpdatePrecedesInstall: Rule = {
     if (update.parent instanceof nodeType.BashScript) {
       update.getParent(nodeType.DockerRun).remove();
       update.setPosition(null);
+      if (update instanceof nodeType.BashStatement) {
+        update.semicolon = false;
+      }
 
       const script = install.getParent(nodeType.BashScript);
       const child = script.children[0];
@@ -685,13 +874,23 @@ export const aptGetUpdatePrecedesInstall: Rule = {
             new nodeType.BashOp("10")
           )
         )
-        .addChild(new nodeType.BashConditionBinaryRhs().addChild(child.clone()))
-        .addChild(new nodeType.BashConditionBinaryLhs().addChild(update));
+        .addChild(new nodeType.BashConditionBinaryLhs().addChild(update))
+        .addChild(
+          new nodeType.BashConditionBinaryRhs().addChild(child.clone())
+        );
       child.replace(binary);
     }
   },
 };
 
+/**
+ * Using the --no-install-recommends flag with apt-get install in a Dockerfile helps save layer space, improve build times, and reduce the size and attack surface of the final image, as well as prevent hidden dependencies.
+ * @example
+ * // bad
+ * RUN apt-get install -y ca-certificates
+ * // good
+ * RUN apt-get install -y --no-install-recommends ca-certificates
+ */
 export const aptGetInstallUseNoRec: Rule = {
   name: "aptGetInstallUseNoRec",
   scope: "INTRA-DIRECTIVE",
@@ -717,6 +916,14 @@ export const aptGetInstallUseNoRec: Rule = {
   },
 };
 
+/**
+ * Running rm -rf /var/lib/apt/lists/* after apt-get install in a Dockerfile can improve efficiency and reduce the size of the image.
+ * @example
+ * // bad
+ * RUN apt-get install -y --no-install-recommends ca-certificates
+ * // good
+ * RUN apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+ */
 export const aptGetInstallThenRemoveAptLists: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "ruleAptGetInstallThenRemoveAptLists",
@@ -741,6 +948,14 @@ export const aptGetInstallThenRemoveAptLists: Rule = {
   },
 };
 
+/**
+ * Using the --no-cache flag with apk add in a Dockerfile can help prevent issues caused by installing outdated packages and ensure that the latest version of a package is installed, but it can increase build times.
+ * @example
+ * // bad
+ * RUN apk add ca-certificates
+ * // good
+ * RUN apk add --no-cache ca-certificates
+ */
 export const apkAddUseNoCache: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "apkAddUseNoCache",
@@ -770,11 +985,11 @@ export const apkAddUseNoCache: Rule = {
   },
 };
 
-export const RULES: Rule[] = [
+export const BINNACLE_RULES: Rule[] = [
   curlUseFlagF,
-  curlUseFlagL,
   npmCacheCleanAfterInstall,
   npmCacheCleanUseForce,
+  yarnCacheCleanAfterInstall,
   rmRecursiveAfterMktempD,
   curlUseHttpsUrl,
   wgetUseHttpsUrl,
@@ -794,6 +1009,9 @@ export const RULES: Rule[] = [
   aptGetInstallUseNoRec,
   aptGetUpdatePrecedesInstall,
   aptGetInstallThenRemoveAptLists,
-  // ruleMoreThanOneInstall,
   apkAddUseNoCache,
 ];
+export const RULES: Rule[] = [
+  curlUseFlagL,
+  //moreThanOneInstall
+].concat(BINNACLE_RULES);
