@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RULES = exports.BINNACLE_RULES = exports.apkAddUseNoCache = exports.aptGetInstallThenRemoveAptLists = exports.aptGetInstallUseNoRec = exports.aptGetUpdatePrecedesInstall = exports.moreThanOneInstall = exports.aptGetInstallUseY = exports.gpgUseHaPools = exports.gpgUseBatchFlag = exports.tarSomethingRmTheSomething = exports.yumInstallRmVarCacheYum = exports.yumInstallForceYes = exports.gpgVerifyAscRmAsc = exports.gemUpdateNoDocument = exports.sha256sumEchoOneSpaces = exports.gemUpdateSystemRmRootGem = exports.configureShouldUseBuildFlag = exports.mkdirUsrSrcThenRemove = exports.pipUseNoCacheDir = exports.wgetUseHttpsUrl = exports.curlUseHttpsUrl = exports.rmRecursiveAfterMktempD = exports.npmCacheCleanUseForce = exports.npmCacheCleanAfterInstall = exports.yarnCacheCleanAfterInstall = exports.curlUseFlagL = exports.curlUseFlagF = void 0;
 var dinghy_1 = require("@tdurieux/dinghy");
+var docker_type_1 = require("@tdurieux/dinghy/build/docker-type");
 var dinghy_enricher_1 = __importDefault(require("dinghy-enricher"));
 function postFixWith(node, toInsert) {
     return __awaiter(this, void 0, void 0, function () {
@@ -615,7 +616,7 @@ exports.aptGetUpdatePrecedesInstall = {
     },
     source: "IMPLICIT --- one of Hadolint's recommendations and a docker best practice.",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
-        var root, installs, updates, install, update, script, child, binary;
+        var root, installs, updates, install, update, updatePosition, script, child, binary;
         return __generator(this, function (_a) {
             root = violation.getParent(dinghy_1.nodeType.DockerFile);
             installs = root.find(dinghy_1.nodeType.Q("SC-APT-INSTALL"));
@@ -630,17 +631,23 @@ exports.aptGetUpdatePrecedesInstall = {
             update = updates[0];
             if (update.parent instanceof dinghy_1.nodeType.BashScript) {
                 update.getParent(dinghy_1.nodeType.DockerRun).remove();
+                updatePosition = update.position;
                 update.setPosition(null);
                 if (update instanceof dinghy_1.nodeType.BashStatement) {
                     update.semicolon = false;
                 }
                 script = install.getParent(dinghy_1.nodeType.BashScript);
                 child = script.children[0];
+                updatePosition.lineEnd = child.position.lineEnd;
+                updatePosition.columnEnd = child.position.columnEnd;
+                update.setPosition(child.position.clone());
                 binary = new dinghy_1.nodeType.BashConditionBinary()
                     .addChild(new dinghy_1.nodeType.BashConditionBinaryOp().addChild(new dinghy_1.nodeType.BashOp("10")))
                     .addChild(new dinghy_1.nodeType.BashConditionBinaryLhs().addChild(update))
-                    .addChild(new dinghy_1.nodeType.BashConditionBinaryRhs().addChild(child.clone()));
+                    .addChild(new dinghy_1.nodeType.BashConditionBinaryRhs().addChild(child.clone().setPosition(updatePosition)));
                 child.replace(binary);
+                child.getParent(docker_type_1.DockerRun).setPosition(updatePosition);
+                binary.setPosition(updatePosition);
             }
             return [2];
         });

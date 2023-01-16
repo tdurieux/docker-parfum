@@ -1,4 +1,5 @@
 import { nodeType, parseDocker, parseShell } from "@tdurieux/dinghy";
+import { DockerRun } from "@tdurieux/dinghy/build/docker-type";
 import enrich from "dinghy-enricher";
 
 export interface Rule {
@@ -859,6 +860,7 @@ export const aptGetUpdatePrecedesInstall: Rule = {
     const update = updates[0];
     if (update.parent instanceof nodeType.BashScript) {
       update.getParent(nodeType.DockerRun).remove();
+      const updatePosition = update.position;
       update.setPosition(null);
       if (update instanceof nodeType.BashStatement) {
         update.semicolon = false;
@@ -867,6 +869,9 @@ export const aptGetUpdatePrecedesInstall: Rule = {
       const script = install.getParent(nodeType.BashScript);
       const child = script.children[0];
 
+      updatePosition.lineEnd = child.position.lineEnd;
+      updatePosition.columnEnd = child.position.columnEnd;
+      update.setPosition(child.position.clone());
       // add at the end of the command
       const binary = new nodeType.BashConditionBinary()
         .addChild(
@@ -876,9 +881,13 @@ export const aptGetUpdatePrecedesInstall: Rule = {
         )
         .addChild(new nodeType.BashConditionBinaryLhs().addChild(update))
         .addChild(
-          new nodeType.BashConditionBinaryRhs().addChild(child.clone())
+          new nodeType.BashConditionBinaryRhs().addChild(
+            child.clone().setPosition(updatePosition)
+          )
         );
       child.replace(binary);
+      child.getParent(DockerRun).setPosition(updatePosition);
+      binary.setPosition(updatePosition);
     }
   },
 };

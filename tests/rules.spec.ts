@@ -447,7 +447,7 @@ describe("Testing rule matcher", () => {
   });
   test("aptGetUpdatePrecedesInstall", async () => {
     const root = await parseDocker(
-      "RUN apt-get update\nRUN apt-get install test"
+      "RUN useradd -ms /bin/bash torq\nRUN apt-get update\nRUN apt-get install test"
     );
     const matcher = new Matcher(root);
 
@@ -459,7 +459,7 @@ describe("Testing rule matcher", () => {
     await violations[0].repair();
     await matcher.match(aptGetInstallUseNoRec)[0].repair();
     expect(matcher.node.toString(true)).toEqual(
-      "RUN apt-get update && \\\napt-get install --no-install-recommends test"
+      "RUN useradd -ms /bin/bash torq\nRUN apt-get update && apt-get install --no-install-recommends test"
     );
   });
   test("aptGetUpdatePrecedesInstall with ;", async () => {
@@ -474,7 +474,7 @@ describe("Testing rule matcher", () => {
 
     await violations[0].repair();
     expect(matcher.node.toString(true)).toEqual(
-      "RUN apt-get update && \\\napt-get install test"
+      "RUN apt-get update && apt-get install test"
     );
   });
   test("aptGetUpdatePrecedesInstall 2", async () => {
@@ -498,7 +498,7 @@ describe("Testing rule matcher", () => {
         )[0]
         .toString(true)
     ).toEqual(
-      "RUN apt-get update -qq && \\\napt-get install --no-install-recommends -yq make gcc flex bison libcap-ng-dev"
+      "RUN apt-get update -qq && apt-get install --no-install-recommends -yq make gcc flex bison libcap-ng-dev"
     );
   });
   test("gpgVerifyAscRmAsc valid", async () => {
