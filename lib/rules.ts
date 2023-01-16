@@ -1022,5 +1022,5 @@ export const BINNACLE_RULES: Rule[] = [
 ];
 export const RULES: Rule[] = [
   curlUseFlagL,
-  //moreThanOneInstall
+  moreThanOneInstall
 ].concat(BINNACLE_RULES);

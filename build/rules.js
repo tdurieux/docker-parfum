@@ -746,5 +746,6 @@ exports.BINNACLE_RULES = [
 ];
 exports.RULES = [
     exports.curlUseFlagL,
+    exports.moreThanOneInstall
 ].concat(exports.BINNACLE_RULES);
 //# sourceMappingURL=rules.js.map

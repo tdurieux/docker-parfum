@@ -176,9 +176,7 @@ angular
       const matcher = new dockerParfum.Matcher(ast);
 
       const violations = [];
-      const allRules = dockerParfum.RULES.concat(
-        dockerParfum.BINNACLE_RULES
-      ).concat(dockerParfum.HADOLING_RULES);
+      const allRules = dockerParfum.RULES.concat(dockerParfum.HADOLING_RULES);
       for (const rule of allRules) {
         matcher.match(rule).forEach((v) => violations.push(v));
       }
