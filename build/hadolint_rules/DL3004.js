@@ -49,7 +49,7 @@ exports.default = {
         var cmd;
         return __generator(this, function (_a) {
             cmd = node.parent;
-            cmd.replace(cmd.getChild(dinghy_1.nodeType.MaybeSemanticCommand));
+            cmd.replace(cmd.getChild(dinghy_1.nodeType.BashCommand));
             return [2];
         });
     }); },

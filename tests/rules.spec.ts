@@ -116,6 +116,35 @@ describe("Testing rule matcher", () => {
       "RUN npm update && npm i && npm cache clean --force;"
     );
   });
+  test("npmCacheCleanAfterInstall invalid real case 1", async () => {
+    const root = await parseDocker(`RUN echo "" \\
+
+    # navigate to another folder outside shopware to avoid this error: npm ERR! Tracker "idealTree" already exists
+    && cd /var/www && npm install -g grunt-cli \\
+    && cd /var/www && npm install grunt --save-dev \\
+
+    && npm install -g yarn \\
+    && chown -R www-data:www-data /var/www/.composer \\
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*`);
+    const matcher = new Matcher(root);
+
+    const rule = npmCacheCleanAfterInstall;
+    const violations = matcher.match(rule);
+    expect(violations).toHaveLength(3);
+
+    await violations[0].repair();
+    expect(matcher.node.toString(true)).toEqual(
+      `RUN echo "" \\
+
+    # navigate to another folder outside shopware to avoid this error: npm ERR! Tracker "idealTree" already exists
+    && cd /var/www && npm install -g grunt-cli \\
+    && cd /var/www && npm install grunt --save-dev \\
+
+    && npm install -g yarn \\
+    && chown -R www-data:www-data /var/www/.composer \\
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/* && npm cache clean --force;`
+    );
+  });
   test("npmCacheCleanAfterInstall valid", async () => {
     const root = await parseShell("RUN npm i\\\n    npm cache clean --force;");
     expect(new Matcher(root).match(npmCacheCleanAfterInstall)).toHaveLength(0);
@@ -213,6 +242,14 @@ describe("Testing rule matcher", () => {
     const rule = curlUseHttpsUrl;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(0);
+  });
+  test("curlUseHttpsUrl invalid", async () => {
+    const root = await parseShell(`curl -SLO "http://resin-packages.s3.amazonaws.com/node/v$NODE_VERSION/node-v$NODE_VERSION-linux-alpine-armv7hf.tar.gz"`);
+    const matcher = new Matcher(root);
+
+    const rule = curlUseHttpsUrl;
+    const violations = matcher.match(rule);
+    expect(violations).toHaveLength(1);
   });
   test("wgetUseHttpsUrl", async () => {
     const root = await parseShell("wget http://host.com/");
@@ -537,6 +574,21 @@ describe("Testing rule matcher", () => {
     await violations[0].repair();
     expect(matcher.node.toString(true)).toEqual("RUN apt-get install -y test");
   });
+  test("aptGetInstallUseY2", async () => {
+    const root = await parseDocker(
+      "RUN sudo dpkg -i /tmp/firefox.deb || sudo apt-get -f install"
+    );
+    const matcher = new Matcher(root);
+
+    const rule = aptGetInstallUseY;
+    const violations = matcher.match(rule);
+    expect(violations).toHaveLength(1);
+
+    await violations[0].repair();
+    expect(matcher.node.toString(true)).toEqual(
+      "RUN sudo dpkg -i /tmp/firefox.deb || sudo apt-get -f -y install"
+    );
+  });
   test("aptGetInstallUseY valid", async () => {
     const root = await parseDocker("RUN apt-get install -y test");
     expect(new Matcher(root).match(aptGetInstallUseY)).toHaveLength(0);
@@ -654,7 +706,7 @@ describe("Testing rule matcher", () => {
 
   test("sha256sumEchoOneSpaces valid", async () => {
     const root = await parseDocker(
-      'RUN echo "$PHP_SHA256 *$PHP_FILENAME" | sha256sum -c -'
+      'RUN echo "$PHP_SHA256  *$PHP_FILENAME" | sha256sum -c -'
     );
     const matcher = new Matcher(root);
 
@@ -676,13 +728,31 @@ describe("Testing rule matcher", () => {
 
   test("sha256sumEchoOneSpaces invalid", async () => {
     const root = await parseDocker(
-      'RUN echo "$PHP_SHA256  *$PHP_FILENAME" | sha256sum -c -\n'
+      'RUN echo "$PHP_SHA256 *$PHP_FILENAME" | sha256sum -c -\n'
     );
     const matcher = new Matcher(root);
 
     const rule = sha256sumEchoOneSpaces;
     const violations = matcher.match(rule);
     expect(violations).toHaveLength(1);
+    violations[0].repair();
+    expect(violations[0].node.toString(true)).toEqual(
+      'echo "$PHP_SHA256  *$PHP_FILENAME" | sha256sum -c -'
+    );
+  });
+  test("sha256sumEchoOneSpaces invalid 2", async () => {
+    const root = await parseDocker(
+      'RUN echo "ef016febe5ec4eaf7d455a34579834bcde7703cb0818c80044f4d148df8473bb /tmp/firefox.deb" | sha256sum -c'
+    );
+    const matcher = new Matcher(root);
+
+    const rule = sha256sumEchoOneSpaces;
+    const violations = matcher.match(rule);
+    expect(violations).toHaveLength(1);
+    violations[0].repair();
+    expect(violations[0].node.toString(true)).toEqual(
+      'echo "ef016febe5ec4eaf7d455a34579834bcde7703cb0818c80044f4d148df8473bb  /tmp/firefox.deb" | sha256sum -c'
+    );
   });
   test("tarSomethingRmTheSomething valid", async () => {
     const root = await parseDocker(

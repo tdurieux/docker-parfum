@@ -87,7 +87,7 @@
         <div class="col col-6 scrollable">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item" ng-repeat="e in cursorPosition">
+              <li class="breadcrumb-item" ng-repeat="e in cursorPosition track by $index">
                 {{e}}
               </li>
             </ol>
@@ -118,7 +118,7 @@
                 <div class="card-body">
                   Please copy past a Dockerfile in the editor on the left. The
                   Dockerfile will be analyzed to indentify best-practice
-                  violations and repair suggestions. Note: The AST is fully
+                  smells and repair suggestions. Note: The AST is fully
                   reprint therefore there may have some slight differences in
                   term of spacing. If you identify any other issue please report
                   it.
@@ -161,10 +161,10 @@
                       commands.
                     </li>
                     <li class="list-group-item">
-                      The violations are identified using template matching.
+                      The smells are identified using template matching.
                     </li>
                     <li class="list-group-item">
-                      The violations are repaired by manipulating the AST.
+                      The smells are repaired by manipulating the AST.
                     </li>
                     <li class="list-group-item">
                       The repaired Dockerfiles are reprinted.
@@ -461,7 +461,7 @@
                 </div>
               </div>
             </div>
-            <div class="card" ng-if="results.violations.length > 0">
+            <div class="card" ng-if="results.smells.length > 0">
               <div class="card-header" id="headingViolations">
                 <h2 class="mb-0">
                   <button
@@ -472,7 +472,7 @@
                     aria-expanded="true"
                     aria-controls="collapseViolations"
                   >
-                    {{results.violations.length}} Violations
+                    {{results.smells.length}} Smells
                   </button>
                 </h2>
               </div>
@@ -486,20 +486,21 @@
                 <div class="card-body">
                   <div
                     class="card m-2"
-                    ng-repeat="(index, violation) in results.violations"
+                    ng-repeat="(index, smell) in results.smells"
+                    ng-click="smellToLine(smell)"
                   >
                     <div class="card-body">
                       <h5 class="card-title">
-                        {{index + 1}}. {{violation.rule.name}}
+                        {{index + 1}}. {{smell.rule.name}} <span class="badge badge-secondary">at line {{smell.position.lineStart + 1}}</span>
                       </h5>
                       <div
                         class="card-text"
-                        ng-bind="violation.rule.description"
+                        ng-bind="smell.rule.description"
                       ></div>
-                      <pre><code ng-bind-html="diff(violation.repaired)"></code></pre>
+                      <pre><code ng-bind-html="diff(smell.repaired)"></code></pre>
                       <button
                         class="btn btn-sm btn-outline-primary"
-                        ng-click="apply(violation.repaired)"
+                        ng-click="apply(smell.repaired)"
                       >
                         Apply fix
                       </button>

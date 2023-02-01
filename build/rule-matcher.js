@@ -43,6 +43,7 @@ exports.Matcher = exports.Violation = void 0;
 var dinghy_enricher_1 = __importDefault(require("dinghy-enricher"));
 var dinghy_1 = require("@tdurieux/dinghy");
 var rules_1 = require("./rules");
+var docker_type_1 = require("@tdurieux/dinghy/build/docker-type");
 var Violation = (function () {
     function Violation(rule, node) {
         this.rule = rule;
@@ -60,9 +61,13 @@ var Violation = (function () {
                         if (!this.isStillValid()) return [3, 2];
                         node_1 = this.node;
                         if (opt.clone) {
-                            parent = (_a = this.node.getParent(dinghy_1.nodeType.DockerFile)) === null || _a === void 0 ? void 0 : _a.clone();
-                            if (parent == null)
-                                throw new Error("not in a nodeType.DockerFile");
+                            parent = this.node instanceof docker_type_1.DockerFile
+                                ? this.node.clone()
+                                : (_a = this.node.getParent(dinghy_1.nodeType.DockerFile)) === null || _a === void 0 ? void 0 : _a.clone();
+                            if (parent == null) {
+                                console.error("Dockerfile not found in parent");
+                                return [2, this.node];
+                            }
                             parent.traverse(function (n) {
                                 if (node_1.type == n.type &&
                                     node_1.position.equals(n.position) &&

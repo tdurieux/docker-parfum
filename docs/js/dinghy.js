@@ -116,7 +116,7 @@ angular
     }
 
     const initInterval = setInterval(() => {
-      if (monacoEditor) {
+      if (window.monacoEditor !== undefined) {
         clearInterval(initInterval);
         init();
       }
@@ -165,6 +165,10 @@ angular
       }
     });
 
+    $scope.smellToLine = function (smell) {
+      monacoEditor.revealLine(smell.position.lineStart + 1);    
+    }
+
     $scope.analyze = async function () {
       console.time("AST PARSING");
       const dockerParser =
@@ -175,14 +179,15 @@ angular
       const ast = await dockerParser.parse();
       const matcher = new dockerParfum.Matcher(ast);
 
-      const violations = [];
+      const smells = [];
       const allRules = dockerParfum.RULES.concat(dockerParfum.HADOLING_RULES);
       for (const rule of allRules) {
-        matcher.match(rule).forEach((v) => violations.push(v));
+        matcher.match(rule).forEach((v) => smells.push(v));
       }
+      smells.sort((a, b) => a.node.position.lineStart - b.node.position.lineStart);
 
       $scope.ast = ast;
-      const output = { queries: {}, violations: [] };
+      const output = { queries: {}, smells: [] };
       output.queries.packages = ast
         .find(dockerParfum.dinghy.nodeType.Q("SC-APT-PACKAGE"))
         .map((n) => n.toString())
@@ -210,24 +215,28 @@ angular
         .filter((v, i, a) => a.indexOf(v) === i);
 
       const markers = [];
-      for (const v of violations) {
-        const node = await v.repair({ clone: true });
-        output.violations.push({
-          rule: v.rule,
-          position: v.node.position,
-          repaired: (
-            node.getParent(dockerParfum.dinghy.nodeType.DockerFile) || node
-          ).toString(true),
-        });
-        markers.push({
-          message: v.rule.description,
-          severity: monaco.MarkerSeverity.Error,
-          startLineNumber: v.node.position.lineStart + 1,
-          startColumn: v.node.position.columnStart + 1,
-          endLineNumber: v.node.position.lineEnd + 1,
-          endColumn: v.node.position.columnEnd + 1,
-          source: v.rule.source,
-        });
+      for (const v of smells) {
+        try {
+          const node = await v.repair({ clone: true });
+          output.smells.push({
+            rule: v.rule,
+            position: v.node.position,
+            repaired: (
+              node.getParent(dockerParfum.dinghy.nodeType.DockerFile) || node
+            ).toString(true),
+          });
+          markers.push({
+            message: v.rule.description,
+            severity: monaco.MarkerSeverity.Error,
+            startLineNumber: v.node.position.lineStart + 1,
+            startColumn: v.node.position.columnStart + 1,
+            endLineNumber: v.node.position.lineEnd + 1,
+            endColumn: v.node.position.columnEnd + 1,
+            source: v.rule.source,
+          });
+        } catch (error) {
+          console.error(error);
+        }
       }
       monaco.editor.setModelMarkers(monacoEditor.getModel(), "owner", markers);
 

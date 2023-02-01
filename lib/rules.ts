@@ -466,14 +466,13 @@ export const sha256sumEchoOneSpaces: Rule = {
   name: "sha256sumEchoOneSpaces",
   description:
     "The sha256sum command reads input from stdin with one space as a separator in order to distinguish the input from a filename.",
-  // query: nodeType.Q("SC-SHA-256-SUM", nodeType.Q("SC-SHA-256-SUM-F-CHECK")),
   query: nodeType.Q(
     nodeType.BashConditionBinary,
     nodeType.Q(
       nodeType.BashConditionBinaryLhs,
       nodeType.Q(
         "ALL",
-        nodeType.Q("SC-ECHO", nodeType.Q("ALL", nodeType.Q("ABS-DOUBLE-SPACE")))
+        nodeType.Q("SC-ECHO", nodeType.Q("ALL", nodeType.Q("ABS-SINGLE-SPACE")))
       )
     ),
     nodeType.Q(
@@ -487,7 +486,7 @@ export const sha256sumEchoOneSpaces: Rule = {
   consequent: {
     inNode: nodeType.Q(
       "SC-ECHO",
-      nodeType.Q("ALL", nodeType.Q("ABS-SINGLE-SPACE"))
+      nodeType.Q("ALL", nodeType.Q("ABS-DOUBLE-SPACE"))
     ),
   },
   source:
@@ -497,17 +496,26 @@ export const sha256sumEchoOneSpaces: Rule = {
   async repair(violation) {
     const node = violation;
     const echoWithDoubleSpace = node.find(
-      nodeType.Q("SC-ECHO", nodeType.Q("ALL", nodeType.Q("ABS-DOUBLE-SPACE")))
+      nodeType.Q("SC-ECHO", nodeType.Q("ALL", nodeType.Q("ABS-SINGLE-SPACE")))
     );
     if (echoWithDoubleSpace) {
       echoWithDoubleSpace.forEach((n) =>
         n
-          .find(nodeType.Q("ABS-DOUBLE-SPACE"))
-          .filter((n) => n instanceof nodeType.DockerOpsValueNode)
+          .find(nodeType.Q("ABS-SINGLE-SPACE"))
+          .filter(
+            (n) =>
+              n instanceof nodeType.DockerOpsValueNode || n.children.length == 1
+          )
           .forEach((doubleSpace) => {
-            (doubleSpace as nodeType.DockerOpsValueNode).value = (
-              doubleSpace as nodeType.DockerOpsValueNode
-            ).value.replace(/  /g, " ");
+            if (doubleSpace instanceof nodeType.DockerOpsValueNode) {
+              doubleSpace.value = doubleSpace.value.replace(/ /g, "  ");
+            } else if (
+              doubleSpace.children.length == 1 &&
+              doubleSpace.children[0] instanceof nodeType.DockerOpsValueNode
+            ) {
+              doubleSpace.children[0].value =
+                doubleSpace.children[0].value.replace(/ /g, "  ");
+            }
           })
       );
     }
@@ -791,7 +799,7 @@ export const aptGetInstallUseY: Rule = {
     const node = violation;
     node.addChild(
       new nodeType.BashCommandArgs()
-        .setPosition(node.children[1].position)
+        .setPosition(node.children[1].position.clone())
         .addChild(
           new nodeType.BashWord().addChild(new nodeType.BashLiteral("-y"))
         )
@@ -905,7 +913,10 @@ export const aptGetInstallUseNoRec: Rule = {
   scope: "INTRA-DIRECTIVE",
   description:
     "Using the --no-install-recommends flag with apt-get install in a Dockerfile helps save layer space, improve build times, and reduce the size and attack surface of the final image, as well as prevent hidden dependencies.",
-  query: nodeType.Q("SC-APT-INSTALL"),
+  query: nodeType.Q(
+    "SC-APT-INSTALL",
+    nodeType.Q("ALL", nodeType.Q("SC-APT-PACKAGE"))
+  ),
   consequent: {
     inNode: nodeType.Q("SC-APT-F-NO-INSTALL-RECOMMENDS"),
   },
@@ -935,10 +946,13 @@ export const aptGetInstallUseNoRec: Rule = {
  */
 export const aptGetInstallThenRemoveAptLists: Rule = {
   scope: "INTRA-DIRECTIVE",
-  name: "ruleAptGetInstallThenRemoveAptLists",
+  name: "aptGetInstallThenRemoveAptLists",
   description:
     "Running rm -rf /var/lib/apt/lists/* after apt-get install in a Dockerfile can improve efficiency and reduce the size of the image.",
-  query: nodeType.Q("SC-APT-INSTALL"),
+  query: nodeType.Q(
+    "SC-APT-INSTALL",
+    nodeType.Q("ALL", nodeType.Q("SC-APT-PACKAGE"))
+  ),
   consequent: {
     afterNode: nodeType.Q(
       "SC-RM",
@@ -1020,7 +1034,6 @@ export const BINNACLE_RULES: Rule[] = [
   aptGetInstallThenRemoveAptLists,
   apkAddUseNoCache,
 ];
-export const RULES: Rule[] = [
-  curlUseFlagL,
-  moreThanOneInstall
-].concat(BINNACLE_RULES);
+export const RULES: Rule[] = [curlUseFlagL, moreThanOneInstall].concat(
+  BINNACLE_RULES
+);

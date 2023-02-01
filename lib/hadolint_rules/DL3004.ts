@@ -14,6 +14,6 @@ export default {
   source: "https://github.com/hadolint/hadolint/wiki/DL3004",
   repair: async (node) => {
     const cmd = node.parent;
-    cmd.replace(cmd.getChild(nodeType.MaybeSemanticCommand));
+    cmd.replace(cmd.getChild(nodeType.BashCommand));
   },
 } as Rule;

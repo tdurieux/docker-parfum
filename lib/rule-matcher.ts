@@ -2,6 +2,7 @@ import enricher from "dinghy-enricher";
 import { nodeType } from "@tdurieux/dinghy";
 
 import { Rule, RULES } from "./rules";
+import { DockerFile } from "@tdurieux/dinghy/build/docker-type";
 
 export class Violation {
   constructor(readonly rule: Rule, readonly node: nodeType.DockerOpsNodeType) {}
@@ -10,8 +11,14 @@ export class Violation {
     if (this.isStillValid()) {
       let node = this.node;
       if (opt.clone) {
-        const parent = this.node.getParent(nodeType.DockerFile)?.clone();
-        if (parent == null) throw new Error("not in a nodeType.DockerFile");
+        const parent =
+          this.node instanceof DockerFile
+            ? this.node.clone()
+            : this.node.getParent(nodeType.DockerFile)?.clone();
+        if (parent == null) {
+          console.error("Dockerfile not found in parent")
+          return this.node;
+        }
         parent.traverse((n) => {
           if (
             node.type == n.type &&

@@ -372,9 +372,9 @@ exports.sha256sumEchoOneSpaces = {
     scope: "INTRA-DIRECTIVE",
     name: "sha256sumEchoOneSpaces",
     description: "The sha256sum command reads input from stdin with one space as a separator in order to distinguish the input from a filename.",
-    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinary, dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinaryLhs, dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-DOUBLE-SPACE"))))), dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinaryRhs, dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-SHA-256-SUM", dinghy_1.nodeType.Q("SC-SHA-256-SUM-F-CHECK"))))),
+    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinary, dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinaryLhs, dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-SINGLE-SPACE"))))), dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinaryRhs, dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-SHA-256-SUM", dinghy_1.nodeType.Q("SC-SHA-256-SUM-F-CHECK"))))),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-SINGLE-SPACE"))),
+        inNode: dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-DOUBLE-SPACE"))),
     },
     source: "https://github.com/docker-library/memcached/pull/6/commits/a8c4206768821aa47579c6413be85be914875caa",
     notes: "sha1sum is old --- transliterated to use more modern sha256sum which most images are using",
@@ -383,14 +383,23 @@ exports.sha256sumEchoOneSpaces = {
             var node, echoWithDoubleSpace;
             return __generator(this, function (_a) {
                 node = violation;
-                echoWithDoubleSpace = node.find(dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-DOUBLE-SPACE"))));
+                echoWithDoubleSpace = node.find(dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-SINGLE-SPACE"))));
                 if (echoWithDoubleSpace) {
                     echoWithDoubleSpace.forEach(function (n) {
                         return n
-                            .find(dinghy_1.nodeType.Q("ABS-DOUBLE-SPACE"))
-                            .filter(function (n) { return n instanceof dinghy_1.nodeType.DockerOpsValueNode; })
+                            .find(dinghy_1.nodeType.Q("ABS-SINGLE-SPACE"))
+                            .filter(function (n) {
+                            return n instanceof dinghy_1.nodeType.DockerOpsValueNode || n.children.length == 1;
+                        })
                             .forEach(function (doubleSpace) {
-                            doubleSpace.value = doubleSpace.value.replace(/  /g, " ");
+                            if (doubleSpace instanceof dinghy_1.nodeType.DockerOpsValueNode) {
+                                doubleSpace.value = doubleSpace.value.replace(/ /g, "  ");
+                            }
+                            else if (doubleSpace.children.length == 1 &&
+                                doubleSpace.children[0] instanceof dinghy_1.nodeType.DockerOpsValueNode) {
+                                doubleSpace.children[0].value =
+                                    doubleSpace.children[0].value.replace(/ /g, "  ");
+                            }
                         });
                     });
                 }
@@ -587,7 +596,7 @@ exports.aptGetInstallUseY = {
         return __generator(this, function (_a) {
             node = violation;
             node.addChild(new dinghy_1.nodeType.BashCommandArgs()
-                .setPosition(node.children[1].position)
+                .setPosition(node.children[1].position.clone())
                 .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("-y"))));
             return [2];
         });
@@ -657,7 +666,7 @@ exports.aptGetInstallUseNoRec = {
     name: "aptGetInstallUseNoRec",
     scope: "INTRA-DIRECTIVE",
     description: "Using the --no-install-recommends flag with apt-get install in a Dockerfile helps save layer space, improve build times, and reduce the size and attack surface of the final image, as well as prevent hidden dependencies.",
-    query: dinghy_1.nodeType.Q("SC-APT-INSTALL"),
+    query: dinghy_1.nodeType.Q("SC-APT-INSTALL", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-APT-PACKAGE"))),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-APT-F-NO-INSTALL-RECOMMENDS"),
     },
@@ -675,9 +684,9 @@ exports.aptGetInstallUseNoRec = {
 };
 exports.aptGetInstallThenRemoveAptLists = {
     scope: "INTRA-DIRECTIVE",
-    name: "ruleAptGetInstallThenRemoveAptLists",
+    name: "aptGetInstallThenRemoveAptLists",
     description: "Running rm -rf /var/lib/apt/lists/* after apt-get install in a Dockerfile can improve efficiency and reduce the size of the image.",
-    query: dinghy_1.nodeType.Q("SC-APT-INSTALL"),
+    query: dinghy_1.nodeType.Q("SC-APT-INSTALL", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-APT-PACKAGE"))),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ABS-GLOB-STAR"), dinghy_1.nodeType.Q("ABS-APT-LISTS"), dinghy_1.nodeType.Q("ABS-PATH-VAR"))),
     },
@@ -744,8 +753,5 @@ exports.BINNACLE_RULES = [
     exports.aptGetInstallThenRemoveAptLists,
     exports.apkAddUseNoCache,
 ];
-exports.RULES = [
-    exports.curlUseFlagL,
-    exports.moreThanOneInstall
-].concat(exports.BINNACLE_RULES);
+exports.RULES = [exports.curlUseFlagL, exports.moreThanOneInstall].concat(exports.BINNACLE_RULES);
 //# sourceMappingURL=rules.js.map
