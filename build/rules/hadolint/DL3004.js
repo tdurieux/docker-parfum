@@ -49,6 +49,9 @@ exports.default = {
         var cmd;
         return __generator(this, function (_a) {
             cmd = node.parent;
+            if (!cmd.getChild(dinghy_1.nodeType.BashCommand).semicolon) {
+                cmd.getChild(dinghy_1.nodeType.BashCommand).semicolon = cmd.semicolon;
+            }
             cmd.replace(cmd.getChild(dinghy_1.nodeType.BashCommand));
             return [2];
         });

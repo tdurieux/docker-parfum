@@ -49,6 +49,25 @@ You can use the web version of Docker-Parfum https://durieux.me/docker-parfum/ (
 
 ### API
 
+**CLI**
+
+```bash
+npm i -g @tdurieux/docker-parfum
+docker-parfum repair <dockerfile>
+```
+```
+Usage: docker-parfum [options] [command]
+
+Options:
+  -h, --help               display help for command
+
+Commands:
+  rules                    List the supported rules
+  repair [options] <file>  Repair the Dockerfile smells
+  analyze <file>           Analyze a Dockerfile file for smells
+  help [command]           display help for command
+```
+
 **Node**
 
 ```typescript
