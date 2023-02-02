@@ -1,5 +1,5 @@
 import { nodeType } from "@tdurieux/dinghy";
-import { Matcher } from "../lib";
+import { BINNACLE_RULES, Matcher } from "../lib";
 import {
   apkAddUseNoCache,
   configureShouldUseBuildFlag,
@@ -21,7 +21,7 @@ import {
   tarSomethingRmTheSomething,
   wgetUseHttpsUrl,
   yumInstallRmVarCacheYum,
-} from "../lib/rules";
+} from "../lib/rules/binnacle";
 import { praseFile } from "./test-utils";
 
 describe("Testing the detecting of rule on real dockerfiles", () => {
@@ -76,7 +76,7 @@ RUN if [ -d .git ]; then \\
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
 
-    const violations = new Matcher(dockerfile).matchAll();
+    const violations = new Matcher(dockerfile).matchAll(BINNACLE_RULES);
     expect(violations).toHaveLength(0);
   });
   test("13ee04f6789083fb2df8c931cc0aaae45746261b", async () => {
@@ -91,7 +91,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(1);
     expect(matcher.match(gpgUseBatchFlag)).toHaveLength(1);
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(8);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(8);
   });
   test("0f2e80905340ffc054e2d445a53c45c11069d30a", async () => {
     const dockerfile = await praseFile(
@@ -116,7 +118,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(1);
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(1);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(4);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(4);
   });
   test("0cfa5aeb451ed647696bf5b9f9cb5648fde8cbd8", async () => {
     const dockerfile = await praseFile(
@@ -127,7 +131,9 @@ RUN if [ -d .git ]; then \\
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(wgetUseHttpsUrl)).toHaveLength(4);
     expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(0);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(4);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(4);
   });
   test("0bab414ad6285c04798e5f4480c10bf65da0e982", async () => {
     const dockerfile = await praseFile(
@@ -140,7 +146,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(3);
     expect(matcher.match(yumInstallRmVarCacheYum)).toHaveLength(1);
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(3);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(9);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(9);
   });
   test("087ced569a2e70e178c18bcf18426fa8fbc4f098", async () => {
     const dockerfile = await praseFile(
@@ -238,7 +246,9 @@ RUN if [ -d .git ]; then \\
 
     expect(matcher.match(curlUseFlagF)).toHaveLength(0);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(0);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(0);
   });
   test("0b687ec4b2f490051a53d114bf64242580c32f28", async () => {
     const dockerfile = await praseFile(
@@ -250,7 +260,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(curlUseFlagF)).toHaveLength(0);
     expect(matcher.match(apkAddUseNoCache)).toHaveLength(1);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(1);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(1);
   });
   test("0b1975d451426f9858f59b812411970f4e2ac49c", async () => {
     const dockerfile = await praseFile(
@@ -261,7 +273,9 @@ RUN if [ -d .git ]; then \\
 
     expect(matcher.match(curlUseFlagF)).toHaveLength(0);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(0);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(0);
   });
   test("0c1e517ccfa17cd28a2a1e54b6a017b6d7b94f0d", async () => {
     const dockerfile = await praseFile(
@@ -272,7 +286,9 @@ RUN if [ -d .git ]; then \\
 
     expect(matcher.match(curlUseFlagF)).toHaveLength(0);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(0);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(0);
   });
   test("0c2ab277bc1488c0fad85b02a5e5cd4ff967e9d9", async () => {
     const dockerfile = await praseFile(
@@ -283,7 +299,9 @@ RUN if [ -d .git ]; then \\
 
     expect(matcher.match(curlUseFlagF)).toHaveLength(0);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(0);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(0);
   });
   test("1ae6fb60aa44225965af5580a60b7b11e92b0ae3", async () => {
     const dockerfile = await praseFile(
@@ -297,7 +315,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(rmRecursiveAfterMktempD)).toHaveLength(2);
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(3);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(3);
   });
   test("1d1bb50eab9be0de526f64d25ee65a173d4b7bac", async () => {
     const dockerfile = await praseFile(
@@ -307,8 +327,11 @@ RUN if [ -d .git ]; then \\
     const matcher = new Matcher(dockerfile);
 
     expect(matcher.match(curlUseFlagF)).toHaveLength(0);
+    expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(1);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(0);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(1);
   });
   test("fc3c55ae7e45976afdced595ba7947a19eba20f6", async () => {
     const dockerfile = await praseFile(
@@ -320,7 +343,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(curlUseFlagF)).toHaveLength(16);
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(1);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(17);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(17);
   });
   test("f7e951de0561fc59784dc65c4759d1440d299548", async () => {
     const dockerfile = await praseFile(
@@ -334,7 +359,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(gpgUseBatchFlag)).toHaveLength(2);
     expect(matcher.match(apkAddUseNoCache)).toHaveLength(2);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(13);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(13);
   });
   test("edb81abfd45e16bcd51d6216b1b4ffcfeeb396fe", async () => {
     const dockerfile = await praseFile(
@@ -346,7 +373,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(curlUseFlagF)).toHaveLength(16);
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(1);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(17);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(17);
   });
   test("d68979a6b11bfd4c96d311a3ec96f6f856eb78fd", async () => {
     const dockerfile = await praseFile(
@@ -358,7 +387,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(curlUseFlagF)).toHaveLength(16);
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(1);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(17);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(17);
   });
   test("cc8c73f5e92b615f02c288c113d9fdbe258f1234", async () => {
     const dockerfile = await praseFile(
@@ -374,7 +405,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(3);
     expect(matcher.match(wgetUseHttpsUrl)).toHaveLength(3);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(22);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(22);
   });
   test("9cae314c3410c74d2267c7c71eeb17a83b13f07f", async () => {
     const dockerfile = await praseFile(
@@ -382,7 +415,9 @@ RUN if [ -d .git ]; then \\
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(11);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(11);
   });
   test("5da2d6445d6786a7822a10a2932465a7e6fb2f66", async () => {
     const dockerfile = await praseFile(
@@ -396,7 +431,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(1);
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(2);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(26);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(26);
   });
   test("6f5babadbdd0a15f4867eba1d2aa5a57983f59ee", async () => {
     const dockerfile = await praseFile(
@@ -411,7 +448,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(3);
     expect(matcher.match(gemUpdateNoDocument)).toHaveLength(1);
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(1);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(16);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(16);
   });
   test("75e40e8cd29890dd65115699529c2e88f7842e7b", async () => {
     const dockerfile = await praseFile(
@@ -419,10 +458,12 @@ RUN if [ -d .git ]; then \\
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
-    expect(matcher.match(curlUseFlagF)).toHaveLength(1);
+    expect(matcher.match(curlUseFlagF)).toHaveLength(0);
     expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(1);
     expect(matcher.match(gpgUseBatchFlag)).toHaveLength(3);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(5);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(4);
   });
   test("a39b5f620df6ae20a6841cf748eb9023c2ea72b6", async () => {
     const dockerfile = await praseFile(
@@ -437,7 +478,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(3);
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(4);
     expect(matcher.match(curlUseFlagF)).toHaveLength(2);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(21);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(21);
   });
   test("01e787466b7c2248a7465f413e587932d4b5bc06", async () => {
     const dockerfile = await praseFile(
@@ -450,7 +493,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(3);
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
     expect(matcher.match(pipUseNoCacheDir)).toHaveLength(7);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(20);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(20);
   });
   test("8650876daf234124a6b7aec4c75d9ccf92ebe626", async () => {
     const dockerfile = await praseFile(
@@ -458,7 +503,9 @@ RUN if [ -d .git ]; then \\
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(19);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(19);
   });
   test("7cb0093bfdd6688528619ff0af54cdf0f95243b3", async () => {
     const dockerfile = await praseFile(
@@ -466,7 +513,9 @@ RUN if [ -d .git ]; then \\
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(16);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(16);
   });
   test("613403030ca5b851255753a0c92254f985b561e4", async () => {
     const dockerfile = await praseFile(
@@ -481,7 +530,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(npmCacheCleanAfterInstall)).toHaveLength(1);
     expect(matcher.match(curlUseFlagF)).toHaveLength(10);
 
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(31);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(31);
   });
   test("0001a177c159ca47f359c34cfdce78ecf80e7eb0", async () => {
     const dockerfile = await praseFile(
@@ -495,7 +546,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(8);
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(5);
     expect(matcher.match(aptGetInstallUseY)).toHaveLength(2);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(26);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(26);
   });
   test("000938d73f02c45eeac641c817cf7146dac43cdf", async () => {
     const dockerfile = await praseFile(
@@ -509,7 +562,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(6);
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(19);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(19);
   });
   test("845801df7b9c5ed80c8a27750129562f0439bfc4", async () => {
     const dockerfile = await praseFile(
@@ -520,7 +575,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(npmCacheCleanAfterInstall)).toHaveLength(2);
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(6);
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(14);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(14);
   });
   test("1fd3f7693e00a8689ba6fa2d34a6d1803166bae6", async () => {
     const dockerfile = await praseFile(
@@ -533,7 +590,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(6);
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(19);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(19);
   });
   test("46ae47ac608f1b0bb5c1e66d0fd307542f1cd86c", async () => {
     const dockerfile = await praseFile(
@@ -544,7 +603,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(1);
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(1);
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(1);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(3);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(3);
   });
   test("11150fc5dca650964185584bd9ec1bbd92669143", async () => {
     const dockerfile = await praseFile(
@@ -554,7 +615,9 @@ RUN if [ -d .git ]; then \\
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(apkAddUseNoCache)).toHaveLength(13);
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(12);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(25);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(25);
   });
   test("b83aa4efc825ca9f0916d68b69361972e694a9fb", async () => {
     const dockerfile = await praseFile(
@@ -568,7 +631,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(3);
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(27);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(27);
   });
   test("c072531d6d374ef808eef795f6d54e48821de888", async () => {
     const dockerfile = await praseFile(
@@ -582,7 +647,9 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(3);
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(7);
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(8);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(28);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(28);
   });
   test("fa8464148f8735f7c24b1d3e41fe88f36e09f8bd", async () => {
     const dockerfile = await praseFile(
@@ -592,13 +659,15 @@ RUN if [ -d .git ]; then \\
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(apkAddUseNoCache)).toHaveLength(13);
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(12);
-    expect(matcher.matchAll().map((i) => i.rule.name)).toHaveLength(25);
+    expect(
+      matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
+    ).toHaveLength(25);
   });
   test("unknow-type", async () => {
     const dockerfile = await praseFile("unknow-type");
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     expect(dockerfile.toString(true)).toBe(dockerfile.position.file.content);
-    //matcher.matchAll().forEach((v) => v.repair());
+    //matcher.matchAll(BINNACLE_RULES).forEach((v) => v.repair());
   });
 });
 

@@ -20,13 +20,13 @@ import {
   aptGetInstallUseNoRec,
   aptGetInstallUseY,
   aptGetUpdatePrecedesInstall,
-  moreThanOneInstall,
   sha256sumEchoOneSpaces,
   tarSomethingRmTheSomething,
   wgetUseHttpsUrl,
   yumInstallForceYes,
   yumInstallRmVarCacheYum,
-} from "../lib/rules";
+} from "../lib/rules/binnacle";
+import { moreThanOneInstall } from "../lib/rules/parfum";
 import { praseFile } from "./test-utils";
 
 describe("moreThanOneInstall", () => {
@@ -244,7 +244,9 @@ describe("Testing rule matcher", () => {
     expect(violations).toHaveLength(0);
   });
   test("curlUseHttpsUrl invalid", async () => {
-    const root = await parseShell(`curl -SLO "http://resin-packages.s3.amazonaws.com/node/v$NODE_VERSION/node-v$NODE_VERSION-linux-alpine-armv7hf.tar.gz"`);
+    const root = await parseShell(
+      `curl -SLO "http://resin-packages.s3.amazonaws.com/node/v$NODE_VERSION/node-v$NODE_VERSION-linux-alpine-armv7hf.tar.gz"`
+    );
     const matcher = new Matcher(root);
 
     const rule = curlUseHttpsUrl;

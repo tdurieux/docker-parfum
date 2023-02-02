@@ -1,6 +1,6 @@
 import { parseDocker } from "@tdurieux/dinghy";
 import { Matcher } from "../../lib/rule-matcher";
-import rule from "../../lib/hadolint_rules/DL3020";
+import rule from "../../lib/rules/hadolint/DL3020";
 
 describe("DL3020", () => {
   test("COPY", async () => {

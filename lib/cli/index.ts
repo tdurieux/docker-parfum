@@ -2,28 +2,28 @@ import { Command } from "commander";
 import { Matcher } from "../rule-matcher";
 import * as Diff from "diff";
 
-import { RULES } from "../rules";
+import { ALL_RULES } from "../rules";
 import { File, DockerParser, parseDocker } from "@tdurieux/dinghy";
 const program = new Command();
 
 program
-  .name("dockerfile-debloat")
-  .description("Debloat Dockerfiles")
-  .version("1.0.0");
+  .name("docker-parfum")
+  .description("Identify and Repair Docker smells")
+  .version("0.5.0");
 
 program
   .command("rules")
   .description("List the supported rules")
   .action(async function () {
-    for (const rule of RULES) {
+    for (const rule of ALL_RULES) {
       console.log(rule.name);
       console.log(rule.description);
     }
   });
 
 program
-  .command("refactor")
-  .description("The Dockerfile to debloat")
+  .command("repair")
+  .description("Repair the Dockerfile smells")
   .argument("<file>", "The filepath to the Dockerfile")
   .option("-o, --output <output>", "the output destination of the repair")
   .action(async function (file: string, options: { output: string }) {
@@ -49,7 +49,7 @@ program
         } else if (part.removed) {
           console.log("- " + line);
         } else {
-          // console.log(" " + line);
+          console.log(" " + line);
         }
       });
     });
@@ -57,23 +57,12 @@ program
 
 program
   .command("analyze")
-  .description("Analyze a Dockerfile file for rule violation")
+  .description("Analyze a Dockerfile file for smells")
   .argument("<file>", "The filepath to the Dockerfile")
   .action(async (file: string) => {
     const dockerfile = await parseDocker(file);
     const matcher = new Matcher(dockerfile);
     matcher.matchAll().forEach((e) => console.log(e.toString()));
-  });
-
-program
-  .command("parse")
-  .description("Generate the AST of the dockerfile")
-  .argument("<file>", "The filepath to the Dockerfile")
-  .action(async (file: string) => {
-    const dockerfile = await parseDocker(file);
-    console.log(
-      JSON.stringify(dockerfile, ["type", "children", "value", "position"], 2)
-    );
   });
 
 program.parse();

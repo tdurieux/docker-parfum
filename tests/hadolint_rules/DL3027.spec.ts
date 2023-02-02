@@ -1,6 +1,6 @@
 import { parseDocker } from "@tdurieux/dinghy";
 import { Matcher } from "../../lib/rule-matcher";
-import rule from "../../lib/hadolint_rules/DL3027";
+import rule from "../../lib/rules/hadolint/DL3027";
 
 describe("DL3027", () => {
   test("apt instead of apt-get", async () => {

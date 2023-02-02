@@ -77,3 +77,14 @@ for (const violation of allViolations) {
 
 const repairedDockerfile = ast.toString(true);
 ```
+
+## Enricher
+
+```typescript
+import * as dindhy from "@tdurieux/dinghy";
+import {enricher} from "@tdurieux/docker-parfum";
+
+const ast = await dindhy.parseDocker(/* file */);
+enricher.enrich(ast);
+ast.find(dindhy.nodeType.Q("SC-APT-PACKAGE"))
+```

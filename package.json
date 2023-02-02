@@ -1,7 +1,7 @@
 {
   "name": "@tdurieux/docker-parfum",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.5.0",
+  "description": "Identify and Repair Docker smells",
   "main": "./build/index.js",
   "scripts": {
     "test": "jest --coverage",
@@ -14,7 +14,8 @@
   "dependencies": {
     "@tdurieux/dinghy": "file:../dinghy",
     "commander": "^9.4.1",
-    "dinghy-enricher": "file:../dinghy-enricher",
+    "yaml": "^2.1.3",
+    "yargs": "^17.6.2",
     "process": "^0.11.10"
   },
   "devDependencies": {

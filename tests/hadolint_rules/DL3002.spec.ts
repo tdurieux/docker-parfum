@@ -1,6 +1,6 @@
 import { parseDocker } from "@tdurieux/dinghy";
 import { Matcher } from "../../lib/rule-matcher";
-import DL3002 from "../../lib/hadolint_rules/DL3002";
+import DL3002 from "../../lib/rules/hadolint/DL3002";
 
 describe("DL3002", () => {
   test("without user", async () => {

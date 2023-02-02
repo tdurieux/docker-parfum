@@ -17,5 +17,5 @@ export declare class Matcher {
     });
     get node(): nodeType.DockerOpsNodeType;
     match(rule: Rule): Violation[];
-    matchAll(): Violation[];
+    matchAll(rules?: Rule[]): Violation[];
 }

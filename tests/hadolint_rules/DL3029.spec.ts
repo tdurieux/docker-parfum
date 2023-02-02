@@ -1,6 +1,6 @@
 import { parseDocker } from "@tdurieux/dinghy";
 import { Matcher } from "../../lib/rule-matcher";
-import rule from "../../lib/hadolint_rules/DL3029";
+import rule from "../../lib/rules/hadolint/DL3029";
 
 describe("DL3029", () => {
   test("FROM with platfrom", async () => {

@@ -1,8 +1,9 @@
-import enricher from "dinghy-enricher";
 import { nodeType } from "@tdurieux/dinghy";
 
-import { Rule, RULES } from "./rules";
+import enricher from "./enricher";
+import { ALL_RULES } from "./rules";
 import { DockerFile } from "@tdurieux/dinghy/build/docker-type";
+import { Rule } from "./rules";
 
 export class Violation {
   constructor(readonly rule: Rule, readonly node: nodeType.DockerOpsNodeType) {}
@@ -16,7 +17,7 @@ export class Violation {
             ? this.node.clone()
             : this.node.getParent(nodeType.DockerFile)?.clone();
         if (parent == null) {
-          console.error("Dockerfile not found in parent")
+          console.error("Dockerfile not found in parent");
           return this.node;
         }
         parent.traverse((n) => {
@@ -142,9 +143,9 @@ export class Matcher {
     return violations.filter((e) => !toRemove.has(e));
   }
 
-  public matchAll() {
+  public matchAll(rules = ALL_RULES) {
     const output: Violation[] = [];
-    for (const rule of RULES) {
+    for (const rule of rules) {
       try {
         this.match(rule).forEach((e) => output.push(e));
       } catch (error) {

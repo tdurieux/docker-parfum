@@ -40,8 +40,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Matcher = exports.Violation = void 0;
-var dinghy_enricher_1 = __importDefault(require("dinghy-enricher"));
 var dinghy_1 = require("@tdurieux/dinghy");
+var enricher_1 = __importDefault(require("./enricher"));
 var rules_1 = require("./rules");
 var docker_type_1 = require("@tdurieux/dinghy/build/docker-type");
 var Violation = (function () {
@@ -100,7 +100,7 @@ exports.Violation = Violation;
 var Matcher = (function () {
     function Matcher(root, _a) {
         var _b = _a === void 0 ? { toEnrich: true } : _a, toEnrich = _b.toEnrich;
-        this._root = toEnrich ? (0, dinghy_enricher_1.default)(root) : root;
+        this._root = toEnrich ? (0, enricher_1.default)(root) : root;
     }
     Object.defineProperty(Matcher.prototype, "node", {
         get: function () {
@@ -161,10 +161,11 @@ var Matcher = (function () {
         }
         return violations.filter(function (e) { return !toRemove.has(e); });
     };
-    Matcher.prototype.matchAll = function () {
+    Matcher.prototype.matchAll = function (rules) {
+        if (rules === void 0) { rules = rules_1.ALL_RULES; }
         var output = [];
-        for (var _i = 0, RULES_1 = rules_1.RULES; _i < RULES_1.length; _i++) {
-            var rule = RULES_1[_i];
+        for (var _i = 0, rules_2 = rules; _i < rules_2.length; _i++) {
+            var rule = rules_2[_i];
             try {
                 this.match(rule).forEach(function (e) { return output.push(e); });
             }

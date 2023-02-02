@@ -1,6 +1,6 @@
 import { parseDocker } from "@tdurieux/dinghy";
 import { Matcher } from "../../lib/rule-matcher";
-import rule from "../../lib/hadolint_rules/DL3046";
+import rule from "../../lib/rules/hadolint/DL3046";
 
 describe("DL3046", () => {
   test("useradd without -l", async () => {

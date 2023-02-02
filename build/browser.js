@@ -59,22 +59,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseAndMatch = exports.enricher = exports.dinghy = exports.Matcher = exports.Violation = exports.HADOLING_RULES = exports.hadoling_rules = exports.rules = exports.BINNACLE_RULES = exports.RULES = void 0;
+exports.parseAndMatch = exports.enricher = exports.dinghy = exports.Matcher = exports.Violation = exports.HADOLINT_RULES = exports.BINNACLE_RULES = exports.PARFUM_RULES = void 0;
 process.argv.push("--browser");
 var dinghy_1 = require("@tdurieux/dinghy");
 var rule_matcher_1 = require("./rule-matcher");
 var rules_1 = require("./rules");
-Object.defineProperty(exports, "RULES", { enumerable: true, get: function () { return rules_1.RULES; } });
+Object.defineProperty(exports, "PARFUM_RULES", { enumerable: true, get: function () { return rules_1.PARFUM_RULES; } });
 Object.defineProperty(exports, "BINNACLE_RULES", { enumerable: true, get: function () { return rules_1.BINNACLE_RULES; } });
-exports.rules = __importStar(require("./rules"));
-exports.hadoling_rules = __importStar(require("./hadolint_rules"));
-var hadolint_rules_1 = require("./hadolint_rules");
-Object.defineProperty(exports, "HADOLING_RULES", { enumerable: true, get: function () { return hadolint_rules_1.HADOLING_RULES; } });
+Object.defineProperty(exports, "HADOLINT_RULES", { enumerable: true, get: function () { return rules_1.HADOLINT_RULES; } });
 var rule_matcher_2 = require("./rule-matcher");
 Object.defineProperty(exports, "Violation", { enumerable: true, get: function () { return rule_matcher_2.Violation; } });
 Object.defineProperty(exports, "Matcher", { enumerable: true, get: function () { return rule_matcher_2.Matcher; } });
 exports.dinghy = __importStar(require("@tdurieux/dinghy"));
-exports.enricher = __importStar(require("dinghy-enricher"));
+exports.enricher = __importStar(require("./enricher"));
 function parseAndMatch(dockerfile) {
     return __awaiter(this, void 0, void 0, function () {
         var ast;

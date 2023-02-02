@@ -66,18 +66,18 @@ var rules_1 = require("../rules");
 var dinghy_1 = require("@tdurieux/dinghy");
 var program = new commander_1.Command();
 program
-    .name("dockerfile-debloat")
-    .description("Debloat Dockerfiles")
-    .version("1.0.0");
+    .name("docker-parfum")
+    .description("Identify and Repair Docker smells")
+    .version("0.5.0");
 program
     .command("rules")
     .description("List the supported rules")
     .action(function () {
     return __awaiter(this, void 0, void 0, function () {
-        var _i, RULES_1, rule;
+        var _i, ALL_RULES_1, rule;
         return __generator(this, function (_a) {
-            for (_i = 0, RULES_1 = rules_1.RULES; _i < RULES_1.length; _i++) {
-                rule = RULES_1[_i];
+            for (_i = 0, ALL_RULES_1 = rules_1.ALL_RULES; _i < ALL_RULES_1.length; _i++) {
+                rule = ALL_RULES_1[_i];
                 console.log(rule.name);
                 console.log(rule.description);
             }
@@ -86,8 +86,8 @@ program
     });
 });
 program
-    .command("refactor")
-    .description("The Dockerfile to debloat")
+    .command("repair")
+    .description("Repair the Dockerfile smells")
     .argument("<file>", "The filepath to the Dockerfile")
     .option("-o, --output <output>", "the output destination of the repair")
     .action(function (file, options) {
@@ -128,6 +128,7 @@ program
                                 console.log("- " + line);
                             }
                             else {
+                                console.log(" " + line);
                             }
                         });
                     });
@@ -138,7 +139,7 @@ program
 });
 program
     .command("analyze")
-    .description("Analyze a Dockerfile file for rule violation")
+    .description("Analyze a Dockerfile file for smells")
     .argument("<file>", "The filepath to the Dockerfile")
     .action(function (file) { return __awaiter(void 0, void 0, void 0, function () {
     var dockerfile, matcher;
@@ -149,22 +150,6 @@ program
                 dockerfile = _a.sent();
                 matcher = new rule_matcher_1.Matcher(dockerfile);
                 matcher.matchAll().forEach(function (e) { return console.log(e.toString()); });
-                return [2];
-        }
-    });
-}); });
-program
-    .command("parse")
-    .description("Generate the AST of the dockerfile")
-    .argument("<file>", "The filepath to the Dockerfile")
-    .action(function (file) { return __awaiter(void 0, void 0, void 0, function () {
-    var dockerfile;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4, (0, dinghy_1.parseDocker)(file)];
-            case 1:
-                dockerfile = _a.sent();
-                console.log(JSON.stringify(dockerfile, ["type", "children", "value", "position"], 2));
                 return [2];
         }
     });
