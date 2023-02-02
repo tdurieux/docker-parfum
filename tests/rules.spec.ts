@@ -27,7 +27,7 @@ import {
   yumInstallRmVarCacheYum,
 } from "../lib/rules/binnacle";
 import { moreThanOneInstall } from "../lib/rules/parfum";
-import { praseFile } from "./test-utils";
+import { praseFile, repairedFile } from "./test-utils";
 
 describe("moreThanOneInstall", () => {
   test("valid", async () => {
@@ -665,7 +665,7 @@ describe("Testing rule matcher", () => {
     await violations[0].repair();
 
     expect(matcher.node.toString(true)).toEqual(
-      readFileSync("./tests/data/complex-reprint-repaired.Dockerfile", "utf8")
+      await repairedFile("complex-reprint")
     );
   });
 

@@ -1,6 +1,6 @@
 import { nodeType } from "@tdurieux/dinghy";
 import { Rule } from "..";
-import { BashWord } from "@tdurieux/dinghy/build/docker-type";
+import { BashCommand, BashWord } from "@tdurieux/dinghy/build/docker-type";
 
 export default {
   scope: "INTRA-DIRECTIVE",
@@ -13,7 +13,10 @@ export default {
   consequent: {},
   source: "https://github.com/hadolint/hadolint/wiki/DL3004",
   repair: async (node) => {
-    const cmd = node.parent;
+    const cmd = node.parent as BashCommand;
+    if (!cmd.getChild(nodeType.BashCommand).semicolon) {
+      cmd.getChild(nodeType.BashCommand).semicolon = cmd.semicolon;
+    }
     cmd.replace(cmd.getChild(nodeType.BashCommand));
   },
 } as Rule;

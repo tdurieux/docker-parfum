@@ -1,4 +1,5 @@
 import { DockerParser, File, Printer } from "@tdurieux/dinghy";
+import { readFile } from "fs/promises";
 
 export async function praseFile(file: string) {
   const filePath = `./tests/data/${file}.Dockerfile`;
@@ -9,4 +10,8 @@ export async function praseFile(file: string) {
   printer.print();
   expect(printer.errors).toHaveLength(0);
   return ast;
+}
+export async function repairedFile(file: string) {
+  const filePath = `./tests/repaired_data/${file}.Dockerfile`;
+  return readFile(filePath, { encoding: "utf-8" });
 }

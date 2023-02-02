@@ -459,7 +459,8 @@ RUN if [ -d .git ]; then \\
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(curlUseFlagF)).toHaveLength(1);
-    expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(1);
+    expect(matcher.match(curlUseHttpsUrl)).toHaveLength(1);
+    expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(0);
     expect(matcher.match(gpgUseBatchFlag)).toHaveLength(3);
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
@@ -543,13 +544,13 @@ RUN if [ -d .git ]; then \\
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(curlUseHttpsUrl)).toHaveLength(2);
     expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(0);
-    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(8);
-    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(8);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(6);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(5);
     expect(matcher.match(aptGetInstallUseY)).toHaveLength(2);
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
-    ).toHaveLength(25);
+    ).toHaveLength(21);
   });
   test("000938d73f02c45eeac641c817cf7146dac43cdf", async () => {
     const dockerfile = await praseFile(
@@ -560,12 +561,12 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(curlUseHttpsUrl)).toHaveLength(2);
     expect(matcher.match(curlUseFlagF)).toHaveLength(2);
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(1);
-    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(6);
-    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(5);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(5);
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
-    ).toHaveLength(19);
+    ).toHaveLength(17);
   });
   test("845801df7b9c5ed80c8a27750129562f0439bfc4", async () => {
     const dockerfile = await praseFile(
