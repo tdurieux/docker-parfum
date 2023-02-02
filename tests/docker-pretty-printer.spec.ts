@@ -1,3 +1,4 @@
+import { BINNACLE_RULES } from "../lib";
 import { Matcher } from "../lib/rule-matcher";
 import { praseFile } from "./test-utils";
 
@@ -10,7 +11,7 @@ describe("Testing docker-pretty-printer", () => {
     const dockerfile = await praseFile("non_sha256echo");
     expect(dockerfile.toString(true)).toBe(dockerfile.position.file.content);
     const matcher = new Matcher(dockerfile);
-    const violations = matcher.matchAll();
+    const violations = matcher.matchAll(BINNACLE_RULES);
     expect(violations.length).toBe(0);
     violations.forEach(async (e) => {
       await e.repair();
@@ -23,7 +24,7 @@ describe("Testing docker-pretty-printer", () => {
     );
     // expect(dockerfile.toString(true)).toBe(dockerfile.fileContent);
     const matcher = new Matcher(dockerfile);
-    matcher.matchAll().forEach(async (e) => {
+    matcher.matchAll(BINNACLE_RULES).forEach(async (e) => {
       await e.repair();
     });
     expect(dockerfile.toString(true)).toBe(dockerfile.position.file.content);
@@ -35,8 +36,7 @@ describe("Testing docker-pretty-printer", () => {
     );
     // expect(dockerfile.toString(true)).toBe(dockerfile.fileContent);
     const matcher = new Matcher(dockerfile);
-    matcher.matchAll().forEach(async (e) => {
-      console.log(e.toString());
+    matcher.matchAll(BINNACLE_RULES).forEach(async (e) => {
       try {
         await e.repair();
       } catch (error) {}
@@ -50,8 +50,7 @@ describe("Testing docker-pretty-printer", () => {
     );
     // expect(dockerfile.toString(true)).toBe(dockerfile.fileContent);
     const matcher = new Matcher(dockerfile);
-    matcher.matchAll().forEach(async (e) => {
-      console.log(e.toString());
+    matcher.matchAll(BINNACLE_RULES).forEach(async (e) => {
       try {
         await e.repair();
       } catch (error) {}
@@ -64,8 +63,7 @@ describe("Testing docker-pretty-printer", () => {
     );
     // expect(dockerfile.toString(true)).toBe(dockerfile.fileContent);
     const matcher = new Matcher(dockerfile);
-    matcher.matchAll().forEach(async (e) => {
-      console.log(e.toString());
+    matcher.matchAll(BINNACLE_RULES).forEach(async (e) => {
       try {
         await e.repair();
       } catch (error) {}

@@ -357,11 +357,11 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(3);
     expect(matcher.match(tarSomethingRmTheSomething)).toHaveLength(3);
     expect(matcher.match(gpgUseBatchFlag)).toHaveLength(2);
-    expect(matcher.match(apkAddUseNoCache)).toHaveLength(2);
+    expect(matcher.match(apkAddUseNoCache)).toHaveLength(0);
 
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
-    ).toHaveLength(13);
+    ).toHaveLength(11);
   });
   test("edb81abfd45e16bcd51d6216b1b4ffcfeeb396fe", async () => {
     const dockerfile = await praseFile(
@@ -458,12 +458,12 @@ RUN if [ -d .git ]; then \\
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
-    expect(matcher.match(curlUseFlagF)).toHaveLength(0);
+    expect(matcher.match(curlUseFlagF)).toHaveLength(1);
     expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(1);
     expect(matcher.match(gpgUseBatchFlag)).toHaveLength(3);
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
-    ).toHaveLength(4);
+    ).toHaveLength(5);
   });
   test("a39b5f620df6ae20a6841cf748eb9023c2ea72b6", async () => {
     const dockerfile = await praseFile(
@@ -529,10 +529,11 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(7);
     expect(matcher.match(npmCacheCleanAfterInstall)).toHaveLength(1);
     expect(matcher.match(curlUseFlagF)).toHaveLength(10);
+    expect(matcher.match(curlUseHttpsUrl)).toHaveLength(6);
 
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
-    ).toHaveLength(31);
+    ).toHaveLength(37);
   });
   test("0001a177c159ca47f359c34cfdce78ecf80e7eb0", async () => {
     const dockerfile = await praseFile(
@@ -541,14 +542,14 @@ RUN if [ -d .git ]; then \\
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
     expect(matcher.match(curlUseHttpsUrl)).toHaveLength(2);
-    expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(1);
+    expect(matcher.match(sha256sumEchoOneSpaces)).toHaveLength(0);
     expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(8);
     expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(8);
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(5);
     expect(matcher.match(aptGetInstallUseY)).toHaveLength(2);
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
-    ).toHaveLength(26);
+    ).toHaveLength(25);
   });
   test("000938d73f02c45eeac641c817cf7146dac43cdf", async () => {
     const dockerfile = await praseFile(
@@ -588,11 +589,11 @@ RUN if [ -d .git ]; then \\
     expect(matcher.match(curlUseHttpsUrl)).toHaveLength(2);
     expect(matcher.match(curlUseFlagF)).toHaveLength(2);
     expect(matcher.match(aptGetUpdatePrecedesInstall)).toHaveLength(2);
-    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(6);
-    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(6);
+    expect(matcher.match(aptGetInstallUseNoRec)).toHaveLength(5);
+    expect(matcher.match(aptGetInstallThenRemoveAptLists)).toHaveLength(5);
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
-    ).toHaveLength(19);
+    ).toHaveLength(17);
   });
   test("46ae47ac608f1b0bb5c1e66d0fd307542f1cd86c", async () => {
     const dockerfile = await praseFile(
@@ -613,11 +614,11 @@ RUN if [ -d .git ]; then \\
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
-    expect(matcher.match(apkAddUseNoCache)).toHaveLength(13);
+    expect(matcher.match(apkAddUseNoCache)).toHaveLength(1);
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(12);
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
-    ).toHaveLength(25);
+    ).toHaveLength(13);
   });
   test("b83aa4efc825ca9f0916d68b69361972e694a9fb", async () => {
     const dockerfile = await praseFile(
@@ -657,11 +658,11 @@ RUN if [ -d .git ]; then \\
     );
     expect(dockerfile).toBeInstanceOf(nodeType.DockerFile);
     const matcher = new Matcher(dockerfile);
-    expect(matcher.match(apkAddUseNoCache)).toHaveLength(13);
+    expect(matcher.match(apkAddUseNoCache)).toHaveLength(1);
     expect(matcher.match(configureShouldUseBuildFlag)).toHaveLength(12);
     expect(
       matcher.matchAll(BINNACLE_RULES).map((i) => i.rule.name)
-    ).toHaveLength(25);
+    ).toHaveLength(13);
   });
   test("unknow-type", async () => {
     const dockerfile = await praseFile("unknow-type");

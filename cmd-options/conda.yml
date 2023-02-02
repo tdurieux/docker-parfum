@@ -1,0 +1,49 @@
+command:
+  prefix: SC-CONDA
+  providerFor:
+    - conda
+  optionsAll: &optionsAll
+    booleans:
+      - -y, --yes
+      - -h, --help
+      - -v, --version
+      - --purge
+      - --auto-remove
+      - --autoremove
+      - --force-yes
+      - --assume-yes
+      - --no-install-recommends
+      - --no-install-suggests
+    paths:
+      - -o, --option
+      - -C, --config
+    counts:
+      - -q, --quiet
+  scenarios:
+    - cmd: $0 install [packages...]
+      options: *optionsAll
+      name: SC-CONDA-INSTALL
+    - cmd: $0 remove [packages...]
+      options: *optionsAll
+      name: SC-CONDA-REMOVE
+    - cmd: $0 update [packages...]
+      options: *optionsAll
+      name: SC-CONDA-UPDATE
+    - cmd: $0 create
+      options: *optionsAll
+      name: SC-CONDA-CREATE
+    - cmd: $0 activate <environement>
+      options: *optionsAll
+      name: SC-CONDA-ACTIVATE
+    - cmd: $0 deactivate
+      options: *optionsAll
+      name: SC-CONDA-DEACTIVATE
+    - cmd: $0 search <term>
+      options: *optionsAll
+      name: SC-CONDA-SEARCH
+    - cmd: $0 list
+      options: *optionsAll
+      name: SC-CONDA-LIST
+    - cmd: $0 info
+      options: *optionsAll
+      name: SC-CONDA-INFO

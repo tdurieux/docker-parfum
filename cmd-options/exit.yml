@@ -1,0 +1,8 @@
+command:
+  providerFor:
+    - exit
+  prefix: SC-EXIT
+  scenarios:
+    - cmd: $0 <code>
+      options: {}
+      name: SC-EXIT

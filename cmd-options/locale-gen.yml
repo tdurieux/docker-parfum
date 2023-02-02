@@ -1,0 +1,8 @@
+command:
+  providerFor:
+    - locale-gen
+  prefix: SC-LOCAL-GEN
+  scenarios:
+    - cmd: $0
+      options: {}
+      name: SC-LOCAL-GEN

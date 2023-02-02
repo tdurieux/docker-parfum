@@ -1,0 +1,254 @@
+command:
+  providerFor:
+    - pecl
+  prefix: SC-PECL
+  options: &options
+    counts:
+      - -v
+    booleans:
+      - -q
+      - -G
+      - -S
+      - -s
+      - -v
+      - -h
+      - -?
+    paths:
+      - -c
+    strings:
+      - -d
+      - -D
+      - -y
+  scenarios:
+    - cmd: $0 -v [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--V
+    - cmd: $0 -q [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--Q
+    - cmd: $0 -c  [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--C
+    - cmd: $0 -C  [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--C
+    - cmd: $0 -d  [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--D
+    - cmd: $0 -D  [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--D
+    - cmd: $0 -G [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--G
+    - cmd: $0 -S [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--S
+    - cmd: $0 -s [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--S
+    - cmd: $0 -y  [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--Y
+    - cmd: $0 -V [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL--V
+    - cmd: $0 build [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-BUILD
+    - cmd: $0 bundle [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-BUNDLE
+    - cmd: $0 channel-alias [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CHANNEL-ALIAS
+    - cmd: $0 channel-delete [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CHANNEL-DELETE
+    - cmd: $0 channel-discover [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CHANNEL-DISCOVER
+    - cmd: $0 channel-info [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CHANNEL-INFO
+    - cmd: $0 channel-login [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CHANNEL-LOGIN
+    - cmd: $0 channel-logout [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CHANNEL-LOGOUT
+    - cmd: $0 channel-update [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CHANNEL-UPDATE
+    - cmd: $0 clear-cache [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CLEAR-CACHE
+    - cmd: $0 config-create [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CONFIG-CREATE
+    - cmd: $0 config-get [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CONFIG-GET
+    - cmd: $0 config-help [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CONFIG-HELP
+    - cmd: $0 config-set [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CONFIG-SET
+    - cmd: $0 config-show [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CONFIG-SHOW
+    - cmd: $0 convert [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CONVERT
+    - cmd: $0 cvsdiff [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CVSDIFF
+    - cmd: $0 cvstag [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-CVSTAG
+    - cmd: $0 download [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-DOWNLOAD
+    - cmd: $0 download-all [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-DOWNLOAD-ALL
+    - cmd: $0 info [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-INFO
+    - cmd: $0 install [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-INSTALL
+    - cmd: $0 list [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-LIST
+    - cmd: $0 list-all [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-LIST-ALL
+    - cmd: $0 list-channels [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-LIST-CHANNELS
+    - cmd: $0 list-files [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-LIST-FILES
+    - cmd: $0 list-upgrades [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-LIST-UPGRADES
+    - cmd: $0 login [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-LOGIN
+    - cmd: $0 logout [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-LOGOUT
+    - cmd: $0 make-rpm-spec [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-MAKE-RPM-SPEC
+    - cmd: $0 makerpm [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-MAKERPM
+    - cmd: $0 package [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-PACKAGE
+    - cmd: $0 package-dependencies [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-PACKAGE-DEPENDENCIES
+    - cmd: $0 package-validate [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-PACKAGE-VALIDATE
+    - cmd: $0 pickle [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-PICKLE
+    - cmd: $0 remote-info [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-REMOTE-INFO
+    - cmd: $0 remote-list [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-REMOTE-LIST
+    - cmd: $0 run-scripts [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-RUN-SCRIPTS
+    - cmd: $0 run-tests [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-RUN-TESTS
+    - cmd: $0 search [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-SEARCH
+    - cmd: $0 shell-test [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-SHELL-TEST
+    - cmd: $0 sign [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-SIGN
+    - cmd: $0 svntag [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-SVNTAG
+    - cmd: $0 uninstall [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-UNINSTALL
+    - cmd: $0 update-channels [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-UPDATE-CHANNELS
+    - cmd: $0 upgrade [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-UPGRADE
+    - cmd: $0 upgrade-all [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-PECL-UPGRADE-ALL

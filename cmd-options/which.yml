@@ -1,0 +1,12 @@
+command:
+  providerFor:
+    - which
+  prefix: SC-WHICH
+  options: &options
+    booleans:
+      - -a
+      - -s
+  scenarios:
+    - cmd: $0 [program...]
+      options: *options
+      name: SC-WHICH

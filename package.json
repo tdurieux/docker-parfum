@@ -12,7 +12,7 @@
   "author": "Thomas Durieux",
   "license": "ISC",
   "dependencies": {
-    "@tdurieux/dinghy": "file:../dinghy",
+    "@tdurieux/dinghy": "^0.5.0",
     "commander": "^9.4.1",
     "yaml": "^2.1.3",
     "yargs": "^17.6.2",

@@ -1,0 +1,88 @@
+command:
+  providerFor:
+    - bundle
+  prefix: SC-BUNDLE
+  options: &options
+    booleans:
+      - --no-color
+      - -V, --verbose
+    strings:
+      - -r, --retry
+  updateOption: &updateOption
+    strings:
+      - --bundler=VERSION
+    booleans:
+      - --all
+      - --group
+      - --source
+      - --local
+      - --ruby
+      - --full-index
+      - --jobs=JOBS
+      - --quiet
+      - --patch
+      - --minor
+      - --major
+      - --redownload
+      - --strict
+      - --conservative
+  installOptions: &installOptions
+    strings:
+      - --binstubs
+      - --standalone
+      - --trust-policy
+      - --with
+      - --without
+      - --jobs
+      - --retry
+    paths:
+      - --path PATH
+      - --gemfile=GEMFILE
+      - --clean
+      - --deployment
+      - --frozen
+      - --full-index
+      - --local
+      - --no-cache
+      - --no-prune
+      - --quiet
+      - --redownload
+      - --shebang
+      - --system
+  scenarios:
+    - cmd: $0 install
+      options:
+        merge: [*options, *installOptions]
+      name: SC-BUNDLE-INSTALL
+    - cmd: $0 update
+      options:
+        merge: [*options]
+      name: SC-BUNDLE-UPDATE
+    - cmd: $0 cache
+      options:
+        merge: [*options]
+      name: SC-BUNDLE-CACHE
+    - cmd: $0 exec
+      options:
+        merge: [*options]
+      name: SC-BUNDLE-EXEC
+    - cmd: $0 config
+      options:
+        merge: [*options]
+      name: SC-BUNDLE-config
+    - cmd: $0 help
+      options:
+        merge: [*options]
+      name: SC-BUNDLE-HELP
+    - cmd: $0 add <name>
+      options:
+        merge: [*options]
+      name: SC-BUNDLE-ADD
+    - cmd: $0 remove <name>
+      options:
+        merge: [*options]
+      name: SC-BUNDLE-REMOVE
+    - cmd: $0 exec
+      options:
+        merge: [*options]
+      name: SC-BUNDLE-EXEC

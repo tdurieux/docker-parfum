@@ -1,0 +1,73 @@
+command:
+  providerFor:
+    - dotnet
+  prefix: SC-DOTNET
+  options: &options
+    booleans:
+      - --help
+      - --version
+  scenarios:
+    - cmd: $0 build [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-BUILD
+    - cmd: $0 build-server [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-BUID-SERVER
+    - cmd: $0 clean [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-CLEAN
+    - cmd: $0 exec [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-exec
+    - cmd: $0 help [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-help
+    - cmd: $0 migrate [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-migrate
+    - cmd: $0 msbuild [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-msbuild
+    - cmd: $0 new [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-new
+    - cmd: $0 pack [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-pack
+    - cmd: $0 publish [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-publish
+    - cmd: $0 restore [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-restore
+    - cmd: $0 run [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-run
+    - cmd: $0 sdk check [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-sdk check
+    - cmd: $0 sln [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-sln
+    - cmd: $0 store [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-store
+    - cmd: $0 test [options...]
+      options: *options
+      fixupNonSpacedArgs: true
+      name: SC-DOTNET-test

@@ -1,0 +1,38 @@
+command:
+  prefix: SC-SH
+  providerFor:
+    - sh
+  options: &options
+    booleans:
+      - -i
+      - -L, --login
+      - -r
+      - -s
+      - -D
+      - --noediting
+      - --noprofile
+      - --norc
+      - --posix
+      - --restricted
+      - -v, --verbose
+      - --version
+      - --rpm-requires
+      - --debugger
+      - --dump-po-strings
+      - --dump-strings
+      - --help
+    strings:
+      - -c
+    paths:
+      - --init-file
+      - --rcfile
+  scenarios:
+    - cmd: $0
+      options: *options
+      name: SC-SH
+      captureAllAfter:
+        match: ["-c"]
+        name: args
+      captureAfterFirstNonOption: args
+      postProcess:
+        - subCommand: args

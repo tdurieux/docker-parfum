@@ -1,0 +1,36 @@
+command:
+  providerFor:
+    - jq
+  prefix: SC-JQ
+  scenarios:
+    - cmd: $0 <filter> [PATH...]
+      options:
+        strings:
+          - -e, --exit-status
+          - --arg
+          - -L
+          - --argjson
+          - --slurpfile
+          - --argfile
+          - -f, --from-file
+          - --run-tests
+          - --indent
+        booleans:
+          - --version
+          - --seq
+          - --stream
+          - --slurp, -s
+          - --raw-input, -R
+          - --null-input, -n
+          - --compact-output, -c
+          - --tab
+          - --color-output, -C
+          - --monochrome-output, -M
+          - --ascii-output, -a
+          - --unbuffered
+          - --sort-keys, -S
+          - --raw-output, -r
+          - --join-output, -j
+          - --args
+          - --jsonargs
+      name: SC-JQ

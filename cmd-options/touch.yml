@@ -1,0 +1,18 @@
+command:
+  providerFor:
+    - touch
+  prefix: SC-TOUCH
+  scenarios:
+    - cmd: $0 [PATH...]
+      options:
+        strings:
+          - -A
+          - -d
+          - -t
+          - -r
+        booleans:
+          - -a
+          - -c
+          - -h
+          - -m
+      name: SC-TOUCH

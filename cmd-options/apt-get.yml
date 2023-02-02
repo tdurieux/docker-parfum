@@ -1,0 +1,93 @@
+command:
+  prefix: SC-APT
+  providerFor:
+    - apt-get
+  optionsAll: &optionsAll
+    booleans:
+      - -y, --yes
+      - -f, --fix-broken
+      - -m, --ignore-missing
+      - --fix-missing
+      - --allow-unauthenticated
+      - --allow-downgrades
+      - --allow-remove-essential
+      - --allow-change-held-packages
+      - -s, --simulate
+      - -u, --show-upgraded
+      - --no-install-recommends
+      - -h, --help
+      - -v, --version
+      - --purge
+      - --auto-remove
+      - --autoremove
+      - --force-yes
+      - --assume-yes
+    paths:
+      - -C, --config
+    counts:
+      - -q, --quiet
+    strings:
+      - -o, --option
+  optionsInstall: &optionsInstall
+    booleans:
+      - -d, --download-only
+      - --no-download
+      - --upgrade
+      - --only-upgrade
+      - --just-print
+      - --dry-run
+      - --recon
+      - --no-act
+      - --assume-yes
+      - -u, --show-upgraded
+      - -V, --verbose-version
+      - -b, --compile
+      - --build
+      - --ignore-hold
+      - --no-upgrade
+      - --no-install-suggests
+      - --install-suggests
+      - --print-uris
+      - --reinstall
+      - --list-cleanup
+      - --trivial-only
+      - --no-remove
+      - --only-source
+  scenarios:
+    - cmd: $0 install [packages...]
+      options:
+        merge: [*optionsAll, *optionsInstall]
+      name: SC-APT-INSTALL
+    - cmd: $0 purge [packages...]
+      options: *optionsAll
+      name: SC-APT-PURGE
+    - cmd: $0 remove [packages...]
+      options: *optionsAll
+      name: SC-APT-REMOVE
+    - cmd: $0 source <package>
+      options: *optionsAll
+      name: SC-APT-SOURCE
+    - cmd: $0 build-dep [packages...]
+      options: *optionsAll
+      name: SC-APT-BUILD-DEP
+    - cmd: $0 clean
+      options: *optionsAll
+      name: SC-APT-CLEAN
+    - cmd: $0 autoclean
+      options: *optionsAll
+      name: SC-APT-AUTO-CLEAN
+    - cmd: $0 autoremove [packages...]
+      options: *optionsAll
+      name: SC-APT-AUTO-REMOVE
+    - cmd: $0 check
+      options: *optionsAll
+      name: SC-APT-CHECK
+    - cmd: $0 update
+      options: *optionsAll
+      name: SC-APT-UPDATE
+    - cmd: $0 upgrade [packages...]
+      options: *optionsAll
+      name: SC-APT-UPGRADE
+    - cmd: $0 dist-upgrade
+      options: *optionsAll
+      name: SC-APT-DIST-UPGRADE

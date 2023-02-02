@@ -1,6 +1,3 @@
-import { CodeJar } from "https://medv.io/codejar/codejar.js";
-import { withLineNumbers } from "https://medv.io/codejar/linenumbers.js";
-
 angular
   .module("dinghy-website", ["ngRoute"])
   // .config(function ($routeProvider) {
@@ -166,8 +163,8 @@ angular
     });
 
     $scope.smellToLine = function (smell) {
-      monacoEditor.revealLine(smell.position.lineStart + 1);    
-    }
+      monacoEditor.revealLine(smell.position.lineStart + 1);
+    };
 
     $scope.analyze = async function () {
       console.time("AST PARSING");
@@ -180,11 +177,16 @@ angular
       const matcher = new dockerParfum.Matcher(ast);
 
       const smells = [];
-      const allRules = dockerParfum.RULES.concat(dockerParfum.HADOLING_RULES);
+      const allRules = dockerParfum.PARFUM_RULES.concat(
+        dockerParfum.HADOLINT_RULES,
+        dockerParfum.BINNACLE_RULES
+      );
       for (const rule of allRules) {
         matcher.match(rule).forEach((v) => smells.push(v));
       }
-      smells.sort((a, b) => a.node.position.lineStart - b.node.position.lineStart);
+      smells.sort(
+        (a, b) => a.node.position.lineStart - b.node.position.lineStart
+      );
 
       $scope.ast = ast;
       const output = { queries: {}, smells: [] };
