@@ -3,6 +3,24 @@
   "version": "0.5.0",
   "description": "Identify and Repair Docker smells",
   "main": "./build/index.js",
+  "bin": {
+    "docker-parfum": "./build/cli/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tdurieux/docker-parfum.git"
+  },
+  "keywords": [
+    "docker",
+    "smell",
+    "repair",
+    "lint",
+    "dockerfile"
+  ],
+  "homepage": "https://github.com/tdurieux/docker-parfum",
+  "sponsor": {
+    "url": "https://ko-fi.com/tdurieux"
+  },
   "scripts": {
     "test": "jest --coverage",
     "build": "rm -rf ./build; tsc; npm run browserify",
@@ -13,12 +31,12 @@
     "node": ">=16.0.0"
   },
   "files": [
-    "files"
+    "./build"
   ],
   "author": "Thomas Durieux",
   "license": "MIT",
   "dependencies": {
-    "@tdurieux/dinghy": "^0.5.1",
+    "@tdurieux/dinghy": "^0.5.5",
     "commander": "^10.0.0",
     "yaml": "^2.1.3",
     "yargs": "^17.6.2",

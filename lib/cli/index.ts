@@ -1,23 +1,21 @@
+#!/usr/bin/env node
+
 import { Command } from "commander";
 import { Matcher } from "../rule-matcher";
 import * as Diff from "diff";
 
 import { ALL_RULES } from "../rules";
 import { File, DockerParser, parseDocker } from "@tdurieux/dinghy";
+import { writeFile } from "fs/promises";
 const program = new Command();
-
-program
-  .name("docker-parfum")
-  .description("Identify and Repair Docker smells")
-  .version("0.5.0");
 
 program
   .command("rules")
   .description("List the supported rules")
   .action(async function () {
+    let index = 0;
     for (const rule of ALL_RULES) {
-      console.log(rule.name);
-      console.log(rule.description);
+      console.log(`\t ${++index}. [${rule.name}] ${rule.description}`);
     }
   });
 
@@ -30,29 +28,34 @@ program
     const parser = new DockerParser(new File(file));
     const dockerfile = await parser.parse();
     const matcher = new Matcher(dockerfile);
-    const originalOutput = matcher.node.toString(true);
-    matcher.matchAll().forEach(async (e) => {
-      console.log(e.toString());
-      await e.repair();
-    });
+
+    const smells = matcher.matchAll();
+    if (smells.length == 0) {
+      console.log(`Well done, no smells found was found in ${file}!`);
+    } else {
+      console.log(`Found ${smells.length} smells in ${file}.`);
+    }
+    for (const smell of smells) {
+      console.log(smell.toString());
+      try {
+        await smell.repair();
+      } catch (error) {}
+    }
     const repairedOutput = matcher.node.toString(true);
-    const diff = Diff.diffLines(parser.file.content, repairedOutput);
+    const diff = Diff.createTwoFilesPatch(
+      file,
+      file,
+      parser.file.content,
+      repairedOutput
+    );
+
+    if (options.output) {
+      await writeFile(options.output, repairedOutput, { encoding: "utf-8" });
+      console.log(`The repaired Dockerfile was written in ${options.output}`);
+    }
 
     console.log("The changes:\n");
-    diff.forEach((part) => {
-      // green for additions, red for deletions
-      // grey for common parts
-      const color = part.added ? "green" : part.removed ? "red" : "grey";
-      part.value.split("\n").forEach((line) => {
-        if (part.added) {
-          console.log("+ " + line);
-        } else if (part.removed) {
-          console.log("- " + line);
-        } else {
-          console.log(" " + line);
-        }
-      });
-    });
+    console.log(diff);
   });
 
 program

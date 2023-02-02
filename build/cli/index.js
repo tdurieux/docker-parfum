@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -64,22 +65,19 @@ var rule_matcher_1 = require("../rule-matcher");
 var Diff = __importStar(require("diff"));
 var rules_1 = require("../rules");
 var dinghy_1 = require("@tdurieux/dinghy");
+var promises_1 = require("fs/promises");
 var program = new commander_1.Command();
-program
-    .name("docker-parfum")
-    .description("Identify and Repair Docker smells")
-    .version("0.5.0");
 program
     .command("rules")
     .description("List the supported rules")
     .action(function () {
     return __awaiter(this, void 0, void 0, function () {
-        var _i, ALL_RULES_1, rule;
+        var index, _i, ALL_RULES_1, rule;
         return __generator(this, function (_a) {
+            index = 0;
             for (_i = 0, ALL_RULES_1 = rules_1.ALL_RULES; _i < ALL_RULES_1.length; _i++) {
                 rule = ALL_RULES_1[_i];
-                console.log(rule.name);
-                console.log(rule.description);
+                console.log("\t ".concat(++index, ". [").concat(rule.name, "] ").concat(rule.description));
             }
             return [2];
         });
@@ -92,8 +90,7 @@ program
     .option("-o, --output <output>", "the output destination of the repair")
     .action(function (file, options) {
     return __awaiter(this, void 0, void 0, function () {
-        var parser, dockerfile, matcher, originalOutput, repairedOutput, diff;
-        var _this = this;
+        var parser, dockerfile, matcher, smells, _i, smells_1, smell, error_1, repairedOutput, diff;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -102,36 +99,44 @@ program
                 case 1:
                     dockerfile = _a.sent();
                     matcher = new rule_matcher_1.Matcher(dockerfile);
-                    originalOutput = matcher.node.toString(true);
-                    matcher.matchAll().forEach(function (e) { return __awaiter(_this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    console.log(e.toString());
-                                    return [4, e.repair()];
-                                case 1:
-                                    _a.sent();
-                                    return [2];
-                            }
-                        });
-                    }); });
+                    smells = matcher.matchAll();
+                    if (smells.length == 0) {
+                        console.log("Well done, no smells found was found in ".concat(file, "!"));
+                    }
+                    else {
+                        console.log("Found ".concat(smells.length, " smells in ").concat(file, "."));
+                    }
+                    _i = 0, smells_1 = smells;
+                    _a.label = 2;
+                case 2:
+                    if (!(_i < smells_1.length)) return [3, 7];
+                    smell = smells_1[_i];
+                    console.log(smell.toString());
+                    _a.label = 3;
+                case 3:
+                    _a.trys.push([3, 5, , 6]);
+                    return [4, smell.repair()];
+                case 4:
+                    _a.sent();
+                    return [3, 6];
+                case 5:
+                    error_1 = _a.sent();
+                    return [3, 6];
+                case 6:
+                    _i++;
+                    return [3, 2];
+                case 7:
                     repairedOutput = matcher.node.toString(true);
-                    diff = Diff.diffLines(parser.file.content, repairedOutput);
+                    diff = Diff.createTwoFilesPatch(file, file, parser.file.content, repairedOutput);
+                    if (!options.output) return [3, 9];
+                    return [4, (0, promises_1.writeFile)(options.output, repairedOutput, { encoding: "utf-8" })];
+                case 8:
+                    _a.sent();
+                    console.log("The repaired Dockerfile was written in ".concat(options.output));
+                    _a.label = 9;
+                case 9:
                     console.log("The changes:\n");
-                    diff.forEach(function (part) {
-                        var color = part.added ? "green" : part.removed ? "red" : "grey";
-                        part.value.split("\n").forEach(function (line) {
-                            if (part.added) {
-                                console.log("+ " + line);
-                            }
-                            else if (part.removed) {
-                                console.log("- " + line);
-                            }
-                            else {
-                                console.log(" " + line);
-                            }
-                        });
-                    });
+                    console.log(diff);
                     return [2];
             }
         });
