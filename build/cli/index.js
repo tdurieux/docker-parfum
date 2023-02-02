@@ -142,14 +142,21 @@ program
     .description("Analyze a Dockerfile file for smells")
     .argument("<file>", "The filepath to the Dockerfile")
     .action(function (file) { return __awaiter(void 0, void 0, void 0, function () {
-    var dockerfile, matcher;
+    var dockerfile, matcher, smells;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4, (0, dinghy_1.parseDocker)(file)];
             case 1:
                 dockerfile = _a.sent();
                 matcher = new rule_matcher_1.Matcher(dockerfile);
-                matcher.matchAll().forEach(function (e) { return console.log(e.toString()); });
+                smells = matcher.matchAll();
+                if (smells.length == 0) {
+                    console.log("Well done, no smells found was found in ".concat(file, "!"));
+                }
+                else {
+                    console.log("Found ".concat(smells.length, " smells in ").concat(file, "."));
+                }
+                smells.forEach(function (e) { return console.log(e.toString()); });
                 return [2];
         }
     });

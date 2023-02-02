@@ -62,7 +62,13 @@ program
   .action(async (file: string) => {
     const dockerfile = await parseDocker(file);
     const matcher = new Matcher(dockerfile);
-    matcher.matchAll().forEach((e) => console.log(e.toString()));
+    const smells = matcher.matchAll();
+    if (smells.length == 0) {
+      console.log(`Well done, no smells found was found in ${file}!`);
+    } else {
+      console.log(`Found ${smells.length} smells in ${file}.`);
+    }
+    smells.forEach((e) => console.log(e.toString()));
   });
 
 program.parse();

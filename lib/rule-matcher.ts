@@ -44,7 +44,8 @@ export class Violation {
   }
 
   public toString(): string {
-    return `[VIOLATION] -> ${this.rule.description}
+    return `[VIOLATION] -> ${this.rule.name}
+        ${this.rule.description}
                            ${this.node
                              .toString(true)
                              .replace(/\n */g, " ")} at ${this.node.position}`;

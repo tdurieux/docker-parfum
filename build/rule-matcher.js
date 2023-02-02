@@ -90,7 +90,7 @@ var Violation = (function () {
         return newViolations.length > 0;
     };
     Violation.prototype.toString = function () {
-        return "[VIOLATION] -> ".concat(this.rule.description, "\n                           ").concat(this.node
+        return "[VIOLATION] -> ".concat(this.rule.name, "\n        ").concat(this.rule.description, "\n                           ").concat(this.node
             .toString(true)
             .replace(/\n */g, " "), " at ").concat(this.node.position);
     };
