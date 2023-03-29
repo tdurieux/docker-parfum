@@ -1,6 +1,6 @@
 {
   "name": "@tdurieux/docker-parfum",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Identify and Repair Docker smells",
   "main": "./build/index.js",
   "bin": {
