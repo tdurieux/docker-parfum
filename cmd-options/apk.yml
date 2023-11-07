@@ -2,6 +2,8 @@ command:
   prefix: SC-APK
   providerFor:
     - apk
+  categories:
+    - PACKAGE_MANAGEMENT
   optionsAll: &optionsAll
     booleans:
       - --print-arch
@@ -36,10 +38,14 @@ command:
       options:
         merge: [ *optionsAll, *optionsAdd ]
       name: SC-APK-ADD
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 del [packages...]
       options:
         merge: [ *optionsAll, *optionsDel ]
       name: SC-APK-DEL
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 fix
       unsupported: true
       options: *optionsAll
@@ -47,6 +53,8 @@ command:
     - cmd: $0 update
       options: *optionsAll
       name: SC-APK-UPDATE
+      categories:
+        - UPDATE_PACKAGES
     - cmd: $0 info
       options:
         merge: [ *optionsAll, *optionsInfo ]
@@ -58,6 +66,8 @@ command:
     - cmd: $0 upgrade [packages...]
       options: *optionsAll
       name: SC-APK-UPGRADE
+      categories:
+        - UPGRADE_PACKAGES
     - cmd: $0 cache
       unsupported: true
       options: *optionsAll

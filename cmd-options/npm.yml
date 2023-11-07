@@ -1,6 +1,8 @@
 command:
   providerFor:
     - npm
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-NPM
   optionsInstall: &optionsInstall
     booleans:
@@ -37,30 +39,53 @@ command:
     - cmd: $0 install [packages...]
       options: *optionsInstall
       name: SC-NPM-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 i [packages...]
       options: *optionsInstall
       name: SC-NPM-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 add [packages...]
       options: *optionsInstall
       name: SC-NPM-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 ci
       options: *optionsInstall
       name: SC-NPM-CI
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 uninstall [packages...]
       options: *optionsInstall
       name: SC-NPM-REMOVE
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 remove [packages...]
       options: *optionsInstall
       name: SC-NPM-REMOVE
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 build [folder]
       options: {}
       name: SC-NPM-BUILD
+      categories:
+        - BUILD_PACKAGES
+    - cmd: $0 TEST [args...]
+      options: {}
+      name: SC-NPM-TEST
+      categories:
+        - TEST_PACKAGES
     - cmd: $0 run [args...]
       options: {}
       name: SC-NPM-RUN
+      categories:
+        - RUN_PACKAGES
     - cmd: $0 run-script [args...]
       options: {}
       name: SC-NPM-RUN-SCRIPT
+      categories:
+        - RUN_PACKAGES
     - cmd: $0 cache clean
       options:
         booleans:
@@ -92,6 +117,8 @@ command:
           - --json
           - --dry-run
       name: SC-NPM-PRUNE
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0
       options:
         booleans:

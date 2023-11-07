@@ -1,6 +1,8 @@
 command:
   providerFor:
     - sha512sum
+  categories:
+    - HASH
   prefix: SC-SHA-512-SUM
   options: &options
     booleans:

@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["ldconfig"],
+  categories: [],
   prefix: "SC-LDCONFIG",
   scenarios: [
     {

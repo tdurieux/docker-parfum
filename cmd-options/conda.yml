@@ -2,6 +2,8 @@ command:
   prefix: SC-CONDA
   providerFor:
     - conda
+  categories:
+    - PACKAGE_MANAGEMENT
   optionsAll: &optionsAll
     booleans:
       - -y, --yes
@@ -23,12 +25,18 @@ command:
     - cmd: $0 install [packages...]
       options: *optionsAll
       name: SC-CONDA-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 remove [packages...]
       options: *optionsAll
       name: SC-CONDA-REMOVE
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 update [packages...]
       options: *optionsAll
       name: SC-CONDA-UPDATE
+      categories:
+        - UPDATE_PACKAGES
     - cmd: $0 create
       options: *optionsAll
       name: SC-CONDA-CREATE

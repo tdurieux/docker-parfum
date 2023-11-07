@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["bash"],
+  categories: ["SHELL"],
   prefix: "SC-BASH",
   scenarios: [
     {

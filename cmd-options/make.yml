@@ -1,6 +1,8 @@
 command:
   providerFor:
     - make
+  categories:
+    - BUILD_SYSTEM
   prefix: SC-MAKE
   options: &options
     booleans:
@@ -49,3 +51,5 @@ command:
     - cmd: $0 [target] [args...]
       options: *options
       name: SC-MAKE
+      categories:
+        - BUILD_PACKAGES

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["mkdir"],
+    categories: ["FILE_SYSTEM"],
     prefix: "SC-MKDIR",
     scenarios: [
         {

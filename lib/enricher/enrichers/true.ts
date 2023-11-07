@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["true",":"],
+  categories: ["UTILS"],
   prefix: "undefined",
   scenarios: [
     {

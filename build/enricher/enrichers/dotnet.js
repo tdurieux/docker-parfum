@@ -3,12 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["dotnet"],
+    categories: ["BUILD_SYSTEM"],
     prefix: "SC-DOTNET",
     scenarios: [
         {
             fixupNonSpacedArgs: true,
             cmd: "$0 build [options...]",
             name: "SC-DOTNET-BUILD",
+            categories: ["BUILD_PACKAGES"],
             prefix: "SC-DOTNET",
             booleans: ["help", "version"],
             argv: function () {
@@ -33,6 +35,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 build-server [options...]",
             name: "SC-DOTNET-BUID-SERVER",
+            categories: ["BUILD_PACKAGES"],
             prefix: "SC-DOTNET",
             booleans: ["help", "version"],
             argv: function () {
@@ -369,6 +372,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 test [options...]",
             name: "SC-DOTNET-test",
+            categories: ["TEST_PACKAGES"],
             prefix: "SC-DOTNET",
             booleans: ["help", "version"],
             argv: function () {

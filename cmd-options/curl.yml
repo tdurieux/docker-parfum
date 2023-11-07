@@ -1,6 +1,8 @@
 command:
   providerFor:
     - curl
+  categories:
+    - DOWNLOAD
   prefix: SC-CURL
   options: &options
     booleans:

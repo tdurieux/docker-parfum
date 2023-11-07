@@ -1,0 +1,25 @@
+command:
+  providerFor:
+    - docker
+  categories:
+    - VIRTUALIZATION
+  prefix: SC-DOCKER
+  options: &options
+    booleans:
+      - -v, --version
+      - -D, --debug
+    strings:
+      - --config
+      - -c, --context
+    lists:
+      - -H, --host
+  scenarios:
+    - cmd: $0 run <image> [command] [args...]
+      options: *options
+      name: SC-DOCKER-RUN
+    - cmd: $0 build [path]
+      options: *options
+      name: SC-DOCKER-BUIlD
+    - cmd: $0
+      options: *options
+      name: SC-DOCKER

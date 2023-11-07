@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["apt-add-repository"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-APT-ADD-REPOSITORY",
   scenarios: [
     {

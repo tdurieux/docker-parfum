@@ -1,10 +1,12 @@
 import { Argv } from "yargs";
 declare const _default: {
     providerFor: string[];
+    categories: string[];
     prefix: string;
     scenarios: ({
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -59,6 +61,7 @@ declare const _default: {
     } | {
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: any[];
         booleans: string[];
@@ -70,6 +73,21 @@ declare const _default: {
         } & {
             r: string;
         }>;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        paths: any[];
+        booleans: string[];
+        counts: any[];
+        argv: () => Argv<{
+            "no-color": boolean;
+        } & {
+            V: boolean;
+        } & {
+            r: string;
+        }>;
+        categories?: undefined;
     })[];
 };
 export default _default;

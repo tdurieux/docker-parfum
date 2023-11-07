@@ -1,6 +1,9 @@
 command:
   providerFor:
     - find
+  categories:
+    - FILE_SYSTEM
+    - SEARCH
   prefix: SC-FIND
   fixThese: &fixThese
     - -delete

@@ -1,6 +1,8 @@
 command:
   providerFor:
     - groupadd
+  categories:
+    - USER_MANAGEMENT
   prefix: SC-GROUP-ADD
   scenarios:
     - cmd: $0 <group>

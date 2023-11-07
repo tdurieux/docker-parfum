@@ -1,6 +1,8 @@
 command:
   providerFor:
     - wget
+  categories:
+    - DOWNLOAD
   prefix: SC-WGET
   options: &options
     booleans:

@@ -1,6 +1,8 @@
 command:
   providerFor:
     - jq
+  categories:
+    - DATA_PROCESSING
   prefix: SC-JQ
   scenarios:
     - cmd: $0 <filter> [PATH...]

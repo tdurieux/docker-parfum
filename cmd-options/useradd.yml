@@ -1,6 +1,8 @@
 command:
   providerFor:
     - useradd
+  categories:
+    - USER_MANAGEMENT
   prefix: SC-USER-ADD
   options: &options
     booleans:

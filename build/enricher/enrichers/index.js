@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.python = exports.printf = exports.pip = exports.php = exports.pecl = exports.nproc = exports.npm = exports.mv = exports.mktemp = exports.mkdir = exports.make = exports.ls = exports.locale_gen = exports.ln = exports.ldconfig = exports.jq = exports.groupadd = exports.grep = exports.gpg = exports.google_chrome = exports.go = exports.git = exports.gem = exports.firefox = exports.find = exports._export = exports.exit = exports.echo = exports.dpkg = exports.dpkg_architecture = exports.dotnet = exports.docker_php_ext_install = exports.dnf = exports.curl = exports.cp = exports.configure = exports.conda = exports.cmake = exports.chown = exports.chmod = exports.cd = exports.cat = exports.bundle = exports.bash = exports.apt = exports.apt_key = exports.apt_get = exports.apt_add_repository = exports.apk = exports.adduser = void 0;
-exports.enrichers = exports.yum = exports.yarn = exports.xargs = exports.which = exports.wget = exports.useradd = exports.unzip = exports._true = exports.touch = exports.tee = exports.tar = exports.sudo = exports.sort = exports.sha512sum = exports.sha256sum = exports.sh = exports.set = exports.sed = exports.rpm = exports.rm = void 0;
+exports.nproc = exports.npm = exports.node = exports.mvn = exports.mv = exports.mktemp = exports.mkdir = exports.make = exports.ls = exports.locale_gen = exports.ln = exports.ldconfig = exports.jq = exports.groupadd = exports.grep = exports.gradle = exports.gpg = exports.google_chrome = exports.go = exports.git = exports.gem = exports.firefox = exports.find = exports._export = exports.exit = exports.echo = exports.dpkg = exports.dpkg_architecture = exports.dotnet = exports.docker = exports.docker_php_ext_install = exports.dnf = exports.diff = exports.curl = exports.cp = exports.configure = exports.conda = exports.cmake = exports.chown = exports.chmod = exports.cd = exports.cat = exports.bundle = exports.bash = exports.apt = exports.apt_key = exports.apt_get = exports.apt_add_repository = exports.apk = exports.adduser = void 0;
+exports.enrichers = exports.yum = exports.yarn = exports.xargs = exports.which = exports.wget = exports.useradd = exports.unzip = exports._true = exports.touch = exports.tee = exports.tar = exports.sudo = exports.sort = exports.sha512sum = exports.sha256sum = exports.sh = exports.set = exports.sed = exports.rpm = exports.rm = exports.python = exports.pytest = exports.printf = exports.pip = exports.php = exports.pecl = void 0;
 var adduser_1 = __importDefault(require("./adduser"));
 var adduser_2 = require("./adduser");
 Object.defineProperty(exports, "adduser", { enumerable: true, get: function () { return __importDefault(adduser_2).default; } });
@@ -56,12 +56,18 @@ Object.defineProperty(exports, "cp", { enumerable: true, get: function () { retu
 var curl_1 = __importDefault(require("./curl"));
 var curl_2 = require("./curl");
 Object.defineProperty(exports, "curl", { enumerable: true, get: function () { return __importDefault(curl_2).default; } });
+var diff_1 = __importDefault(require("./diff"));
+var diff_2 = require("./diff");
+Object.defineProperty(exports, "diff", { enumerable: true, get: function () { return __importDefault(diff_2).default; } });
 var dnf_1 = __importDefault(require("./dnf"));
 var dnf_2 = require("./dnf");
 Object.defineProperty(exports, "dnf", { enumerable: true, get: function () { return __importDefault(dnf_2).default; } });
 var docker_php_ext_install_1 = __importDefault(require("./docker-php-ext-install"));
 var docker_php_ext_install_2 = require("./docker-php-ext-install");
 Object.defineProperty(exports, "docker_php_ext_install", { enumerable: true, get: function () { return __importDefault(docker_php_ext_install_2).default; } });
+var docker_1 = __importDefault(require("./docker"));
+var docker_2 = require("./docker");
+Object.defineProperty(exports, "docker", { enumerable: true, get: function () { return __importDefault(docker_2).default; } });
 var dotnet_1 = __importDefault(require("./dotnet"));
 var dotnet_2 = require("./dotnet");
 Object.defineProperty(exports, "dotnet", { enumerable: true, get: function () { return __importDefault(dotnet_2).default; } });
@@ -101,6 +107,9 @@ Object.defineProperty(exports, "google_chrome", { enumerable: true, get: functio
 var gpg_1 = __importDefault(require("./gpg"));
 var gpg_2 = require("./gpg");
 Object.defineProperty(exports, "gpg", { enumerable: true, get: function () { return __importDefault(gpg_2).default; } });
+var gradle_1 = __importDefault(require("./gradle"));
+var gradle_2 = require("./gradle");
+Object.defineProperty(exports, "gradle", { enumerable: true, get: function () { return __importDefault(gradle_2).default; } });
 var grep_1 = __importDefault(require("./grep"));
 var grep_2 = require("./grep");
 Object.defineProperty(exports, "grep", { enumerable: true, get: function () { return __importDefault(grep_2).default; } });
@@ -134,6 +143,12 @@ Object.defineProperty(exports, "mktemp", { enumerable: true, get: function () { 
 var mv_1 = __importDefault(require("./mv"));
 var mv_2 = require("./mv");
 Object.defineProperty(exports, "mv", { enumerable: true, get: function () { return __importDefault(mv_2).default; } });
+var mvn_1 = __importDefault(require("./mvn"));
+var mvn_2 = require("./mvn");
+Object.defineProperty(exports, "mvn", { enumerable: true, get: function () { return __importDefault(mvn_2).default; } });
+var node_1 = __importDefault(require("./node"));
+var node_2 = require("./node");
+Object.defineProperty(exports, "node", { enumerable: true, get: function () { return __importDefault(node_2).default; } });
 var npm_1 = __importDefault(require("./npm"));
 var npm_2 = require("./npm");
 Object.defineProperty(exports, "npm", { enumerable: true, get: function () { return __importDefault(npm_2).default; } });
@@ -152,6 +167,9 @@ Object.defineProperty(exports, "pip", { enumerable: true, get: function () { ret
 var printf_1 = __importDefault(require("./printf"));
 var printf_2 = require("./printf");
 Object.defineProperty(exports, "printf", { enumerable: true, get: function () { return __importDefault(printf_2).default; } });
+var pytest_1 = __importDefault(require("./pytest"));
+var pytest_2 = require("./pytest");
+Object.defineProperty(exports, "pytest", { enumerable: true, get: function () { return __importDefault(pytest_2).default; } });
 var python_1 = __importDefault(require("./python"));
 var python_2 = require("./python");
 Object.defineProperty(exports, "python", { enumerable: true, get: function () { return __importDefault(python_2).default; } });
@@ -216,6 +234,6 @@ var yum_1 = __importDefault(require("./yum"));
 var yum_2 = require("./yum");
 Object.defineProperty(exports, "yum", { enumerable: true, get: function () { return __importDefault(yum_2).default; } });
 exports.enrichers = [
-    adduser_1.default, apk_1.default, apt_add_repository_1.default, apt_get_1.default, apt_key_1.default, apt_1.default, bash_1.default, bundle_1.default, cat_1.default, cd_1.default, chmod_1.default, chown_1.default, cmake_1.default, conda_1.default, configure_1.default, cp_1.default, curl_1.default, dnf_1.default, docker_php_ext_install_1.default, dotnet_1.default, dpkg_architecture_1.default, dpkg_1.default, echo_1.default, exit_1.default, export_1.default, find_1.default, firefox_1.default, gem_1.default, git_1.default, go_1.default, google_chrome_1.default, gpg_1.default, grep_1.default, groupadd_1.default, jq_1.default, ldconfig_1.default, ln_1.default, locale_gen_1.default, ls_1.default, make_1.default, mkdir_1.default, mktemp_1.default, mv_1.default, npm_1.default, nproc_1.default, pecl_1.default, php_1.default, pip_1.default, printf_1.default, python_1.default, rm_1.default, rpm_1.default, sed_1.default, set_1.default, sh_1.default, sha256sum_1.default, sha512sum_1.default, sort_1.default, sudo_1.default, tar_1.default, tee_1.default, touch_1.default, true_1.default, unzip_1.default, useradd_1.default, wget_1.default, which_1.default, xargs_1.default, yarn_1.default, yum_1.default,
+    adduser_1.default, apk_1.default, apt_add_repository_1.default, apt_get_1.default, apt_key_1.default, apt_1.default, bash_1.default, bundle_1.default, cat_1.default, cd_1.default, chmod_1.default, chown_1.default, cmake_1.default, conda_1.default, configure_1.default, cp_1.default, curl_1.default, diff_1.default, dnf_1.default, docker_php_ext_install_1.default, docker_1.default, dotnet_1.default, dpkg_architecture_1.default, dpkg_1.default, echo_1.default, exit_1.default, export_1.default, find_1.default, firefox_1.default, gem_1.default, git_1.default, go_1.default, google_chrome_1.default, gpg_1.default, gradle_1.default, grep_1.default, groupadd_1.default, jq_1.default, ldconfig_1.default, ln_1.default, locale_gen_1.default, ls_1.default, make_1.default, mkdir_1.default, mktemp_1.default, mv_1.default, mvn_1.default, node_1.default, npm_1.default, nproc_1.default, pecl_1.default, php_1.default, pip_1.default, printf_1.default, pytest_1.default, python_1.default, rm_1.default, rpm_1.default, sed_1.default, set_1.default, sh_1.default, sha256sum_1.default, sha512sum_1.default, sort_1.default, sudo_1.default, tar_1.default, tee_1.default, touch_1.default, true_1.default, unzip_1.default, useradd_1.default, wget_1.default, which_1.default, xargs_1.default, yarn_1.default, yum_1.default,
 ];
 //# sourceMappingURL=index.js.map

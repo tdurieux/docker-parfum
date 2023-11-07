@@ -418,7 +418,7 @@ function annotateAST(scenario, type, argName, aliases, value, cmdAST, strNode2AS
     }
     return;
 }
-function enrichAST(cmdAST, commandArgs, commandArgsString, scenario, parseResult) {
+function enrichAST(cmdAST, commandArgs, commandArgsString, enricher, scenario, parseResult) {
     var _a, _b;
     var argsASTCache = function (nodeStr) {
         if (!nodeStr)
@@ -439,6 +439,14 @@ function enrichAST(cmdAST, commandArgs, commandArgsString, scenario, parseResult
     if (!cmdAST.annotations.includes(scenario.name)) {
         cmdAST.annotations.push(scenario.name);
     }
+    if (!cmdAST.categories) {
+        cmdAST.categories = [];
+    }
+    enricher.categories.concat(scenario.categories || []).forEach(function (c) {
+        if (!cmdAST.categories.includes(c)) {
+            cmdAST.categories.push(c);
+        }
+    });
     var ignores = new Set(scenario.cmd
         .split(/ /g)
         .filter(function (x) { return !x.startsWith("[") && !x.startsWith("<"); })
@@ -540,7 +548,7 @@ function enrich(root) {
                         var parseResult = parseArgWithScenario(commandArgsString_1, scenario);
                         if (!parseResult)
                             continue;
-                        enrichAST(node, commandArgs_1, commandArgsString_1, scenario, parseResult);
+                        enrichAST(node, commandArgs_1, commandArgsString_1, e, scenario, parseResult);
                         break;
                     }
                     catch (error) {

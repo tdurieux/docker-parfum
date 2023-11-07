@@ -3,6 +3,8 @@ command:
     - pip
     - pip2
     - pip3
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-PIP
   optionsAll: &optionsAll
     booleans:
@@ -72,10 +74,14 @@ command:
       options:
         merge: [ *optionsAll, *optionsInstall ]
       name: SC-PIP-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 uninstall [targets...]
       options:
         merge: [ *optionsAll, *optionsUnistall ]
       name: SC-PIP-UNINSTALL
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 freeze
       options: *optionsAll
       name: SC-PIP-FREEZE

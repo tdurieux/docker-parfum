@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["google-chrome","chromedriver"],
+  categories: ["BROWSER"],
   prefix: "SC-GOOGLE-CHROME",
   scenarios: [
     {

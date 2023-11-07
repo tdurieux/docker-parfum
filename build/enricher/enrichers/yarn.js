@@ -3,11 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["yarn"],
+    categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-YARN",
     scenarios: [
         {
             cmd: "$0 add [modules...]",
             name: "SC-YARN-ADD",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-YARN",
             paths: ["cache-folder"],
             booleans: ["verbose", "help", "D", "dev", "P", "peer", "O", "optional", "E", "exact", "T", "tilde", "N", "ignore-workspace-root-check", "audit"],
@@ -42,6 +44,7 @@ exports.default = {
         {
             cmd: "$0 audit",
             name: "SC-YARN-AUDIT",
+            categories: ["AUDIT_PACKAGES"],
             prefix: "SC-YARN",
             paths: ["cache-folder"],
             booleans: ["verbose", "help", "verbose", "json"],
@@ -266,6 +269,7 @@ exports.default = {
         {
             cmd: "$0 install",
             name: "SC-YARN-INSTALL",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-YARN",
             paths: ["cache-folder", "modules-folder"],
             booleans: ["verbose", "help", "check-files", "flat", "force", "har", "ignore-scripts", "no-lockfile", "pure-lockfile", "focus", "frozen-lockfile", "silent", "ignore-engines", "ignore-optional", "offline", "non-interactive", "update-checksums", "audit", "no-bin-links", "link-duplicates"],
@@ -314,6 +318,7 @@ exports.default = {
             captureAfterThirdNonOption: "args",
             cmd: "$0 run <script>",
             name: "SC-YARN-RUN-SCRIPT",
+            categories: ["RUN_PACKAGES"],
             prefix: "SC-YARN",
             paths: ["cache-folder"],
             booleans: ["verbose", "help"],
@@ -342,6 +347,7 @@ exports.default = {
             rejectIfIs: { "name": "script", "values": ["add", "audit", "autoclean", "bin", "cache", "check", "config", "create", "dedupe", "generate-lock-entry", "global", "help", "import", "info", "init", "install", "licenses", "link", "list", "lockfile", "login", "logout", "outdated", "owner", "pack", "policies", "prune", "publish", "remove", "run", "self-update", "tag", "team", "test", "unlink", "upgrade", "upgrade-interactive", "version", "versions", "why", "workspace", "workspaces"] },
             cmd: "$0 <script>",
             name: "SC-YARN-RUN-SCRIPT",
+            categories: ["RUN_PACKAGES"],
             prefix: "SC-YARN",
             paths: ["cache-folder"],
             booleans: ["verbose", "help"],
@@ -369,6 +375,7 @@ exports.default = {
             rejectIf: ["install"],
             cmd: "$0",
             name: "SC-YARN-INSTALL",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-YARN",
             paths: ["cache-folder", "modules-folder"],
             booleans: ["verbose", "help", "check-files", "flat", "force", "har", "ignore-scripts", "no-lockfile", "pure-lockfile", "focus", "frozen-lockfile", "silent", "ignore-engines", "ignore-optional", "offline", "non-interactive", "update-checksums", "audit", "no-bin-links", "link-duplicates"],

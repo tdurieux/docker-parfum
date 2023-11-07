@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["apt-key"],
+    categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-APT-KEY",
     scenarios: [
         {

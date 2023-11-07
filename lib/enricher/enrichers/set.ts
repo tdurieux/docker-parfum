@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["set"],
+  categories: ["ENVIRONMENT"],
   prefix: "SC-SET",
   scenarios: [
     {

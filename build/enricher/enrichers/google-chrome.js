@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["google-chrome", "chromedriver"],
+    categories: ["BROWSER"],
     prefix: "SC-GOOGLE-CHROME",
     scenarios: [
         {

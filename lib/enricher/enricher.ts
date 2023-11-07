@@ -35,6 +35,7 @@ interface Scenario {
   argv: () => Argv;
   cmd: string;
   name: string;
+  categories: string[];
   prefix: string;
   // tags: string[];
   paths?: string[];
@@ -45,6 +46,7 @@ interface Enricher {
   providerFor: string[];
   prefix: string;
   scenarios: Scenario[];
+  categories: string[];
 }
 
 /**
@@ -601,6 +603,7 @@ function enrichAST(
   cmdAST: nodeType.BashCommand,
   commandArgs: nodeType.DockerOpsNodeType[],
   commandArgsString: string[],
+  enricher: Enricher,
   scenario: Scenario,
   parseResult: ReturnType<typeof parseArgWithScenario>
 ) {
@@ -627,6 +630,15 @@ function enrichAST(
   if (!cmdAST.annotations.includes(scenario.name)) {
     cmdAST.annotations.push(scenario.name);
   }
+  if (!(cmdAST as any).categories) {
+    (cmdAST as any).categories = [];
+  }
+  // add the enricher categories to the command annotations
+  enricher.categories.concat(scenario.categories || []).forEach((c) => {
+    if (!(cmdAST as any).categories.includes(c)) {
+      (cmdAST as any).categories.push(c);
+    }
+  });
 
   const ignores = new Set(
     scenario.cmd
@@ -773,6 +785,7 @@ export function enrich(root: nodeType.DockerOpsNodeType) {
                   node,
                   commandArgs,
                   commandArgsString,
+                  e,
                   scenario,
                   parseResult
                 );

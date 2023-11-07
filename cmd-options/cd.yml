@@ -1,6 +1,8 @@
 command:
   providerFor:
     - cd
+  categories:
+    - NAVIGATION
   prefix: SC-CD
   scenarios:
     - cmd: $0 <path>

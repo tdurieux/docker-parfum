@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["exit"],
+  categories: ["CONTROL_FLOW"],
   prefix: "SC-EXIT",
   scenarios: [
     {

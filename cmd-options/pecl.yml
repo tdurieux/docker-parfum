@@ -1,6 +1,8 @@
 command:
   providerFor:
     - pecl
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-PECL
   options: &options
     counts:
@@ -68,6 +70,8 @@ command:
       options: *options
       fixupNonSpacedArgs: true
       name: SC-PECL-BUILD
+      categories:
+        - BUILD_PACKAGES
     - cmd: $0 bundle [options...]
       options: *options
       fixupNonSpacedArgs: true
@@ -132,6 +136,8 @@ command:
       options: *options
       fixupNonSpacedArgs: true
       name: SC-PECL-CVSDIFF
+      categories:
+        - DIFF
     - cmd: $0 cvstag [options...]
       options: *options
       fixupNonSpacedArgs: true
@@ -220,6 +226,8 @@ command:
       options: *options
       fixupNonSpacedArgs: true
       name: SC-PECL-RUN-TESTS
+      categories:
+        - TEST_PACKAGES
     - cmd: $0 search [options...]
       options: *options
       fixupNonSpacedArgs: true
@@ -240,6 +248,8 @@ command:
       options: *options
       fixupNonSpacedArgs: true
       name: SC-PECL-UNINSTALL
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 update-channels [options...]
       options: *options
       fixupNonSpacedArgs: true
@@ -248,7 +258,11 @@ command:
       options: *options
       fixupNonSpacedArgs: true
       name: SC-PECL-UPGRADE
+      categories:
+        - UPGRADE_PACKAGES
     - cmd: $0 upgrade-all [options...]
       options: *options
       fixupNonSpacedArgs: true
       name: SC-PECL-UPGRADE-ALL
+      categories:
+        - UPGRADE_PACKAGES

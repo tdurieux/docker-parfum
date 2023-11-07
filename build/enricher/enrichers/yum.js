@@ -3,11 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["yum"],
+    categories: ["PACKAGE-MANAGEMENT"],
     prefix: "SC-YUM",
     scenarios: [
         {
             cmd: "$0 remove [packages...]",
             name: "SC-YUM-REMOVE",
+            categories: ["UNINSTALL_PACKAGES"],
             prefix: "SC-YUM",
             paths: ["c", "config", "installroot"],
             booleans: ["h", "help", "y", "assumeyes", "q", "quiet", "v", "verbose", "C", "cacheonly", "version", "showduplicates", "obsoletes", "noplugins", "nopgpgcheck", "skip-broken", "t", "tolerant"],
@@ -54,6 +56,7 @@ exports.default = {
         {
             cmd: "$0 erase [packages...]",
             name: "SC-YUM-REMOVE",
+            categories: ["UNINSTALL_PACKAGES"],
             prefix: "SC-YUM",
             paths: ["c", "config", "installroot"],
             booleans: ["h", "help", "y", "assumeyes", "q", "quiet", "v", "verbose", "C", "cacheonly", "version", "showduplicates", "obsoletes", "noplugins", "nopgpgcheck", "skip-broken", "t", "tolerant"],
@@ -146,6 +149,7 @@ exports.default = {
         {
             cmd: "$0 update [packages...]",
             name: "SC-YUM-UPDATE",
+            categories: ["UPDATE_PACKAGES"],
             prefix: "SC-YUM",
             paths: ["c", "config", "installroot"],
             booleans: ["h", "help", "y", "assumeyes", "q", "quiet", "v", "verbose", "C", "cacheonly", "version", "showduplicates", "obsoletes", "noplugins", "nopgpgcheck", "skip-broken", "t", "tolerant"],
@@ -192,6 +196,7 @@ exports.default = {
         {
             cmd: "$0 upgrade [packages...]",
             name: "SC-YUM-UPGRADE",
+            categories: ["UPDGRADE_PACKAGES"],
             prefix: "SC-YUM",
             paths: ["c", "config", "installroot"],
             booleans: ["h", "help", "y", "assumeyes", "q", "quiet", "v", "verbose", "C", "cacheonly", "version", "showduplicates", "obsoletes", "noplugins", "nopgpgcheck", "skip-broken", "t", "tolerant"],
@@ -238,6 +243,7 @@ exports.default = {
         {
             cmd: "$0 install [packages...]",
             name: "SC-YUM-INSTALL",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-YUM",
             paths: ["c", "config", "installroot"],
             booleans: ["h", "help", "y", "assumeyes", "q", "quiet", "v", "verbose", "C", "cacheonly", "version", "showduplicates", "obsoletes", "noplugins", "nopgpgcheck", "skip-broken", "t", "tolerant"],
@@ -284,6 +290,7 @@ exports.default = {
         {
             cmd: "$0 localinstall [packages...]",
             name: "SC-YUM-LOCAL-INSTALL",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-YUM",
             paths: ["c", "config", "installroot"],
             booleans: ["h", "help", "y", "assumeyes", "q", "quiet", "v", "verbose", "C", "cacheonly", "version", "showduplicates", "obsoletes", "noplugins", "nopgpgcheck", "skip-broken", "t", "tolerant"],
@@ -330,6 +337,7 @@ exports.default = {
         {
             cmd: "$0 groupinstall [packages...]",
             name: "SC-YUM-GROUP-INSTALL",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-YUM",
             paths: ["c", "config", "installroot"],
             booleans: ["h", "help", "y", "assumeyes", "q", "quiet", "v", "verbose", "C", "cacheonly", "version", "showduplicates", "obsoletes", "noplugins", "nopgpgcheck", "skip-broken", "t", "tolerant"],

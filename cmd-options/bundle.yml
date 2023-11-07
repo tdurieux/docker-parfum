@@ -1,6 +1,8 @@
 command:
   providerFor:
     - bundle
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-BUNDLE
   options: &options
     booleans:
@@ -54,10 +56,14 @@ command:
       options:
         merge: [*options, *installOptions]
       name: SC-BUNDLE-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 update
       options:
         merge: [*options]
       name: SC-BUNDLE-UPDATE
+      categories:
+        - UPDATE_PACKAGES
     - cmd: $0 cache
       options:
         merge: [*options]
@@ -78,10 +84,14 @@ command:
       options:
         merge: [*options]
       name: SC-BUNDLE-ADD
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 remove <name>
       options:
         merge: [*options]
       name: SC-BUNDLE-REMOVE
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 exec
       options:
         merge: [*options]

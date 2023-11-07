@@ -1,6 +1,8 @@
 command:
   providerFor:
     - firefox
+  categories:
+    - BROWSER
   prefix: SC-FIREFOX
   fixThese: &fixThese
     - -installer

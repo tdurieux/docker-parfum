@@ -1,10 +1,12 @@
 import { Argv } from "yargs";
 declare const _default: {
     providerFor: string[];
+    categories: string[];
     prefix: string;
     scenarios: ({
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -39,6 +41,7 @@ declare const _default: {
     } | {
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -80,6 +83,7 @@ declare const _default: {
         } & {
             "cache-folder": string;
         }>;
+        categories?: undefined;
         captureAfterThirdNonOption?: undefined;
         captureAfterSecondNonOption?: undefined;
         rejectIfIs?: undefined;
@@ -99,6 +103,7 @@ declare const _default: {
         } & {
             "cache-folder": string;
         }>;
+        categories?: undefined;
         counts?: undefined;
         captureAfterThirdNonOption?: undefined;
         captureAfterSecondNonOption?: undefined;
@@ -122,6 +127,7 @@ declare const _default: {
         } & {
             "cache-folder": string;
         }>;
+        categories?: undefined;
         captureAfterThirdNonOption?: undefined;
         captureAfterSecondNonOption?: undefined;
         rejectIfIs?: undefined;
@@ -129,6 +135,42 @@ declare const _default: {
     } | {
         cmd: string;
         name: string;
+        prefix: string;
+        paths: string[];
+        booleans: string[];
+        counts: any[];
+        argv: () => Argv<{
+            verbose: boolean;
+        } & {
+            help: boolean;
+        } & {
+            D: boolean;
+        } & {
+            P: boolean;
+        } & {
+            O: boolean;
+        } & {
+            E: boolean;
+        } & {
+            T: boolean;
+        } & {
+            N: boolean;
+        } & {
+            audit: boolean;
+        } & {
+            mutex: string;
+        } & {
+            "cache-folder": string;
+        }>;
+        categories?: undefined;
+        captureAfterThirdNonOption?: undefined;
+        captureAfterSecondNonOption?: undefined;
+        rejectIfIs?: undefined;
+        rejectIf?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -190,6 +232,7 @@ declare const _default: {
         captureAfterThirdNonOption: string;
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -214,6 +257,7 @@ declare const _default: {
         };
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -233,6 +277,7 @@ declare const _default: {
         rejectIf: string[];
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];

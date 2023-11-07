@@ -1,6 +1,7 @@
 import { Argv } from "yargs";
 declare const _default: {
     providerFor: string[];
+    categories: string[];
     prefix: string;
     scenarios: {
         captureAllAfter: {

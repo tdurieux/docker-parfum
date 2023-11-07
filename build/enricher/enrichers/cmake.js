@@ -3,13 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["cmake"],
+    categories: ["BUILD_SYSTEM"],
     prefix: "SC-CMAKE",
     scenarios: [
         {
             fixupNonSpacedArgs: true,
             mustHave: ["--build"],
             cmd: "$0 [options...]",
-            name: "SC-CMAKE",
+            name: "SC-CMAKE-BULD",
+            categories: ["BUILD_PACKAGES"],
             prefix: "SC-CMAKE",
             paths: ["build", "install", "open", "config", "prefix", "S", "B", "C"],
             booleans: ["help", "version", "v", "verbose", "strip", "N", "clean-first", "user-stderr"],
@@ -26,7 +28,7 @@ exports.default = {
                     "camel-case-expansion": false,
                     "parse-numbers": false,
                 })
-                    .command("$0 [options...]", "SC-CMAKE")
+                    .command("$0 [options...]", "SC-CMAKE-BULD")
                     .option("help", { "type": "boolean" })
                     .option("version", { "type": "boolean" })
                     .option("v", { "alias": "verbose", "type": "boolean" })
@@ -109,7 +111,8 @@ exports.default = {
             fixupNonSpacedArgs: true,
             mustHave: ["--install"],
             cmd: "$0",
-            name: "SC-CMAKE",
+            name: "SC-CMAKE-INSTALL",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-CMAKE",
             paths: ["build", "install", "open", "config", "prefix", "S", "B", "C"],
             booleans: ["help", "version", "v", "verbose", "strip", "N", "clean-first", "user-stderr"],
@@ -126,7 +129,7 @@ exports.default = {
                     "camel-case-expansion": false,
                     "parse-numbers": false,
                 })
-                    .command("$0", "SC-CMAKE")
+                    .command("$0", "SC-CMAKE-INSTALL")
                     .option("help", { "type": "boolean" })
                     .option("version", { "type": "boolean" })
                     .option("v", { "alias": "verbose", "type": "boolean" })
@@ -159,7 +162,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             mustHave: ["--open"],
             cmd: "$0",
-            name: "SC-CMAKE",
+            name: "SC-CMAKE-OPEN",
             prefix: "SC-CMAKE",
             paths: ["build", "install", "open", "config", "prefix", "S", "B", "C"],
             booleans: ["help", "version", "v", "verbose", "strip", "N", "clean-first", "user-stderr"],
@@ -176,7 +179,7 @@ exports.default = {
                     "camel-case-expansion": false,
                     "parse-numbers": false,
                 })
-                    .command("$0", "SC-CMAKE")
+                    .command("$0", "SC-CMAKE-OPEN")
                     .option("help", { "type": "boolean" })
                     .option("version", { "type": "boolean" })
                     .option("v", { "alias": "verbose", "type": "boolean" })

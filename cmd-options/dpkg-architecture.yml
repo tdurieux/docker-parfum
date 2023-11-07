@@ -1,6 +1,8 @@
 command:
   providerFor:
     - dpkg-architecture
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-DPKG-ARCHITECTURE
   options: &options
     booleans:

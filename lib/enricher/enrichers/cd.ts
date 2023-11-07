@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["cd"],
+  categories: ["NAVIGATION"],
   prefix: "SC-CD",
   scenarios: [
     {

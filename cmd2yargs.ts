@@ -15,6 +15,7 @@ interface Options {
 interface Scenario {
   cmd: string;
   name: string;
+  categories?: string[];
   options: Options;
   fixBadLongNames?: string[];
   captureAllAfter?: {
@@ -47,6 +48,7 @@ interface Scenario {
 }
 interface Command {
   prefix: string;
+  categories?: string[];
   providerFor: string[];
   options: Options;
   scenarios: Scenario[];
@@ -58,15 +60,14 @@ interface CommandFile {
 const YAML_DIR = `${__dirname}/cmd-options`;
 
 function getOptions(scenario: Scenario) {
-  if (scenario.options.merge) {
-    const options = {
-      booleans: [],
-      strings: [],
-      paths: [],
-      arrays: [],
-      counts: [],
-    } as Options;
-
+  const options = {
+    booleans: [],
+    strings: [],
+    paths: [],
+    arrays: [],
+    counts: [],
+  } as Options;
+  if (scenario.options?.merge) {
     options.booleans = scenario.options.merge
       .map((opt) => opt.booleans || [])
       .flat();
@@ -84,7 +85,7 @@ function getOptions(scenario: Scenario) {
     return options;
   }
 
-  return scenario.options;
+  return scenario.options || options;
 }
 
 function processArg(arg: string): [short: string, long?: string] {
@@ -111,7 +112,7 @@ function createEnrichers() {
   readdirSync(`${YAML_DIR}`)
     .filter((x) => x.endsWith(".yml"))
     .forEach((fname) => {
-      console.log(fname)
+      console.log(fname);
       const command = (
         yamlParser(readFileSync(`${YAML_DIR}/${fname}`, "utf8")) as CommandFile
       ).command;
@@ -122,6 +123,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ${JSON.stringify(command.providerFor)},
+  categories: ${JSON.stringify(command.categories || [])},
   prefix: "${command.prefix}",
   scenarios: [\n`;
       const allTags: string[] = [];
@@ -143,6 +145,7 @@ export default {
           "replaceEmptyArgsWith",
           "cmd",
           "name",
+          "categories"
         ];
         output += `    {\n`;
         for (const key of toCopy) {

@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["mktemp"],
+  categories: ["FILE_SYSTEM"],
   prefix: "SC-MKTEMP",
   scenarios: [
     {

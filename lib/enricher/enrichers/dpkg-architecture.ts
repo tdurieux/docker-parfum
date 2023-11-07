@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["dpkg-architecture"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-DPKG-ARCHITECTURE",
   scenarios: [
     {

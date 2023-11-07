@@ -1,0 +1,9 @@
+command:
+  providerFor:
+    - diff
+  categories:
+    - DIFF
+  prefix: SC-DIFF
+  scenarios:
+    - cmd: $0 [args...]
+      name: SC-DIFF

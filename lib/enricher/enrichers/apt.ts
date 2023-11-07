@@ -3,11 +3,13 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["apt"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-APT",
   scenarios: [
     {
       cmd: "$0 install [packages...]",
       name: "SC-APT-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-APT",
       paths: ["o","option","C","config"],
       booleans: ["y","yes","h","help","v","version","purge","auto-remove","autoremove","force-yes","assume-yes","no-install-recommends","no-install-suggests"],
@@ -44,6 +46,7 @@ export default {
     {
       cmd: "$0 remove [packages...]",
       name: "SC-APT-REMOVE",
+      categories: ["UNINSTALL_PACKAGES"],
       prefix: "SC-APT",
       paths: ["o","option","C","config"],
       booleans: ["y","yes","h","help","v","version","purge","auto-remove","autoremove","force-yes","assume-yes","no-install-recommends","no-install-suggests"],
@@ -188,6 +191,7 @@ export default {
     {
       cmd: "$0 update",
       name: "SC-APT-UPDATE",
+      categories: ["UPDATE_PACKAGES"],
       prefix: "SC-APT",
       paths: ["o","option","C","config"],
       booleans: ["y","yes","h","help","v","version","purge","auto-remove","autoremove","force-yes","assume-yes","no-install-recommends","no-install-suggests"],
@@ -224,6 +228,7 @@ export default {
     {
       cmd: "$0 upgrade [packages...]",
       name: "SC-APT-UPGRADE",
+      categories: ["UPDATE_PACKAGES"],
       prefix: "SC-APT",
       paths: ["o","option","C","config"],
       booleans: ["y","yes","h","help","v","version","purge","auto-remove","autoremove","force-yes","assume-yes","no-install-recommends","no-install-suggests"],

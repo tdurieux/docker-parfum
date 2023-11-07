@@ -1,6 +1,9 @@
 command:
   providerFor:
     - tar
+  categories:
+    - ARCHIVE
+    - FILE_SYSTEM
   prefix: SC-TAR
   options: &options
     boolean:

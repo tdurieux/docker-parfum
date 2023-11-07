@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["git"],
+    categories: ["VERSION_CONTROL"],
     prefix: "SC-GIT",
     scenarios: [
         {
@@ -51,6 +52,7 @@ exports.default = {
         {
             cmd: "$0 pull",
             name: "SC-GIT-PULL",
+            categories: ["VERSION_CONTROL_PULL"],
             prefix: "SC-GIT",
             argv: function () {
                 return yargs()
@@ -135,6 +137,7 @@ exports.default = {
         {
             cmd: "$0 clone <url> [directory]",
             name: "SC-GIT-CLONE",
+            categories: ["VERSION_CONTROL_CLONE"],
             prefix: "SC-GIT",
             booleans: ["single-branch", "q", "quiet", "recursive", "no-recurse-submodules", "recurse-submodules", "no-checkout"],
             argv: function () {
@@ -329,8 +332,35 @@ exports.default = {
             }
         },
         {
+            cmd: "$0 diff [...args]",
+            name: "SC-GIT-DIFF",
+            categories: ["DIFF"],
+            prefix: "SC-GIT",
+            booleans: ["no-index", "quiet", "raw", "minimal"],
+            argv: function () {
+                return yargs()
+                    .describe("git", "SC-GIT")
+                    .help(false)
+                    .version(false)
+                    .exitProcess(false)
+                    .showHelpOnFail(false)
+                    .parserConfiguration({
+                    "short-option-groups": true,
+                    "boolean-negation": false,
+                    "camel-case-expansion": false,
+                    "parse-numbers": false,
+                })
+                    .command("$0 diff [...args]", "SC-GIT-DIFF")
+                    .option("no-index", { "type": "boolean" })
+                    .option("quiet", { "type": "boolean" })
+                    .option("raw", { "type": "boolean" })
+                    .option("minimal", { "type": "boolean" });
+            }
+        },
+        {
             cmd: "$0 cat-file <file>",
             name: "SC-GIT-CAT-FILE",
+            categories: ["PRINT"],
             prefix: "SC-GIT",
             booleans: ["t", "s", "e", "p"],
             argv: function () {

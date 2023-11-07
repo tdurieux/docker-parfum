@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["apt-add-repository"],
+    categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-APT-ADD-REPOSITORY",
     scenarios: [
         {

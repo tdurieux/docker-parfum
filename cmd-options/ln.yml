@@ -1,6 +1,8 @@
 command:
   providerFor:
     - ln
+  categories:
+    - FILE_SYSTEM
   prefix: SC-LN
   options: &options
     booleans:

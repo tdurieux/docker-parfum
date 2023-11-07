@@ -1,6 +1,8 @@
 command:
   providerFor:
     - which
+  categories:
+    - UTILS
   prefix: SC-WHICH
   options: &options
     booleans:

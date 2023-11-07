@@ -3,11 +3,13 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["gem"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-GEM",
   scenarios: [
     {
       cmd: "$0 install [gems...]",
       name: "SC-GEM-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-GEM",
       paths: ["i","install-dir","n","bindir","g","file","config-file","build-root"],
       booleans: ["h","help","V","verbose","no-verbose","q","quiet","silent","backtrace","debug","norc","l","local","r","remote","b","both","clear-source","no-http-proxy","no-lock","no-suggestions","lock","suggestions","default","post-install-message","no-post-install-message","minimal-deps","conservative","development","development-all","user-install","no-user-install","ignore-dependencies","f","force","no-force","w","wrappers","no-wrappers","vendor","N","no-document","E","env-shebang","no-env-shebang","u","update-sources","no-update-sources","prerelease","no-prerelease","no-ri","no-rdoc","system"],
@@ -83,6 +85,7 @@ export default {
     {
       cmd: "$0 update [gems...]",
       name: "SC-GEM-UPDATE",
+      categories: ["UPGRADE_PACKAGES"],
       prefix: "SC-GEM",
       paths: ["i","install-dir","n","bindir","g","file","config-file","build-root"],
       booleans: ["h","help","V","verbose","no-verbose","q","quiet","silent","backtrace","debug","norc","l","local","r","remote","b","both","clear-source","no-http-proxy","no-lock","no-suggestions","lock","suggestions","default","post-install-message","no-post-install-message","minimal-deps","conservative","development","development-all","user-install","no-user-install","ignore-dependencies","f","force","no-force","w","wrappers","no-wrappers","vendor","N","no-document","E","env-shebang","no-env-shebang","u","update-sources","no-update-sources","prerelease","no-prerelease","no-ri","no-rdoc","system"],
@@ -198,6 +201,7 @@ export default {
     {
       cmd: "$0 build <path>",
       name: "SC-GEM-BUILD",
+      categories: ["BUILD_PACKAGES"],
       prefix: "SC-GEM",
       paths: ["o","output","config-file"],
       booleans: ["h","help","V","verbose","no-verbose","q","quiet","silent","backtrace","debug","norc","force","strict"],

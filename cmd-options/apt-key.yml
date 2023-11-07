@@ -2,6 +2,8 @@ command:
   prefix: SC-APT-KEY
   providerFor:
     - apt-key
+  categories:
+    - PACKAGE_MANAGEMENT
   options: &options
     paths:
       - --keyring

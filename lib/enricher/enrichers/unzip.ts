@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["unzip"],
+  categories: ["ARCHIVE"],
   prefix: "SC-UNZIP",
   scenarios: [
     {

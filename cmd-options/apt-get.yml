@@ -2,6 +2,8 @@ command:
   prefix: SC-APT
   providerFor:
     - apt-get
+  categories:
+    - PACKAGE_MANAGEMENT
   optionsAll: &optionsAll
     booleans:
       - -y, --yes
@@ -58,12 +60,16 @@ command:
       options:
         merge: [*optionsAll, *optionsInstall]
       name: SC-APT-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 purge [packages...]
       options: *optionsAll
       name: SC-APT-PURGE
     - cmd: $0 remove [packages...]
       options: *optionsAll
       name: SC-APT-REMOVE
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 source <package>
       options: *optionsAll
       name: SC-APT-SOURCE
@@ -85,9 +91,15 @@ command:
     - cmd: $0 update
       options: *optionsAll
       name: SC-APT-UPDATE
+      categories:
+        - UPDATE_PACKAGES
     - cmd: $0 upgrade [packages...]
       options: *optionsAll
       name: SC-APT-UPGRADE
+      categories:
+        - UPGRADE_PACKAGES
     - cmd: $0 dist-upgrade
       options: *optionsAll
       name: SC-APT-DIST-UPGRADE
+      categories:
+        - UPGRADE_PACKAGES

@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["sha512sum"],
+  categories: ["HASH"],
   prefix: "SC-SHA-512-SUM",
   scenarios: [
     {

@@ -2,6 +2,8 @@ command:
   providerFor:
     - google-chrome
     - chromedriver
+  categories:
+    - BROWSER
   prefix: SC-GOOGLE-CHROME
   scenarios:
     - cmd: $0 <URL>

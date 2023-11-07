@@ -1,6 +1,8 @@
 command:
   providerFor:
     - docker-php-ext-install
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-DPHP-EXT-INSTALL
   scenarios:
     - cmd: $0 [packages...]
@@ -9,3 +11,5 @@ command:
           - -j
       name: SC-DPHP-EXT-INSTALL
       fixupNonSpacedArgs: true
+      categories:
+        - INSTALL_PACKAGES

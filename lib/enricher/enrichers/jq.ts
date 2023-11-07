@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["jq"],
+  categories: ["DATA_PROCESSING"],
   prefix: "SC-JQ",
   scenarios: [
     {

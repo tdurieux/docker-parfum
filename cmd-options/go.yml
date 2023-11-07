@@ -1,6 +1,9 @@
 command:
   providerFor:
     - go
+  categories:
+    - BUILD_SYSTEM
+    - DEVELOPMENT
   prefix: SC-GO
   fixThese: &fixThese
     - -race
@@ -67,6 +70,8 @@ command:
       name: SC-GO-GET
       fixBadLongNames: *fixThese
       fixupNonSpacedArgs: true
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 vet
       options:
         booleans:
@@ -92,6 +97,8 @@ command:
       name: SC-GO-INSTALL
       fixBadLongNames: *fixThese
       fixupNonSpacedArgs: true
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 test [packages...]
       options: *optionsBuild
       name: SC-GO-TEST
@@ -100,6 +107,8 @@ command:
       captureAllAfter:
         match: [ '--args' ]
         name: args
+      categories:
+        - TEST_PACKAGES
     - cmd: $0 clean
       options:
         booleans:
@@ -112,6 +121,8 @@ command:
       name: SC-GO-BUILD
       fixBadLongNames: *fixThese
       fixupNonSpacedArgs: true
+      categories:
+        - BUILD_PACKAGES
     - cmd: $0 mod [arg]
       options: {}
       name: SC-GO-MOD
@@ -124,6 +135,8 @@ command:
       name: SC-GO-ENV
       fixBadLongNames: *fixThese
       fixupNonSpacedArgs: true
+      categories:
+        - ENVIRONMENT
     - cmd: $0 generate [path]
       options:
         booleans:

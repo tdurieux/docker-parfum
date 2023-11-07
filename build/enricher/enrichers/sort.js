@@ -2,17 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
-    providerFor: ["ls"],
-    prefix: "SC-LS",
+    providerFor: ["sort"],
+    categories: [],
+    prefix: "SC-SORT",
     scenarios: [
         {
             cmd: "$0 [PATH...]",
-            name: "SC-LS",
-            prefix: "SC-LS",
+            name: "SC-SORT",
+            prefix: "SC-SORT",
             booleans: ["c", "check", "m", "merge", "u", "unique", "s", "version", "help", "b", "ignore-leading-blanks", "d", "dictionary-order", "f", "ignore-case", "g", "general-numeric-sort", "h", "human-numeric-sort", "i", "ignore-nonprinting", "M", "month-sort", "n", "numeric-sort", "R", "random-sort", "r", "reverse", "V", "version-sort", "b", "ignore-leading-blanks", "z", "zero-terminated", "debug", "parallel", "radixsort", "mergesort", "qsort", "heapsort", "mmap"],
             argv: function () {
                 return yargs()
-                    .describe("ls", "SC-LS")
+                    .describe("sort", "SC-SORT")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -23,7 +24,7 @@ exports.default = {
                     "camel-case-expansion": false,
                     "parse-numbers": false,
                 })
-                    .command("$0 [PATH...]", "SC-LS")
+                    .command("$0 [PATH...]", "SC-SORT")
                     .option("c", { "alias": "check", "type": "boolean" })
                     .option("m", { "alias": "merge", "type": "boolean" })
                     .option("u", { "alias": "unique", "type": "boolean" })

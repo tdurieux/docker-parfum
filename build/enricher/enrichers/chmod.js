@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["chmod"],
+    categories: ["FILE_PERMISSIONS"],
     prefix: "SC-CHMOD",
     scenarios: [
         {

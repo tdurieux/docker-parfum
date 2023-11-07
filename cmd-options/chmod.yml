@@ -1,6 +1,8 @@
 command:
   providerFor:
     - chmod
+  categories:
+    - FILE_PERMISSIONS
   prefix: SC-CHMOD
   options: &options
     booleans:

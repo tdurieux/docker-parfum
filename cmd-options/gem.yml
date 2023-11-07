@@ -1,6 +1,8 @@
 command:
   providerFor:
     - gem
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-GEM
   installOrUpdateOptions: &installOrUpdateOptions
     booleans:
@@ -64,9 +66,13 @@ command:
     - cmd: $0 install [gems...]
       options: *installOrUpdateOptions
       name: SC-GEM-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 update [gems...]
       options: *installOrUpdateOptions
       name: SC-GEM-UPDATE
+      categories:
+        - UPGRADE_PACKAGES
     - cmd: $0 cleanup
       options: {}
       name: SC-GEM-CLEAN
@@ -90,3 +96,5 @@ command:
           - -o, --output
           - --config-file
       name: SC-GEM-BUILD
+      categories:
+        - BUILD_PACKAGES

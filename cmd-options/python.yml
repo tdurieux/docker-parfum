@@ -5,30 +5,44 @@ command:
     - python2.7
     - python3
     - python3.4
+  categories:
+    - DEVELOPMENT
   prefix: SC-PYTHON
+  options: &options
+    booleans:
+      - -B
+      - -d
+      - -E
+      - -i
+      - -O
+      - -R
+      - -s
+      - -S
+      - -t
+      - -u
+      - -v
+      - -V, --version
+      - -x
+      - '-3'
+      - -h, --help
+    strings:
+      - -c
+      - -m
+      - -q
   scenarios:
+    - cmd: $0 [args...]
+      options: *options
+      name: SC-PYTHON-MODULE
+      mustHave:
+        - -m
+      captureAllAfter:
+        match: ["-m"]
+        name: args
+      captureAfterFirstNonOption: args
+      postProcess:
+        - subCommand: args
     - cmd: $0
-      options:
-        booleans:
-          - -B
-          - -d
-          - -E
-          - -i
-          - -O
-          - -R
-          - -s
-          - -S
-          - -t
-          - -u
-          - -v
-          - -V, --version
-          - -x
-          - '-3'
-          - -h, --help
-        strings:
-          - -m
-          - -c
-          - -q
+      options: *options
       captureAfterFirstNonOption: args
       fixupNonSpacedArgs: true
       name: SC-PYTHON

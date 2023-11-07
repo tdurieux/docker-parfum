@@ -1,0 +1,29 @@
+command:
+  providerFor:
+    - mvn
+  categories:
+    - PACKAGE_MANAGEMENT
+  prefix: SC-MVN
+  scenarios:
+    - cmd: $0 install
+      name: SC-MVN-INSTALL
+      categories:
+        - INSTALL_PACKAGES
+    - cmd: $0 clean
+      name: SC-MVN-CLEAN
+    - cmd: $0 compile
+      name: SC-MVN-COMPILE
+      categories:
+        - BUILD_PACKAGES
+    - cmd: $0 test
+      name: SC-MVN-TEST
+      categories:
+        - TEST_PACKAGES
+    - cmd: $0 package
+      name: SC-MVN-PACKAGE
+      categories:
+        - BUILD_PACKAGES
+    - cmd: $0 deploy
+      name: SC-MVN-DEPLOY
+      categories:
+        - DEPLOY_PACKAGES

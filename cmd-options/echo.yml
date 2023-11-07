@@ -1,6 +1,8 @@
 command:
   providerFor:
     - echo
+  categories:
+    - PRINT
   prefix: SC-ECHO
   scenarios:
     - cmd: $0 [items...]

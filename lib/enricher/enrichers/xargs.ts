@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["xargs"],
+  categories: ["UTILS"],
   prefix: "SC-XARGS",
   scenarios: [
     {

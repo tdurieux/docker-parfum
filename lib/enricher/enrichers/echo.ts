@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["echo"],
+  categories: ["PRINT"],
   prefix: "SC-ECHO",
   scenarios: [
     {

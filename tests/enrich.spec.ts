@@ -17,6 +17,13 @@ describe("Testing enrich", () => {
       expect(r.find(nodeType.Q("SC-MV-DESTINATION"))).toHaveLength(1);
     });
   });
+  describe("python", () => {
+    test("python -m pip install -r requirements", async () => {
+      const root = await parseShell("python -m pip install -r requirements");
+      const r = enrich(root);
+      expect(r.find(nodeType.Q("SC-PIP-INSTALL"))).toHaveLength(1);
+    });
+  });
 
   describe("CHMOD", () => {
     test("chmod 777 file", async () => {

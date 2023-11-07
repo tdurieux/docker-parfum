@@ -1,6 +1,8 @@
 command:
   providerFor:
     - chown
+  categories:
+    - FILE_PERMISSIONS
   prefix: SC-CHOWN
   options: &options
     booleans:

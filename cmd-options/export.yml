@@ -1,6 +1,8 @@
 command:
   providerFor:
     - export
+  categories:
+    - ENVIRONMENT
   prefix: SC-EXPORT
   scenarios:
     - cmd: $0 <target>

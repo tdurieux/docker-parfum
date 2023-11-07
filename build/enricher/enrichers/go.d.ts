@@ -1,12 +1,14 @@
 import { Argv } from "yargs";
 declare const _default: {
     providerFor: string[];
+    categories: string[];
     prefix: string;
     scenarios: ({
         fixBadLongNames: string[];
         fixupNonSpacedArgs: boolean;
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -83,6 +85,7 @@ declare const _default: {
         argv: () => Argv<{
             all: boolean;
         }>;
+        categories?: undefined;
         paths?: undefined;
         counts?: undefined;
         captureAllAfter?: undefined;
@@ -98,6 +101,7 @@ declare const _default: {
         } & {
             x: boolean;
         }>;
+        categories?: undefined;
         paths?: undefined;
         counts?: undefined;
         captureAllAfter?: undefined;
@@ -108,6 +112,7 @@ declare const _default: {
         name: string;
         prefix: string;
         argv: () => Argv<{}>;
+        categories?: undefined;
         paths?: undefined;
         booleans?: undefined;
         counts?: undefined;
@@ -117,6 +122,7 @@ declare const _default: {
         fixupNonSpacedArgs: boolean;
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -178,6 +184,7 @@ declare const _default: {
         fixupNonSpacedArgs: boolean;
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -239,6 +246,7 @@ declare const _default: {
         argv: () => Argv<{
             cache: boolean;
         }>;
+        categories?: undefined;
         paths?: undefined;
         counts?: undefined;
         captureAllAfter?: undefined;
@@ -247,6 +255,7 @@ declare const _default: {
         fixupNonSpacedArgs: boolean;
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         booleans: string[];
         argv: () => Argv<{

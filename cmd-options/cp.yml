@@ -1,6 +1,8 @@
 command:
   providerFor:
     - cp
+  categories:
+    - FILE_SYSTEM
   prefix: SC-CP
   options: &options
     booleans:

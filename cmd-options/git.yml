@@ -1,6 +1,8 @@
 command:
   providerFor:
     - git
+  categories:
+    - VERSION_CONTROL
   prefix: SC-GIT
   scenarios:
     - cmd: $0 submodule init
@@ -15,6 +17,8 @@ command:
     - cmd: $0 pull
       options: {}
       name: SC-GIT-PULL
+      categories:
+        - VERSION_CONTROL_PULL
     - cmd: $0 remote set-url <target> <url>
       options: {}
       name: SC-GIT-REMOTE-SET-URL
@@ -41,6 +45,8 @@ command:
           - -b, --branch
           - --depth
       name: SC-GIT-CLONE
+      categories:
+        - VERSION_CONTROL_CLONE
     - cmd: $0 init
       options: {}
       name: SC-GIT-INIT
@@ -91,6 +97,16 @@ command:
         strings:
           - -m, --message
       name: SC-GIT-COMMIT
+    - cmd: $0 diff [...args]
+      options:
+        booleans:
+          - --no-index
+          - --quiet
+          - --raw
+          - --minimal
+      name: SC-GIT-DIFF
+      categories:
+        - DIFF
     - cmd: $0 cat-file <file>
       options:
         booleans:
@@ -99,6 +115,8 @@ command:
           - -e
           - -p
       name: SC-GIT-CAT-FILE
+      categories:
+        - PRINT
     - cmd: $0 clean
       options:
         booleans:

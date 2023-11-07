@@ -1,6 +1,8 @@
 command:
   providerFor:
     - yum
+  categories:
+    - PACKAGE-MANAGEMENT
   prefix: SC-YUM
   optionsAll: &optionsAll
     booleans:
@@ -35,27 +37,41 @@ command:
     - cmd: $0 remove [packages...]
       options: *optionsAll
       name: SC-YUM-REMOVE
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 erase [packages...]
       options: *optionsAll
       name: SC-YUM-REMOVE
+      categories:
+        - UNINSTALL_PACKAGES
     - cmd: $0 clean all 
       options: *optionsAll
       name: SC-YUM-CLEAN-ALL
     - cmd: $0 update [packages...]
       options: *optionsAll
       name: SC-YUM-UPDATE
+      categories:
+        - UPDATE_PACKAGES
     - cmd: $0 upgrade [packages...]
       options: *optionsAll
       name: SC-YUM-UPGRADE
+      categories:
+        - UPDGRADE_PACKAGES
     - cmd: $0 install [packages...]
       options: *optionsAll
       name: SC-YUM-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 localinstall [packages...]
       options: *optionsAll
       name: SC-YUM-LOCAL-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 groupinstall [packages...]
       options: *optionsAll
       name: SC-YUM-GROUP-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 versionlock [packages...]
       options: *optionsAll
       name: SC-YUM-VERSION-LOCK

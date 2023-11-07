@@ -3,11 +3,13 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["npm"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-NPM",
   scenarios: [
     {
       cmd: "$0 install [packages...]",
       name: "SC-NPM-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-NPM",
       paths: ["nodedir"],
       booleans: ["P","save-prod","D","save-dev","O","save-optional","no-save","E","save-exact","B","save-bundle","dry-run","package-lock-only","f","force","g","global","global-style","ignore-scripts","legacy-bundling","link","no-bin-links","no-optional","no-shrinkwrap","no-package-lock","no-audit","no-color","save","production","unsafe-perm"],
@@ -57,6 +59,7 @@ export default {
     {
       cmd: "$0 i [packages...]",
       name: "SC-NPM-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-NPM",
       paths: ["nodedir"],
       booleans: ["P","save-prod","D","save-dev","O","save-optional","no-save","E","save-exact","B","save-bundle","dry-run","package-lock-only","f","force","g","global","global-style","ignore-scripts","legacy-bundling","link","no-bin-links","no-optional","no-shrinkwrap","no-package-lock","no-audit","no-color","save","production","unsafe-perm"],
@@ -106,6 +109,7 @@ export default {
     {
       cmd: "$0 add [packages...]",
       name: "SC-NPM-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-NPM",
       paths: ["nodedir"],
       booleans: ["P","save-prod","D","save-dev","O","save-optional","no-save","E","save-exact","B","save-bundle","dry-run","package-lock-only","f","force","g","global","global-style","ignore-scripts","legacy-bundling","link","no-bin-links","no-optional","no-shrinkwrap","no-package-lock","no-audit","no-color","save","production","unsafe-perm"],
@@ -155,6 +159,7 @@ export default {
     {
       cmd: "$0 ci",
       name: "SC-NPM-CI",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-NPM",
       paths: ["nodedir"],
       booleans: ["P","save-prod","D","save-dev","O","save-optional","no-save","E","save-exact","B","save-bundle","dry-run","package-lock-only","f","force","g","global","global-style","ignore-scripts","legacy-bundling","link","no-bin-links","no-optional","no-shrinkwrap","no-package-lock","no-audit","no-color","save","production","unsafe-perm"],
@@ -204,6 +209,7 @@ export default {
     {
       cmd: "$0 uninstall [packages...]",
       name: "SC-NPM-REMOVE",
+      categories: ["UNINSTALL_PACKAGES"],
       prefix: "SC-NPM",
       paths: ["nodedir"],
       booleans: ["P","save-prod","D","save-dev","O","save-optional","no-save","E","save-exact","B","save-bundle","dry-run","package-lock-only","f","force","g","global","global-style","ignore-scripts","legacy-bundling","link","no-bin-links","no-optional","no-shrinkwrap","no-package-lock","no-audit","no-color","save","production","unsafe-perm"],
@@ -253,6 +259,7 @@ export default {
     {
       cmd: "$0 remove [packages...]",
       name: "SC-NPM-REMOVE",
+      categories: ["UNINSTALL_PACKAGES"],
       prefix: "SC-NPM",
       paths: ["nodedir"],
       booleans: ["P","save-prod","D","save-dev","O","save-optional","no-save","E","save-exact","B","save-bundle","dry-run","package-lock-only","f","force","g","global","global-style","ignore-scripts","legacy-bundling","link","no-bin-links","no-optional","no-shrinkwrap","no-package-lock","no-audit","no-color","save","production","unsafe-perm"],
@@ -302,6 +309,7 @@ export default {
     {
       cmd: "$0 build [folder]",
       name: "SC-NPM-BUILD",
+      categories: ["BUILD_PACKAGES"],
       prefix: "SC-NPM",
       argv: () => {
         return (yargs() as Argv)
@@ -320,8 +328,30 @@ export default {
       }
     },
     {
+      cmd: "$0 TEST [args...]",
+      name: "SC-NPM-TEST",
+      categories: ["TEST_PACKAGES"],
+      prefix: "SC-NPM",
+      argv: () => {
+        return (yargs() as Argv)
+          .describe("npm", "SC-NPM")
+          .help(false)
+          .version(false)
+          .exitProcess(false)
+          .showHelpOnFail(false)
+          .parserConfiguration({
+            "short-option-groups": true,
+            "boolean-negation": false,
+            "camel-case-expansion": false,
+            "parse-numbers": false,
+          })
+          .command("$0 TEST [args...]", "SC-NPM-TEST")
+      }
+    },
+    {
       cmd: "$0 run [args...]",
       name: "SC-NPM-RUN",
+      categories: ["RUN_PACKAGES"],
       prefix: "SC-NPM",
       argv: () => {
         return (yargs() as Argv)
@@ -342,6 +372,7 @@ export default {
     {
       cmd: "$0 run-script [args...]",
       name: "SC-NPM-RUN-SCRIPT",
+      categories: ["RUN_PACKAGES"],
       prefix: "SC-NPM",
       argv: () => {
         return (yargs() as Argv)
@@ -488,6 +519,7 @@ export default {
     {
       cmd: "$0 prune [packages...]",
       name: "SC-NPM-PRUNE",
+      categories: ["UNINSTALL_PACKAGES"],
       prefix: "SC-NPM",
       booleans: ["production","json","dry-run"],
       argv: () => {

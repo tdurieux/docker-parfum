@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["touch"],
+  categories: ["FILE_SYSTEM"],
   prefix: "SC-TOUCH",
   scenarios: [
     {

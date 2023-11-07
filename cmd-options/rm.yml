@@ -1,6 +1,8 @@
 command:
   providerFor:
     - rm
+  categories:
+    - FILE_SYSTEM
   prefix: SC-RM
   scenarios:
     - cmd: $0 [paths...]

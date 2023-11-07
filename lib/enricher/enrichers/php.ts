@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["php"],
+  categories: ["DEVELOPMENT"],
   prefix: "SC-PHP",
   scenarios: [
     {

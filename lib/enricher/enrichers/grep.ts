@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["grep"],
+  categories: ["SEARCH","FILE_SYSTEM"],
   prefix: "SC-GREP",
   scenarios: [
     {

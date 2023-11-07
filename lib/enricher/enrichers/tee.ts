@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["tee"],
+  categories: ["PRINT"],
   prefix: "SC-TEE",
   scenarios: [
     {

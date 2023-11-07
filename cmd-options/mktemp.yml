@@ -1,6 +1,8 @@
 command:
   providerFor:
     - mktemp
+  categories:
+    - FILE_SYSTEM
   prefix: SC-MKTEMP
   options: &options
     booleans:

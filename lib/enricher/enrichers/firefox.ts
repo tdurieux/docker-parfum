@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["firefox"],
+  categories: ["BROWSER"],
   prefix: "SC-FIREFOX",
   scenarios: [
     {

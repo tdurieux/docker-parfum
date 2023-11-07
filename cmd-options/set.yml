@@ -1,6 +1,8 @@
 command:
   providerFor:
     - set
+  categories:
+    - ENVIRONMENT
   prefix: SC-SET
   options: &options
     booleans:

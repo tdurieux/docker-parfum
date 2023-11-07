@@ -1,6 +1,8 @@
 command:
   providerFor:
     - sed
+  categories:
+    - REGEX
   prefix: SC-SED
   options: &options
     booleans:

@@ -3,11 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["make"],
+    categories: ["BUILD_SYSTEM"],
     prefix: "SC-MAKE",
     scenarios: [
         {
             cmd: "$0 [target] [args...]",
             name: "SC-MAKE",
+            categories: ["BUILD_PACKAGES"],
             prefix: "SC-MAKE",
             paths: ["C", "directory", "f", "file", "f", "makefile", "I", "include-dir", "W", "what-if", "W", "new-file", "W", "assume-new"],
             booleans: ["b", "m", "B", "always-make", "d", "e", "environment-overrides", "h", "help", "i", "ignore-errors", "k", "keep-going", "L", "cehck-symlink-times", "n", "just-print", "n", "dry-run", "n", "recon", "p", "print-data-base", "q", "question", "r", "no-builtin-rules", "R", "no-builtin-variables", "s", "silent", "s", "quiet", "S", "no-keep-going", "S", "stop", "t", "touch", "trace", "v", "version", "w", "print-directory", "no-print-directory", "warn-undefined-variables", "O", "output-sync"],

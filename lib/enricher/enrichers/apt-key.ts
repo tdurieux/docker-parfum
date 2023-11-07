@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["apt-key"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-APT-KEY",
   scenarios: [
     {

@@ -1,6 +1,9 @@
 command:
   providerFor:
     - grep
+  categories:
+    - SEARCH
+    - FILE_SYSTEM
   prefix: SC-GREP
   options: &options
     booleans:

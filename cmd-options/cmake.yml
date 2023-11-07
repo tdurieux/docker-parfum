@@ -1,6 +1,8 @@
 command:
   providerFor:
     - cmake
+  categories:
+    - BUILD_SYSTEM
   prefix: SC-CMAKE
   options: &options
     booleans:
@@ -39,7 +41,9 @@ command:
         - --build
       options: *options
       fixupNonSpacedArgs: true
-      name: SC-CMAKE
+      name: SC-CMAKE-BULD
+      categories:
+        - BUILD_PACKAGES
     - cmd: $0
       mustHave:
         - -S
@@ -52,13 +56,15 @@ command:
         - --install
       options: *options
       fixupNonSpacedArgs: true
-      name: SC-CMAKE
+      name: SC-CMAKE-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0
       mustHave:
         - --open
       options: *options
       fixupNonSpacedArgs: true
-      name: SC-CMAKE
+      name: SC-CMAKE-OPEN
     - cmd: $0 [pathToSourceOrBuild]
       options: *options
       fixupNonSpacedArgs: true

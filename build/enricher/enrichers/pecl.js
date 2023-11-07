@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["pecl"],
+    categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-PECL",
     scenarios: [
         {
@@ -405,6 +406,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 build [options...]",
             name: "SC-PECL-BUILD",
+            categories: ["BUILD_PACKAGES"],
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
@@ -981,6 +983,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 cvsdiff [options...]",
             name: "SC-PECL-CVSDIFF",
+            categories: ["DIFF"],
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
@@ -1773,6 +1776,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 run-tests [options...]",
             name: "SC-PECL-RUN-TESTS",
+            categories: ["TEST_PACKAGES"],
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
@@ -1953,6 +1957,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 uninstall [options...]",
             name: "SC-PECL-UNINSTALL",
+            categories: ["UNINSTALL_PACKAGES"],
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
@@ -2025,6 +2030,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 upgrade [options...]",
             name: "SC-PECL-UPGRADE",
+            categories: ["UPGRADE_PACKAGES"],
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
@@ -2061,6 +2067,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 upgrade-all [options...]",
             name: "SC-PECL-UPGRADE-ALL",
+            categories: ["UPGRADE_PACKAGES"],
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],

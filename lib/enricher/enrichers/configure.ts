@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["./configure"],
+  categories: ["BUILD_SYSTEM"],
   prefix: "SC-CONFIGURE",
   scenarios: [
     {

@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["chown"],
+  categories: ["FILE_PERMISSIONS"],
   prefix: "SC-CHOWN",
   scenarios: [
     {

@@ -3,11 +3,13 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["apk"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-APK",
   scenarios: [
     {
       cmd: "$0 add [packages...]",
       name: "SC-APK-ADD",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-APK",
       paths: [],
       booleans: ["print-arch","no-cache","force","u","update","U","update-cache","q","quiet","no-progress","no-network","initdb","allow-untrusted","upgrade"],
@@ -46,6 +48,7 @@ export default {
     {
       cmd: "$0 del [packages...]",
       name: "SC-APK-DEL",
+      categories: ["UNINSTALL_PACKAGES"],
       prefix: "SC-APK",
       paths: [],
       booleans: ["print-arch","no-cache","force","u","update","U","update-cache","q","quiet","no-progress","no-network","purge"],
@@ -111,6 +114,7 @@ export default {
     {
       cmd: "$0 update",
       name: "SC-APK-UPDATE",
+      categories: ["UPDATE_PACKAGES"],
       prefix: "SC-APK",
       booleans: ["print-arch","no-cache","force","u","update","U","update-cache","q","quiet","no-progress"],
       counts: ["v","verbose"],
@@ -206,6 +210,7 @@ export default {
     {
       cmd: "$0 upgrade [packages...]",
       name: "SC-APK-UPGRADE",
+      categories: ["UPGRADE_PACKAGES"],
       prefix: "SC-APK",
       booleans: ["print-arch","no-cache","force","u","update","U","update-cache","q","quiet","no-progress"],
       counts: ["v","verbose"],

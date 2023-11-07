@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["curl"],
+  categories: ["DOWNLOAD"],
   prefix: "SC-CURL",
   scenarios: [
     {

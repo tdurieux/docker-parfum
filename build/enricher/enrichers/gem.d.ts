@@ -1,10 +1,12 @@
 import { Argv } from "yargs";
 declare const _default: {
     providerFor: string[];
+    categories: string[];
     prefix: string;
     scenarios: ({
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
@@ -120,11 +122,13 @@ declare const _default: {
         name: string;
         prefix: string;
         argv: () => Argv<{}>;
+        categories?: undefined;
         paths?: undefined;
         booleans?: undefined;
     } | {
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];

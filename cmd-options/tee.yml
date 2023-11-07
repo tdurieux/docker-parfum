@@ -1,6 +1,8 @@
 command:
   providerFor:
     - tee
+  categories:
+    - PRINT
   prefix: SC-TEE
   scenarios:
     - cmd: $0 [PATH...]

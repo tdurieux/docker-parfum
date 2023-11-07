@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["nproc"],
+  categories: ["SYSTEM_INFO"],
   prefix: "SC-NPROC",
   scenarios: [
     {

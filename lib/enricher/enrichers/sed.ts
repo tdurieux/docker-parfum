@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["sed"],
+  categories: ["REGEX"],
   prefix: "SC-SED",
   scenarios: [
     {

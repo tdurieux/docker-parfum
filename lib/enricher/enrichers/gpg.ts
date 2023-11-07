@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["gpg"],
+  categories: ["SECURITY"],
   prefix: "SC-GPG",
   scenarios: [
     {

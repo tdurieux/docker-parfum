@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["mkdir"],
+  categories: ["FILE_SYSTEM"],
   prefix: "SC-MKDIR",
   scenarios: [
     {

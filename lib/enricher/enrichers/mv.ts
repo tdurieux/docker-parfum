@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["mv"],
+  categories: ["FILE_SYSTEM"],
   prefix: "SC-MV",
   scenarios: [
     {

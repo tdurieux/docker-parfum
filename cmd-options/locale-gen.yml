@@ -1,6 +1,8 @@
 command:
   providerFor:
     - locale-gen
+  categories:
+    - LOCALIZATION
   prefix: SC-LOCAL-GEN
   scenarios:
     - cmd: $0

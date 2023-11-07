@@ -3,11 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["apt-get"],
+    categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-APT",
     scenarios: [
         {
             cmd: "$0 install [packages...]",
             name: "SC-APT-INSTALL",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes", "d", "download-only", "no-download", "upgrade", "only-upgrade", "just-print", "dry-run", "recon", "no-act", "assume-yes", "u", "show-upgraded", "V", "verbose-version", "b", "compile", "build", "ignore-hold", "no-upgrade", "no-install-suggests", "install-suggests", "print-uris", "reinstall", "list-cleanup", "trivial-only", "no-remove", "only-source"],
@@ -119,6 +121,7 @@ exports.default = {
         {
             cmd: "$0 remove [packages...]",
             name: "SC-APT-REMOVE",
+            categories: ["UNINSTALL_PACKAGES"],
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
@@ -427,6 +430,7 @@ exports.default = {
         {
             cmd: "$0 update",
             name: "SC-APT-UPDATE",
+            categories: ["UPDATE_PACKAGES"],
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
@@ -471,6 +475,7 @@ exports.default = {
         {
             cmd: "$0 upgrade [packages...]",
             name: "SC-APT-UPGRADE",
+            categories: ["UPGRADE_PACKAGES"],
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
@@ -515,6 +520,7 @@ exports.default = {
         {
             cmd: "$0 dist-upgrade",
             name: "SC-APT-DIST-UPGRADE",
+            categories: ["UPGRADE_PACKAGES"],
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],

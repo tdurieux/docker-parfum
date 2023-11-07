@@ -1,0 +1,9 @@
+command:
+  providerFor:
+    - pytest
+  categories:
+    - TEST_PACKAGES
+  prefix: SC-PYTEST
+  scenarios:
+    - cmd: $0 [args...]
+      name: SC-PYTEST

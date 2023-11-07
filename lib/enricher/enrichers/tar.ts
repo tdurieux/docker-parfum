@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["tar"],
+  categories: ["ARCHIVE","FILE_SYSTEM"],
   prefix: "SC-TAR",
   scenarios: [
     {

@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["locale-gen"],
+  categories: ["LOCALIZATION"],
   prefix: "SC-LOCAL-GEN",
   scenarios: [
     {

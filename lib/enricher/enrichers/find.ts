@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["find"],
+  categories: ["FILE_SYSTEM","SEARCH"],
   prefix: "SC-FIND",
   scenarios: [
     {

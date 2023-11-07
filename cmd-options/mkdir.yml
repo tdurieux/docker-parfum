@@ -1,6 +1,8 @@
 command:
   providerFor:
     - mkdir
+  categories:
+    - FILE_SYSTEM
   prefix: SC-MKDIR
   options: &options
     booleans:

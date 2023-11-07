@@ -1,6 +1,8 @@
 command:
   providerFor:
     - php
+  categories:
+    - DEVELOPMENT
   prefix: SC-PHP
   scenarios:
     - cmd: $0 [script] [args...]

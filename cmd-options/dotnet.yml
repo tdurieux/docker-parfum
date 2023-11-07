@@ -1,6 +1,8 @@
 command:
   providerFor:
     - dotnet
+  categories:
+    - BUILD_SYSTEM
   prefix: SC-DOTNET
   options: &options
     booleans:
@@ -11,10 +13,14 @@ command:
       options: *options
       fixupNonSpacedArgs: true
       name: SC-DOTNET-BUILD
+      categories:
+        - BUILD_PACKAGES
     - cmd: $0 build-server [options...]
       options: *options
       fixupNonSpacedArgs: true
       name: SC-DOTNET-BUID-SERVER
+      categories:
+        - BUILD_PACKAGES
     - cmd: $0 clean [options...]
       options: *options
       fixupNonSpacedArgs: true
@@ -71,3 +77,5 @@ command:
       options: *options
       fixupNonSpacedArgs: true
       name: SC-DOTNET-test
+      categories:
+        - TEST_PACKAGES

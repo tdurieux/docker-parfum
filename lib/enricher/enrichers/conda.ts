@@ -3,11 +3,13 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["conda"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-CONDA",
   scenarios: [
     {
       cmd: "$0 install [packages...]",
       name: "SC-CONDA-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-CONDA",
       paths: ["o","option","C","config"],
       booleans: ["y","yes","h","help","v","version","purge","auto-remove","autoremove","force-yes","assume-yes","no-install-recommends","no-install-suggests"],
@@ -44,6 +46,7 @@ export default {
     {
       cmd: "$0 remove [packages...]",
       name: "SC-CONDA-REMOVE",
+      categories: ["UNINSTALL_PACKAGES"],
       prefix: "SC-CONDA",
       paths: ["o","option","C","config"],
       booleans: ["y","yes","h","help","v","version","purge","auto-remove","autoremove","force-yes","assume-yes","no-install-recommends","no-install-suggests"],
@@ -80,6 +83,7 @@ export default {
     {
       cmd: "$0 update [packages...]",
       name: "SC-CONDA-UPDATE",
+      categories: ["UPDATE_PACKAGES"],
       prefix: "SC-CONDA",
       paths: ["o","option","C","config"],
       booleans: ["y","yes","h","help","v","version","purge","auto-remove","autoremove","force-yes","assume-yes","no-install-recommends","no-install-suggests"],

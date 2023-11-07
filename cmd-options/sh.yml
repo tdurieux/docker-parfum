@@ -2,6 +2,8 @@ command:
   prefix: SC-SH
   providerFor:
     - sh
+  categories:
+    - SHELL
   options: &options
     booleans:
       - -i

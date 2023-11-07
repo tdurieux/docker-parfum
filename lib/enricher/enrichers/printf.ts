@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["printf"],
+  categories: ["PRINT"],
   prefix: "SC-PRINTF",
   scenarios: [
     {

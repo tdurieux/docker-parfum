@@ -1,6 +1,8 @@
 command:
   providerFor:
     - dnf
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-DNF
   options: &options
     booleans:
@@ -13,18 +15,26 @@ command:
     - cmd: $0 install [packages...]
       options: *options
       name: SC-DNF-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 debuginfo-install [packages...]
       options: *options
       name: SC-DNF-DEBUG-INFO-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 clean all
       options: *options
       name: SC-DNF-CLEAN-ALL
     - cmd: $0 update
       options: *options
       name: SC-DNF-UPDATE
+      categories:
+        - UPDATE_PACKAGES
     - cmd: $0 upgrade
       options: *options
       name: SC-DNF-UPGRADE
+      categories:
+        - UPDGRADE_PACKAGES
     - cmd: $0 check-update
       options: *options
       name: SC-DNF-CHECK-UPDATE
@@ -34,3 +44,5 @@ command:
     - cmd: $0 builddep [packages...]
       options: *options
       name: SC-DNF-BUILD-DEP
+      categories:
+        - BUILD_PACKAGES

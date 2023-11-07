@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["go"],
+    categories: ["BUILD_SYSTEM", "DEVELOPMENT"],
     prefix: "SC-GO",
     scenarios: [
         {
@@ -10,6 +11,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 get [packages...]",
             name: "SC-GO-GET",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-GO",
             paths: ["o"],
             booleans: ["i", "a", "n", "race", "msan", "v", "work", "x", "linkshared", "c", "d", "f", "t", "u", "v", "fix", "insecure"],
@@ -136,6 +138,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 install [packages...]",
             name: "SC-GO-INSTALL",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-GO",
             paths: ["o"],
             booleans: ["i", "a", "n", "race", "msan", "v", "work", "x", "linkshared", "c"],
@@ -184,6 +187,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 test [packages...]",
             name: "SC-GO-TEST",
+            categories: ["TEST_PACKAGES"],
             prefix: "SC-GO",
             paths: ["o"],
             booleans: ["i", "a", "n", "race", "msan", "v", "work", "x", "linkshared", "c"],
@@ -255,6 +259,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 build [packages...]",
             name: "SC-GO-BUILD",
+            categories: ["BUILD_PACKAGES"],
             prefix: "SC-GO",
             paths: ["o"],
             booleans: ["i", "a", "n", "race", "msan", "v", "work", "x", "linkshared", "c"],
@@ -324,6 +329,7 @@ exports.default = {
             fixupNonSpacedArgs: true,
             cmd: "$0 env [arg]",
             name: "SC-GO-ENV",
+            categories: ["ENVIRONMENT"],
             prefix: "SC-GO",
             booleans: ["json"],
             argv: function () {

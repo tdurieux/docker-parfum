@@ -1,6 +1,8 @@
 command:
   providerFor:
     - nproc
+  categories:
+    - SYSTEM_INFO
   prefix: SC-NPROC
   scenarios:
     - cmd: $0

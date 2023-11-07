@@ -3,11 +3,13 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["dnf"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-DNF",
   scenarios: [
     {
       cmd: "$0 install [packages...]",
       name: "SC-DNF-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
       argv: () => {
@@ -33,6 +35,7 @@ export default {
     {
       cmd: "$0 debuginfo-install [packages...]",
       name: "SC-DNF-DEBUG-INFO-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
       argv: () => {
@@ -83,6 +86,7 @@ export default {
     {
       cmd: "$0 update",
       name: "SC-DNF-UPDATE",
+      categories: ["UPDATE_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
       argv: () => {
@@ -108,6 +112,7 @@ export default {
     {
       cmd: "$0 upgrade",
       name: "SC-DNF-UPGRADE",
+      categories: ["UPDGRADE_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
       argv: () => {
@@ -183,6 +188,7 @@ export default {
     {
       cmd: "$0 builddep [packages...]",
       name: "SC-DNF-BUILD-DEP",
+      categories: ["BUILD_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
       argv: () => {

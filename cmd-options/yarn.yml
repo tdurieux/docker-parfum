@@ -1,6 +1,8 @@
 command:
   providerFor:
     - yarn
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-YARN
   options: &options
     booleans:
@@ -59,10 +61,14 @@ command:
       options:
         merge: [ *options, *addOptions ]
       name: SC-YARN-ADD
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 audit
       options:
         merge: [ *options, *auditOptions ]
       name: SC-YARN-AUDIT
+      categories:
+        - AUDIT_PACKAGES
     - cmd: $0 autoclean
       options:
         merge: [ *options, *autocleanOptions ]
@@ -91,10 +97,14 @@ command:
       options:
         merge: [ *options, *installOptions ]
       name: SC-YARN-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 run <script>
       options: *options
       name: SC-YARN-RUN-SCRIPT
       captureAfterThirdNonOption: args
+      categories:
+        - RUN_PACKAGES
     - cmd: $0 <script>
       options: *options
       name: SC-YARN-RUN-SCRIPT
@@ -144,9 +154,13 @@ command:
           - workspace
           - workspaces
       captureAfterSecondNonOption: args
+      categories:
+        - RUN_PACKAGES
     - cmd: $0
       options:
         merge: [ *options, *installOptions ]
       rejectIf: [ 'install' ]
       name: SC-YARN-INSTALL
+      categories:
+        - INSTALL_PACKAGES
       

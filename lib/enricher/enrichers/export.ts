@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["export"],
+  categories: ["ENVIRONMENT"],
   prefix: "SC-EXPORT",
   scenarios: [
     {

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["dpkg-architecture"],
+    categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-DPKG-ARCHITECTURE",
     scenarios: [
         {

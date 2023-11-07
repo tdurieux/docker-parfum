@@ -1,6 +1,8 @@
 command:
   providerFor:
     - gpg
+  categories:
+    - SECURITY
   prefix: SC-GPG
   options: &options
     booleans:

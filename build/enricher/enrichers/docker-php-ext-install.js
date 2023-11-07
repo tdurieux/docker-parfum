@@ -3,12 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["docker-php-ext-install"],
+    categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-DPHP-EXT-INSTALL",
     scenarios: [
         {
             fixupNonSpacedArgs: true,
             cmd: "$0 [packages...]",
             name: "SC-DPHP-EXT-INSTALL",
+            categories: ["INSTALL_PACKAGES"],
             prefix: "SC-DPHP-EXT-INSTALL",
             argv: function () {
                 return yargs()

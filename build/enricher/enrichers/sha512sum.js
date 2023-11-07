@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["sha512sum"],
+    categories: ["HASH"],
     prefix: "SC-SHA-512-SUM",
     scenarios: [
         {

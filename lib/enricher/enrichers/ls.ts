@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["ls"],
+  categories: ["FILE_SYSTEM"],
   prefix: "SC-LS",
   scenarios: [
     {

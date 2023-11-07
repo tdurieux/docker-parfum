@@ -3,6 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["adduser"],
+  categories: ["USER_MANAGEMENT"],
   prefix: "SC-ADD-USER",
   scenarios: [
     {

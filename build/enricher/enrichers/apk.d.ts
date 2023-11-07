@@ -1,10 +1,12 @@
 import { Argv } from "yargs";
 declare const _default: {
     providerFor: string[];
+    categories: string[];
     prefix: string;
     scenarios: ({
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: any[];
         booleans: string[];
@@ -43,6 +45,7 @@ declare const _default: {
     } | {
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: any[];
         booleans: string[];
@@ -95,6 +98,34 @@ declare const _default: {
         } & {
             v: number;
         }>;
+        categories?: undefined;
+        paths?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        categories: string[];
+        prefix: string;
+        booleans: string[];
+        counts: string[];
+        argv: () => Argv<{
+            "print-arch": boolean;
+        } & {
+            "no-cache": boolean;
+        } & {
+            force: boolean;
+        } & {
+            u: boolean;
+        } & {
+            U: boolean;
+        } & {
+            q: boolean;
+        } & {
+            "no-progress": boolean;
+        } & {
+            X: (string | number)[];
+        } & {
+            v: number;
+        }>;
         paths?: undefined;
     } | {
         cmd: string;
@@ -124,6 +155,7 @@ declare const _default: {
         } & {
             v: number;
         }>;
+        categories?: undefined;
     })[];
 };
 export default _default;

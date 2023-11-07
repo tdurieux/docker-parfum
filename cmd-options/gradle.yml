@@ -1,0 +1,28 @@
+command:
+  providerFor:
+    - ./gradlew
+    - gradle
+  categories:
+    - PACKAGE_MANAGEMENT
+  prefix: SC-GRADLE
+  scenarios:
+    - cmd: $0 install
+      name: SC-GRADLE-INSTALL
+      categories:
+        - INSTALL_PACKAGES
+    - cmd: $0 build
+      name: SC-GRADLE-BUILD
+      categories:
+        - BUILD_PACKAGES
+    - cmd: $0 clean
+      name: SC-GRADLE-CLEAN
+    - cmd: $0 test
+      name: SC-GRADLE-TEST
+      categories:
+        - TEST_PACKAGES
+    - cmd: $0 assemble
+      name: SC-GRADLE-ASSEMBLE
+    - cmd: $0 publish
+      name: SC-GRADLE-PUBLISH
+      categories:
+        - PUBLISH_PACKAGES

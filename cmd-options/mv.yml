@@ -1,6 +1,8 @@
 command:
   providerFor:
     - mv
+  categories:
+    - FILE_SYSTEM
   prefix: SC-MV
   scenarios:
     - cmd: $0 [paths...]

@@ -3,11 +3,13 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["bundle"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-BUNDLE",
   scenarios: [
     {
       cmd: "$0 install",
       name: "SC-BUNDLE-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-BUNDLE",
       paths: ["path PATH","gemfile=GEMFILE","clean","deployment","frozen","full-index","local","no-cache","no-prune","quiet","redownload","shebang","system"],
       booleans: ["no-color","V","verbose"],
@@ -54,6 +56,7 @@ export default {
     {
       cmd: "$0 update",
       name: "SC-BUNDLE-UPDATE",
+      categories: ["UPDATE_PACKAGES"],
       prefix: "SC-BUNDLE",
       paths: [],
       booleans: ["no-color","V","verbose"],
@@ -184,6 +187,7 @@ export default {
     {
       cmd: "$0 add <name>",
       name: "SC-BUNDLE-ADD",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-BUNDLE",
       paths: [],
       booleans: ["no-color","V","verbose"],
@@ -210,6 +214,7 @@ export default {
     {
       cmd: "$0 remove <name>",
       name: "SC-BUNDLE-REMOVE",
+      categories: ["UNINSTALL_PACKAGES"],
       prefix: "SC-BUNDLE",
       paths: [],
       booleans: ["no-color","V","verbose"],

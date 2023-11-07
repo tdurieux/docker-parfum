@@ -1,6 +1,8 @@
 command:
   providerFor:
     - rpm
+  categories:
+    - PACKAGE_MANAGEMENT
   prefix: SC-rpm
   eraseEptions: &eraseEptions
     booleans:
@@ -133,12 +135,16 @@ command:
       options:
         merge: [*options, *installOptions]
       name: SC-RPM-INSTALL
+      categories:
+        - INSTALL_PACKAGES
     - cmd: $0 [packages...]
       mustHave:
         - --upgrade
       options:
         merge: [*options, *installOptions]
       name: SC-RPM-UPGRADE
+      categories:
+        - UPGRADE_PACKAGES
     - cmd: $0 [packages...]
       mustHave:
         - --freshen

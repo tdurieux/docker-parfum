@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["mktemp"],
+    categories: ["FILE_SYSTEM"],
     prefix: "SC-MKTEMP",
     scenarios: [
         {

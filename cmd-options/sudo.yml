@@ -1,6 +1,8 @@
 command:
   providerFor:
     - sudo
+  categories:
+    - PRIVILEGES
   prefix: SC-SUDO
   options: &options
     booleans:

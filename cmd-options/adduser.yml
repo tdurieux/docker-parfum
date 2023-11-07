@@ -2,6 +2,8 @@ command:
   prefix: SC-ADD-USER
   providerFor:
     - adduser
+  categories:
+    - USER_MANAGEMENT
   options: &options
     booleans:
       - -D, --defaults

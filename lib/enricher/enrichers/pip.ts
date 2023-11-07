@@ -3,11 +3,13 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["pip","pip2","pip3"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-PIP",
   scenarios: [
     {
       cmd: "$0 install [targets...]",
       name: "SC-PIP-INSTALL",
+      categories: ["INSTALL_PACKAGES"],
       prefix: "SC-PIP",
       paths: ["log","cert","client-cert","cache-dir","c","constraint","r","requirements","b","build","t","target","d","download","src","root","prefix"],
       booleans: ["h","help","isolated","v","verbose","V","version","q","quiet","no-cache-dir","disable-pip-version-check","U","upgrade","force-reinstall","I","ignore-installed","ignore-requires-python","no-deps","user","system","egg","compile","no-compile","no-use-wheel","pre","no-clean","require-hashes","no-index","process-dependency-links"],
@@ -80,6 +82,7 @@ export default {
     {
       cmd: "$0 uninstall [targets...]",
       name: "SC-PIP-UNINSTALL",
+      categories: ["UNINSTALL_PACKAGES"],
       prefix: "SC-PIP",
       paths: ["log","cert","client-cert","cache-dir","r","requirements"],
       booleans: ["h","help","isolated","v","verbose","V","version","q","quiet","no-cache-dir","disable-pip-version-check","y","yes"],

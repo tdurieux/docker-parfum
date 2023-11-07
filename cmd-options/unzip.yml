@@ -1,6 +1,8 @@
 command:
   providerFor:
     - unzip
+  categories:
+    - ARCHIVE
   prefix: SC-UNZIP
   options: &options
     booleans:
