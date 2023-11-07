@@ -3,6 +3,7 @@ command:
     - cd
   categories:
     - NAVIGATION
+    - FILE_SYSTEM
   prefix: SC-CD
   scenarios:
     - cmd: $0 <path>

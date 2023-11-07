@@ -32,6 +32,7 @@ export { default as dpkg } from "./dpkg";
 export { default as echo } from "./echo";
 export { default as exit } from "./exit";
 export { default as _export } from "./export";
+export { default as _false } from "./false";
 export { default as find } from "./find";
 export { default as firefox } from "./firefox";
 export { default as gem } from "./gem";
@@ -49,6 +50,7 @@ export { default as ln } from "./ln";
 export { default as locale_gen } from "./locale-gen";
 export { default as ls } from "./ls";
 export { default as make } from "./make";
+export { default as md5 } from "./md5";
 export { default as mkdir } from "./mkdir";
 export { default as mktemp } from "./mktemp";
 export { default as mv } from "./mv";
@@ -86,6 +88,16 @@ export { default as xargs } from "./xargs";
 export { default as yarn } from "./yarn";
 export { default as yum } from "./yum";
 export declare const enrichers: ({
+    providerFor: string[];
+    categories: string[];
+    prefix: string;
+    scenarios: {
+        cmd: string;
+        name: string;
+        prefix: any;
+        argv: () => import("yargs").Argv<{}>;
+    }[];
+} | {
     providerFor: string[];
     categories: any[];
     prefix: string;
@@ -733,15 +745,5 @@ export declare const enrichers: ({
         } & {
             f: string;
         }>;
-    }[];
-} | {
-    providerFor: string[];
-    categories: string[];
-    prefix: string;
-    scenarios: {
-        cmd: string;
-        name: string;
-        prefix: any;
-        argv: () => import("yargs").Argv<{}>;
     }[];
 })[];

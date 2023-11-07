@@ -76,6 +76,11 @@ command:
       name: SC-NPM-TEST
       categories:
         - TEST_PACKAGES
+    - cmd: $0 run build [args...]
+      options: {}
+      name: SC-NPM-RUN-BUILD
+      categories:
+        - BUILD_PACKAGES
     - cmd: $0 run [args...]
       options: {}
       name: SC-NPM-RUN

@@ -2,19 +2,17 @@ import { Argv } from "yargs";
 const yargs = require("yargs/yargs");
 
 export default {
-  providerFor: ["cd"],
-  categories: ["NAVIGATION","FILE_SYSTEM"],
-  prefix: "SC-CD",
+  providerFor: ["false"],
+  categories: ["UTILS"],
+  prefix: "undefined",
   scenarios: [
     {
-      postProcess: [{"tagLastElement":{"source":"path","tag":"BASH-PATH"}}],
-      replaceEmptyArgsWith: ["~"],
-      cmd: "$0 <path>",
-      name: "SC-CD",
-      prefix: "SC-CD",
+      cmd: "$0",
+      name: "SC-FALSE",
+      prefix: undefined,
       argv: () => {
         return (yargs() as Argv)
-          .describe("cd", "SC-CD")
+          .describe("false", "undefined")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -25,7 +23,7 @@ export default {
             "camel-case-expansion": false,
             "parse-numbers": false,
           })
-          .command("$0 <path>", "SC-CD")
+          .command("$0", "SC-FALSE")
       }
     },
   ]

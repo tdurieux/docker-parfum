@@ -24,6 +24,13 @@ describe("Testing enrich", () => {
       expect(r.find(nodeType.Q("SC-PIP-INSTALL"))).toHaveLength(1);
     });
   });
+  describe("npm", () => {
+    test("npm run build", async () => {
+      const root = await parseShell("npm run build");
+      const r = enrich(root);
+      expect(r.find(nodeType.Q("SC-NPM-RUN-BUILD"))).toHaveLength(1);
+    });
+  });
 
   describe("CHMOD", () => {
     test("chmod 777 file", async () => {

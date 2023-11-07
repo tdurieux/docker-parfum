@@ -2,19 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
-    providerFor: ["cd"],
-    categories: ["NAVIGATION", "FILE_SYSTEM"],
-    prefix: "SC-CD",
+    providerFor: ["false"],
+    categories: ["UTILS"],
+    prefix: "undefined",
     scenarios: [
         {
-            postProcess: [{ "tagLastElement": { "source": "path", "tag": "BASH-PATH" } }],
-            replaceEmptyArgsWith: ["~"],
-            cmd: "$0 <path>",
-            name: "SC-CD",
-            prefix: "SC-CD",
+            cmd: "$0",
+            name: "SC-FALSE",
+            prefix: undefined,
             argv: function () {
                 return yargs()
-                    .describe("cd", "SC-CD")
+                    .describe("false", "undefined")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -25,9 +23,9 @@ exports.default = {
                     "camel-case-expansion": false,
                     "parse-numbers": false,
                 })
-                    .command("$0 <path>", "SC-CD");
+                    .command("$0", "SC-FALSE");
             }
         },
     ]
 };
-//# sourceMappingURL=cd.js.map
+//# sourceMappingURL=false.js.map

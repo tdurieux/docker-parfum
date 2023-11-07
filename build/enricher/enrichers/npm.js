@@ -349,6 +349,27 @@ exports.default = {
             }
         },
         {
+            cmd: "$0 run build [args...]",
+            name: "SC-NPM-RUN-BUILD",
+            categories: ["BUILD_PACKAGES"],
+            prefix: "SC-NPM",
+            argv: function () {
+                return yargs()
+                    .describe("npm", "SC-NPM")
+                    .help(false)
+                    .version(false)
+                    .exitProcess(false)
+                    .showHelpOnFail(false)
+                    .parserConfiguration({
+                    "short-option-groups": true,
+                    "boolean-negation": false,
+                    "camel-case-expansion": false,
+                    "parse-numbers": false,
+                })
+                    .command("$0 run build [args...]", "SC-NPM-RUN-BUILD");
+            }
+        },
+        {
             cmd: "$0 run [args...]",
             name: "SC-NPM-RUN",
             categories: ["RUN_PACKAGES"],

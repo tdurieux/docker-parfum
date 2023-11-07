@@ -64,6 +64,8 @@ import exit from "./exit";
 export {default as exit} from "./exit";
 import _export from "./export";
 export {default as _export} from "./export";
+import _false from "./false";
+export {default as _false} from "./false";
 import find from "./find";
 export {default as find} from "./find";
 import firefox from "./firefox";
@@ -98,6 +100,8 @@ import ls from "./ls";
 export {default as ls} from "./ls";
 import make from "./make";
 export {default as make} from "./make";
+import md5 from "./md5";
+export {default as md5} from "./md5";
 import mkdir from "./mkdir";
 export {default as mkdir} from "./mkdir";
 import mktemp from "./mktemp";
@@ -171,4 +175,4 @@ export {default as yarn} from "./yarn";
 import yum from "./yum";
 export {default as yum} from "./yum";
 export const enrichers = [
-adduser,apk,apt_add_repository,apt_get,apt_key,apt,basename,bash,bundle,cat,cd,chmod,chown,cmake,codecov,composer,conda,configure,coverage,coveralls,cp,ctest,curl,diff,dnf,docker_php_ext_install,docker,dotnet,dpkg_architecture,dpkg,echo,exit,_export,find,firefox,gem,gh,git,go,google_chrome,gpg,gradle,grep,groupadd,jq,ldconfig,ln,locale_gen,ls,make,mkdir,mktemp,mv,mvn,node,npm,nproc,pecl,php,pip,printf,pwd,pytest,python,rm,rpm,sed,set,sh,sha256sum,sha512sum,sort,sudo,swift,tar,tee,touch,_true,unzip,useradd,wc,wget,which,xargs,yarn,yum,]
+adduser,apk,apt_add_repository,apt_get,apt_key,apt,basename,bash,bundle,cat,cd,chmod,chown,cmake,codecov,composer,conda,configure,coverage,coveralls,cp,ctest,curl,diff,dnf,docker_php_ext_install,docker,dotnet,dpkg_architecture,dpkg,echo,exit,_export,_false,find,firefox,gem,gh,git,go,google_chrome,gpg,gradle,grep,groupadd,jq,ldconfig,ln,locale_gen,ls,make,md5,mkdir,mktemp,mv,mvn,node,npm,nproc,pecl,php,pip,printf,pwd,pytest,python,rm,rpm,sed,set,sh,sha256sum,sha512sum,sort,sudo,swift,tar,tee,touch,_true,unzip,useradd,wc,wget,which,xargs,yarn,yum,]

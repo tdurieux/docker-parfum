@@ -1,0 +1,9 @@
+command:
+  providerFor:
+    - "false"
+  categories:
+    - UTILS
+  scenarios:
+    - cmd: $0
+      options: {}
+      name: SC-FALSE

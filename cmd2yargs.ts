@@ -248,7 +248,7 @@ export default {
         .replace(/-/g, "_")
         .replace(".", "")
         .replace("/", "");
-      if (["true", "export"].includes(name)) name = `_${name}`;
+      if (["true", "export", "false"].includes(name)) name = `_${name}`;
 
       (command as any).name = name;
       indexOutput += `import ${name} from "./${fname.replace(".yml", "")}";\n`;
