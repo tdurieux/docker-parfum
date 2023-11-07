@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
-    providerFor: ["mvn"],
+    providerFor: ["mvn", "mvnw"],
     categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-MVN",
     scenarios: [
@@ -16,7 +16,7 @@ exports.default = {
             counts: [],
             argv: function () {
                 return yargs()
-                    .describe("mvn", "SC-MVN")
+                    .describe("mvn,mvnw", "SC-MVN")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -39,7 +39,7 @@ exports.default = {
             counts: [],
             argv: function () {
                 return yargs()
-                    .describe("mvn", "SC-MVN")
+                    .describe("mvn,mvnw", "SC-MVN")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -63,7 +63,7 @@ exports.default = {
             counts: [],
             argv: function () {
                 return yargs()
-                    .describe("mvn", "SC-MVN")
+                    .describe("mvn,mvnw", "SC-MVN")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -87,7 +87,7 @@ exports.default = {
             counts: [],
             argv: function () {
                 return yargs()
-                    .describe("mvn", "SC-MVN")
+                    .describe("mvn,mvnw", "SC-MVN")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -111,7 +111,7 @@ exports.default = {
             counts: [],
             argv: function () {
                 return yargs()
-                    .describe("mvn", "SC-MVN")
+                    .describe("mvn,mvnw", "SC-MVN")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -135,7 +135,7 @@ exports.default = {
             counts: [],
             argv: function () {
                 return yargs()
-                    .describe("mvn", "SC-MVN")
+                    .describe("mvn,mvnw", "SC-MVN")
                     .help(false)
                     .version(false)
                     .exitProcess(false)

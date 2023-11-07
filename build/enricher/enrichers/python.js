@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
-    providerFor: ["python", "python2", "python2.7", "python3", "python3.4"],
+    providerFor: ["python", "python2", "python2.7", "python3", "python3.4", "python.exe"],
     categories: ["DEVELOPMENT"],
     prefix: "SC-PYTHON",
     scenarios: [
@@ -17,7 +17,7 @@ exports.default = {
             booleans: ["B", "d", "E", "i", "O", "R", "s", "S", "t", "u", "v", "V", "version", "x", "3", "h", "help"],
             argv: function () {
                 return yargs()
-                    .describe("python,python2,python2.7,python3,python3.4", "SC-PYTHON")
+                    .describe("python,python2,python2.7,python3,python3.4,python.exe", "SC-PYTHON")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -58,7 +58,7 @@ exports.default = {
             booleans: ["B", "d", "E", "i", "O", "R", "s", "S", "t", "u", "v", "V", "version", "x", "3", "h", "help"],
             argv: function () {
                 return yargs()
-                    .describe("python,python2,python2.7,python3,python3.4", "SC-PYTHON")
+                    .describe("python,python2,python2.7,python3,python3.4,python.exe", "SC-PYTHON")
                     .help(false)
                     .version(false)
                     .exitProcess(false)

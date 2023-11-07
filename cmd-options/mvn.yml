@@ -1,6 +1,7 @@
 command:
   providerFor:
     - mvn
+    - mvnw
   categories:
     - PACKAGE_MANAGEMENT
   prefix: SC-MVN

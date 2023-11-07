@@ -2,7 +2,7 @@ import { Argv } from "yargs";
 const yargs = require("yargs/yargs");
 
 export default {
-  providerFor: ["python","python2","python2.7","python3","python3.4"],
+  providerFor: ["python","python2","python2.7","python3","python3.4","python.exe"],
   categories: ["DEVELOPMENT"],
   prefix: "SC-PYTHON",
   scenarios: [
@@ -17,7 +17,7 @@ export default {
       booleans: ["B","d","E","i","O","R","s","S","t","u","v","V","version","x","3","h","help"],
       argv: () => {
         return (yargs() as Argv)
-          .describe("python,python2,python2.7,python3,python3.4", "SC-PYTHON")
+          .describe("python,python2,python2.7,python3,python3.4,python.exe", "SC-PYTHON")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -58,7 +58,7 @@ export default {
       booleans: ["B","d","E","i","O","R","s","S","t","u","v","V","version","x","3","h","help"],
       argv: () => {
         return (yargs() as Argv)
-          .describe("python,python2,python2.7,python3,python3.4", "SC-PYTHON")
+          .describe("python,python2,python2.7,python3,python3.4,python.exe", "SC-PYTHON")
           .help(false)
           .version(false)
           .exitProcess(false)

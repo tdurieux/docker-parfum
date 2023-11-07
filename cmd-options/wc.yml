@@ -1,0 +1,16 @@
+command:
+  providerFor:
+    - wc
+  categories:
+    - FILE_SYSTEM
+    - UTILS
+  prefix: SC-WC
+  scenarios:
+    - cmd: $0 [paths...]
+      options:
+        booleans:
+          - -c
+          - -l
+          - -m
+          - -w
+      name: SC-WC

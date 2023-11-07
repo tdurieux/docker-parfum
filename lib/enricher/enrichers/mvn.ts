@@ -2,7 +2,7 @@ import { Argv } from "yargs";
 const yargs = require("yargs/yargs");
 
 export default {
-  providerFor: ["mvn"],
+  providerFor: ["mvn","mvnw"],
   categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-MVN",
   scenarios: [
@@ -16,7 +16,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("mvn", "SC-MVN")
+          .describe("mvn,mvnw", "SC-MVN")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -39,7 +39,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("mvn", "SC-MVN")
+          .describe("mvn,mvnw", "SC-MVN")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -63,7 +63,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("mvn", "SC-MVN")
+          .describe("mvn,mvnw", "SC-MVN")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -87,7 +87,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("mvn", "SC-MVN")
+          .describe("mvn,mvnw", "SC-MVN")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -111,7 +111,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("mvn", "SC-MVN")
+          .describe("mvn,mvnw", "SC-MVN")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -135,7 +135,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("mvn", "SC-MVN")
+          .describe("mvn,mvnw", "SC-MVN")
           .help(false)
           .version(false)
           .exitProcess(false)

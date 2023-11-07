@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["yum"],
-    categories: ["PACKAGE-MANAGEMENT"],
+    categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-YUM",
     scenarios: [
         {

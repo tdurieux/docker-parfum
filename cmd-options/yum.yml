@@ -2,7 +2,7 @@ command:
   providerFor:
     - yum
   categories:
-    - PACKAGE-MANAGEMENT
+    - PACKAGE_MANAGEMENT
   prefix: SC-YUM
   optionsAll: &optionsAll
     booleans:

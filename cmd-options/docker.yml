@@ -4,22 +4,253 @@ command:
   categories:
     - VIRTUALIZATION
   prefix: SC-DOCKER
-  options: &options
-    booleans:
-      - -v, --version
-      - -D, --debug
-    strings:
-      - --config
-      - -c, --context
-    lists:
-      - -H, --host
   scenarios:
-    - cmd: $0 run <image> [command] [args...]
-      options: *options
+    - cmd: $0 run
+      options: 
+        booleans:
+          - -d, --detach
+          - --disable-content-trust
+          - --help
+          - --init
+          - -i, --interactive
+          - --no-healthcheck
+          - --oom-kill-disable
+          - --privileged
+          - -P, --publish-all
+          - -q, --quiet
+          - --read-only
+          - --rm
+          - --sig-proxy
+          - -t, --tty
+        strings:
+          - --add-host
+          - --annotation
+          - -a, --attach
+          - --blkio-weight
+          - --blkio-weight-device
+          - --cap-add
+          - --cap-drop
+          - --cgroup-parent
+          - --cgroupns
+          - --cidfile
+          - --cpu-count
+          - --cpu-percent
+          - --cpu-period
+          - --cpu-quota
+          - --cpu-rt-period
+          - --cpu-rt-runtime
+          - -c, --cpu-shares
+          - --cpus
+          - --cpuset-cpus
+          - --cpuset-mems
+          - --detach-keys
+          - --device
+          - --device-cgroup-rule
+          - --device-read-bps
+          - --device-read-iops
+          - --device-write-bps
+          - --device-write-iops
+          - --dns
+          - --dns-option
+          - --dns-search
+          - --domainname
+          - --entrypoint
+          - -e, --env
+          - --env-file
+          - --expose
+          - --gpus
+          - --group-add
+          - --health-cmd
+          - --health-interval
+          - --health-retries
+          - --health-start-period
+          - --health-timeout
+          - -h, --hostname
+          - --io-maxbandwidth
+          - --io-maxiops
+          - --ip
+          - --ip6
+          - --ipc
+          - --isolation
+          - --kernel-memory
+          - -l, --label
+          - --label-file
+          - --link
+          - --link-local-ip
+          - --log-driver
+          - --log-opt
+          - --mac-address
+          - -m, --memory
+          - --memory-reservation
+          - --memory-swap
+          - --memory-swappiness
+          - --mount
+          - --name
+          - --network
+          - --network-alias
+          - --oom-score-adj
+          - --pid
+          - --pids-limit
+          - --platform
+          - -p, --publish
+          - --pull
+          - --restart
+          - --runtime
+          - --security-opt
+          - --shm-size
+          - --stop-signal
+          - --stop-timeout
+          - --storage-opt
+          - --sysctl
+          - --tmpfs
+          - --ulimit
+          - -u, --user
+          - --userns
+          - --uts
+          - -v, --volume
+          - --volume-driver
+          - --volumes-from
+          - -w, --workdir
       name: SC-DOCKER-RUN
-    - cmd: $0 build [path]
-      options: *options
-      name: SC-DOCKER-BUIlD
-    - cmd: $0
-      options: *options
-      name: SC-DOCKER
+    - cmd: $0 exec
+      options: 
+        booleans:
+          - -d, --detach
+          - -i, --interactive
+          - --privileged
+          - -t, --tty
+        strings:
+          - --detach-keys
+          - -e, --env
+          - --env-file
+          - -u, --user
+          - -w, --workdir
+      name: SC-DOCKER-EXEC
+    - cmd: $0 ps
+      options: 
+        booleans:
+          - -a, --all
+          - -l, --latest
+          - --no-trunc
+          - -q, --quiet
+          - -s, --size
+        strings:
+          - -f, --filter
+          - --format
+          - -n, --last
+      name: SC-DOCKER-PS
+    - cmd: $0 build
+      options: 
+        booleans:
+          - --load
+          - --no-cache
+          - --pull
+          - --push
+          - -q, --quiet
+        strings:
+          - --add-host
+          - --allow
+          - --attest
+          - --build-arg
+          - --build-context
+          - --builder
+          - --cache-from
+          - --cache-to
+          - --cgroup-parent
+          - -f, --file
+          - --iidfile
+          - --label
+          - --metadata-file
+          - --network
+          - --no-cache-filter
+          - -o, --output
+          - --platform
+          - --progress
+          - --provenance
+          - --sbom
+          - --secret
+          - --shm-size
+          - --ssh
+          - -t, --tag
+          - --target
+          - --ulimit
+      name: SC-DOCKER-BUILD
+    - cmd: $0 pull
+      options: 
+        booleans:
+          - -a, --all-tags
+          - --disable-content-trust
+          - -q, --quiet
+        strings:
+          - --platform
+      name: SC-DOCKER-PULL
+    - cmd: $0 push
+      options: 
+        booleans:
+          - -a, --all-tags
+          - --disable-content-trust
+          - -q, --quiet
+      name: SC-DOCKER-PUSH
+    - cmd: $0 images
+      options: 
+        booleans:
+          - -a, --all
+          - --digests
+          - --no-trunc
+          - -q, --quiet
+        strings:
+          - -f, --filter
+          - --format
+      name: SC-DOCKER-IMAGES
+    - cmd: $0 login
+      options: 
+        booleans:
+          - -h, --help
+          - --password-stdin
+        strings:
+          - -p, --password
+          - -u, --username
+      name: SC-DOCKER-LOGIN
+    - cmd: $0 login azure
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - --client-id
+          - --client-secret
+          - --cloud-name
+          - --tenant-id
+      name: SC-DOCKER-LOGIN-AZURE
+    - cmd: $0 logout
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-DOCKER-LOGOUT
+    - cmd: $0 logout azure
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-DOCKER-LOGOUT-AZURE
+    - cmd: $0 search
+      options: 
+        booleans:
+          - --no-trunc
+        strings:
+          - -f, --filter
+          - --format
+          - --limit
+      name: SC-DOCKER-SEARCH
+    - cmd: $0 version
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - -f, --format
+          - --kubeconfig
+      name: SC-DOCKER-VERSION
+    - cmd: $0 info
+      options: 
+        strings:
+          - -f, --format
+      name: SC-DOCKER-INFO
+

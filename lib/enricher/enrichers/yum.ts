@@ -3,7 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["yum"],
-  categories: ["PACKAGE-MANAGEMENT"],
+  categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-YUM",
   scenarios: [
     {
