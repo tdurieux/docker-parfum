@@ -173,7 +173,19 @@ angular
           new dockerParfum.dinghy.File(undefined, $scope.dockerfile)
         );
 
-      const ast = await dockerParser.parse();
+      let ast = null;
+      try {
+        ast = dockerParser.parse();
+      } catch (error) {
+        if (error.ast) {
+          ast = error.ast;
+        }
+        console.error(error.errors);
+      }
+      if (ast == null) {
+        $scope.ast = undefined;
+        return;
+      }
       const matcher = new dockerParfum.Matcher(ast);
 
       const smells = [];

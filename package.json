@@ -36,7 +36,7 @@
   "author": "Thomas Durieux",
   "license": "MIT",
   "dependencies": {
-    "@tdurieux/dinghy": "^0.5.6",
+    "@tdurieux/dinghy": "^0.6.1",
     "commander": "^11.1.0",
     "diff": "^5.1.0",
     "process": "^0.11.10",

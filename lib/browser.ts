@@ -8,7 +8,7 @@ export { Violation, Matcher } from "./rule-matcher";
 export * as dinghy from "@tdurieux/dinghy";
 export * as enricher from "./enricher";
 
-export async function parseAndMatch(dockerfile: string) {
-  const ast = await parseDocker(new File(null, dockerfile));
+export function parseAndMatch(dockerfile: string) {
+  const ast = parseDocker(new File(null, dockerfile));
   return new Matcher(ast).matchAll();
 }

@@ -3,15 +3,15 @@ import { Matcher } from "../../lib/rule-matcher";
 import DL3004 from "../../lib/rules/hadolint/DL3004";
 
 describe("DL3004", () => {
-  test("without sudo", async () => {
-    const root = await parseDocker("RUN apt-get update");
+  test("without sudo", () => {
+    const root = parseDocker("RUN apt-get update");
     const matcher = new Matcher(root);
 
     const violations = matcher.match(DL3004);
     expect(violations).toHaveLength(0);
   });
   test("with sudo", async () => {
-    const root = await parseDocker("RUN sudo apt-get update");
+    const root = parseDocker("RUN sudo apt-get update");
     const matcher = new Matcher(root);
 
     const violations = matcher.match(DL3004);
@@ -20,7 +20,7 @@ describe("DL3004", () => {
     expect(root.toString()).toBe("RUN apt-get update");
   });
   test("with sudo 2", async () => {
-    const root = await parseDocker(
+    const root = parseDocker(
       "RUN sudo dpkg -i /tmp/firefox.deb || sudo apt-get -f install"
     );
     const matcher = new Matcher(root);

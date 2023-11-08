@@ -3,7 +3,7 @@ import { ALL_RULES } from "../lib/rules";
 import { praseFile, repairedFile } from "./test-utils";
 
 async function parseAndRepair(name: string) {
-  const dockerfile = await praseFile(name);
+  const dockerfile = praseFile(name);
   const matcher = new Matcher(dockerfile);
   matcher.matchAll(ALL_RULES);
   for (const smell of matcher.matchAll(ALL_RULES)) {
@@ -14,8 +14,8 @@ async function parseAndRepair(name: string) {
   expect(dockerfile.toString(true)).toBe(await repairedFile(name));
 }
 describe("Testing docker-pretty-printer", () => {
-  test("print reprint_issue", async () => {
-    const dockerfile = await praseFile("reprint_issue");
+  test("print reprint_issue", () => {
+    const dockerfile = praseFile("reprint_issue");
     expect(dockerfile.toString(true)).toBe(dockerfile.position.file.content);
   });
   test("test repair non sha256", async () => {
