@@ -15,6 +15,7 @@ export declare const abtractionRegex: {
     "ABS-MAYBE-BUILD-DIR": RegExp;
     "ABS-VAR-CACHE-YUM": RegExp;
     "ABS-VAR-CACHE-APK": RegExp;
+    "HOME-CACHE-PIP": RegExp;
     "ABS-MAYBE-SRC-DIR": RegExp;
     "ABS-USR-SRC-DIR": RegExp;
     "ABS-PATH-DOT-CACHE": RegExp;

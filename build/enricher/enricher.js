@@ -498,12 +498,13 @@ function enrichAST(cmdAST, commandArgs, commandArgsString, enricher, scenario, p
                         .addChild(new dinghy_1.nodeType.BashCommandCommand()
                         .addChild(firstNode.children)
                         .setPosition(firstNode.position));
+                    var subCommandsArgs = commandArgs.slice(commandArgs.indexOf(firstNode));
                     for (var i = 1; i < v.length; i++) {
-                        if (argsASTCache(v[i])[0]) {
+                        if (subCommandsArgs[i]) {
                             command.addChild(new dinghy_1.nodeType.BashCommandArgs()
-                                .addChild(argsASTCache(v[i])[0].children)
-                                .setPosition(argsASTCache(v[i])[0].position));
-                            argsASTCache(v[i])[0].remove();
+                                .addChild(subCommandsArgs[i].children)
+                                .setPosition(subCommandsArgs[i].position));
+                            subCommandsArgs[i].remove();
                         }
                     }
                     firstNode.replace(command);

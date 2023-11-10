@@ -23,6 +23,11 @@ describe("Testing enrich", () => {
       const r = enrich(root);
       expect(r.find(nodeType.Q("SC-PIP-INSTALL"))).toHaveLength(1);
     });
+    test("python -m RUN python -m pip install --upgrade pip", () => {
+      const root = parseShell("python -m pip install --upgrade pip");
+      const r = enrich(root);
+      expect(r.find(nodeType.Q("SC-PIP-INSTALL"))).toHaveLength(1);
+    });
   });
   describe("npm", () => {
     test("npm run build", () => {

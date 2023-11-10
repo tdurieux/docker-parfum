@@ -1,5 +1,5 @@
 import { nodeType, parseDocker, parseShell } from "@tdurieux/dinghy";
-import { DockerRun } from "@tdurieux/dinghy/build/docker-type";
+import { DockerRun, QOR } from "@tdurieux/dinghy/build/docker-type";
 import { Rule } from "..";
 import { postFixWith } from "../utils";
 
@@ -45,14 +45,14 @@ export const npmCacheCleanAfterInstall: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "npmCacheCleanAfterInstall",
   description: `Running npm cache clean after npm install in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.`,
-  query: nodeType.Q("SC-NPM-INSTALL"),
+  query: nodeType.Q(QOR("SC-NPM-INSTALL", "SC-NPM-CI")),
   consequent: {
     afterNode: nodeType.Q("SC-NPM-CACHE-CLEAN"),
   },
   source:
     "https://github.com/docker-library/ghost/pull/186/commits/c3bac502046ed5bea16fee67cc48ba993baeaea8",
   repair: async (violation) => {
-    postFixWith(violation, await parseShell("npm cache clean --force;"));
+    postFixWith(violation, parseShell("npm cache clean --force;"));
   },
 };
 
@@ -111,7 +111,7 @@ export const rmRecursiveAfterMktempD: Rule = {
 
     postFixWith(
       node,
-      await parseShell("rm -rf " + node.children.at(-1)?.toString(true))
+      parseShell("rm -rf " + node.children.at(-1)?.toString(true))
     );
   },
 };
@@ -209,6 +209,10 @@ export const pipUseNoCacheDir: Rule = {
   query: nodeType.Q("SC-PIP-INSTALL"),
   consequent: {
     inNode: nodeType.Q("SC-PIP-F-NO-CACHE-DIR"),
+    afterNode: nodeType.Q(
+      "SC-RM",
+      nodeType.Q("SC-RM-PATH", nodeType.Q("HOME-CACHE-PIP"))
+    ),
   },
   source:
     "https://github.com/docker-library/python/pull/50/commits/7663560df7547e69d13b1b548675502f4e0917d1",
@@ -257,7 +261,7 @@ export const mkdirUsrSrcThenRemove: Rule = {
   repair: async (violation) => {
     postFixWith(
       violation,
-      await parseShell(
+      parseShell(
         "rm -rf " +
           violation
             .find(nodeType.Q("SC-MKDIR-PATH"))[0]

@@ -25,6 +25,7 @@ export const abtractionRegex = {
   "ABS-MAYBE-BUILD-DIR": new RegExp("/build|build/"),
   "ABS-VAR-CACHE-YUM": new RegExp("var/cache/yum"),
   "ABS-VAR-CACHE-APK": new RegExp("var/cache/apk"),
+  "HOME-CACHE-PIP": new RegExp("~/.cache/pip"),
   "ABS-MAYBE-SRC-DIR": new RegExp("/src|src/"),
   "ABS-USR-SRC-DIR": new RegExp("/usr/src"),
   "ABS-PATH-DOT-CACHE": new RegExp("/.cache"),

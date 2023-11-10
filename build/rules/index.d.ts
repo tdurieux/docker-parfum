@@ -16,4 +16,5 @@ export interface Rule {
 export { rules as BINNACLE_RULES } from "./binnacle";
 export { rules as HADOLINT_RULES } from "./hadolint";
 export { rules as PARFUM_RULES } from "./parfum";
+export declare const SIZE_RULES: Rule[];
 export declare const ALL_RULES: Rule[];

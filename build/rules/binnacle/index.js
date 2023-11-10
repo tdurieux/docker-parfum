@@ -64,23 +64,15 @@ exports.npmCacheCleanAfterInstall = {
     scope: "INTRA-DIRECTIVE",
     name: "npmCacheCleanAfterInstall",
     description: "Running npm cache clean after npm install in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.",
-    query: dinghy_1.nodeType.Q("SC-NPM-INSTALL"),
+    query: dinghy_1.nodeType.Q((0, docker_type_1.QOR)("SC-NPM-INSTALL", "SC-NPM-CI")),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-NPM-CACHE-CLEAN"),
     },
     source: "https://github.com/docker-library/ghost/pull/186/commits/c3bac502046ed5bea16fee67cc48ba993baeaea8",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
-        var _a, _b;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0:
-                    _a = utils_1.postFixWith;
-                    _b = [violation];
-                    return [4, (0, dinghy_1.parseShell)("npm cache clean --force;")];
-                case 1:
-                    _a.apply(void 0, _b.concat([_c.sent()]));
-                    return [2];
-            }
+        return __generator(this, function (_a) {
+            (0, utils_1.postFixWith)(violation, (0, dinghy_1.parseShell)("npm cache clean --force;"));
+            return [2];
         });
     }); },
 };
@@ -115,19 +107,12 @@ exports.rmRecursiveAfterMktempD = {
     },
     source: "IMPLICIT --- you should remove temporary dirs in docker images",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
-        var node, _a, _b;
-        var _c;
-        return __generator(this, function (_d) {
-            switch (_d.label) {
-                case 0:
-                    node = violation;
-                    _a = utils_1.postFixWith;
-                    _b = [node];
-                    return [4, (0, dinghy_1.parseShell)("rm -rf " + ((_c = node.children.at(-1)) === null || _c === void 0 ? void 0 : _c.toString(true)))];
-                case 1:
-                    _a.apply(void 0, _b.concat([_d.sent()]));
-                    return [2];
-            }
+        var node;
+        var _a;
+        return __generator(this, function (_b) {
+            node = violation;
+            (0, utils_1.postFixWith)(node, (0, dinghy_1.parseShell)("rm -rf " + ((_a = node.children.at(-1)) === null || _a === void 0 ? void 0 : _a.toString(true))));
+            return [2];
         });
     }); },
 };
@@ -186,6 +171,7 @@ exports.pipUseNoCacheDir = {
     query: dinghy_1.nodeType.Q("SC-PIP-INSTALL"),
     consequent: {
         inNode: dinghy_1.nodeType.Q("SC-PIP-F-NO-CACHE-DIR"),
+        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("HOME-CACHE-PIP"))),
     },
     source: "https://github.com/docker-library/python/pull/50/commits/7663560df7547e69d13b1b548675502f4e0917d1",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -209,21 +195,13 @@ exports.mkdirUsrSrcThenRemove = {
     },
     source: "https://github.com/docker-library/python/pull/20/commits/ce7da0b874784e6b69e3966b5d7ba995e873163e",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
-        var _a, _b;
-        var _c;
-        return __generator(this, function (_d) {
-            switch (_d.label) {
-                case 0:
-                    _a = utils_1.postFixWith;
-                    _b = [violation];
-                    return [4, (0, dinghy_1.parseShell)("rm -rf " +
-                            ((_c = violation
-                                .find(dinghy_1.nodeType.Q("SC-MKDIR-PATH"))[0]
-                                .getElement(dinghy_1.nodeType.BashLiteral)) === null || _c === void 0 ? void 0 : _c.toString(true)))];
-                case 1:
-                    _a.apply(void 0, _b.concat([_d.sent()]));
-                    return [2];
-            }
+        var _a;
+        return __generator(this, function (_b) {
+            (0, utils_1.postFixWith)(violation, (0, dinghy_1.parseShell)("rm -rf " +
+                ((_a = violation
+                    .find(dinghy_1.nodeType.Q("SC-MKDIR-PATH"))[0]
+                    .getElement(dinghy_1.nodeType.BashLiteral)) === null || _a === void 0 ? void 0 : _a.toString(true))));
+            return [2];
         });
     }); },
 };

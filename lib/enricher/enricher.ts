@@ -718,14 +718,17 @@ function enrichAST(
                 .addChild(firstNode.children)
                 .setPosition(firstNode.position)
             );
+          const subCommandsArgs = commandArgs.slice(
+            commandArgs.indexOf(firstNode)
+          );
           for (let i = 1; i < v.length; i++) {
-            if (argsASTCache(v[i])[0]) {
+            if (subCommandsArgs[i]) {
               command.addChild(
                 new nodeType.BashCommandArgs()
-                  .addChild(argsASTCache(v[i])[0].children)
-                  .setPosition(argsASTCache(v[i])[0].position)
+                  .addChild(subCommandsArgs[i].children)
+                  .setPosition(subCommandsArgs[i].position)
               );
-              argsASTCache(v[i])[0].remove();
+              subCommandsArgs[i].remove();
             }
           }
           firstNode.replace(command);

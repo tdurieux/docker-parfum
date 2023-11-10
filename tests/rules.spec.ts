@@ -88,6 +88,19 @@ describe("Testing rule matcher", () => {
       "RUN curl -f -L 'https://www.eclipse.org/downloads/download.php?file=/virgo/release/VP/3.6.4.RELEASE/virgo-tomcat-server-3.6.4.RELEASE.zip&mirror_id=580&r=1' | bsdtar --strip-components 1 -C /home/developer/virgo -xzf -"
     );
   });
+  test("npmCacheCleanAfterInstall CI", async () => {
+    const root = parseDocker("RUN npm ci");
+    const matcher = new Matcher(root);
+
+    const rule = npmCacheCleanAfterInstall;
+    const violations = matcher.match(rule);
+    expect(violations).toHaveLength(1);
+
+    await violations[0].repair();
+    expect(matcher.node.toString(true)).toEqual(
+      "RUN npm ci && npm cache clean --force;"
+    );
+  });
   test("npmCacheCleanAfterInstall", async () => {
     const root = parseDocker("RUN npm i");
     const matcher = new Matcher(root);
@@ -286,6 +299,16 @@ describe("Testing rule matcher", () => {
   test("pipUseNoCacheDir valid", () => {
     const root = parseShell(
       "pip install --no-cache-dir --upgrade pip==${PYTHON_PIP_VERSION}"
+    );
+    expect(new Matcher(root).match(pipUseNoCacheDir)).toHaveLength(0);
+  });
+  test("pipUseNoCacheDir valid rm -rf ~/.cache/pip", () => {
+    const root = parseShell(
+      "pip install pip==9.0.3 \
+      && pip install -U h5py \
+      && pip install ipywidgets \
+      && jupyter nbextension enable --sys-prefix --py widgetsnbextension \
+      && rm -rf ~/.cache/pip"
     );
     expect(new Matcher(root).match(pipUseNoCacheDir)).toHaveLength(0);
   });
