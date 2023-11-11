@@ -38,7 +38,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rules = exports.apkAddUseNoCache = exports.aptGetInstallThenRemoveAptLists = exports.aptGetInstallUseNoRec = exports.aptGetUpdatePrecedesInstall = exports.aptGetInstallUseY = exports.gpgUseHaPools = exports.gpgUseBatchFlag = exports.tarSomethingRmTheSomething = exports.yumInstallRmVarCacheYum = exports.yumInstallForceYes = exports.gpgVerifyAscRmAsc = exports.gemUpdateNoDocument = exports.sha256sumEchoOneSpaces = exports.gemUpdateSystemRmRootGem = exports.configureShouldUseBuildFlag = exports.mkdirUsrSrcThenRemove = exports.pipUseNoCacheDir = exports.wgetUseHttpsUrl = exports.curlUseHttpsUrl = exports.rmRecursiveAfterMktempD = exports.npmCacheCleanUseForce = exports.npmCacheCleanAfterInstall = exports.curlUseFlagF = void 0;
 var dinghy_1 = require("@tdurieux/dinghy");
-var docker_type_1 = require("@tdurieux/dinghy/build/docker-type");
 var utils_1 = require("../utils");
 exports.curlUseFlagF = {
     scope: "INTRA-DIRECTIVE",
@@ -64,7 +63,7 @@ exports.npmCacheCleanAfterInstall = {
     scope: "INTRA-DIRECTIVE",
     name: "npmCacheCleanAfterInstall",
     description: "Running npm cache clean after npm install in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.",
-    query: dinghy_1.nodeType.Q((0, docker_type_1.QOR)("SC-NPM-INSTALL", "SC-NPM-CI")),
+    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.QOR("SC-NPM-INSTALL", "SC-NPM-CI")),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-NPM-CACHE-CLEAN"),
     },
@@ -523,7 +522,7 @@ exports.aptGetUpdatePrecedesInstall = {
                     .addChild(new dinghy_1.nodeType.BashConditionBinaryLhs().addChild(update))
                     .addChild(new dinghy_1.nodeType.BashConditionBinaryRhs().addChild(child.clone().setPosition(updatePosition)));
                 child.replace(binary);
-                child.getParent(docker_type_1.DockerRun).setPosition(updatePosition);
+                child.getParent(dinghy_1.nodeType.DockerRun).setPosition(updatePosition);
                 binary.setPosition(updatePosition);
             }
             return [2];

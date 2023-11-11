@@ -44,7 +44,7 @@ var dinghy_1 = require("@tdurieux/dinghy");
 var enricher_1 = __importDefault(require("../enricher"));
 function postFixWith(node, toInsert) {
     return __awaiter(this, void 0, void 0, function () {
-        var script, child, _i, _a, c, position, binary;
+        var script, newScript, child, _i, _a, c, position, binary;
         return __generator(this, function (_b) {
             if (!toInsert) {
                 console.error("[REPAIR] toInsert is null");
@@ -56,7 +56,18 @@ function postFixWith(node, toInsert) {
             (0, enricher_1.default)(toInsert);
             script = node.getParent(dinghy_1.nodeType.BashIfThen)
                 ? node.getParent(dinghy_1.nodeType.BashIfThen)
-                : node.getParent(dinghy_1.nodeType.BashScript);
+                : node.getParent(dinghy_1.nodeType.BashScript)
+                    ? node.getParent(dinghy_1.nodeType.BashScript)
+                    : node.getParent(dinghy_1.nodeType.DockerJSONInstruction);
+            if (script instanceof dinghy_1.nodeType.DockerJSONInstruction) {
+                newScript = new dinghy_1.nodeType.BashScript().setPosition(script.position);
+                newScript.children = script.children;
+                newScript.traverse(function (n) {
+                    n.isChanged = true;
+                });
+                script.replace(newScript);
+                script = newScript;
+            }
             child = script.children[0];
             for (_i = 0, _a = script.children; _i < _a.length; _i++) {
                 c = _a[_i];

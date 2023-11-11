@@ -1,5 +1,4 @@
 import { nodeType, parseDocker, parseShell } from "@tdurieux/dinghy";
-import { DockerRun, QOR } from "@tdurieux/dinghy/build/docker-type";
 import { Rule } from "..";
 import { postFixWith } from "../utils";
 
@@ -45,7 +44,7 @@ export const npmCacheCleanAfterInstall: Rule = {
   scope: "INTRA-DIRECTIVE",
   name: "npmCacheCleanAfterInstall",
   description: `Running npm cache clean after npm install in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.`,
-  query: nodeType.Q(QOR("SC-NPM-INSTALL", "SC-NPM-CI")),
+  query: nodeType.Q(nodeType.QOR("SC-NPM-INSTALL", "SC-NPM-CI")),
   consequent: {
     afterNode: nodeType.Q("SC-NPM-CACHE-CLEAN"),
   },
@@ -749,7 +748,7 @@ export const aptGetUpdatePrecedesInstall: Rule = {
           )
         );
       child.replace(binary);
-      child.getParent(DockerRun).setPosition(updatePosition);
+      child.getParent(nodeType.DockerRun).setPosition(updatePosition);
       binary.setPosition(updatePosition);
     }
   },

@@ -101,6 +101,19 @@ describe("Testing rule matcher", () => {
       "RUN npm ci && npm cache clean --force;"
     );
   });
+  test("npmCacheCleanAfterInstall in JSON instruction", async () => {
+    const root = parseDocker('RUN ["npm", "install"]');
+    const matcher = new Matcher(root);
+
+    const rule = npmCacheCleanAfterInstall;
+    const violations = matcher.match(rule);
+    expect(violations).toHaveLength(1);
+
+    await violations[0].repair();
+    expect(root.toString(true)).toEqual(
+      "RUN npm install && npm cache clean --force;"
+    );
+  });
   test("npmCacheCleanAfterInstall", async () => {
     const root = parseDocker("RUN npm i");
     const matcher = new Matcher(root);
@@ -296,6 +309,7 @@ describe("Testing rule matcher", () => {
       "pip install --no-cache-dir --upgrade pip==$PYTHON_PIP_VERSION"
     );
   });
+
   test("pipUseNoCacheDir valid", () => {
     const root = parseShell(
       "pip install --no-cache-dir --upgrade pip==${PYTHON_PIP_VERSION}"

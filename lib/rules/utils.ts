@@ -13,10 +13,23 @@ export async function postFixWith(
     toInsert = toInsert.children[0];
   }
   enrich(toInsert);
-  const script = node.getParent(nodeType.BashIfThen)
+  let script = node.getParent(nodeType.BashIfThen)
     ? node.getParent(nodeType.BashIfThen)
-    : node.getParent(nodeType.BashScript);
+    : node.getParent(nodeType.BashScript)
+    ? node.getParent(nodeType.BashScript)
+    : node.getParent(nodeType.DockerJSONInstruction);
 
+  // transform the docker instruction into a bash script to be able to add the node
+  if (script instanceof nodeType.DockerJSONInstruction) {
+    const newScript = new nodeType.BashScript().setPosition(script.position);
+    newScript.children = script.children;
+    // need to force the reprint otherwise the args will have "" around them
+    newScript.traverse((n) => {
+      n.isChanged = true;
+    });
+    script.replace(newScript);
+    script = newScript;
+  }
   let child = script.children[0];
   for (const c of script.children) {
     if (c === node || c.hasChild(node)) {
