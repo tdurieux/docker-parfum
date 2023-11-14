@@ -4,6 +4,10 @@ declare const _default: {
     categories: string[];
     prefix: string;
     scenarios: ({
+        captureAfterThirdNonOption: string;
+        postProcess: {
+            subCommand: string;
+        }[];
         cmd: string;
         name: string;
         prefix: string;
@@ -49,6 +53,8 @@ declare const _default: {
         } & {
             n: string;
         }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -117,6 +123,8 @@ declare const _default: {
         } & {
             ulimit: string;
         }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -129,6 +137,8 @@ declare const _default: {
         } & {
             q: boolean;
         }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -147,6 +157,8 @@ declare const _default: {
         } & {
             format: string;
         }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -155,6 +167,8 @@ declare const _default: {
         argv: () => Argv<{
             h: boolean;
         }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -169,6 +183,8 @@ declare const _default: {
         } & {
             limit: string;
         }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -176,6 +192,8 @@ declare const _default: {
         argv: () => Argv<{
             f: string;
         }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
         booleans?: undefined;
     })[];
 };

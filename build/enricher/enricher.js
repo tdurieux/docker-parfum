@@ -84,6 +84,13 @@ function captureAllAfter(args, scenario) {
 }
 function captureAfterN(args, scenario) {
     var captures = [];
+    var skipXFirst = 0;
+    if (scenario.captureAfterSecondNonOption) {
+        skipXFirst = 1;
+    }
+    else if (scenario.captureAfterThirdNonOption) {
+        skipXFirst = 2;
+    }
     var valuedOpts = getValuedOptions(scenario.argv())
         .map(function (opt) { return ["-".concat(opt), "--".concat(opt)]; })
         .flat();
@@ -102,6 +109,11 @@ function captureAfterN(args, scenario) {
             continue;
         }
         if (!arg.startsWith("-")) {
+            if (skipXFirst > 0) {
+                skipXFirst--;
+                newArgs.push(arg);
+                continue;
+            }
             capturing = true;
             captures.push(arg);
             continue;
@@ -132,13 +144,6 @@ function compaturesArgs(args, scenario) {
         var r = captureAfterN(output.args, scenario);
         var captures = r.captures;
         var newArgs = r.args;
-        if (scenario.captureAfterSecondNonOption && captures.length >= 1) {
-            newArgs.push(captures.shift());
-        }
-        else if (scenario.captureAfterThirdNonOption && captures.length >= 2) {
-            newArgs.push(captures.shift());
-            newArgs.push(captures.shift());
-        }
         output.args = newArgs;
         output.captures = captures.concat(output.captures);
     }

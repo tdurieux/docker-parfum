@@ -3,7 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["swift"],
-  categories: [],
+  categories: ["DEVELOPMENT"],
   prefix: "SC-SWIFT",
   scenarios: [
     {

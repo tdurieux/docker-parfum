@@ -5,8 +5,8 @@ command:
     - VIRTUALIZATION
   prefix: SC-DOCKER
   scenarios:
-    - cmd: $0 run
-      options: 
+    - cmd: $0 run <image> [...args]
+      options:
         booleans:
           - -d, --detach
           - --disable-content-trust
@@ -112,8 +112,11 @@ command:
           - --volumes-from
           - -w, --workdir
       name: SC-DOCKER-RUN
-    - cmd: $0 exec
-      options: 
+      captureAfterThirdNonOption: args
+      postProcess:
+        - subCommand: args
+    - cmd: $0 exec <container> [...args]
+      options:
         booleans:
           - -d, --detach
           - -i, --interactive
@@ -126,8 +129,11 @@ command:
           - -u, --user
           - -w, --workdir
       name: SC-DOCKER-EXEC
+      captureAfterThirdNonOption: args
+      postProcess:
+        - subCommand: args
     - cmd: $0 ps
-      options: 
+      options:
         booleans:
           - -a, --all
           - -l, --latest
@@ -140,7 +146,7 @@ command:
           - -n, --last
       name: SC-DOCKER-PS
     - cmd: $0 build
-      options: 
+      options:
         booleans:
           - --load
           - --no-cache
@@ -176,7 +182,7 @@ command:
           - --ulimit
       name: SC-DOCKER-BUILD
     - cmd: $0 pull
-      options: 
+      options:
         booleans:
           - -a, --all-tags
           - --disable-content-trust
@@ -185,14 +191,14 @@ command:
           - --platform
       name: SC-DOCKER-PULL
     - cmd: $0 push
-      options: 
+      options:
         booleans:
           - -a, --all-tags
           - --disable-content-trust
           - -q, --quiet
       name: SC-DOCKER-PUSH
     - cmd: $0 images
-      options: 
+      options:
         booleans:
           - -a, --all
           - --digests
@@ -203,7 +209,7 @@ command:
           - --format
       name: SC-DOCKER-IMAGES
     - cmd: $0 login
-      options: 
+      options:
         booleans:
           - -h, --help
           - --password-stdin
@@ -212,7 +218,7 @@ command:
           - -u, --username
       name: SC-DOCKER-LOGIN
     - cmd: $0 login azure
-      options: 
+      options:
         booleans:
           - -h, --help
         strings:
@@ -222,17 +228,17 @@ command:
           - --tenant-id
       name: SC-DOCKER-LOGIN-AZURE
     - cmd: $0 logout
-      options: 
+      options:
         booleans:
           - -h, --help
       name: SC-DOCKER-LOGOUT
     - cmd: $0 logout azure
-      options: 
+      options:
         booleans:
           - -h, --help
       name: SC-DOCKER-LOGOUT-AZURE
     - cmd: $0 search
-      options: 
+      options:
         booleans:
           - --no-trunc
         strings:
@@ -241,7 +247,7 @@ command:
           - --limit
       name: SC-DOCKER-SEARCH
     - cmd: $0 version
-      options: 
+      options:
         booleans:
           - -h, --help
         strings:
@@ -249,8 +255,7 @@ command:
           - --kubeconfig
       name: SC-DOCKER-VERSION
     - cmd: $0 info
-      options: 
+      options:
         strings:
           - -f, --format
       name: SC-DOCKER-INFO
-

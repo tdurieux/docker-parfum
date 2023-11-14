@@ -3,7 +3,7 @@ const yargs = require("yargs/yargs");
 
 export default {
   providerFor: ["wc"],
-  categories: ["FILE_SYSTEM","UTILS"],
+  categories: ["UTILS"],
   prefix: "SC-WC",
   scenarios: [
     {

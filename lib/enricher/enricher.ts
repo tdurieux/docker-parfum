@@ -125,6 +125,14 @@ function prepareArgs(args: string[], scenario: Scenario) {
   if (scenario.fixupNonSpacedArgs) {
     args = fixupNonSpacedArgs(args, scenario.argv());
   }
+  // const scenarios = scenario.cmd.replace("$0", "").trim().split(" ");
+  // for (const s of scenarios) {
+  //   for (const arg of [...args]) {
+  //     if (arg === s) {
+  //       args = args.slice(args.indexOf(arg) + 1);
+  //     }
+  //   }
+  // }
   // remove the = from the end of args
   args = args.map((arg) =>
     arg.startsWith("-") ? arg.replace(/\=$/, "") : arg
@@ -160,6 +168,13 @@ function captureAllAfter(args: string[], scenario: Scenario) {
 function captureAfterN(args: string[], scenario: Scenario) {
   const captures: string[] = [];
 
+  let skipXFirst = 0;
+  if (scenario.captureAfterSecondNonOption) {
+    skipXFirst = 1;
+  } else if (scenario.captureAfterThirdNonOption) {
+    skipXFirst = 2;
+  }
+
   const valuedOpts = getValuedOptions(scenario.argv())
     .map((opt) => [`-${opt}`, `--${opt}`])
     .flat();
@@ -184,6 +199,11 @@ function captureAfterN(args: string[], scenario: Scenario) {
 
     // it is a value start capturing
     if (!arg.startsWith("-")) {
+      if (skipXFirst > 0) {
+        skipXFirst--;
+        newArgs.push(arg);
+        continue;
+      }
       capturing = true;
       captures.push(arg);
       continue;
@@ -224,12 +244,12 @@ function compaturesArgs(args: string[], scenario: Scenario) {
     const newArgs = r.args;
 
     // Possibly reclaim on or two args
-    if (scenario.captureAfterSecondNonOption && captures.length >= 1) {
-      newArgs.push(captures.shift());
-    } else if (scenario.captureAfterThirdNonOption && captures.length >= 2) {
-      newArgs.push(captures.shift());
-      newArgs.push(captures.shift());
-    }
+    // if (scenario.captureAfterSecondNonOption && captures.length >= 1) {
+    //   newArgs.push(captures.shift());
+    // } else if (scenario.captureAfterThirdNonOption && captures.length >= 2) {
+    //   newArgs.push(captures.shift());
+    //   newArgs.push(captures.shift());
+    // }
     output.args = newArgs;
     output.captures = captures.concat(output.captures);
   }

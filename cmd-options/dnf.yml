@@ -34,7 +34,7 @@ command:
       options: *options
       name: SC-DNF-UPGRADE
       categories:
-        - UPDGRADE_PACKAGES
+        - UPGRADE_PACKAGES
     - cmd: $0 check-update
       options: *options
       name: SC-DNF-CHECK-UPDATE

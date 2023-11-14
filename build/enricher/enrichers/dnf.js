@@ -112,7 +112,7 @@ exports.default = {
         {
             cmd: "$0 upgrade",
             name: "SC-DNF-UPGRADE",
-            categories: ["UPDGRADE_PACKAGES"],
+            categories: ["UPGRADE_PACKAGES"],
             prefix: "SC-DNF",
             booleans: ["y", "assumeyes", "q", "quiet", "nogpgcheck"],
             argv: function () {

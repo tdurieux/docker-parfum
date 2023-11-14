@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["wc"],
-    categories: ["FILE_SYSTEM", "UTILS"],
+    categories: ["UTILS"],
     prefix: "SC-WC",
     scenarios: [
         {

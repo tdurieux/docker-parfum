@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
     providerFor: ["swift"],
-    categories: [],
+    categories: ["DEVELOPMENT"],
     prefix: "SC-SWIFT",
     scenarios: [
         {

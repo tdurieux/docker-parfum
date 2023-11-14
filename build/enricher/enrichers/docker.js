@@ -7,7 +7,9 @@ exports.default = {
     prefix: "SC-DOCKER",
     scenarios: [
         {
-            cmd: "$0 run",
+            captureAfterThirdNonOption: "args",
+            postProcess: [{ "subCommand": "args" }],
+            cmd: "$0 run <image> [...args]",
             name: "SC-DOCKER-RUN",
             prefix: "SC-DOCKER",
             booleans: ["d", "detach", "disable-content-trust", "help", "init", "i", "interactive", "no-healthcheck", "oom-kill-disable", "privileged", "P", "publish-all", "q", "quiet", "read-only", "rm", "sig-proxy", "t", "tty"],
@@ -24,7 +26,7 @@ exports.default = {
                     "camel-case-expansion": false,
                     "parse-numbers": false,
                 })
-                    .command("$0 run", "SC-DOCKER-RUN")
+                    .command("$0 run <image> [...args]", "SC-DOCKER-RUN")
                     .option("d", { "alias": "detach", "type": "boolean" })
                     .option("disable-content-trust", { "type": "boolean" })
                     .option("help", { "type": "boolean" })
@@ -130,7 +132,9 @@ exports.default = {
             }
         },
         {
-            cmd: "$0 exec",
+            captureAfterThirdNonOption: "args",
+            postProcess: [{ "subCommand": "args" }],
+            cmd: "$0 exec <container> [...args]",
             name: "SC-DOCKER-EXEC",
             prefix: "SC-DOCKER",
             booleans: ["d", "detach", "i", "interactive", "privileged", "t", "tty"],
@@ -147,7 +151,7 @@ exports.default = {
                     "camel-case-expansion": false,
                     "parse-numbers": false,
                 })
-                    .command("$0 exec", "SC-DOCKER-EXEC")
+                    .command("$0 exec <container> [...args]", "SC-DOCKER-EXEC")
                     .option("d", { "alias": "detach", "type": "boolean" })
                     .option("i", { "alias": "interactive", "type": "boolean" })
                     .option("privileged", { "type": "boolean" })

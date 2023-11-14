@@ -1,10 +1,12 @@
 command:
   providerFor:
     - swift
+  categories:
+    - DEVELOPMENT
   prefix: SC-SWIFT
   scenarios:
     - cmd: $0
-      options: 
+      options:
         booleans:
           - -color-diagnostics
           - -disable-clang-target
@@ -137,4 +139,3 @@ command:
           - -Xcc
           - -Xlinker
       name: SC-SWIFT
-

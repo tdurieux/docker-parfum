@@ -36,6 +36,25 @@ describe("Testing enrich", () => {
       expect(r.find(nodeType.Q("SC-NPM-RUN-BUILD"))).toHaveLength(1);
     });
   });
+  describe("dokcer", () => {
+    test("docker run <image>", () => {
+      const root = parseShell(`docker run -v ".:/testing" --rm my-image`);
+      const r = enrich(root);
+      expect(r.find(nodeType.Q("SC-DOCKER-RUN"))).toHaveLength(1);
+    });
+    test("docker run python -m pytest", () => {
+      const root =
+        parseShell(`docker run -v ".:/testing" -v "./user_data/data:/testing/user_data/data" --rm \
+        -w /testing --entrypoint "" --env-file .github/workflows/scripts/ci-proxy.env \
+        ci-strategy-backtesting \
+        python -m pytest -ra -vv -s --log-cli-level=info --artifacts-path=artifacts/ \
+        -p no:cacheprovider tests/backtests -k 'kucoin and spot and 20230801-20230901'`);
+      const r = enrich(root);
+      expect(r.find(nodeType.Q("SC-DOCKER-RUN"))).toHaveLength(1);
+      expect(r.find(nodeType.Q("SC-PYTHON-MODULE"))).toHaveLength(1);
+      expect(r.find(nodeType.Q("SC-PYTEST"))).toHaveLength(1);
+    });
+  });
 
   describe("CHMOD", () => {
     test("chmod 777 file", () => {

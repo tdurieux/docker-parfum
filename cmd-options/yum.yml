@@ -56,7 +56,7 @@ command:
       options: *optionsAll
       name: SC-YUM-UPGRADE
       categories:
-        - UPDGRADE_PACKAGES
+        - UPGRADE_PACKAGES
     - cmd: $0 install [packages...]
       options: *optionsAll
       name: SC-YUM-INSTALL

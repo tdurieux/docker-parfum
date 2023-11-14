@@ -2,7 +2,6 @@ command:
   providerFor:
     - wc
   categories:
-    - FILE_SYSTEM
     - UTILS
   prefix: SC-WC
   scenarios:

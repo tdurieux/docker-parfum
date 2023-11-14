@@ -196,7 +196,7 @@ exports.default = {
         {
             cmd: "$0 upgrade [packages...]",
             name: "SC-YUM-UPGRADE",
-            categories: ["UPDGRADE_PACKAGES"],
+            categories: ["UPGRADE_PACKAGES"],
             prefix: "SC-YUM",
             paths: ["c", "config", "installroot"],
             booleans: ["h", "help", "y", "assumeyes", "q", "quiet", "v", "verbose", "C", "cacheonly", "version", "showduplicates", "obsoletes", "noplugins", "nopgpgcheck", "skip-broken", "t", "tolerant"],
