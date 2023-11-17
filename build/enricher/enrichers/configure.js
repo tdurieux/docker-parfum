@@ -12,6 +12,7 @@ exports.default = {
             prefix: "SC-CONFIGURE",
             paths: ["prefix"],
             booleans: ["with-ssl"],
+            strings: ["build"],
             argv: function () {
                 return yargs()
                     .describe("./configure", "SC-CONFIGURE")

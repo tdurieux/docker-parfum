@@ -9,6 +9,7 @@ declare const _default: {
         categories: string[];
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             y: boolean;
         } & {
@@ -23,6 +24,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             y: boolean;
         } & {

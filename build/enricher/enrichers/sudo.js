@@ -13,6 +13,7 @@ exports.default = {
             name: "SC-SUDO",
             prefix: "SC-SUDO",
             booleans: ["A", "askpass", "b", "background", "E", "preserve-env", "e", "edit", "H", "set-home", "h", "help", "i", "login", "K", "remove-timestamp", "k", "reset-timestamp", "l", "list", "n", "non-interactive", "P", "preserve-groups", "S", "stdin", "s", "shell", "V", "version", "v", "validate"],
+            strings: ["C", "close-from", "g", "group", "h", "host", "p", "prompt", "r", "role", "U", "other-user", "u", "user"],
             argv: function () {
                 return yargs()
                     .describe("sudo", "SC-SUDO")

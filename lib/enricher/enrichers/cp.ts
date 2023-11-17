@@ -12,6 +12,7 @@ export default {
       name: "SC-CP",
       prefix: "SC-CP",
       booleans: ["r","recursive","R","recursive","a","archive","f","force","l","link","L","dereference","n","no-clobber","d","i","interactive","p","parents","s","symbolic-link","remove-destination","T","no-target-directory","u","update","v","verbose","x","one-file-system","Z","help","version","H","copy-contents","b","attributes-only","strip-trailing-slashes"],
+      strings: ["preserve","no-preserve","context","backup","sparse"],
       argv: () => {
         return (yargs() as Argv)
           .describe("cp", "SC-CP")

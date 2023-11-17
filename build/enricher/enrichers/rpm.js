@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-rpm",
             paths: ["dbpath", "root", "f", "file", "p", "package"],
             booleans: ["?", "help", "version", "quiet", "v", "vv", "q", "query", "V", "verify", "i", "install", "U", "upgrade", "F", "freshen", "e", "erase", "querytags", "showrc", "setperms", "setugids", "a", "changelog", "conflicts", "dump", "last", "filesbypkg", "obsoletes", "provides", "scripts", "c", "configfiles", "l", "list", "i", "info", "d", "docfiles", "R", "requires", "s", "state", "triggers", "triggerscripts"],
+            strings: ["rcfile", "pipe", "D", "define", "undefine", "E", "eval", "g", "group", "hdrid", "pkgid", "tid", "querybynumber", "triggeredby", "whatprovides", "whatrequires", "qf", "queryformat"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -84,6 +85,7 @@ exports.default = {
             prefix: "SC-rpm",
             paths: ["dbpath", "root", "f", "file", "p", "package"],
             booleans: ["?", "help", "version", "quiet", "v", "vv", "q", "query", "V", "verify", "i", "install", "U", "upgrade", "F", "freshen", "e", "erase", "querytags", "showrc", "setperms", "setugids", "a", "nodeps", "nofiles", "noscripts", "nodigest", "nosignature", "nolinkto", "nofiledigest", "nosize", "nouser", "nogroup", "nomtime", "nomode", "nordev", "nocaps"],
+            strings: ["rcfile", "pipe", "D", "define", "undefine", "E", "eval", "g", "group", "hdrid", "pkgid", "tid", "querybynumber", "triggeredby", "whatprovides", "whatrequires"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -154,6 +156,7 @@ exports.default = {
             prefix: "SC-rpm",
             paths: ["dbpath", "root", "excludepath"],
             booleans: ["?", "help", "version", "quiet", "v", "vv", "q", "query", "V", "verify", "i", "install", "U", "upgrade", "F", "freshen", "e", "erase", "querytags", "showrc", "setperms", "setugids", "excludedocs", "force", "allfiles", "badreloc", "ignoresize", "ignorearch", "ignoreos", "includedocs", "justdb", "nocollections", "nodeps", "nodigest", "nosignature", "noplugins", "noorder", "noscripts", "notriggers", "oldpackage", "percent", "replacefiles", "replacepkgs", "test", "h", "hash"],
+            strings: ["rcfile", "pipe", "D", "define", "undefine", "E", "eval", "prefix", "relocate"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -225,6 +228,7 @@ exports.default = {
             prefix: "SC-rpm",
             paths: ["dbpath", "root", "excludepath"],
             booleans: ["?", "help", "version", "quiet", "v", "vv", "q", "query", "V", "verify", "i", "install", "U", "upgrade", "F", "freshen", "e", "erase", "querytags", "showrc", "setperms", "setugids", "excludedocs", "force", "allfiles", "badreloc", "ignoresize", "ignorearch", "ignoreos", "includedocs", "justdb", "nocollections", "nodeps", "nodigest", "nosignature", "noplugins", "noorder", "noscripts", "notriggers", "oldpackage", "percent", "replacefiles", "replacepkgs", "test", "h", "hash"],
+            strings: ["rcfile", "pipe", "D", "define", "undefine", "E", "eval", "prefix", "relocate"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -295,6 +299,7 @@ exports.default = {
             prefix: "SC-rpm",
             paths: ["dbpath", "root", "excludepath"],
             booleans: ["?", "help", "version", "quiet", "v", "vv", "q", "query", "V", "verify", "i", "install", "U", "upgrade", "F", "freshen", "e", "erase", "querytags", "showrc", "setperms", "setugids", "excludedocs", "force", "allfiles", "badreloc", "ignoresize", "ignorearch", "ignoreos", "includedocs", "justdb", "nocollections", "nodeps", "nodigest", "nosignature", "noplugins", "noorder", "noscripts", "notriggers", "oldpackage", "percent", "replacefiles", "replacepkgs", "test", "h", "hash"],
+            strings: ["rcfile", "pipe", "D", "define", "undefine", "E", "eval", "prefix", "relocate"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -365,6 +370,7 @@ exports.default = {
             prefix: "SC-rpm",
             paths: ["dbpath", "root"],
             booleans: ["?", "help", "version", "quiet", "v", "vv", "q", "query", "V", "verify", "i", "install", "U", "upgrade", "F", "freshen", "e", "erase", "querytags", "showrc", "setperms", "setugids", "allmatches", "justdb", "nodeps", "noscripts", "notriggers", "test"],
+            strings: ["rcfile", "pipe", "D", "define", "undefine", "E", "eval"],
             counts: [],
             argv: function () {
                 return yargs()

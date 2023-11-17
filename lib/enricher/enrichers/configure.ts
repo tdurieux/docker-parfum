@@ -12,6 +12,7 @@ export default {
       prefix: "SC-CONFIGURE",
       paths: ["prefix"],
       booleans: ["with-ssl"],
+      strings: ["build"],
       argv: () => {
         return (yargs() as Argv)
           .describe("./configure", "SC-CONFIGURE")

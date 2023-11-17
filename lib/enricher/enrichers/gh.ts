@@ -33,6 +33,7 @@ export default {
       name: "SC-GH-AUTH-LOGIN",
       prefix: "SC-GH",
       booleans: ["insecure-storage","w","web","with-token"],
+      strings: ["p","git-protocol","h","hostname","s","scopes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -59,6 +60,7 @@ export default {
       cmd: "$0 auth logout",
       name: "SC-GH-AUTH-LOGOUT",
       prefix: "SC-GH",
+      strings: ["h","hostname"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -81,6 +83,7 @@ export default {
       name: "SC-GH-AUTH-REFRESH",
       prefix: "SC-GH",
       booleans: ["insecure-storage","reset-scopes"],
+      strings: ["h","hostname","r","remove-scopes","s","scopes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -106,6 +109,7 @@ export default {
       cmd: "$0 auth setup-git",
       name: "SC-GH-AUTH-SETUP-GIT",
       prefix: "SC-GH",
+      strings: ["h","hostname"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -128,6 +132,7 @@ export default {
       name: "SC-GH-AUTH-STATUS",
       prefix: "SC-GH",
       booleans: ["t","show-token"],
+      strings: ["h","hostname"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -150,6 +155,7 @@ export default {
       cmd: "$0 auth token",
       name: "SC-GH-AUTH-TOKEN",
       prefix: "SC-GH",
+      strings: ["h","hostname"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -172,6 +178,7 @@ export default {
       name: "SC-GH-BROWSE",
       prefix: "SC-GH",
       booleans: ["n","no-browser","p","projects","r","releases","s","settings","w","wiki"],
+      strings: ["b","branch","c","commit","R","repo"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -223,6 +230,7 @@ export default {
       name: "SC-GH-CODESPACE-CODE",
       prefix: "SC-GH",
       booleans: ["insiders","w","web"],
+      strings: ["c","codespace","R","repo","repo-owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -249,6 +257,7 @@ export default {
       name: "SC-GH-CODESPACE-CP",
       prefix: "SC-GH",
       booleans: ["e","expand","r","recursive"],
+      strings: ["c","codespace","p","profile","R","repo","repo-owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -276,6 +285,7 @@ export default {
       name: "SC-GH-CODESPACE-CREATE",
       prefix: "SC-GH",
       booleans: ["default-permissions","s","status","w","web"],
+      strings: ["b","branch","devcontainer-path","d","display-name","idle-timeout","l","location","m","machine","R","repo","retention-period"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -308,6 +318,7 @@ export default {
       name: "SC-GH-CODESPACE-DELETE",
       prefix: "SC-GH",
       booleans: ["all","f","force"],
+      strings: ["c","codespace","days","o","org","R","repo","repo-owner","u","user"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -336,6 +347,7 @@ export default {
       cmd: "$0 codespace edit",
       name: "SC-GH-CODESPACE-EDIT",
       prefix: "SC-GH",
+      strings: ["c","codespace","d","display-name","m","machine","R","repo","repo-owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -361,6 +373,7 @@ export default {
       cmd: "$0 codespace jupyter",
       name: "SC-GH-CODESPACE-JUPYTER",
       prefix: "SC-GH",
+      strings: ["c","codespace","R","repo","repo-owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -385,6 +398,7 @@ export default {
       name: "SC-GH-CODESPACE-LIST",
       prefix: "SC-GH",
       booleans: ["w","web"],
+      strings: ["q","jq","json","L","limit","o","org","R","repo","t","template","u","user"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -414,6 +428,7 @@ export default {
       name: "SC-GH-CODESPACE-LOGS",
       prefix: "SC-GH",
       booleans: ["f","follow"],
+      strings: ["c","codespace","R","repo","repo-owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -438,6 +453,7 @@ export default {
       cmd: "$0 codespace ports",
       name: "SC-GH-CODESPACE-PORTS",
       prefix: "SC-GH",
+      strings: ["c","codespace","q","jq","json","R","repo","repo-owner","t","template"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -465,6 +481,7 @@ export default {
       name: "SC-GH-CODESPACE PORTS-FORWARD",
       prefix: "SC-GH",
       booleans: ["help"],
+      strings: ["c","codespace","R","repo","repo-owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -490,6 +507,7 @@ export default {
       name: "SC-GH-CODESPACE PORTS-VISIBILITY",
       prefix: "SC-GH",
       booleans: ["help"],
+      strings: ["c","codespace","R","repo","repo-owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -515,6 +533,7 @@ export default {
       name: "SC-GH-CODESPACE-REBUILD",
       prefix: "SC-GH",
       booleans: ["full"],
+      strings: ["c","codespace","R","repo","repo-owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -540,6 +559,7 @@ export default {
       name: "SC-GH-CODESPACE-SSH",
       prefix: "SC-GH",
       booleans: ["config","d","debug"],
+      strings: ["c","codespace","debug-file","profile","R","repo","repo-owner","server-port"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -568,6 +588,7 @@ export default {
       cmd: "$0 codespace stop",
       name: "SC-GH-CODESPACE-STOP",
       prefix: "SC-GH",
+      strings: ["c","codespace","o","org","R","repo","repo-owner","u","user"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -593,6 +614,7 @@ export default {
       cmd: "$0 codespace view",
       name: "SC-GH-CODESPACE-VIEW",
       prefix: "SC-GH",
+      strings: ["c","codespace","q","jq","json","R","repo","repo-owner","t","template"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -664,6 +686,7 @@ export default {
       name: "SC-GH-GIST-CREATE",
       prefix: "SC-GH",
       booleans: ["p","public","w","web"],
+      strings: ["d","desc","f","filename"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -710,6 +733,7 @@ export default {
       cmd: "$0 gist edit",
       name: "SC-GH-GIST-EDIT",
       prefix: "SC-GH",
+      strings: ["a","add","d","desc","f","filename","r","remove"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -735,6 +759,7 @@ export default {
       name: "SC-GH-GIST-LIST",
       prefix: "SC-GH",
       booleans: ["public","secret"],
+      strings: ["L","limit"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -781,6 +806,7 @@ export default {
       name: "SC-GH-GIST-VIEW",
       prefix: "SC-GH",
       booleans: ["files","r","raw","w","web"],
+      strings: ["f","filename"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -805,6 +831,7 @@ export default {
       cmd: "$0 issue",
       name: "SC-GH-ISSUE",
       prefix: "SC-GH",
+      strings: ["R","repo"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -827,6 +854,7 @@ export default {
       name: "SC-GH-ISSUE-CREATE",
       prefix: "SC-GH",
       booleans: ["w","web"],
+      strings: ["a","assignee","b","body","F","body-file","l","label","m","milestone","p","project","recover","T","template","t","title"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -858,6 +886,7 @@ export default {
       name: "SC-GH-ISSUE-LIST",
       prefix: "SC-GH",
       booleans: ["w","web"],
+      strings: ["app","a","assignee","A","author","q","jq","json","l","label","L","limit","mention","m","milestone","S","search","s","state","t","template"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -891,6 +920,7 @@ export default {
       cmd: "$0 issue status",
       name: "SC-GH-ISSUE-STATUS",
       prefix: "SC-GH",
+      strings: ["q","jq","json","t","template"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -936,6 +966,7 @@ export default {
       cmd: "$0 org list",
       name: "SC-GH-ORG-LIST",
       prefix: "SC-GH",
+      strings: ["L","limit"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -957,6 +988,7 @@ export default {
       cmd: "$0 pr",
       name: "SC-GH-PR",
       prefix: "SC-GH",
+      strings: ["R","repo"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -979,6 +1011,7 @@ export default {
       name: "SC-GH-PR-CREATE",
       prefix: "SC-GH",
       booleans: ["d","draft","f","fill","fill-first","no-maintainer-edit","w","web"],
+      strings: ["a","assignee","B","base","b","body","F","body-file","H","head","l","label","m","milestone","p","project","recover","r","reviewer","T","template","t","title"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1017,6 +1050,7 @@ export default {
       name: "SC-GH-PR-LIST",
       prefix: "SC-GH",
       booleans: ["d","draft","w","web"],
+      strings: ["app","a","assignee","A","author","B","base","H","head","q","jq","json","l","label","L","limit","S","search","s","state","t","template"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1052,6 +1086,7 @@ export default {
       name: "SC-GH-PR-STATUS",
       prefix: "SC-GH",
       booleans: ["c","conflict-status"],
+      strings: ["q","jq","json","t","template"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1099,6 +1134,7 @@ export default {
       name: "SC-GH-PROJECT-CLOSE",
       prefix: "SC-GH",
       booleans: ["undo"],
+      strings: ["format","owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1123,6 +1159,7 @@ export default {
       name: "SC-GH-PROJECT-COPY",
       prefix: "SC-GH",
       booleans: ["drafts"],
+      strings: ["format","source-owner","target-owner","title"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1148,6 +1185,7 @@ export default {
       cmd: "$0 project create",
       name: "SC-GH-PROJECT-CREATE",
       prefix: "SC-GH",
+      strings: ["format","owner","title"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1171,6 +1209,7 @@ export default {
       cmd: "$0 project delete",
       name: "SC-GH-PROJECT-DELETE",
       prefix: "SC-GH",
+      strings: ["format","owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1193,6 +1232,7 @@ export default {
       cmd: "$0 project edit",
       name: "SC-GH-PROJECT-EDIT",
       prefix: "SC-GH",
+      strings: ["d","description","format","owner","readme","title","visibility"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1219,6 +1259,7 @@ export default {
       cmd: "$0 project field-create",
       name: "SC-GH-PROJECT-FIELD-CREATE",
       prefix: "SC-GH",
+      strings: ["data-type","format","name","owner","single-select-options"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1244,6 +1285,7 @@ export default {
       cmd: "$0 project field-delete",
       name: "SC-GH-PROJECT-FIELD-DELETE",
       prefix: "SC-GH",
+      strings: ["format","id"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1266,6 +1308,7 @@ export default {
       cmd: "$0 project field-list",
       name: "SC-GH-PROJECT-FIELD-LIST",
       prefix: "SC-GH",
+      strings: ["format","L","limit","owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1289,6 +1332,7 @@ export default {
       cmd: "$0 project item-add",
       name: "SC-GH-PROJECT-ITEM-ADD",
       prefix: "SC-GH",
+      strings: ["format","owner","url"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1313,6 +1357,7 @@ export default {
       name: "SC-GH-PROJECT-ITEM-ARCHIVE",
       prefix: "SC-GH",
       booleans: ["undo"],
+      strings: ["format","id","owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1337,6 +1382,7 @@ export default {
       cmd: "$0 project item-create",
       name: "SC-GH-PROJECT-ITEM-CREATE",
       prefix: "SC-GH",
+      strings: ["body","format","owner","title"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1361,6 +1407,7 @@ export default {
       cmd: "$0 project item-delete",
       name: "SC-GH-PROJECT-ITEM-DELETE",
       prefix: "SC-GH",
+      strings: ["format","id","owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1385,6 +1432,7 @@ export default {
       name: "SC-GH-PROJECT-ITEM-EDIT",
       prefix: "SC-GH",
       booleans: ["clear"],
+      strings: ["body","date","field-id","format","id","iteration-id","number","project-id","single-select-option-id","text","title"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1417,6 +1465,7 @@ export default {
       cmd: "$0 project item-list",
       name: "SC-GH-PROJECT-ITEM-LIST",
       prefix: "SC-GH",
+      strings: ["format","L","limit","owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1441,6 +1490,7 @@ export default {
       name: "SC-GH-PROJECT-LIST",
       prefix: "SC-GH",
       booleans: ["closed","w","web"],
+      strings: ["format","L","limit","owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1467,6 +1517,7 @@ export default {
       name: "SC-GH-PROJECT-MARK-TEMPLATE",
       prefix: "SC-GH",
       booleans: ["undo"],
+      strings: ["format","owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1491,6 +1542,7 @@ export default {
       name: "SC-GH-PROJECT-VIEW",
       prefix: "SC-GH",
       booleans: ["w","web"],
+      strings: ["format","owner"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1514,6 +1566,7 @@ export default {
       cmd: "$0 release",
       name: "SC-GH-RELEASE",
       prefix: "SC-GH",
+      strings: ["R","repo"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1536,6 +1589,7 @@ export default {
       name: "SC-GH-RELEASE-CREATE",
       prefix: "SC-GH",
       booleans: ["d","draft","generate-notes","latest","notes-from-tag","p","prerelease","verify-tag"],
+      strings: ["discussion-category","n","notes","F","notes-file","notes-start-tag","target","t","title"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1569,6 +1623,7 @@ export default {
       name: "SC-GH-RELEASE-LIST",
       prefix: "SC-GH",
       booleans: ["exclude-drafts","exclude-pre-releases"],
+      strings: ["L","limit"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1615,6 +1670,7 @@ export default {
       name: "SC-GH-REPO-CREATE",
       prefix: "SC-GH",
       booleans: ["add-readme","c","clone","disable-issues","disable-wiki","include-all-branches","internal","private","public","push"],
+      strings: ["d","description","g","gitignore","h","homepage","l","license","r","remote","s","source","t","team","p","template"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")
@@ -1653,6 +1709,7 @@ export default {
       name: "SC-GH-REPO-LIST",
       prefix: "SC-GH",
       booleans: ["archived","fork","no-archived","source"],
+      strings: ["q","jq","json","l","language","L","limit","t","template","topic","visibility"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gh", "SC-GH")

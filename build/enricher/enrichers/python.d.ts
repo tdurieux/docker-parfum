@@ -17,7 +17,10 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
+            b: boolean;
+        } & {
             B: boolean;
         } & {
             d: boolean;
@@ -26,15 +29,19 @@ declare const _default: {
         } & {
             i: boolean;
         } & {
+            I: boolean;
+        } & {
             O: boolean;
         } & {
-            R: boolean;
+            OO: boolean;
+        } & {
+            P: boolean;
+        } & {
+            q: boolean;
         } & {
             s: boolean;
         } & {
             S: boolean;
-        } & {
-            t: boolean;
         } & {
             u: boolean;
         } & {
@@ -44,15 +51,15 @@ declare const _default: {
         } & {
             x: boolean;
         } & {
-            3: boolean;
-        } & {
             h: boolean;
         } & {
             c: string;
         } & {
             m: string;
         } & {
-            q: string;
+            W: string;
+        } & {
+            X: string;
         }>;
         fixupNonSpacedArgs?: undefined;
     } | {
@@ -62,7 +69,10 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
+            b: boolean;
+        } & {
             B: boolean;
         } & {
             d: boolean;
@@ -71,15 +81,19 @@ declare const _default: {
         } & {
             i: boolean;
         } & {
+            I: boolean;
+        } & {
             O: boolean;
         } & {
-            R: boolean;
+            OO: boolean;
+        } & {
+            P: boolean;
+        } & {
+            q: boolean;
         } & {
             s: boolean;
         } & {
             S: boolean;
-        } & {
-            t: boolean;
         } & {
             u: boolean;
         } & {
@@ -89,15 +103,15 @@ declare const _default: {
         } & {
             x: boolean;
         } & {
-            3: boolean;
-        } & {
             h: boolean;
         } & {
             c: string;
         } & {
             m: string;
         } & {
-            q: string;
+            W: string;
+        } & {
+            X: string;
         }>;
         captureAllAfter?: undefined;
         mustHave?: undefined;

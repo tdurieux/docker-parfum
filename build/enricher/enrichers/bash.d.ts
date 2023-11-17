@@ -17,6 +17,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             i: boolean;
         } & {

@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-GRADLE",
             paths: [],
             booleans: [],
+            strings: [],
             counts: [],
             argv: function () {
                 return yargs()
@@ -37,6 +38,7 @@ exports.default = {
             prefix: "SC-GRADLE",
             paths: [],
             booleans: [],
+            strings: [],
             counts: [],
             argv: function () {
                 return yargs()
@@ -60,6 +62,7 @@ exports.default = {
             prefix: "SC-GRADLE",
             paths: [],
             booleans: [],
+            strings: [],
             counts: [],
             argv: function () {
                 return yargs()
@@ -84,6 +87,7 @@ exports.default = {
             prefix: "SC-GRADLE",
             paths: [],
             booleans: [],
+            strings: [],
             counts: [],
             argv: function () {
                 return yargs()
@@ -107,6 +111,7 @@ exports.default = {
             prefix: "SC-GRADLE",
             paths: [],
             booleans: [],
+            strings: [],
             counts: [],
             argv: function () {
                 return yargs()
@@ -131,6 +136,7 @@ exports.default = {
             prefix: "SC-GRADLE",
             paths: [],
             booleans: [],
+            strings: [],
             counts: [],
             argv: function () {
                 return yargs()

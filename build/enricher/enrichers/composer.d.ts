@@ -9,6 +9,7 @@ declare const _default: {
         prefix: string;
         paths: any[];
         booleans: any[];
+        strings: any[];
         counts: any[];
         argv: () => Argv<{}>;
     }[];

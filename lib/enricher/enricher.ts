@@ -39,6 +39,7 @@ interface Scenario {
   prefix: string;
   // tags: string[];
   paths?: string[];
+  strings?: string[];
   booleans?: string[];
   counts?: string[];
 }
@@ -447,7 +448,9 @@ function matchArgumentAST(
       for (let i = 0; i < nodeStr.length; i++) {
         if (
           !scenario.booleans?.includes(nodeStr[i]) &&
-          !scenario.counts?.includes(nodeStr[i])
+          !scenario.counts?.includes(nodeStr[i]) &&
+          !scenario.strings?.includes(nodeStr[i]) &&
+          !scenario.paths?.includes(nodeStr[i])
         ) {
           continue strNode2ASTLoop;
         }
@@ -773,11 +776,11 @@ export function enrich(root: nodeType.DockerOpsNodeType) {
         const commandAST = node.command;
         if (!commandAST) return true;
 
-        const command = commandAST
-          .getElement(nodeType.BashLiteral)
-          ?.value.replace(/^\/bin\//, "");
+        let command = commandAST.getElement(nodeType.BashLiteral)?.value;
         if (!command) return true;
-
+        if (command.includes("bin/")) {
+          command = command.split("bin/")[1];
+        }
         const commandArgs = node.args.filter((e) => {
           return e.traverse(
             (e) => {

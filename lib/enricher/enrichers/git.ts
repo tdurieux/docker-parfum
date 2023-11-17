@@ -140,6 +140,7 @@ export default {
       categories: ["VERSION_CONTROL_CLONE"],
       prefix: "SC-GIT",
       booleans: ["single-branch","q","quiet","recursive","no-recurse-submodules","recurse-submodules","no-checkout"],
+      strings: ["b","branch","depth"],
       argv: () => {
         return (yargs() as Argv)
           .describe("git", "SC-GIT")
@@ -286,6 +287,7 @@ export default {
       name: "SC-GIT-DESCRIBE",
       prefix: "SC-GIT",
       booleans: ["always","tags"],
+      strings: ["match","dirty"],
       argv: () => {
         return (yargs() as Argv)
           .describe("git", "SC-GIT")
@@ -311,6 +313,7 @@ export default {
       name: "SC-GIT-COMMIT",
       prefix: "SC-GIT",
       booleans: ["allow-empty","allow-empty-message","no-edit"],
+      strings: ["m","message"],
       argv: () => {
         return (yargs() as Argv)
           .describe("git", "SC-GIT")

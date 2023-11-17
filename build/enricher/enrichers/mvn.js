@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-MVN",
             paths: ["f", "file", "l", "log-file", "s", "settings", "t", "toolchains"],
             booleans: ["am", "also-make", "amd", "also-make-dependents", "B", "batch-mode", "C", "strict-checksums", "c", "lax-checksums", "cpu", "check-plugin-updates", "e", "errors", "fae", "fail-at-end", "ff", "fail-fast", "fn", "fail-never", "h", "help", "llr", "legacy-local-repository", "N", "non-recursive", "npr", "no-plugin-registry", "npu", "no-plugin-updates", "nsu", "no-snapshot-updates", "ntp", "no-transfer-progress", "o", "offline", "q", "quiet", "U", "update-snapshots", "up", "update-plugins", "v", "version", "V", "show-version", "X", "debug"],
+            strings: ["b", "builder", "color", "D", "define", "emp", "encrypt-master-password", "ep", "encrypt-password", "gs", "global-settings", "gt", "global-toolchains", "P", "activate-profiles", "pl", "projects", "rf", "resume-from", "T", "threads"],
             argv: function () {
                 return yargs()
                     .describe("mvn,mvnw", "SC-MVN")
@@ -74,6 +75,7 @@ exports.default = {
             prefix: "SC-MVN",
             paths: ["f", "file", "l", "log-file", "s", "settings", "t", "toolchains"],
             booleans: ["am", "also-make", "amd", "also-make-dependents", "B", "batch-mode", "C", "strict-checksums", "c", "lax-checksums", "cpu", "check-plugin-updates", "e", "errors", "fae", "fail-at-end", "ff", "fail-fast", "fn", "fail-never", "h", "help", "llr", "legacy-local-repository", "N", "non-recursive", "npr", "no-plugin-registry", "npu", "no-plugin-updates", "nsu", "no-snapshot-updates", "ntp", "no-transfer-progress", "o", "offline", "q", "quiet", "U", "update-snapshots", "up", "update-plugins", "v", "version", "V", "show-version", "X", "debug"],
+            strings: ["b", "builder", "color", "D", "define", "emp", "encrypt-master-password", "ep", "encrypt-password", "gs", "global-settings", "gt", "global-toolchains", "P", "activate-profiles", "pl", "projects", "rf", "resume-from", "T", "threads"],
             argv: function () {
                 return yargs()
                     .describe("mvn,mvnw", "SC-MVN")
@@ -136,6 +138,7 @@ exports.default = {
             prefix: "SC-MVN",
             paths: ["f", "file", "l", "log-file", "s", "settings", "t", "toolchains"],
             booleans: ["am", "also-make", "amd", "also-make-dependents", "B", "batch-mode", "C", "strict-checksums", "c", "lax-checksums", "cpu", "check-plugin-updates", "e", "errors", "fae", "fail-at-end", "ff", "fail-fast", "fn", "fail-never", "h", "help", "llr", "legacy-local-repository", "N", "non-recursive", "npr", "no-plugin-registry", "npu", "no-plugin-updates", "nsu", "no-snapshot-updates", "ntp", "no-transfer-progress", "o", "offline", "q", "quiet", "U", "update-snapshots", "up", "update-plugins", "v", "version", "V", "show-version", "X", "debug"],
+            strings: ["b", "builder", "color", "D", "define", "emp", "encrypt-master-password", "ep", "encrypt-password", "gs", "global-settings", "gt", "global-toolchains", "P", "activate-profiles", "pl", "projects", "rf", "resume-from", "T", "threads"],
             argv: function () {
                 return yargs()
                     .describe("mvn,mvnw", "SC-MVN")
@@ -198,6 +201,7 @@ exports.default = {
             prefix: "SC-MVN",
             paths: ["f", "file", "l", "log-file", "s", "settings", "t", "toolchains"],
             booleans: ["am", "also-make", "amd", "also-make-dependents", "B", "batch-mode", "C", "strict-checksums", "c", "lax-checksums", "cpu", "check-plugin-updates", "e", "errors", "fae", "fail-at-end", "ff", "fail-fast", "fn", "fail-never", "h", "help", "llr", "legacy-local-repository", "N", "non-recursive", "npr", "no-plugin-registry", "npu", "no-plugin-updates", "nsu", "no-snapshot-updates", "ntp", "no-transfer-progress", "o", "offline", "q", "quiet", "U", "update-snapshots", "up", "update-plugins", "v", "version", "V", "show-version", "X", "debug"],
+            strings: ["b", "builder", "color", "D", "define", "emp", "encrypt-master-password", "ep", "encrypt-password", "gs", "global-settings", "gt", "global-toolchains", "P", "activate-profiles", "pl", "projects", "rf", "resume-from", "T", "threads"],
             argv: function () {
                 return yargs()
                     .describe("mvn,mvnw", "SC-MVN")
@@ -260,6 +264,7 @@ exports.default = {
             prefix: "SC-MVN",
             paths: ["f", "file", "l", "log-file", "s", "settings", "t", "toolchains"],
             booleans: ["am", "also-make", "amd", "also-make-dependents", "B", "batch-mode", "C", "strict-checksums", "c", "lax-checksums", "cpu", "check-plugin-updates", "e", "errors", "fae", "fail-at-end", "ff", "fail-fast", "fn", "fail-never", "h", "help", "llr", "legacy-local-repository", "N", "non-recursive", "npr", "no-plugin-registry", "npu", "no-plugin-updates", "nsu", "no-snapshot-updates", "ntp", "no-transfer-progress", "o", "offline", "q", "quiet", "U", "update-snapshots", "up", "update-plugins", "v", "version", "V", "show-version", "X", "debug"],
+            strings: ["b", "builder", "color", "D", "define", "emp", "encrypt-master-password", "ep", "encrypt-password", "gs", "global-settings", "gt", "global-toolchains", "P", "activate-profiles", "pl", "projects", "rf", "resume-from", "T", "threads"],
             argv: function () {
                 return yargs()
                     .describe("mvn,mvnw", "SC-MVN")
@@ -322,6 +327,7 @@ exports.default = {
             prefix: "SC-MVN",
             paths: ["f", "file", "l", "log-file", "s", "settings", "t", "toolchains"],
             booleans: ["am", "also-make", "amd", "also-make-dependents", "B", "batch-mode", "C", "strict-checksums", "c", "lax-checksums", "cpu", "check-plugin-updates", "e", "errors", "fae", "fail-at-end", "ff", "fail-fast", "fn", "fail-never", "h", "help", "llr", "legacy-local-repository", "N", "non-recursive", "npr", "no-plugin-registry", "npu", "no-plugin-updates", "nsu", "no-snapshot-updates", "ntp", "no-transfer-progress", "o", "offline", "q", "quiet", "U", "update-snapshots", "up", "update-plugins", "v", "version", "V", "show-version", "X", "debug"],
+            strings: ["b", "builder", "color", "D", "define", "emp", "encrypt-master-password", "ep", "encrypt-password", "gs", "global-settings", "gt", "global-toolchains", "P", "activate-profiles", "pl", "projects", "rf", "resume-from", "T", "threads"],
             argv: function () {
                 return yargs()
                     .describe("mvn,mvnw", "SC-MVN")

@@ -11,6 +11,7 @@ export default {
       name: "SC-APT-ADD-REPOSITORY",
       prefix: "SC-APT-ADD-REPOSITORY",
       booleans: ["h","help","m","massive-debug","r","remove","s","enable-source","y","yes","u","update"],
+      strings: ["k","keyserver"],
       argv: () => {
         return (yargs() as Argv)
           .describe("apt-add-repository", "SC-APT-ADD-REPOSITORY")

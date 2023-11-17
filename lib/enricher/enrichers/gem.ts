@@ -13,6 +13,7 @@ export default {
       prefix: "SC-GEM",
       paths: ["i","install-dir","n","bindir","g","file","config-file","build-root"],
       booleans: ["h","help","V","verbose","no-verbose","q","quiet","silent","backtrace","debug","norc","l","local","r","remote","b","both","clear-source","no-http-proxy","no-lock","no-suggestions","lock","suggestions","default","post-install-message","no-post-install-message","minimal-deps","conservative","development","development-all","user-install","no-user-install","ignore-dependencies","f","force","no-force","w","wrappers","no-wrappers","vendor","N","no-document","E","env-shebang","no-env-shebang","u","update-sources","no-update-sources","prerelease","no-prerelease","no-ri","no-rdoc","system"],
+      strings: ["platform","P","trust-policy","s","source","p","http-proxy"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gem", "SC-GEM")
@@ -89,6 +90,7 @@ export default {
       prefix: "SC-GEM",
       paths: ["i","install-dir","n","bindir","g","file","config-file","build-root"],
       booleans: ["h","help","V","verbose","no-verbose","q","quiet","silent","backtrace","debug","norc","l","local","r","remote","b","both","clear-source","no-http-proxy","no-lock","no-suggestions","lock","suggestions","default","post-install-message","no-post-install-message","minimal-deps","conservative","development","development-all","user-install","no-user-install","ignore-dependencies","f","force","no-force","w","wrappers","no-wrappers","vendor","N","no-document","E","env-shebang","no-env-shebang","u","update-sources","no-update-sources","prerelease","no-prerelease","no-ri","no-rdoc","system"],
+      strings: ["platform","P","trust-policy","s","source","p","http-proxy"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gem", "SC-GEM")

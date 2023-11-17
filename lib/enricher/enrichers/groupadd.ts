@@ -12,6 +12,7 @@ export default {
       prefix: "SC-GROUP-ADD",
       paths: ["R","root"],
       booleans: ["f","force","h","help","o","non-unique","r","system"],
+      strings: ["g","gid"],
       argv: () => {
         return (yargs() as Argv)
           .describe("groupadd", "SC-GROUP-ADD")

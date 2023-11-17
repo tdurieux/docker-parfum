@@ -13,6 +13,7 @@ export default {
       prefix: "SC-GRADLE",
       paths: [],
       booleans: [],
+      strings: [],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -37,6 +38,7 @@ export default {
       prefix: "SC-GRADLE",
       paths: [],
       booleans: [],
+      strings: [],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -60,6 +62,7 @@ export default {
       prefix: "SC-GRADLE",
       paths: [],
       booleans: [],
+      strings: [],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -84,6 +87,7 @@ export default {
       prefix: "SC-GRADLE",
       paths: [],
       booleans: [],
+      strings: [],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -107,6 +111,7 @@ export default {
       prefix: "SC-GRADLE",
       paths: [],
       booleans: [],
+      strings: [],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -131,6 +136,7 @@ export default {
       prefix: "SC-GRADLE",
       paths: [],
       booleans: [],
+      strings: [],
       counts: [],
       argv: () => {
         return (yargs() as Argv)

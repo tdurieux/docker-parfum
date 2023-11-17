@@ -11,6 +11,7 @@ export default {
       name: "SC-DPKG-ARCHITECTURE",
       prefix: "SC-DPKG-ARCHITECTURE",
       booleans: ["l","list","L","list-known","s","print-set","u","print-unset","?","help","version","f","force"],
+      strings: ["i","is","q","query","c","command","a","host-arch","t","host-type","A","target-arch","T","target-type","W","match-wildcard","B","match-bits","E","match-endian"],
       argv: () => {
         return (yargs() as Argv)
           .describe("dpkg-architecture", "SC-DPKG-ARCHITECTURE")

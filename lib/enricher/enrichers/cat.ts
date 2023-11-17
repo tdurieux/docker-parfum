@@ -11,6 +11,7 @@ export default {
       name: "SC-CAT",
       prefix: "SC-CAT",
       booleans: ["e","s","t","u","v"],
+      strings: ["b","n","l"],
       argv: () => {
         return (yargs() as Argv)
           .describe("cat", "SC-CAT")

@@ -250,4 +250,17 @@ fi`);
     const r = enrich(root);
     expect(r.find(nodeType.Q("SC-GIT-CLONE"))).toHaveLength(1);
   });
+  test("command in bin", () => {
+    const root =
+      parseShell(`cd /home/runner/work/brian2/brian2/.. # move out of the workspace to avoid direct import
+    /opt/hostedtoolcache/Python/3.12.0/×64/bin/python -Wd /home/runner/work/brian2/brian2/dev/continuous-integration/run_test_suite.py`);
+    const r = enrich(root);
+    expect(r.find(nodeType.Q("SC-PYTHON"))).toHaveLength(1);
+  });
+  test("tar", () => {
+    const root =
+      parseShell(`tar -xzf /tmp/ghidra_9.2.2_PUBLIC_20201229.zip -C /opt`);
+    const r = enrich(root);
+    expect(r.find(nodeType.Q("SC-TAR-EXTRACT"))).toHaveLength(1);
+  });
 });

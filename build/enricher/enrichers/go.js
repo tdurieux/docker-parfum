@@ -15,6 +15,7 @@ exports.default = {
             prefix: "SC-GO",
             paths: ["o"],
             booleans: ["i", "a", "n", "race", "msan", "v", "work", "x", "linkshared", "c", "d", "f", "t", "u", "v", "fix", "insecure"],
+            strings: ["asmflags", "buildmode", "compiler", "gccgoflags", "gcflags", "installsuffix", "ldflags", "mod", "pkgdir", "tags", "toolexec", "exec"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -142,6 +143,7 @@ exports.default = {
             prefix: "SC-GO",
             paths: ["o"],
             booleans: ["i", "a", "n", "race", "msan", "v", "work", "x", "linkshared", "c"],
+            strings: ["asmflags", "buildmode", "compiler", "gccgoflags", "gcflags", "installsuffix", "ldflags", "mod", "pkgdir", "tags", "toolexec", "exec"],
             argv: function () {
                 return yargs()
                     .describe("go", "SC-GO")
@@ -191,6 +193,7 @@ exports.default = {
             prefix: "SC-GO",
             paths: ["o"],
             booleans: ["i", "a", "n", "race", "msan", "v", "work", "x", "linkshared", "c"],
+            strings: ["asmflags", "buildmode", "compiler", "gccgoflags", "gcflags", "installsuffix", "ldflags", "mod", "pkgdir", "tags", "toolexec", "exec"],
             argv: function () {
                 return yargs()
                     .describe("go", "SC-GO")
@@ -263,6 +266,7 @@ exports.default = {
             prefix: "SC-GO",
             paths: ["o"],
             booleans: ["i", "a", "n", "race", "msan", "v", "work", "x", "linkshared", "c"],
+            strings: ["asmflags", "buildmode", "compiler", "gccgoflags", "gcflags", "installsuffix", "ldflags", "mod", "pkgdir", "tags", "toolexec", "exec"],
             argv: function () {
                 return yargs()
                     .describe("go", "SC-GO")

@@ -15,6 +15,7 @@ export default {
       prefix: "SC-BASH",
       paths: ["init-file","rcfile"],
       booleans: ["i","L","login","r","s","D","noediting","noprofile","norc","posix","restricted","v","verbose","version","rpm-requires","debugger","dump-po-strings","dump-strings","help"],
+      strings: ["c"],
       argv: () => {
         return (yargs() as Argv)
           .describe("bash", "SC-BASH")

@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-CHOWN",
             paths: ["reference"],
             booleans: ["c", "changes", "f", "silent", "f", "quiet", "v", "verbose", "dereference", "h", "no-dereference", "no-preserve-root", "preserve-root", "R", "recursive", "H", "L", "P", "help", "version"],
+            strings: ["from"],
             argv: function () {
                 return yargs()
                     .describe("chown", "SC-CHOWN")
@@ -51,6 +52,7 @@ exports.default = {
             prefix: "SC-CHOWN",
             paths: ["reference"],
             booleans: ["c", "changes", "f", "silent", "f", "quiet", "v", "verbose", "dereference", "h", "no-dereference", "no-preserve-root", "preserve-root", "R", "recursive", "H", "L", "P", "help", "version"],
+            strings: ["from"],
             argv: function () {
                 return yargs()
                     .describe("chown", "SC-CHOWN")

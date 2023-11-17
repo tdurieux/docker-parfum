@@ -9,6 +9,7 @@ declare const _default: {
         name: string;
         categories: string[];
         prefix: string;
+        strings: string[];
         argv: () => Argv<{
             j: string;
         }>;

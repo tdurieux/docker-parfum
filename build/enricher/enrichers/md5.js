@@ -11,6 +11,7 @@ exports.default = {
             name: "SC-MD5",
             prefix: "SC-MD5",
             booleans: ["p", "q", "r", "t", "x"],
+            strings: ["s"],
             argv: function () {
                 return yargs()
                     .describe("md5", "SC-MD5")

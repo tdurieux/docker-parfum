@@ -10,6 +10,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             P: boolean;
         } & {
@@ -73,6 +74,28 @@ declare const _default: {
         argv: () => Argv<{}>;
         paths?: undefined;
         booleans?: undefined;
+        strings?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        categories: string[];
+        prefix: string;
+        booleans: string[];
+        strings: string[];
+        argv: () => Argv<{
+            "dry-run": boolean;
+        } & {
+            "include-workspace-root": boolean;
+        } & {
+            tag: string;
+        } & {
+            access: string;
+        } & {
+            otp: string;
+        } & {
+            w: string;
+        }>;
+        paths?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -83,6 +106,7 @@ declare const _default: {
         }>;
         categories?: undefined;
         paths?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -91,6 +115,7 @@ declare const _default: {
         categories?: undefined;
         paths?: undefined;
         booleans?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -105,6 +130,7 @@ declare const _default: {
             "dry-run": boolean;
         }>;
         paths?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -117,6 +143,7 @@ declare const _default: {
         }>;
         categories?: undefined;
         paths?: undefined;
+        strings?: undefined;
     })[];
 };
 export default _default;

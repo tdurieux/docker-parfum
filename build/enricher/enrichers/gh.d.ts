@@ -11,11 +11,13 @@ declare const _default: {
         argv: () => Argv<{
             help: boolean;
         }>;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             "insecure-storage": boolean;
         } & {
@@ -33,6 +35,7 @@ declare const _default: {
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => Argv<{
             h: string;
         }>;
@@ -42,6 +45,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             "insecure-storage": boolean;
         } & {
@@ -58,6 +62,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             t: boolean;
         } & {
@@ -68,6 +73,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             n: boolean;
         } & {
@@ -90,6 +96,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             insiders: boolean;
         } & {
@@ -106,6 +113,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             e: boolean;
         } & {
@@ -124,6 +132,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             "default-permissions": boolean;
         } & {
@@ -152,6 +161,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             w: boolean;
         } & {
@@ -174,6 +184,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             f: boolean;
         } & {
@@ -188,6 +199,22 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
+        argv: () => Argv<{
+            help: boolean;
+        } & {
+            c: string;
+        } & {
+            R: string;
+        } & {
+            "repo-owner": string;
+        }>;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             full: boolean;
         } & {
@@ -202,6 +229,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             config: boolean;
         } & {
@@ -224,6 +252,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             p: boolean;
         } & {
@@ -237,6 +266,7 @@ declare const _default: {
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => Argv<{
             a: string;
         } & {
@@ -252,6 +282,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             public: boolean;
         } & {
@@ -264,6 +295,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             files: boolean;
         } & {
@@ -277,6 +309,7 @@ declare const _default: {
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => Argv<{
             R: string;
         }>;
@@ -286,6 +319,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             w: boolean;
         } & {
@@ -312,6 +346,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             w: boolean;
         } & {
@@ -343,6 +378,7 @@ declare const _default: {
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => Argv<{
             q: string;
         } & {
@@ -355,6 +391,7 @@ declare const _default: {
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => Argv<{
             L: string;
         }>;
@@ -364,6 +401,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             d: boolean;
         } & {
@@ -398,6 +436,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             c: boolean;
         } & {
@@ -412,6 +451,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             undo: boolean;
         } & {
@@ -424,6 +464,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             drafts: boolean;
         } & {
@@ -439,6 +480,7 @@ declare const _default: {
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => Argv<{
             format: string;
         } & {
@@ -449,6 +491,7 @@ declare const _default: {
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => Argv<{
             format: string;
         } & {
@@ -460,6 +503,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             clear: boolean;
         } & {
@@ -490,6 +534,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             w: boolean;
         } & {
@@ -502,6 +547,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             d: boolean;
         } & {
@@ -532,6 +578,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             "exclude-drafts": boolean;
         } & {
@@ -544,6 +591,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             "add-readme": boolean;
         } & {
@@ -584,6 +632,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             archived: boolean;
         } & {

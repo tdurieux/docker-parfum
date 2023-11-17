@@ -11,6 +11,7 @@ export default {
       name: "SC-NPROC",
       prefix: "SC-NPROC",
       booleans: ["all","help","version"],
+      strings: ["ignore"],
       argv: () => {
         return (yargs() as Argv)
           .describe("nproc", "SC-NPROC")

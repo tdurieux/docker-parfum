@@ -12,6 +12,7 @@ export default {
       name: "SC-MKDIR",
       prefix: "SC-MKDIR",
       booleans: ["p","parents","v","verbose","Z","help","version"],
+      strings: ["m","mode","context"],
       argv: () => {
         return (yargs() as Argv)
           .describe("mkdir", "SC-MKDIR")

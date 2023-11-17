@@ -13,6 +13,7 @@ export default {
       name: "SC-DOCKER-RUN",
       prefix: "SC-DOCKER",
       booleans: ["d","detach","disable-content-trust","help","init","i","interactive","no-healthcheck","oom-kill-disable","privileged","P","publish-all","q","quiet","read-only","rm","sig-proxy","t","tty"],
+      strings: ["add-host","annotation","a","attach","blkio-weight","blkio-weight-device","cap-add","cap-drop","cgroup-parent","cgroupns","cidfile","cpu-count","cpu-percent","cpu-period","cpu-quota","cpu-rt-period","cpu-rt-runtime","c","cpu-shares","cpus","cpuset-cpus","cpuset-mems","detach-keys","device","device-cgroup-rule","device-read-bps","device-read-iops","device-write-bps","device-write-iops","dns","dns-option","dns-search","domainname","entrypoint","e","env","env-file","expose","gpus","group-add","health-cmd","health-interval","health-retries","health-start-period","health-timeout","h","hostname","io-maxbandwidth","io-maxiops","ip","ip6","ipc","isolation","kernel-memory","l","label","label-file","link","link-local-ip","log-driver","log-opt","mac-address","m","memory","memory-reservation","memory-swap","memory-swappiness","mount","name","network","network-alias","oom-score-adj","pid","pids-limit","platform","p","publish","pull","restart","runtime","security-opt","shm-size","stop-signal","stop-timeout","storage-opt","sysctl","tmpfs","ulimit","u","user","userns","uts","v","volume","volume-driver","volumes-from","w","workdir"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -138,6 +139,7 @@ export default {
       name: "SC-DOCKER-EXEC",
       prefix: "SC-DOCKER",
       booleans: ["d","detach","i","interactive","privileged","t","tty"],
+      strings: ["detach-keys","e","env","env-file","u","user","w","workdir"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -168,6 +170,7 @@ export default {
       name: "SC-DOCKER-PS",
       prefix: "SC-DOCKER",
       booleans: ["a","all","l","latest","no-trunc","q","quiet","s","size"],
+      strings: ["f","filter","format","n","last"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -197,6 +200,7 @@ export default {
       name: "SC-DOCKER-BUILD",
       prefix: "SC-DOCKER",
       booleans: ["load","no-cache","pull","push","q","quiet"],
+      strings: ["add-host","allow","attest","build-arg","build-context","builder","cache-from","cache-to","cgroup-parent","f","file","iidfile","label","metadata-file","network","no-cache-filter","o","output","platform","progress","provenance","sbom","secret","shm-size","ssh","t","tag","target","ulimit"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -249,6 +253,7 @@ export default {
       name: "SC-DOCKER-PULL",
       prefix: "SC-DOCKER",
       booleans: ["a","all-tags","disable-content-trust","q","quiet"],
+      strings: ["platform"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -298,6 +303,7 @@ export default {
       name: "SC-DOCKER-IMAGES",
       prefix: "SC-DOCKER",
       booleans: ["a","all","digests","no-trunc","q","quiet"],
+      strings: ["f","filter","format"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -325,6 +331,7 @@ export default {
       name: "SC-DOCKER-LOGIN",
       prefix: "SC-DOCKER",
       booleans: ["h","help","password-stdin"],
+      strings: ["p","password","u","username"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -350,6 +357,7 @@ export default {
       name: "SC-DOCKER-LOGIN-AZURE",
       prefix: "SC-DOCKER",
       booleans: ["h","help"],
+      strings: ["client-id","client-secret","cloud-name","tenant-id"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -420,6 +428,7 @@ export default {
       name: "SC-DOCKER-SEARCH",
       prefix: "SC-DOCKER",
       booleans: ["no-trunc"],
+      strings: ["f","filter","format","limit"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -445,6 +454,7 @@ export default {
       name: "SC-DOCKER-VERSION",
       prefix: "SC-DOCKER",
       booleans: ["h","help"],
+      strings: ["f","format","kubeconfig"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")
@@ -468,6 +478,7 @@ export default {
       cmd: "$0 info",
       name: "SC-DOCKER-INFO",
       prefix: "SC-DOCKER",
+      strings: ["f","format"],
       argv: () => {
         return (yargs() as Argv)
           .describe("docker", "SC-DOCKER")

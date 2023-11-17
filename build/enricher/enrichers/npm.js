@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-NPM",
             paths: ["nodedir"],
             booleans: ["P", "save-prod", "D", "save-dev", "O", "save-optional", "no-save", "E", "save-exact", "B", "save-bundle", "dry-run", "package-lock-only", "f", "force", "g", "global", "global-style", "ignore-scripts", "legacy-bundling", "link", "no-bin-links", "no-optional", "no-shrinkwrap", "no-package-lock", "no-audit", "no-color", "save", "production", "unsafe-perm"],
+            strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
                     .describe("npm", "SC-NPM")
@@ -63,6 +64,7 @@ exports.default = {
             prefix: "SC-NPM",
             paths: ["nodedir"],
             booleans: ["P", "save-prod", "D", "save-dev", "O", "save-optional", "no-save", "E", "save-exact", "B", "save-bundle", "dry-run", "package-lock-only", "f", "force", "g", "global", "global-style", "ignore-scripts", "legacy-bundling", "link", "no-bin-links", "no-optional", "no-shrinkwrap", "no-package-lock", "no-audit", "no-color", "save", "production", "unsafe-perm"],
+            strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
                     .describe("npm", "SC-NPM")
@@ -113,6 +115,7 @@ exports.default = {
             prefix: "SC-NPM",
             paths: ["nodedir"],
             booleans: ["P", "save-prod", "D", "save-dev", "O", "save-optional", "no-save", "E", "save-exact", "B", "save-bundle", "dry-run", "package-lock-only", "f", "force", "g", "global", "global-style", "ignore-scripts", "legacy-bundling", "link", "no-bin-links", "no-optional", "no-shrinkwrap", "no-package-lock", "no-audit", "no-color", "save", "production", "unsafe-perm"],
+            strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
                     .describe("npm", "SC-NPM")
@@ -163,6 +166,7 @@ exports.default = {
             prefix: "SC-NPM",
             paths: ["nodedir"],
             booleans: ["P", "save-prod", "D", "save-dev", "O", "save-optional", "no-save", "E", "save-exact", "B", "save-bundle", "dry-run", "package-lock-only", "f", "force", "g", "global", "global-style", "ignore-scripts", "legacy-bundling", "link", "no-bin-links", "no-optional", "no-shrinkwrap", "no-package-lock", "no-audit", "no-color", "save", "production", "unsafe-perm"],
+            strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
                     .describe("npm", "SC-NPM")
@@ -213,6 +217,7 @@ exports.default = {
             prefix: "SC-NPM",
             paths: ["nodedir"],
             booleans: ["P", "save-prod", "D", "save-dev", "O", "save-optional", "no-save", "E", "save-exact", "B", "save-bundle", "dry-run", "package-lock-only", "f", "force", "g", "global", "global-style", "ignore-scripts", "legacy-bundling", "link", "no-bin-links", "no-optional", "no-shrinkwrap", "no-package-lock", "no-audit", "no-color", "save", "production", "unsafe-perm"],
+            strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
                     .describe("npm", "SC-NPM")
@@ -263,6 +268,7 @@ exports.default = {
             prefix: "SC-NPM",
             paths: ["nodedir"],
             booleans: ["P", "save-prod", "D", "save-dev", "O", "save-optional", "no-save", "E", "save-exact", "B", "save-bundle", "dry-run", "package-lock-only", "f", "force", "g", "global", "global-style", "ignore-scripts", "legacy-bundling", "link", "no-bin-links", "no-optional", "no-shrinkwrap", "no-package-lock", "no-audit", "no-color", "save", "production", "unsafe-perm"],
+            strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
                     .describe("npm", "SC-NPM")
@@ -325,6 +331,56 @@ exports.default = {
                     "parse-numbers": false,
                 })
                     .command("$0 build [folder]", "SC-NPM-BUILD");
+            }
+        },
+        {
+            cmd: "$0 audit [type]",
+            name: "SC-NPM-AUDIT",
+            categories: ["AUDIT_PACKAGES"],
+            prefix: "SC-NPM",
+            argv: function () {
+                return yargs()
+                    .describe("npm", "SC-NPM")
+                    .help(false)
+                    .version(false)
+                    .exitProcess(false)
+                    .showHelpOnFail(false)
+                    .parserConfiguration({
+                    "short-option-groups": true,
+                    "boolean-negation": false,
+                    "camel-case-expansion": false,
+                    "parse-numbers": false,
+                })
+                    .command("$0 audit [type]", "SC-NPM-AUDIT");
+            }
+        },
+        {
+            cmd: "$0 publish [package-spec]",
+            name: "SC-NPM-PUBLISH",
+            categories: ["DEPLOY_PACKAGES"],
+            prefix: "SC-NPM",
+            booleans: ["dry-run", "include-workspace-root"],
+            strings: ["tag", "access", "otp", "w", "workspace"],
+            argv: function () {
+                return yargs()
+                    .describe("npm", "SC-NPM")
+                    .help(false)
+                    .version(false)
+                    .exitProcess(false)
+                    .showHelpOnFail(false)
+                    .parserConfiguration({
+                    "short-option-groups": true,
+                    "boolean-negation": false,
+                    "camel-case-expansion": false,
+                    "parse-numbers": false,
+                })
+                    .command("$0 publish [package-spec]", "SC-NPM-PUBLISH")
+                    .option("dry-run", { "type": "boolean" })
+                    .option("include-workspace-root", { "type": "boolean" })
+                    .option("tag", { "type": "string" })
+                    .option("access", { "type": "string" })
+                    .option("otp", { "type": "string" })
+                    .option("w", { "alias": "workspace", "type": "string" });
             }
         },
         {

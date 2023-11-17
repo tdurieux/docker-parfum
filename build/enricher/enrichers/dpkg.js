@@ -12,6 +12,7 @@ exports.default = {
             name: "SC-DPKG",
             prefix: "SC-DPKG",
             booleans: ["L", "list-files", "print-architecture"],
+            strings: ["add-architecture", "x", "extract", "X", "vextract"],
             argv: function () {
                 return yargs()
                     .describe("dpkg", "SC-DPKG")
@@ -40,6 +41,7 @@ exports.default = {
             name: "SC-DPKG",
             prefix: "SC-DPKG",
             booleans: ["L", "list-files", "print-architecture"],
+            strings: ["add-architecture", "x", "extract", "X", "vextract"],
             argv: function () {
                 return yargs()
                     .describe("dpkg", "SC-DPKG")
@@ -67,6 +69,7 @@ exports.default = {
             name: "SC-DPKG",
             prefix: "SC-DPKG",
             booleans: ["L", "list-files", "print-architecture"],
+            strings: ["add-architecture", "x", "extract", "X", "vextract"],
             argv: function () {
                 return yargs()
                     .describe("dpkg", "SC-DPKG")

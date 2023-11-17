@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes", "d", "download-only", "no-download", "upgrade", "only-upgrade", "just-print", "dry-run", "recon", "no-act", "assume-yes", "u", "show-upgraded", "V", "verbose-version", "b", "compile", "build", "ignore-hold", "no-upgrade", "no-install-suggests", "install-suggests", "print-uris", "reinstall", "list-cleanup", "trivial-only", "no-remove", "only-source"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -80,6 +81,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -125,6 +127,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -169,6 +172,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -213,6 +217,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -257,6 +262,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -301,6 +307,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -345,6 +352,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -389,6 +397,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -434,6 +443,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -479,6 +489,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()
@@ -524,6 +535,7 @@ exports.default = {
             prefix: "SC-APT",
             paths: ["C", "config"],
             booleans: ["y", "yes", "f", "fix-broken", "m", "ignore-missing", "fix-missing", "allow-unauthenticated", "allow-downgrades", "allow-remove-essential", "allow-change-held-packages", "s", "simulate", "u", "show-upgraded", "no-install-recommends", "h", "help", "v", "version", "purge", "auto-remove", "autoremove", "force-yes", "assume-yes"],
+            strings: ["o", "option"],
             counts: ["q", "quiet"],
             argv: function () {
                 return yargs()

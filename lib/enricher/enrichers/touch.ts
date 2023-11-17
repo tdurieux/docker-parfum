@@ -11,6 +11,7 @@ export default {
       name: "SC-TOUCH",
       prefix: "SC-TOUCH",
       booleans: ["a","c","h","m"],
+      strings: ["A","d","t","r"],
       argv: () => {
         return (yargs() as Argv)
           .describe("touch", "SC-TOUCH")

@@ -12,6 +12,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             d: boolean;
         } & {
@@ -36,6 +37,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             a: boolean;
         } & {
@@ -60,6 +62,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             load: boolean;
         } & {
@@ -130,6 +133,23 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
+        argv: () => Argv<{
+            a: boolean;
+        } & {
+            "disable-content-trust": boolean;
+        } & {
+            q: boolean;
+        } & {
+            platform: string;
+        }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        booleans: string[];
         argv: () => Argv<{
             a: boolean;
         } & {
@@ -139,11 +159,13 @@ declare const _default: {
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             a: boolean;
         } & {
@@ -164,8 +186,15 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             h: boolean;
+        } & {
+            "password-stdin": boolean;
+        } & {
+            p: string;
+        } & {
+            u: string;
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
@@ -174,6 +203,37 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
+        argv: () => Argv<{
+            h: boolean;
+        } & {
+            "client-id": string;
+        } & {
+            "client-secret": string;
+        } & {
+            "cloud-name": string;
+        } & {
+            "tenant-id": string;
+        }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        booleans: string[];
+        argv: () => Argv<{
+            h: boolean;
+        }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
+        strings?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             "no-trunc": boolean;
         } & {
@@ -189,6 +249,22 @@ declare const _default: {
         cmd: string;
         name: string;
         prefix: string;
+        booleans: string[];
+        strings: string[];
+        argv: () => Argv<{
+            h: boolean;
+        } & {
+            f: string;
+        } & {
+            kubeconfig: string;
+        }>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        strings: string[];
         argv: () => Argv<{
             f: string;
         }>;

@@ -10,6 +10,7 @@ declare const _default: {
         prefix: string;
         paths: any[];
         booleans: any[];
+        strings: any[];
         counts: any[];
         argv: () => Argv<{}>;
     } | {
@@ -18,6 +19,7 @@ declare const _default: {
         prefix: string;
         paths: any[];
         booleans: any[];
+        strings: any[];
         counts: any[];
         argv: () => Argv<{}>;
         categories?: undefined;

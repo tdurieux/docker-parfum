@@ -12,6 +12,7 @@ export default {
       categories: ["INSTALL_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
+      strings: ["setopt"],
       argv: () => {
         return (yargs() as Argv)
           .describe("dnf", "SC-DNF")
@@ -38,6 +39,7 @@ export default {
       categories: ["INSTALL_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
+      strings: ["setopt"],
       argv: () => {
         return (yargs() as Argv)
           .describe("dnf", "SC-DNF")
@@ -63,6 +65,7 @@ export default {
       name: "SC-DNF-CLEAN-ALL",
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
+      strings: ["setopt"],
       argv: () => {
         return (yargs() as Argv)
           .describe("dnf", "SC-DNF")
@@ -89,6 +92,7 @@ export default {
       categories: ["UPDATE_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
+      strings: ["setopt"],
       argv: () => {
         return (yargs() as Argv)
           .describe("dnf", "SC-DNF")
@@ -115,6 +119,7 @@ export default {
       categories: ["UPGRADE_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
+      strings: ["setopt"],
       argv: () => {
         return (yargs() as Argv)
           .describe("dnf", "SC-DNF")
@@ -140,6 +145,7 @@ export default {
       name: "SC-DNF-CHECK-UPDATE",
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
+      strings: ["setopt"],
       argv: () => {
         return (yargs() as Argv)
           .describe("dnf", "SC-DNF")
@@ -165,6 +171,7 @@ export default {
       name: "SC-DNF-AUTO-REMOVE",
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
+      strings: ["setopt"],
       argv: () => {
         return (yargs() as Argv)
           .describe("dnf", "SC-DNF")
@@ -191,6 +198,7 @@ export default {
       categories: ["BUILD_PACKAGES"],
       prefix: "SC-DNF",
       booleans: ["y","assumeyes","q","quiet","nogpgcheck"],
+      strings: ["setopt"],
       argv: () => {
         return (yargs() as Argv)
           .describe("dnf", "SC-DNF")

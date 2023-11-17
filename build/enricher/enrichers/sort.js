@@ -11,6 +11,7 @@ exports.default = {
             name: "SC-SORT",
             prefix: "SC-SORT",
             booleans: ["c", "check", "m", "merge", "u", "unique", "s", "version", "help", "b", "ignore-leading-blanks", "d", "dictionary-order", "f", "ignore-case", "g", "general-numeric-sort", "h", "human-numeric-sort", "i", "ignore-nonprinting", "M", "month-sort", "n", "numeric-sort", "R", "random-sort", "r", "reverse", "V", "version-sort", "b", "ignore-leading-blanks", "z", "zero-terminated", "debug", "parallel", "radixsort", "mergesort", "qsort", "heapsort", "mmap"],
+            strings: ["o", "output", "S", "buffer-size", "t", "field-separator", "T", "temporary-directory", "k", "key", "sort", "files0-from=filename", "batch-size", "compress-program", "random-source"],
             argv: function () {
                 return yargs()
                     .describe("sort", "SC-SORT")

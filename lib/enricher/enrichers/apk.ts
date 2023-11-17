@@ -13,6 +13,7 @@ export default {
       prefix: "SC-APK",
       paths: [],
       booleans: ["print-arch","no-cache","force","u","update","U","update-cache","q","quiet","no-progress","no-network","initdb","allow-untrusted","upgrade"],
+      strings: ["p","t","virtual"],
       counts: ["v","verbose"],
       argv: () => {
         return (yargs() as Argv)
@@ -52,6 +53,7 @@ export default {
       prefix: "SC-APK",
       paths: [],
       booleans: ["print-arch","no-cache","force","u","update","U","update-cache","q","quiet","no-progress","no-network","purge"],
+      strings: [],
       counts: ["v","verbose"],
       argv: () => {
         return (yargs() as Argv)
@@ -149,6 +151,7 @@ export default {
       prefix: "SC-APK",
       paths: [],
       booleans: ["print-arch","no-cache","force","u","update","U","update-cache","q","quiet","no-progress","installed"],
+      strings: [],
       counts: ["v","verbose"],
       argv: () => {
         return (yargs() as Argv)

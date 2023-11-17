@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-PIP",
             paths: ["log", "cert", "client-cert", "cache-dir", "c", "constraint", "r", "requirements", "b", "build", "t", "target", "d", "download", "src", "root", "prefix"],
             booleans: ["h", "help", "isolated", "v", "verbose", "V", "version", "q", "quiet", "no-cache-dir", "disable-pip-version-check", "U", "upgrade", "force-reinstall", "I", "ignore-installed", "ignore-requires-python", "no-deps", "user", "system", "egg", "compile", "no-compile", "no-use-wheel", "pre", "no-clean", "require-hashes", "no-index", "process-dependency-links"],
+            strings: ["proxy", "retries", "timeout", "exists-action", "trusted-host", "i", "index-url", "e", "editable", "upgrade-strategy", "no-binary", "only-binary", "f", "find-links"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -86,6 +87,7 @@ exports.default = {
             prefix: "SC-PIP",
             paths: ["log", "cert", "client-cert", "cache-dir", "r", "requirements"],
             booleans: ["h", "help", "isolated", "v", "verbose", "V", "version", "q", "quiet", "no-cache-dir", "disable-pip-version-check", "y", "yes"],
+            strings: ["proxy", "retries", "timeout", "exists-action", "trusted-host"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -127,6 +129,7 @@ exports.default = {
             prefix: "SC-PIP",
             paths: ["log", "cert", "client-cert", "cache-dir"],
             booleans: ["h", "help", "isolated", "v", "verbose", "V", "version", "q", "quiet", "no-cache-dir", "disable-pip-version-check"],
+            strings: ["proxy", "retries", "timeout", "exists-action", "trusted-host"],
             argv: function () {
                 return yargs()
                     .describe("pip,pip2,pip3", "SC-PIP")
@@ -165,6 +168,7 @@ exports.default = {
             prefix: "SC-PIP",
             paths: ["log", "cert", "client-cert", "cache-dir"],
             booleans: ["h", "help", "isolated", "v", "verbose", "V", "version", "q", "quiet", "no-cache-dir", "disable-pip-version-check"],
+            strings: ["proxy", "retries", "timeout", "exists-action", "trusted-host"],
             argv: function () {
                 return yargs()
                     .describe("pip,pip2,pip3", "SC-PIP")

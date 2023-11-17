@@ -12,6 +12,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<import("yargs").Omit<{
             i: boolean;
@@ -87,6 +88,7 @@ declare const _default: {
         }>;
         categories?: undefined;
         paths?: undefined;
+        strings?: undefined;
         counts?: undefined;
         captureAllAfter?: undefined;
     } | {
@@ -103,6 +105,7 @@ declare const _default: {
         }>;
         categories?: undefined;
         paths?: undefined;
+        strings?: undefined;
         counts?: undefined;
         captureAllAfter?: undefined;
     } | {
@@ -115,6 +118,7 @@ declare const _default: {
         categories?: undefined;
         paths?: undefined;
         booleans?: undefined;
+        strings?: undefined;
         counts?: undefined;
         captureAllAfter?: undefined;
     } | {
@@ -126,6 +130,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             i: boolean;
         } & {
@@ -188,6 +193,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             i: boolean;
         } & {
@@ -248,6 +254,7 @@ declare const _default: {
         }>;
         categories?: undefined;
         paths?: undefined;
+        strings?: undefined;
         counts?: undefined;
         captureAllAfter?: undefined;
     } | {
@@ -262,6 +269,7 @@ declare const _default: {
             json: boolean;
         }>;
         paths?: undefined;
+        strings?: undefined;
         counts?: undefined;
         captureAllAfter?: undefined;
     })[];

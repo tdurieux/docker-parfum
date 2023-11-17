@@ -6,13 +6,12 @@ command:
     - FILE_SYSTEM
   prefix: SC-TAR
   options: &options
-    boolean:
+    booleans:
       - -x, --extract
       - -z, --gzip
       - -c, --create
       - -A, --catenate
       - -A, --concatenate
-      - -c, --create
       - -t, --list
       - -d, --diff
       - -d, --compare
@@ -123,11 +122,24 @@ command:
       - -C, --directory
     arrays:
       - -T, --files-from
+  postProcess: &postProcess
+    - tagLastElement:
+        source: args
+        tag: SC-TAR-FILE
   scenarios:
     - cmd: $0 [args...]
       options: *options
+      name: SC-TAR-EXTRACT
+      mustHave:
+        - -x
+      postProcess: *postProcess
+    - cmd: $0 [args...]
+      options: *options
+      name: SC-TAR-COMPRESS
+      mustHave:
+        - -c
+      postProcess: *postProcess
+    - cmd: $0 [args...]
+      options: *options
       name: SC-TAR
-      postProcess:
-        - tagLastElement:
-            source: args
-            tag: SC-TAR-FILE
+      postProcess: *postProcess

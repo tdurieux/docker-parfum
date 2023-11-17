@@ -12,6 +12,7 @@ exports.default = {
             prefix: "SC-CURL",
             paths: ["o", "output"],
             booleans: ["version", "f", "fail", "s", "silent", "l", "list-only", "N", "no-buffer", "v", "verbose", "S", "show-error", "L", "location", "compressed", "j", "junk-session-cookies", "k", "insecure", "progress", "progress-bar", "create-dirs", "O", "remote-name"],
+            strings: ["retry", "url"],
             argv: function () {
                 return yargs()
                     .describe("curl", "SC-CURL")

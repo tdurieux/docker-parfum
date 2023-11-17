@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -49,6 +50,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -85,6 +87,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -121,6 +124,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -157,6 +161,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -193,6 +198,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -229,6 +235,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -265,6 +272,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -301,6 +309,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -337,6 +346,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -373,6 +383,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -410,6 +421,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -446,6 +458,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -482,6 +495,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -518,6 +532,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -554,6 +569,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -590,6 +606,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -626,6 +643,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -662,6 +680,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -698,6 +717,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -734,6 +754,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -770,6 +791,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -806,6 +828,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -842,6 +865,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -878,6 +902,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -914,6 +939,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -950,6 +976,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -987,6 +1014,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1023,6 +1051,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1059,6 +1088,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1095,6 +1125,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1131,6 +1162,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1167,6 +1199,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1203,6 +1236,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1239,6 +1273,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1275,6 +1310,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1311,6 +1347,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1347,6 +1384,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1383,6 +1421,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1419,6 +1458,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1455,6 +1495,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1491,6 +1532,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1527,6 +1569,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1563,6 +1606,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1599,6 +1643,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1635,6 +1680,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1671,6 +1717,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1707,6 +1754,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1743,6 +1791,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1780,6 +1829,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1816,6 +1866,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1852,6 +1903,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1888,6 +1940,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1924,6 +1977,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1961,6 +2015,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -1997,6 +2052,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -2034,6 +2090,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()
@@ -2071,6 +2128,7 @@ exports.default = {
             prefix: "SC-PECL",
             paths: ["c"],
             booleans: ["q", "G", "S", "s", "v", "h", "?"],
+            strings: ["d", "D", "y"],
             counts: ["v"],
             argv: function () {
                 return yargs()

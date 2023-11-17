@@ -12,6 +12,7 @@ exports.default = {
             name: "SC-DPHP-EXT-INSTALL",
             categories: ["INSTALL_PACKAGES"],
             prefix: "SC-DPHP-EXT-INSTALL",
+            strings: ["j"],
             argv: function () {
                 return yargs()
                     .describe("docker-php-ext-install", "SC-DPHP-EXT-INSTALL")

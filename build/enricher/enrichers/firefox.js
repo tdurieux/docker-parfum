@@ -12,6 +12,7 @@ exports.default = {
             name: "SC-FIREFOX",
             prefix: "SC-FIREFOX",
             booleans: ["sync", "no-xshm", "g-fatal-warnings", "h", "help", "installer", "v", "version", "ProfileWizard", "ProfileManager", "SelectProfile", "splash", "jsconsole"],
+            strings: ["gdk-debug", "gdk-no-debug", "gtk-debug", "gtk-no-debug", "gtk-module", "display", "xim-preedit", "xim-status", "height", "width", "CreateProfile", "P", "lang", "remote", "chrome"],
             argv: function () {
                 return yargs()
                     .describe("firefox", "SC-FIREFOX")

@@ -10,6 +10,7 @@ declare const _default: {
         prefix: string;
         paths: any[];
         booleans: string[];
+        strings: string[];
         counts: string[];
         argv: () => Argv<{
             "print-arch": boolean;
@@ -49,6 +50,7 @@ declare const _default: {
         prefix: string;
         paths: any[];
         booleans: string[];
+        strings: any[];
         counts: string[];
         argv: () => Argv<{
             "print-arch": boolean;
@@ -100,6 +102,7 @@ declare const _default: {
         }>;
         categories?: undefined;
         paths?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -127,12 +130,14 @@ declare const _default: {
             v: number;
         }>;
         paths?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
         prefix: string;
         paths: any[];
         booleans: string[];
+        strings: any[];
         counts: string[];
         argv: () => Argv<{
             "print-arch": boolean;

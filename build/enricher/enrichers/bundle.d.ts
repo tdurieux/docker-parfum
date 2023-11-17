@@ -10,6 +10,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             "no-color": boolean;
@@ -65,6 +66,7 @@ declare const _default: {
         prefix: string;
         paths: any[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             "no-color": boolean;
@@ -79,6 +81,7 @@ declare const _default: {
         prefix: string;
         paths: any[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             "no-color": boolean;

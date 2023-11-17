@@ -271,19 +271,21 @@ function getAliases(scenario) {
     return aliases;
 }
 function matchArgumentAST(scenario, strNode2AST, argName) {
-    var _a, _b;
+    var _a, _b, _c, _d;
     if (strNode2AST("-" + argName).length > 0)
         return strNode2AST("-" + argName);
     if (strNode2AST("--" + argName).length > 0)
         return strNode2AST("--" + argName);
     var output = [];
     if (argName.length == 1 && (scenario.booleans || scenario.counts)) {
-        strNode2ASTLoop: for (var _i = 0, _c = strNode2AST(); _i < _c.length; _i++) {
-            var node = _c[_i];
+        strNode2ASTLoop: for (var _i = 0, _e = strNode2AST(); _i < _e.length; _i++) {
+            var node = _e[_i];
             var nodeStr = node.toString().replace(/^-+/, "");
             for (var i = 0; i < nodeStr.length; i++) {
                 if (!((_a = scenario.booleans) === null || _a === void 0 ? void 0 : _a.includes(nodeStr[i])) &&
-                    !((_b = scenario.counts) === null || _b === void 0 ? void 0 : _b.includes(nodeStr[i]))) {
+                    !((_b = scenario.counts) === null || _b === void 0 ? void 0 : _b.includes(nodeStr[i])) &&
+                    !((_c = scenario.strings) === null || _c === void 0 ? void 0 : _c.includes(nodeStr[i])) &&
+                    !((_d = scenario.paths) === null || _d === void 0 ? void 0 : _d.includes(nodeStr[i]))) {
                     continue strNode2ASTLoop;
                 }
             }
@@ -293,8 +295,8 @@ function matchArgumentAST(scenario, strNode2AST, argName) {
         }
     }
     else {
-        for (var _d = 0, _e = strNode2AST(); _d < _e.length; _d++) {
-            var node = _e[_d];
+        for (var _f = 0, _g = strNode2AST(); _f < _g.length; _f++) {
+            var node = _g[_f];
             if (node
                 .toString()
                 .match(new RegExp("^--" + argName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"))) {
@@ -530,10 +532,12 @@ function enrich(root) {
             var commandAST = node.command;
             if (!commandAST)
                 return true;
-            var command_1 = (_a = commandAST
-                .getElement(dinghy_1.nodeType.BashLiteral)) === null || _a === void 0 ? void 0 : _a.value.replace(/^\/bin\//, "");
+            var command_1 = (_a = commandAST.getElement(dinghy_1.nodeType.BashLiteral)) === null || _a === void 0 ? void 0 : _a.value;
             if (!command_1)
                 return true;
+            if (command_1.includes("bin/")) {
+                command_1 = command_1.split("bin/")[1];
+            }
             var commandArgs_1 = node.args.filter(function (e) {
                 return e.traverse(function (e) {
                     var _a;

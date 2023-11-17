@@ -109,11 +109,13 @@ export declare const enrichers: ({
         argv: () => import("yargs").Argv<{
             help: boolean;
         }>;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             "insecure-storage": boolean;
         } & {
@@ -131,6 +133,7 @@ export declare const enrichers: ({
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => import("yargs").Argv<{
             h: string;
         }>;
@@ -140,6 +143,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             "insecure-storage": boolean;
         } & {
@@ -156,6 +160,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             t: boolean;
         } & {
@@ -166,6 +171,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             n: boolean;
         } & {
@@ -188,6 +194,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             insiders: boolean;
         } & {
@@ -204,6 +211,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             e: boolean;
         } & {
@@ -222,6 +230,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             "default-permissions": boolean;
         } & {
@@ -250,6 +259,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             w: boolean;
         } & {
@@ -272,6 +282,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             f: boolean;
         } & {
@@ -286,6 +297,22 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
+        argv: () => import("yargs").Argv<{
+            help: boolean;
+        } & {
+            c: string;
+        } & {
+            R: string;
+        } & {
+            "repo-owner": string;
+        }>;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             full: boolean;
         } & {
@@ -300,6 +327,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             config: boolean;
         } & {
@@ -322,6 +350,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             p: boolean;
         } & {
@@ -335,6 +364,7 @@ export declare const enrichers: ({
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => import("yargs").Argv<{
             a: string;
         } & {
@@ -350,6 +380,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             public: boolean;
         } & {
@@ -362,6 +393,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             files: boolean;
         } & {
@@ -375,6 +407,7 @@ export declare const enrichers: ({
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => import("yargs").Argv<{
             R: string;
         }>;
@@ -384,6 +417,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             w: boolean;
         } & {
@@ -410,6 +444,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             w: boolean;
         } & {
@@ -441,6 +476,7 @@ export declare const enrichers: ({
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => import("yargs").Argv<{
             q: string;
         } & {
@@ -453,6 +489,7 @@ export declare const enrichers: ({
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => import("yargs").Argv<{
             L: string;
         }>;
@@ -462,6 +499,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             d: boolean;
         } & {
@@ -496,6 +534,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             c: boolean;
         } & {
@@ -510,6 +549,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             undo: boolean;
         } & {
@@ -522,6 +562,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             drafts: boolean;
         } & {
@@ -537,6 +578,7 @@ export declare const enrichers: ({
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => import("yargs").Argv<{
             format: string;
         } & {
@@ -547,6 +589,7 @@ export declare const enrichers: ({
         cmd: string;
         name: string;
         prefix: string;
+        strings: string[];
         argv: () => import("yargs").Argv<{
             format: string;
         } & {
@@ -558,6 +601,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             clear: boolean;
         } & {
@@ -588,6 +632,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             w: boolean;
         } & {
@@ -600,6 +645,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             d: boolean;
         } & {
@@ -630,6 +676,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             "exclude-drafts": boolean;
         } & {
@@ -642,6 +689,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             "add-readme": boolean;
         } & {
@@ -682,6 +730,7 @@ export declare const enrichers: ({
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<{
             archived: boolean;
         } & {
@@ -716,6 +765,7 @@ export declare const enrichers: ({
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         argv: () => import("yargs").Argv<import("yargs").Omit<{
             i: boolean;
         } & {
@@ -744,6 +794,90 @@ export declare const enrichers: ({
             C: string;
         } & {
             f: string;
+        }>;
+    }[];
+} | {
+    providerFor: string[];
+    categories: any[];
+    prefix: string;
+    scenarios: {
+        cmd: string;
+        name: string;
+        prefix: string;
+        booleans: string[];
+        strings: string[];
+        argv: () => import("yargs").Argv<import("yargs").Omit<{
+            c: boolean;
+        } & {
+            m: boolean;
+        } & {
+            u: boolean;
+        } & {
+            s: boolean;
+        } & {
+            version: boolean;
+        } & {
+            help: boolean;
+        } & {
+            b: boolean;
+        } & {
+            d: boolean;
+        } & {
+            f: boolean;
+        } & {
+            g: boolean;
+        } & {
+            h: boolean;
+        } & {
+            i: boolean;
+        } & {
+            M: boolean;
+        } & {
+            n: boolean;
+        } & {
+            R: boolean;
+        } & {
+            r: boolean;
+        } & {
+            V: boolean;
+        }, "b"> & {
+            b: boolean;
+        } & {
+            z: boolean;
+        } & {
+            debug: boolean;
+        } & {
+            parallel: boolean;
+        } & {
+            radixsort: boolean;
+        } & {
+            mergesort: boolean;
+        } & {
+            qsort: boolean;
+        } & {
+            heapsort: boolean;
+        } & {
+            mmap: boolean;
+        } & {
+            o: string;
+        } & {
+            S: string;
+        } & {
+            t: string;
+        } & {
+            T: string;
+        } & {
+            k: string;
+        } & {
+            sort: string;
+        } & {
+            "files0-from=filename": string;
+        } & {
+            "batch-size": string;
+        } & {
+            "compress-program": string;
+        } & {
+            "random-source": string;
         }>;
     }[];
 })[];

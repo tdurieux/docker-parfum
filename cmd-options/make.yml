@@ -48,6 +48,11 @@ command:
       - -W, --new-file
       - -W, --assume-new
   scenarios:
+    - cmd: $0 test [args...]
+      options: *options
+      name: SC-MAKE-TEST
+      categories:
+        - TEST_PACKAGES
     - cmd: $0 [target] [args...]
       options: *options
       name: SC-MAKE

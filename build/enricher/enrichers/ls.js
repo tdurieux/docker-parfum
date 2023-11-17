@@ -11,6 +11,7 @@ exports.default = {
             name: "SC-LS",
             prefix: "SC-LS",
             booleans: ["@", "A", "B", "C", "F", "G", "H", "I", "L", "O", "P", "R", "S", "T", "U", "W", "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "%", "1"],
+            strings: ["D", "color"],
             argv: function () {
                 return yargs()
                     .describe("ls", "SC-LS")

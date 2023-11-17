@@ -71,6 +71,24 @@ command:
       name: SC-NPM-BUILD
       categories:
         - BUILD_PACKAGES
+    - cmd: $0 audit [type]
+      options: {}
+      name: SC-NPM-AUDIT
+      categories:
+        - AUDIT_PACKAGES
+    - cmd: $0 publish [package-spec]
+      options: 
+        strings:
+          - --tag
+          - --access
+          - --otp
+          - -w, --workspace
+        booleans:
+          - --dry-run
+          - --include-workspace-root
+      name: SC-NPM-PUBLISH
+      categories:
+        - DEPLOY_PACKAGES
     - cmd: $0 TEST [args...]
       options: {}
       name: SC-NPM-TEST

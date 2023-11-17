@@ -12,6 +12,7 @@ export default {
       prefix: "SC-CTEST",
       paths: [],
       booleans: [],
+      strings: [],
       counts: [],
       argv: () => {
         return (yargs() as Argv)

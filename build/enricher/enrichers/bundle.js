@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-BUNDLE",
             paths: ["path PATH", "gemfile=GEMFILE", "clean", "deployment", "frozen", "full-index", "local", "no-cache", "no-prune", "quiet", "redownload", "shebang", "system"],
             booleans: ["no-color", "V", "verbose"],
+            strings: ["r", "retry", "binstubs", "standalone", "trust-policy", "with", "without", "jobs", "retry"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -60,6 +61,7 @@ exports.default = {
             prefix: "SC-BUNDLE",
             paths: [],
             booleans: ["no-color", "V", "verbose"],
+            strings: ["r", "retry"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -86,6 +88,7 @@ exports.default = {
             prefix: "SC-BUNDLE",
             paths: [],
             booleans: ["no-color", "V", "verbose"],
+            strings: ["r", "retry"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -112,6 +115,7 @@ exports.default = {
             prefix: "SC-BUNDLE",
             paths: [],
             booleans: ["no-color", "V", "verbose"],
+            strings: ["r", "retry"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -138,6 +142,7 @@ exports.default = {
             prefix: "SC-BUNDLE",
             paths: [],
             booleans: ["no-color", "V", "verbose"],
+            strings: ["r", "retry"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -164,6 +169,7 @@ exports.default = {
             prefix: "SC-BUNDLE",
             paths: [],
             booleans: ["no-color", "V", "verbose"],
+            strings: ["r", "retry"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -191,6 +197,7 @@ exports.default = {
             prefix: "SC-BUNDLE",
             paths: [],
             booleans: ["no-color", "V", "verbose"],
+            strings: ["r", "retry"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -218,6 +225,7 @@ exports.default = {
             prefix: "SC-BUNDLE",
             paths: [],
             booleans: ["no-color", "V", "verbose"],
+            strings: ["r", "retry"],
             counts: [],
             argv: function () {
                 return yargs()
@@ -244,6 +252,7 @@ exports.default = {
             prefix: "SC-BUNDLE",
             paths: [],
             booleans: ["no-color", "V", "verbose"],
+            strings: ["r", "retry"],
             counts: [],
             argv: function () {
                 return yargs()

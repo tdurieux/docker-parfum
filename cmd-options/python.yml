@@ -11,25 +11,28 @@ command:
   prefix: SC-PYTHON
   options: &options
     booleans:
+      - -b
       - -B
       - -d
       - -E
       - -i
+      - -I
       - -O
-      - -R
+      - -OO
+      - -P
+      - -q
       - -s
       - -S
-      - -t
       - -u
       - -v
       - -V, --version
       - -x
-      - '-3'
       - -h, --help
     strings:
       - -c
       - -m
-      - -q
+      - -W
+      - -X
   scenarios:
     - cmd: $0 [args...]
       options: *options

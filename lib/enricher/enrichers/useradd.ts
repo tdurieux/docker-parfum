@@ -13,6 +13,7 @@ export default {
       prefix: "SC-USER-ADD",
       paths: ["b","base-dir","d","home-dir","k","skel","R","root"],
       booleans: ["D","defaults","h","help","l","no-log-init","m","create-home","M","no-create-home","N","no-user-group","o","non-unique","r","system","U","user-group"],
+      strings: ["c","comment","e","expiredate","f","inactive","g","gid","p","password","s","shell","u","uid","Z","selinux-user"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -60,6 +61,7 @@ export default {
       prefix: "SC-USER-ADD",
       paths: ["b","base-dir","d","home-dir","k","skel","R","root"],
       booleans: ["D","defaults","h","help","l","no-log-init","m","create-home","M","no-create-home","N","no-user-group","o","non-unique","r","system","U","user-group"],
+      strings: ["c","comment","e","expiredate","f","inactive","g","gid","p","password","s","shell","u","uid","Z","selinux-user"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -107,6 +109,7 @@ export default {
       prefix: "SC-USER-ADD",
       paths: ["b","base-dir","d","home-dir","k","skel","R","root"],
       booleans: ["D","defaults","h","help","l","no-log-init","m","create-home","M","no-create-home","N","no-user-group","o","non-unique","r","system","U","user-group"],
+      strings: ["c","comment","e","expiredate","f","inactive","g","gid","p","password","s","shell","u","uid","Z","selinux-user","G","groups"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -154,6 +157,7 @@ export default {
       prefix: "SC-USER-ADD",
       paths: ["b","base-dir","d","home-dir","k","skel","R","root"],
       booleans: ["D","defaults","h","help","l","no-log-init","m","create-home","M","no-create-home","N","no-user-group","o","non-unique","r","system","U","user-group"],
+      strings: ["c","comment","e","expiredate","f","inactive","g","gid","p","password","s","shell","u","uid","Z","selinux-user","G","groups"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -201,6 +205,7 @@ export default {
       prefix: "SC-USER-ADD",
       paths: ["b","base-dir","d","home-dir","k","skel","R","root"],
       booleans: ["D","defaults","h","help","l","no-log-init","m","create-home","M","no-create-home","N","no-user-group","o","non-unique","r","system","U","user-group"],
+      strings: ["c","comment","e","expiredate","f","inactive","g","gid","p","password","s","shell","u","uid","Z","selinux-user","G","groups"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -247,6 +252,7 @@ export default {
       prefix: "SC-USER-ADD",
       paths: ["b","base-dir","d","home-dir","k","skel","R","root"],
       booleans: ["D","defaults","h","help","l","no-log-init","m","create-home","M","no-create-home","N","no-user-group","o","non-unique","r","system","U","user-group"],
+      strings: ["c","comment","e","expiredate","f","inactive","g","gid","p","password","s","shell","u","uid","Z","selinux-user"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)

@@ -12,6 +12,7 @@ exports.default = {
             name: "SC-RM",
             prefix: "SC-RM",
             booleans: ["r", "recursive", "R", "recursive", "f", "force", "i", "I", "one-file-system", "v", "verbose", "version", "help", "preserve-root", "no-preserve-root"],
+            strings: ["interactive"],
             argv: function () {
                 return yargs()
                     .describe("rm", "SC-RM")

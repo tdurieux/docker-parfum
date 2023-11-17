@@ -182,6 +182,11 @@ export default {
             options.booleans.map(processArg).flat()
           )},\n`;
         }
+        if (options.strings) {
+          output += `      strings: ${JSON.stringify(
+            options.strings.map(processArg).flat()
+          )},\n`;
+        }
         if (options.counts) {
           output += `      counts: ${JSON.stringify(
             options.counts.map(processArg).flat()

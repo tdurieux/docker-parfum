@@ -15,6 +15,7 @@ export default {
       prefix: "SC-CMAKE",
       paths: ["build","install","open","config","prefix","S","B","C"],
       booleans: ["help","version","v","verbose","strip","N","clean-first","user-stderr"],
+      strings: ["from","E","G","U","T","A","component","j","parallel"],
       argv: () => {
         return (yargs() as Argv)
           .describe("cmake", "SC-CMAKE")
@@ -65,6 +66,7 @@ export default {
       prefix: "SC-CMAKE",
       paths: ["build","install","open","config","prefix","S","B","C"],
       booleans: ["help","version","v","verbose","strip","N","clean-first","user-stderr"],
+      strings: ["from","E","G","U","T","A","component","j","parallel"],
       argv: () => {
         return (yargs() as Argv)
           .describe("cmake", "SC-CMAKE")
@@ -116,6 +118,7 @@ export default {
       prefix: "SC-CMAKE",
       paths: ["build","install","open","config","prefix","S","B","C"],
       booleans: ["help","version","v","verbose","strip","N","clean-first","user-stderr"],
+      strings: ["from","E","G","U","T","A","component","j","parallel"],
       argv: () => {
         return (yargs() as Argv)
           .describe("cmake", "SC-CMAKE")
@@ -166,6 +169,7 @@ export default {
       prefix: "SC-CMAKE",
       paths: ["build","install","open","config","prefix","S","B","C"],
       booleans: ["help","version","v","verbose","strip","N","clean-first","user-stderr"],
+      strings: ["from","E","G","U","T","A","component","j","parallel"],
       argv: () => {
         return (yargs() as Argv)
           .describe("cmake", "SC-CMAKE")
@@ -216,6 +220,7 @@ export default {
       prefix: "SC-CMAKE",
       paths: ["build","install","open","config","prefix","S","B","C"],
       booleans: ["help","version","v","verbose","strip","N","clean-first","user-stderr"],
+      strings: ["from","E","G","U","T","A","component","j","parallel"],
       argv: () => {
         return (yargs() as Argv)
           .describe("cmake", "SC-CMAKE")

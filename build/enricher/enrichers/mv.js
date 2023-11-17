@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-MV",
             paths: ["t", "target-directory"],
             booleans: ["b", "f", "force", "i", "interactive", "n", "no-clobber", "strip-trailing-slashes", "u", "update", "v", "verbose", "version", "help", "T", "no-target-directory"],
+            strings: ["S", "suffix"],
             argv: function () {
                 return yargs()
                     .describe("mv", "SC-MV")

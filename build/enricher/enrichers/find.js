@@ -16,6 +16,7 @@ exports.default = {
             name: "SC-FIND",
             prefix: "SC-FIND",
             booleans: ["delete", "print0", "print", "execdir", "exec", "depth"],
+            strings: ["type", "name", "regextype", "regex", "wholename", "perm", "path", "mindepth", "maxdepth"],
             argv: function () {
                 return yargs()
                     .describe("find", "SC-FIND")

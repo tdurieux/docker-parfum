@@ -13,6 +13,7 @@ exports.default = {
             prefix: "SC-WGET",
             paths: ["O", "output-document", "a", "append-output", "o", "output-file", "i", "input-file"],
             booleans: ["d", "debug", "q", "quiet", "v", "verbose", "no-verbose", "span-hosts", "no-check-certificate", "N", "timestamping", "c", "continue", "nc", "no-clobber", "nv", "no-verbose", "content-disposition"],
+            strings: ["progress", "U", "user-agent"],
             argv: function () {
                 return yargs()
                     .describe("wget", "SC-WGET")

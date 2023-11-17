@@ -10,6 +10,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: string[];
         argv: () => Argv<import("yargs").Omit<{
             q: boolean;
@@ -45,6 +46,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: string[];
         argv: () => Argv<import("yargs").Omit<{
             q: boolean;

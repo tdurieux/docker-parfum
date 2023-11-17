@@ -10,6 +10,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             h: boolean;
         } & {
@@ -125,6 +126,7 @@ declare const _default: {
         categories?: undefined;
         paths?: undefined;
         booleans?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -157,6 +159,7 @@ declare const _default: {
         } & {
             "config-file": string;
         }>;
+        strings?: undefined;
     })[];
 };
 export default _default;

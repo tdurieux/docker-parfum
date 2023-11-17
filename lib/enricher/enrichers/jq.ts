@@ -11,6 +11,7 @@ export default {
       name: "SC-JQ",
       prefix: "SC-JQ",
       booleans: ["version","seq","stream","slurp","s","raw-input","R","null-input","n","compact-output","c","tab","color-output","C","monochrome-output","M","ascii-output","a","unbuffered","sort-keys","S","raw-output","r","join-output","j","args","jsonargs"],
+      strings: ["e","exit-status","arg","L","argjson","slurpfile","argfile","f","from-file","run-tests","indent"],
       argv: () => {
         return (yargs() as Argv)
           .describe("jq", "SC-JQ")

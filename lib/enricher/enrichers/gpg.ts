@@ -12,6 +12,7 @@ export default {
       prefix: "SC-GPG",
       paths: ["homedir","options"],
       booleans: ["version","verbose","fingerprint","batch","y","yes","no-tty","import","fast-import","a","armor","no-batch","q","quiet","enarmor","dearmor","d","decrypt","refresh-keys"],
+      strings: ["trusted-key","recv-key","recv","keyserver"],
       argv: () => {
         return (yargs() as Argv)
           .describe("gpg", "SC-GPG")

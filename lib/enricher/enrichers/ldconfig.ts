@@ -12,6 +12,7 @@ export default {
       prefix: "SC-LDCONFIG",
       paths: ["r","C","f"],
       booleans: ["i","ingore-aux-cache","l","n","N","p","print-cache","v","verbose","X","?","help","?","usage","V","version"],
+      strings: ["c","format"],
       argv: () => {
         return (yargs() as Argv)
           .describe("ldconfig", "SC-LDCONFIG")

@@ -12,6 +12,7 @@ exports.default = {
             prefix: "SC-LN",
             paths: ["t", "target-directory"],
             booleans: ["b", "d", "directory", "F", "directory", "f", "force", "i", "interactive", "L", "logical", "n", "no-dereference", "P", "physical", "r", "relative", "s", "symbolic", "T", "no-target-directory", "v", "verbose", "help", "version"],
+            strings: ["backup", "S", "suffix"],
             argv: function () {
                 return yargs()
                     .describe("ln", "SC-LN")
@@ -51,6 +52,7 @@ exports.default = {
             prefix: "SC-LN",
             paths: ["t", "target-directory"],
             booleans: ["b", "d", "directory", "F", "directory", "f", "force", "i", "interactive", "L", "logical", "n", "no-dereference", "P", "physical", "r", "relative", "s", "symbolic", "T", "no-target-directory", "v", "verbose", "help", "version"],
+            strings: ["backup", "S", "suffix"],
             argv: function () {
                 return yargs()
                     .describe("ln", "SC-LN")
@@ -91,6 +93,7 @@ exports.default = {
             prefix: "SC-LN",
             paths: ["t", "target-directory"],
             booleans: ["b", "d", "directory", "F", "directory", "f", "force", "i", "interactive", "L", "logical", "n", "no-dereference", "P", "physical", "r", "relative", "s", "symbolic", "T", "no-target-directory", "v", "verbose", "help", "version"],
+            strings: ["backup", "S", "suffix"],
             argv: function () {
                 return yargs()
                     .describe("ln", "SC-LN")
@@ -131,6 +134,7 @@ exports.default = {
             prefix: "SC-LN",
             paths: ["t", "target-directory"],
             booleans: ["b", "d", "directory", "F", "directory", "f", "force", "i", "interactive", "L", "logical", "n", "no-dereference", "P", "physical", "r", "relative", "s", "symbolic", "T", "no-target-directory", "v", "verbose", "help", "version"],
+            strings: ["backup", "S", "suffix"],
             argv: function () {
                 return yargs()
                     .describe("ln", "SC-LN")
@@ -171,6 +175,7 @@ exports.default = {
             prefix: "SC-LN",
             paths: ["t", "target-directory"],
             booleans: ["b", "d", "directory", "F", "directory", "f", "force", "i", "interactive", "L", "logical", "n", "no-dereference", "P", "physical", "r", "relative", "s", "symbolic", "T", "no-target-directory", "v", "verbose", "help", "version"],
+            strings: ["backup", "S", "suffix"],
             argv: function () {
                 return yargs()
                     .describe("ln", "SC-LN")

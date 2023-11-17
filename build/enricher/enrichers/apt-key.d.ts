@@ -12,6 +12,7 @@ declare const _default: {
             keyring: string;
         }>;
         booleans?: undefined;
+        strings?: undefined;
         counts?: undefined;
     } | {
         cmd: string;
@@ -19,6 +20,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             version: boolean;

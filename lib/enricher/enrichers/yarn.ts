@@ -13,6 +13,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help","D","dev","P","peer","O","optional","E","exact","T","tilde","N","ignore-workspace-root-check","audit"],
+      strings: ["mutex"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -48,6 +49,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help","verbose","json"],
+      strings: ["mutex"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -77,6 +79,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help","I","init","F","force"],
+      strings: ["mutex"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -103,9 +106,11 @@ export default {
     {
       cmd: "$0 bin <executable>",
       name: "SC-YARN-BIN",
+      categories: ["RUN_PACKAGES"],
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help"],
+      strings: ["mutex"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yarn", "SC-YARN")
@@ -132,6 +137,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help"],
+      strings: ["mutex"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yarn", "SC-YARN")
@@ -158,6 +164,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help"],
+      strings: ["mutex","pattern"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -186,6 +193,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help"],
+      strings: ["mutex"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yarn", "SC-YARN")
@@ -212,6 +220,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help"],
+      strings: ["mutex"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yarn", "SC-YARN")
@@ -238,6 +247,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help","D","dev","P","peer","O","optional","E","exact","T","tilde","N","ignore-workspace-root-check","audit"],
+      strings: ["mutex"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -273,6 +283,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder","modules-folder"],
       booleans: ["verbose","help","check-files","flat","force","har","ignore-scripts","no-lockfile","pure-lockfile","focus","frozen-lockfile","silent","ignore-engines","ignore-optional","offline","non-interactive","update-checksums","audit","no-bin-links","link-duplicates"],
+      strings: ["mutex","prod","production"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)
@@ -315,6 +326,90 @@ export default {
       }
     },
     {
+      cmd: "$0 remove",
+      name: "SC-YARN-REMOVE",
+      categories: ["UNINSTALL_PACKAGES"],
+      prefix: "SC-YARN",
+      paths: ["cache-folder"],
+      booleans: ["verbose","help"],
+      strings: ["mutex"],
+      argv: () => {
+        return (yargs() as Argv)
+          .describe("yarn", "SC-YARN")
+          .help(false)
+          .version(false)
+          .exitProcess(false)
+          .showHelpOnFail(false)
+          .parserConfiguration({
+            "short-option-groups": true,
+            "boolean-negation": false,
+            "camel-case-expansion": false,
+            "parse-numbers": false,
+          })
+          .command("$0 remove", "SC-YARN-REMOVE")
+          .option("verbose", {"type":"boolean"})
+          .option("help", {"type":"boolean"})
+          .option("mutex", {"type":"string"})
+          .option("cache-folder", {"type":"string"})
+      }
+    },
+    {
+      cmd: "$0 prune",
+      name: "SC-YARN-PRUNE",
+      categories: ["UNINSTALL_PACKAGES"],
+      prefix: "SC-YARN",
+      paths: ["cache-folder"],
+      booleans: ["verbose","help"],
+      strings: ["mutex"],
+      argv: () => {
+        return (yargs() as Argv)
+          .describe("yarn", "SC-YARN")
+          .help(false)
+          .version(false)
+          .exitProcess(false)
+          .showHelpOnFail(false)
+          .parserConfiguration({
+            "short-option-groups": true,
+            "boolean-negation": false,
+            "camel-case-expansion": false,
+            "parse-numbers": false,
+          })
+          .command("$0 prune", "SC-YARN-PRUNE")
+          .option("verbose", {"type":"boolean"})
+          .option("help", {"type":"boolean"})
+          .option("mutex", {"type":"string"})
+          .option("cache-folder", {"type":"string"})
+      }
+    },
+    {
+      cmd: "$0 publish",
+      name: "SC-YARN-PUBLISH",
+      categories: ["DEPLOY_PACKAGES"],
+      prefix: "SC-YARN",
+      paths: ["cache-folder"],
+      booleans: ["verbose","help"],
+      strings: ["mutex"],
+      argv: () => {
+        return (yargs() as Argv)
+          .describe("yarn", "SC-YARN")
+          .help(false)
+          .version(false)
+          .exitProcess(false)
+          .showHelpOnFail(false)
+          .parserConfiguration({
+            "short-option-groups": true,
+            "boolean-negation": false,
+            "camel-case-expansion": false,
+            "parse-numbers": false,
+          })
+          .command("$0 publish", "SC-YARN-PUBLISH")
+          .option("verbose", {"type":"boolean"})
+          .option("help", {"type":"boolean"})
+          .option("mutex", {"type":"string"})
+          .option("cache-folder", {"type":"string"})
+      }
+    },
+    {
       captureAfterThirdNonOption: "args",
       cmd: "$0 run <script>",
       name: "SC-YARN-RUN-SCRIPT",
@@ -322,6 +417,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help"],
+      strings: ["mutex"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yarn", "SC-YARN")
@@ -343,6 +439,35 @@ export default {
       }
     },
     {
+      captureAfterThirdNonOption: "args",
+      cmd: "$0 test <script>",
+      name: "SC-YARN-TEST",
+      categories: ["TEST_PACKAGES"],
+      prefix: "SC-YARN",
+      paths: ["cache-folder"],
+      booleans: ["verbose","help"],
+      strings: ["mutex"],
+      argv: () => {
+        return (yargs() as Argv)
+          .describe("yarn", "SC-YARN")
+          .help(false)
+          .version(false)
+          .exitProcess(false)
+          .showHelpOnFail(false)
+          .parserConfiguration({
+            "short-option-groups": true,
+            "boolean-negation": false,
+            "camel-case-expansion": false,
+            "parse-numbers": false,
+          })
+          .command("$0 test <script>", "SC-YARN-TEST")
+          .option("verbose", {"type":"boolean"})
+          .option("help", {"type":"boolean"})
+          .option("mutex", {"type":"string"})
+          .option("cache-folder", {"type":"string"})
+      }
+    },
+    {
       captureAfterSecondNonOption: "args",
       rejectIfIs: {"name":"script","values":["add","audit","autoclean","bin","cache","check","config","create","dedupe","generate-lock-entry","global","help","import","info","init","install","licenses","link","list","lockfile","login","logout","outdated","owner","pack","policies","prune","publish","remove","run","self-update","tag","team","test","unlink","upgrade","upgrade-interactive","version","versions","why","workspace","workspaces"]},
       cmd: "$0 <script>",
@@ -351,6 +476,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder"],
       booleans: ["verbose","help"],
+      strings: ["mutex"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yarn", "SC-YARN")
@@ -379,6 +505,7 @@ export default {
       prefix: "SC-YARN",
       paths: ["cache-folder","modules-folder"],
       booleans: ["verbose","help","check-files","flat","force","har","ignore-scripts","no-lockfile","pure-lockfile","focus","frozen-lockfile","silent","ignore-engines","ignore-optional","offline","non-interactive","update-checksums","audit","no-bin-links","link-duplicates"],
+      strings: ["mutex","prod","production"],
       counts: [],
       argv: () => {
         return (yargs() as Argv)

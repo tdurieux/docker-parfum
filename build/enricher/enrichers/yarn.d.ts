@@ -10,6 +10,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             verbose: boolean;
@@ -45,6 +46,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<import("yargs").Omit<{
             verbose: boolean;
@@ -69,6 +71,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             verbose: boolean;
@@ -91,9 +94,32 @@ declare const _default: {
     } | {
         cmd: string;
         name: string;
+        categories: string[];
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
+        argv: () => Argv<{
+            verbose: boolean;
+        } & {
+            help: boolean;
+        } & {
+            mutex: string;
+        } & {
+            "cache-folder": string;
+        }>;
+        counts?: undefined;
+        captureAfterThirdNonOption?: undefined;
+        captureAfterSecondNonOption?: undefined;
+        rejectIfIs?: undefined;
+        rejectIf?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        paths: string[];
+        booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             verbose: boolean;
         } & {
@@ -115,6 +141,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             verbose: boolean;
@@ -138,6 +165,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             verbose: boolean;
@@ -174,6 +202,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             verbose: boolean;
@@ -236,6 +265,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             verbose: boolean;
         } & {
@@ -261,6 +291,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             verbose: boolean;
         } & {
@@ -281,6 +312,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: any[];
         argv: () => Argv<{
             verbose: boolean;

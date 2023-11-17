@@ -9,6 +9,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: string[];
         argv: () => Argv<{
             y: boolean;
@@ -61,6 +62,7 @@ declare const _default: {
         prefix: string;
         paths: string[];
         booleans: string[];
+        strings: string[];
         counts: string[];
         argv: () => Argv<{
             y: boolean;

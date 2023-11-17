@@ -12,6 +12,7 @@ exports.default = {
             prefix: "SC-MKTEMP",
             paths: ["p", "tmpdir"],
             booleans: ["d", "directory", "u", "dry-run", "q", "quiet", "t", "help", "version"],
+            strings: ["suffix"],
             argv: function () {
                 return yargs()
                     .describe("mktemp", "SC-MKTEMP")

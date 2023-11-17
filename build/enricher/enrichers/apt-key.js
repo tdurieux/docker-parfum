@@ -166,6 +166,7 @@ exports.default = {
             prefix: "SC-APT-KEY",
             paths: ["keyring", "homedir", "options"],
             booleans: ["version", "verbose", "fingerprint", "batch", "y", "yes", "no-tty", "import", "fast-import", "a", "armor", "no-batch", "q", "quiet", "enarmor", "dearmor", "d", "decrypt", "refresh-keys"],
+            strings: ["trusted-key", "recv-key", "recv", "keyserver"],
             counts: [],
             argv: function () {
                 return yargs()

@@ -13,6 +13,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")
@@ -60,6 +61,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")
@@ -106,6 +108,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")
@@ -153,6 +156,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")
@@ -200,6 +204,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")
@@ -247,6 +252,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")
@@ -294,6 +300,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")
@@ -341,6 +348,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")
@@ -387,6 +395,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")
@@ -433,6 +442,7 @@ export default {
       prefix: "SC-YUM",
       paths: ["c","config","installroot"],
       booleans: ["h","help","y","assumeyes","q","quiet","v","verbose","C","cacheonly","version","showduplicates","obsoletes","noplugins","nopgpgcheck","skip-broken","t","tolerant"],
+      strings: ["d","debuglevel","e","errorlevel","rpmverbosity","R","randomwait","enablerepo","disablerepo","x","exclude","color","disableexcludes"],
       argv: () => {
         return (yargs() as Argv)
           .describe("yum", "SC-YUM")

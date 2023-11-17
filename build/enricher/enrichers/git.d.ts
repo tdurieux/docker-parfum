@@ -10,6 +10,7 @@ declare const _default: {
         argv: () => Argv<{}>;
         booleans?: undefined;
         categories?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -21,6 +22,7 @@ declare const _default: {
             recursive: boolean;
         }>;
         categories?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -28,6 +30,7 @@ declare const _default: {
         prefix: string;
         argv: () => Argv<{}>;
         booleans?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -37,6 +40,7 @@ declare const _default: {
             hard: boolean;
         }>;
         categories?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -46,12 +50,14 @@ declare const _default: {
             short: boolean;
         }>;
         categories?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
         categories: string[];
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             "single-branch": boolean;
         } & {
@@ -80,6 +86,7 @@ declare const _default: {
             q: boolean;
         }>;
         categories?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -91,6 +98,7 @@ declare const _default: {
             p: boolean;
         }>;
         categories?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -102,6 +110,7 @@ declare const _default: {
             system: boolean;
         }>;
         categories?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -123,11 +132,13 @@ declare const _default: {
             p: boolean;
         }>;
         categories?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             always: boolean;
         } & {
@@ -143,6 +154,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             "allow-empty": boolean;
         } & {
@@ -168,6 +180,7 @@ declare const _default: {
         } & {
             minimal: boolean;
         }>;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -183,6 +196,7 @@ declare const _default: {
         } & {
             p: boolean;
         }>;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -206,6 +220,7 @@ declare const _default: {
             e: (string | number)[];
         }>;
         categories?: undefined;
+        strings?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -217,6 +232,7 @@ declare const _default: {
             help: boolean;
         }>;
         categories?: undefined;
+        strings?: undefined;
     })[];
 };
 export default _default;

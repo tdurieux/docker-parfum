@@ -76,6 +76,8 @@ command:
     - cmd: $0 bin <executable>
       options: *options
       name: SC-YARN-BIN
+      categories:
+        - RUN_PACKAGES
     - cmd: $0 lint
       options: *options
       name: SC-YARN-LINT
@@ -99,12 +101,33 @@ command:
       name: SC-YARN-INSTALL
       categories:
         - INSTALL_PACKAGES
+    - cmd: $0 remove
+      options: *options
+      name: SC-YARN-REMOVE
+      categories:
+        - UNINSTALL_PACKAGES
+    - cmd: $0 prune
+      options: *options
+      name: SC-YARN-PRUNE
+      categories:
+        - UNINSTALL_PACKAGES
+    - cmd: $0 publish
+      options: *options
+      name: SC-YARN-PUBLISH
+      categories:
+        - DEPLOY_PACKAGES
     - cmd: $0 run <script>
       options: *options
       name: SC-YARN-RUN-SCRIPT
       captureAfterThirdNonOption: args
       categories:
         - RUN_PACKAGES
+    - cmd: $0 test <script>
+      options: *options
+      name: SC-YARN-TEST
+      captureAfterThirdNonOption: args
+      categories:
+        - TEST_PACKAGES
     - cmd: $0 <script>
       options: *options
       name: SC-YARN-RUN-SCRIPT

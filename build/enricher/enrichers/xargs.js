@@ -11,6 +11,7 @@ exports.default = {
             name: "SC-XARGS",
             prefix: "SC-XARGS",
             booleans: ["0", "o", "p", "r", "t", "x"],
+            strings: ["E", "I", "J", "L", "P", "R", "S", "n"],
             argv: function () {
                 return yargs()
                     .describe("xargs", "SC-XARGS")

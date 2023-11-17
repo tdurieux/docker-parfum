@@ -12,6 +12,7 @@ export default {
       prefix: "SC-CODECOV",
       paths: [],
       booleans: [],
+      strings: [],
       counts: [],
       argv: () => {
         return (yargs() as Argv)

@@ -7,7 +7,7 @@ command:
   scenarios:
     - cmd: $0 [script] [args...]
       options:
-        boolean:
+        booleans:
           - -a, --interactive
           - -C, --nochdir
           - -q, --no-header
@@ -21,7 +21,7 @@ command:
           - -s, --syntax-highlight
           - -v, --version
           - -w, --stripped
-        string:
+        strings:
           - -b, --bindpath
           - -T, --timing
           - -g, --global

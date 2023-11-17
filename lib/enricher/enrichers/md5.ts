@@ -11,6 +11,7 @@ export default {
       name: "SC-MD5",
       prefix: "SC-MD5",
       booleans: ["p","q","r","t","x"],
+      strings: ["s"],
       argv: () => {
         return (yargs() as Argv)
           .describe("md5", "SC-MD5")

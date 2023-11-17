@@ -8,6 +8,7 @@ declare const _default: {
         name: string;
         prefix: string;
         booleans: string[];
+        strings: string[];
         argv: () => Argv<{
             h: boolean;
         } & {
