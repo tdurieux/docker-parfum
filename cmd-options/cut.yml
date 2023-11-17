@@ -1,0 +1,9 @@
+command:
+  providerFor:
+    - cut
+  categories:
+    - UTILITIES
+  prefix: SC-CUT
+  scenarios:
+    - cmd: $0
+      name: SC-CUT

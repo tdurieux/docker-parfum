@@ -1,0 +1,10 @@
+command:
+  providerFor:
+    - sleep
+  categories:
+    - UTILITIES
+  prefix: SC-SLEEP
+  scenarios:
+    - cmd: $0
+      name: SC-SLEEP
+

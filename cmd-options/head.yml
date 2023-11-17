@@ -1,0 +1,13 @@
+command:
+  providerFor:
+    - head
+  categories:
+    - UTILITIES
+  prefix: SC-HEAD
+  scenarios:
+    - cmd: $0 [file...]
+      options:
+        strings:
+          - -n
+          - -c
+      name: SC-HEAD

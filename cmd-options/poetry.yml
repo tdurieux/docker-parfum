@@ -1,0 +1,84 @@
+command:
+  providerFor:
+    - poetry
+  categories:
+    - PACKAGE_MANAGEMENT
+  prefix: SC-POETRY
+  options: &options
+    counts:
+      - -v, --verbose
+    booleans:
+      - -h, --help
+      - -q, --quiet
+      - -n, --no-interaction
+      - --no-plugins
+      - --no-cache
+    paths:
+      - -c, --directory
+  scenarios:
+    - cmd: $0 build
+      categories:
+        - BUILD_PACKAGES
+      options: *options
+      name: SC-POETRY-BUILD
+    - cmd: $0 check
+      options: *options
+      name: SC-POETRY-CHECK
+    - cmd: $0 config
+      options: *options
+      name: SC-POETRY-CONFIG
+    - cmd: $0 debug
+      options: *options
+      name: SC-POETRY-DEBUG
+    - cmd: $0 env
+      options: *options
+      name: SC-POETRY-ENV
+    - cmd: $0 export
+      options: *options
+      name: SC-POETRY-EXPORT
+    - cmd: $0 help
+      options: *options
+      name: SC-POETRY-HELP
+    - cmd: $0 init
+      options: *options
+      name: SC-POETRY-INIT
+    - cmd: $0 install
+      options: *options
+      categories:
+        - INSTALL_PACKAGES
+      name: SC-POETRY-INSTALL
+    - cmd: $0 lock
+      options: *options
+      name: SC-POETRY-LOCK
+    - cmd: $0 publish
+      options: *options
+      categories:
+        - DEPLOY_PACKAGES
+      name: SC-POETRY-PUBLISH
+    - cmd: $0 remove
+      options: *options
+      categories:
+        - UNINSTALL_PACKAGES
+      name: SC-POETRY-REMOVE
+    - cmd: $0 run
+      options: *options
+      categories:
+        - RUN_PACKAGES
+      name: SC-POETRY-RUN
+    - cmd: $0 search
+      options: *options
+      name: SC-POETRY-SEARCH
+    - cmd: $0 shell
+      options: *options
+      name: SC-POETRY-SHELL
+    - cmd: $0 show
+      options: *options
+      name: SC-POETRY-SHOW
+    - cmd: $0 update
+      options: *options
+      categories:
+        - UPDATE_PACKAGES
+      name: SC-POETRY-UPDATE
+    - cmd: $0 version
+      options: *options
+      name: SC-POETRY-VERSION

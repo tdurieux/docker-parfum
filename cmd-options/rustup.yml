@@ -1,0 +1,279 @@
+command:
+  providerFor:
+    - rustup
+  categories:
+    - DEVELOPMENT
+  prefix: SC-RUSTUP
+  scenarios:
+    - cmd: $0
+      options: 
+        booleans:
+          - -v, --verbose
+          - -q, --quiet
+          - -h, --help
+          - -V, --version
+      name: SC-RUSTUP
+    - cmd: $0 show
+      options: 
+        booleans:
+          - -v, --verbose
+          - -h, --help
+      name: SC-RUSTUP-SHOW
+    - cmd: $0 show active-toolchain
+      options: 
+        booleans:
+          - -v, --verbose
+          - -h, --help
+      name: SC-RUSTUP-SHOW-ACTIVE-TOOLCHAIN
+    - cmd: $0 show home
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-SHOW-HOME
+    - cmd: $0 show profile
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-SHOW-PROFILE
+    - cmd: $0 show help
+      name: SC-RUSTUP-SHOW-HELP
+    - cmd: $0 update
+      options: 
+        booleans:
+          - --no-self-update
+          - --force
+          - --force-non-host
+          - -h, --help
+      name: SC-RUSTUP-UPDATE
+    - cmd: $0 check
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-CHECK
+    - cmd: $0 default
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-DEFAULT
+    - cmd: $0 toolchain
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-TOOLCHAIN
+    - cmd: $0 toolchain list
+      options: 
+        booleans:
+          - -v, --verbose
+          - -h, --help
+      name: SC-RUSTUP-TOOLCHAIN-LIST
+    - cmd: $0 toolchain install
+      options: 
+        booleans:
+          - --no-self-update
+          - --force
+          - --allow-downgrade
+          - --force-non-host
+          - -h, --help
+        strings:
+          - --profile
+          - -c, --component
+          - -t, --target
+      name: SC-RUSTUP-TOOLCHAIN-INSTALL
+    - cmd: $0 toolchain uninstall
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-TOOLCHAIN-UNINSTALL
+    - cmd: $0 toolchain link
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-TOOLCHAIN-LINK
+    - cmd: $0 toolchain help
+      name: SC-RUSTUP-TOOLCHAIN-HELP
+    - cmd: $0 target
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-TARGET
+    - cmd: $0 target list
+      options: 
+        booleans:
+          - --installed
+          - -h, --help
+        strings:
+          - --toolchain
+      name: SC-RUSTUP-TARGET-LIST
+    - cmd: $0 target add
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - --toolchain
+      name: SC-RUSTUP-TARGET-ADD
+    - cmd: $0 target remove
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - --toolchain
+      name: SC-RUSTUP-TARGET-REMOVE
+    - cmd: $0 target help
+      name: SC-RUSTUP-TARGET-HELP
+    - cmd: $0 component
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-COMPONENT
+    - cmd: $0 component list
+      options: 
+        booleans:
+          - --installed
+          - -h, --help
+        strings:
+          - --toolchain
+      name: SC-RUSTUP-COMPONENT-LIST
+    - cmd: $0 component add
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - --toolchain
+          - --target
+      name: SC-RUSTUP-COMPONENT-ADD
+    - cmd: $0 component remove
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - --toolchain
+          - --target
+      name: SC-RUSTUP-COMPONENT-REMOVE
+    - cmd: $0 component help
+      name: SC-RUSTUP-COMPONENT-HELP
+    - cmd: $0 override
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-OVERRIDE
+    - cmd: $0 override list
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-OVERRIDE-LIST
+    - cmd: $0 override set
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - --path
+      name: SC-RUSTUP-OVERRIDE-SET
+    - cmd: $0 override unset
+      options: 
+        booleans:
+          - --nonexistent
+          - -h, --help
+        strings:
+          - --path
+      name: SC-RUSTUP-OVERRIDE-UNSET
+    - cmd: $0 override help
+      options: 
+        
+      name: SC-RUSTUP-OVERRIDE-HELP
+    - cmd: $0 run
+      options: 
+        booleans:
+          - --install
+          - -h, --help
+      name: SC-RUSTUP-RUN
+    - cmd: $0 which
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - --toolchain
+      name: SC-RUSTUP-WHICH
+    - cmd: $0 doc
+      options: 
+        booleans:
+          - --path
+          - --alloc
+          - --book
+          - --cargo
+          - --core
+          - --edition-guide
+          - --nomicon
+          - --proc_macro
+          - --reference
+          - --rust-by-example
+          - --rustc
+          - --rustdoc
+          - --std
+          - --test
+          - --unstable-book
+          - --embedded-book
+          - -h, --help
+        strings:
+          - --toolchain
+      name: SC-RUSTUP-DOC
+    - cmd: $0 man
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - --toolchain
+      name: SC-RUSTUP-MAN
+    - cmd: $0 self
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-SELF
+    - cmd: $0 self update
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-SELF-UPDATE
+    - cmd: $0 self uninstall
+      options: 
+        booleans:
+          - -h, --help
+        strings:
+          - -y
+      name: SC-RUSTUP-SELF-UNINSTALL
+    - cmd: $0 self upgrade-data
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-SELF-UPGRADE-DATA
+    - cmd: $0 self help
+      name: SC-RUSTUP-SELF-HELP
+    - cmd: $0 set
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-SET
+    - cmd: $0 set default-host
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-SET-DEFAULT-HOST
+    - cmd: $0 set profile
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-SET-PROFILE
+    - cmd: $0 set auto-self-update
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-SET-AUTO-SELF-UPDATE
+    - cmd: $0 set help
+      name: SC-RUSTUP-SET-HELP
+    - cmd: $0 completions
+      options: 
+        booleans:
+          - -h, --help
+      name: SC-RUSTUP-COMPLETIONS
+    - cmd: $0 help
+      name: SC-RUSTUP-HELP
+

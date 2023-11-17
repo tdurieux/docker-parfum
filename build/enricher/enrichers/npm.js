@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
-    providerFor: ["npm"],
+    providerFor: ["npm", "pnpm"],
     categories: ["PACKAGE_MANAGEMENT"],
     prefix: "SC-NPM",
     scenarios: [
@@ -16,7 +16,7 @@ exports.default = {
             strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -67,7 +67,7 @@ exports.default = {
             strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -118,7 +118,7 @@ exports.default = {
             strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -169,7 +169,7 @@ exports.default = {
             strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -220,7 +220,7 @@ exports.default = {
             strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -271,7 +271,7 @@ exports.default = {
             strings: ["only", "tag", "prefix"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -319,7 +319,7 @@ exports.default = {
             prefix: "SC-NPM",
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -340,7 +340,7 @@ exports.default = {
             prefix: "SC-NPM",
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -363,7 +363,7 @@ exports.default = {
             strings: ["tag", "access", "otp", "w", "workspace"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -390,7 +390,7 @@ exports.default = {
             prefix: "SC-NPM",
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -411,7 +411,7 @@ exports.default = {
             prefix: "SC-NPM",
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -432,7 +432,7 @@ exports.default = {
             prefix: "SC-NPM",
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -453,7 +453,7 @@ exports.default = {
             prefix: "SC-NPM",
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -474,7 +474,7 @@ exports.default = {
             booleans: ["force"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -496,7 +496,7 @@ exports.default = {
             booleans: ["force"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -518,7 +518,7 @@ exports.default = {
             booleans: ["force"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -539,7 +539,7 @@ exports.default = {
             prefix: "SC-NPM",
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -559,7 +559,7 @@ exports.default = {
             prefix: "SC-NPM",
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -579,7 +579,7 @@ exports.default = {
             prefix: "SC-NPM",
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -601,7 +601,7 @@ exports.default = {
             booleans: ["production", "json", "dry-run"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -619,13 +619,13 @@ exports.default = {
             }
         },
         {
-            cmd: "$0",
+            cmd: "$0 [cmd]",
             name: "SC-NPM",
             prefix: "SC-NPM",
             booleans: ["help", "v", "version"],
             argv: function () {
                 return yargs()
-                    .describe("npm", "SC-NPM")
+                    .describe("npm,pnpm", "SC-NPM")
                     .help(false)
                     .version(false)
                     .exitProcess(false)
@@ -636,7 +636,7 @@ exports.default = {
                     "camel-case-expansion": false,
                     "parse-numbers": false,
                 })
-                    .command("$0", "SC-NPM")
+                    .command("$0 [cmd]", "SC-NPM")
                     .option("help", { "type": "boolean" })
                     .option("v", { "alias": "version", "type": "boolean" });
             }

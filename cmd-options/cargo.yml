@@ -1,0 +1,227 @@
+command:
+  providerFor:
+    - cargo
+  prefix: SC-CARGO
+  categories:
+    - PACKAGE_MANAGEMENT
+  scenarios:
+    - cmd: $0
+      options:
+        booleans:
+          - -V, --version
+          - --list
+          - -v, --verbose...
+          - -q, --quiet
+          - --frozen
+          - --locked
+          - --offline
+          - -h, --help
+        strings:
+          - --explain
+          - --color
+          - -C
+          - --config
+          - -Z
+      name: SC-CARGO
+    - cmd: $0 build
+      name: SC-CARGO-BUILD
+      categories:
+        - BUILD_PACKAGES
+    - cmd: $0 check
+      name: SC-CARGO-CHECK
+    - cmd: $0 clean
+      options:
+        booleans:
+          - --doc
+          - -q, --quiet
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --color
+          - --config
+          - -Z
+      name: SC-CARGO-CLEAN
+    - cmd: $0 doc
+      name: SC-CARGO-DOC
+    - cmd: $0 new
+      options:
+        booleans:
+          - --bin
+          - --lib
+          - -q, --quiet
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --vcs
+          - --edition
+          - --name
+          - --registry
+          - --color
+          - --config
+          - -Z
+      name: SC-CARGO-NEW
+    - cmd: $0 init
+      options:
+        booleans:
+          - --bin
+          - --lib
+          - -q, --quiet
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --vcs
+          - --edition
+          - --name
+          - --registry
+          - --color
+          - --config
+          - -Z
+      name: SC-CARGO-INIT
+    - cmd: $0 add
+      options:
+        strings:
+          - --no-default-features
+          - --default-features
+          - -F, --features
+          - --optional
+          - --no-optional
+          - --rename
+          - --ignore-rust-version
+          - --dry-run
+          - -q, --quiet
+          - -v, --verbose...
+          - --color
+          - --config
+          - -Z
+          - -h, --help
+      name: SC-CARGO-ADD
+      categories:
+        - INSTALL_PACKAGES
+    - cmd: $0 remove
+      options:
+        booleans:
+          - --dry-run
+          - -q, --quiet
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --color
+          - --config
+          - -Z
+      categories:
+        - UNINSTALL_PACKAGES
+      name: SC-CARGO-REMOVE
+    - cmd: $0 run
+      name: SC-CARGO-RUN
+      categories:
+        - RUN_PACKAGES
+    - cmd: $0 test
+      categories:
+        - TEST_PACKAGES
+      name: SC-CARGO-TEST
+    - cmd: $0 bench
+      options:
+        booleans:
+          - --no-run
+          - --no-fail-fast
+          - --ignore-rust-version
+          - -q, --quiet
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --message-format
+          - --color
+          - --config
+          - -Z
+      name: SC-CARGO-BENCH
+    - cmd: $0 update
+      options:
+        booleans:
+          - --dry-run
+          - --aggressive
+          - -q, --quiet
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --precise
+          - --color
+          - --config
+          - -Z
+      categories:
+        - UPDATE_PACKAGES
+      name: SC-CARGO-UPDATE
+    - cmd: $0 search
+      options:
+        booleans:
+          - -q, --quiet
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --limit
+          - --index
+          - --registry
+          - --color
+          - --config
+          - -Z
+      name: SC-CARGO-SEARCH
+    - cmd: $0 publish
+      options:
+        booleans:
+          - --dry-run
+          - --no-verify
+          - --allow-dirty
+          - -q, --quiet
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --index
+          - --registry
+          - --token
+          - --color
+          - --config
+          - -Z
+      categories:
+        - DEPLOY_PACKAGES
+      name: SC-CARGO-PUBLISH
+    - cmd: $0 install
+      options:
+        booleans:
+          - -f, --force
+          - --no-track
+          - --list
+          - --ignore-rust-version
+          - -q, --quiet
+          - --debug
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --version
+          - --index
+          - --registry
+          - --git
+          - --branch
+          - --tag
+          - --rev
+          - --path
+          - --root
+          - --message-format
+          - --color
+          - --config
+          - -Z
+      categories:
+        - INSTALL_PACKAGES
+      name: SC-CARGO-INSTALL
+    - cmd: $0 uninstall
+      options:
+        booleans:
+          - -q, --quiet
+          - -v, --verbose...
+          - -h, --help
+        strings:
+          - --root
+          - --color
+          - --config
+          - -Z
+      categories:
+        - UNINSTALL_PACKAGES
+      name: SC-CARGO-UNINSTALL

@@ -1,0 +1,38 @@
+command:
+  providerFor:
+    - rustc
+  prefix: SC-RUSTC
+  categories:
+    - DEVELOPMENT
+  scenarios:
+    - cmd: $0
+      options: 
+        booleans:
+          - -h, --help
+          - -g
+          - -O
+          - --test
+          - -V, --version
+          - -v, --verbose
+        strings:
+          - --cfg
+          - -L
+          - -l
+          - --crate-type
+          - --crate-name
+          - --edition
+          - --emit
+          - --print
+          - -o
+          - --out-dir
+          - --explain
+          - --target
+          - -A, --allow
+          - -W, --warn
+          - --force-warn
+          - -D, --deny
+          - -F, --forbid
+          - --cap-lints
+          - -C, --codegen
+      name: SC-RUSTC
+

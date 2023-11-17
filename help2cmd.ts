@@ -1,6 +1,4 @@
-import { readdirSync, readFileSync, writeFileSync } from "fs";
 import { exec } from "child_process";
-import { options } from "yargs";
 
 interface Options {
   booleans?: string[];
