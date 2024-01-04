@@ -11,6 +11,7 @@ interface Scenario {
   rejectIf?: string[];
   mustHave?: string[];
   replaceEmptyArgsWith?: string[];
+  fixupBadFlag?: boolean;
   fixupNonSpacedArgs?: boolean;
   stealFromArrayFor?: {
     array: string;
@@ -122,6 +123,13 @@ function prepareArgs(args: string[], scenario: Scenario) {
   // Sometimes we have a default arg if we are passed none (like cd ...)
   if (scenario.replaceEmptyArgsWith && args.length === 0) {
     args = scenario.replaceEmptyArgsWith;
+  }
+
+  // some commands does not have - for the flags is missing a -
+  if (scenario.fixupBadFlag) {
+    if (args.length > 0 && !args[0].startsWith("-")) {
+      args[0] = "-" + args[0];
+    }
   }
   if (scenario.fixupNonSpacedArgs) {
     args = fixupNonSpacedArgs(args, scenario.argv());
@@ -670,7 +678,7 @@ function enrichAST(
       .concat(["$", "_"])
   );
 
-  // ignore co  unt args that are zero
+  // ignore count args that are zero
   scenario.counts
     ?.filter((c: string) => parseResult[c] === 0)
     .forEach(ignores.add, ignores);
@@ -780,6 +788,9 @@ export function enrich(root: nodeType.DockerOpsNodeType) {
         if (!command) return true;
         if (command.includes("bin/")) {
           command = command.split("bin/")[1];
+        }
+        if (command.startsWith("./")) {
+          command = command.split("./")[1];
         }
         const commandArgs = node.args.filter((e) => {
           return e.traverse(

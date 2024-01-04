@@ -52,6 +52,11 @@ function prepareArgs(args, scenario) {
     if (scenario.replaceEmptyArgsWith && args.length === 0) {
         args = scenario.replaceEmptyArgsWith;
     }
+    if (scenario.fixupBadFlag) {
+        if (args.length > 0 && !args[0].startsWith("-")) {
+            args[0] = "-" + args[0];
+        }
+    }
     if (scenario.fixupNonSpacedArgs) {
         args = fixupNonSpacedArgs(args, scenario.argv());
     }
@@ -537,6 +542,9 @@ function enrich(root) {
                 return true;
             if (command_1.includes("bin/")) {
                 command_1 = command_1.split("bin/")[1];
+            }
+            if (command_1.startsWith("./")) {
+                command_1 = command_1.split("./")[1];
             }
             var commandArgs_1 = node.args.filter(function (e) {
                 return e.traverse(function (e) {

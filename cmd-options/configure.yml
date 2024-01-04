@@ -1,6 +1,6 @@
 command:
   providerFor:
-    - './configure'
+    - configure
   categories:
     - BUILD_SYSTEM
   prefix: SC-CONFIGURE

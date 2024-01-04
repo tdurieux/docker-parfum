@@ -561,7 +561,7 @@ export const tarSomethingRmTheSomething: Rule = {
   description:
     "Removing the .tar file after extracting its contents in a Dockerfile helps reduce the size of the final image and can improve build times, as well as keep the file system organized and reduce clutter.",
   query: nodeType.Q(
-    "SC-TAR",
+    "SC-TAR-EXTRACT",
     nodeType.Q(
       "SC-TAR-FILE",
       nodeType.Q("ALL", nodeType.Q("ABS-EXTENSION-TAR"))

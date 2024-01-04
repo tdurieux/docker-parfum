@@ -7,6 +7,7 @@ exports.default = {
     prefix: "SC-TAR",
     scenarios: [
         {
+            fixupBadFlag: true,
             mustHave: ["-x"],
             postProcess: [{ "tagLastElement": { "source": "args", "tag": "SC-TAR-FILE" } }],
             cmd: "$0 [args...]",
@@ -144,6 +145,7 @@ exports.default = {
             }
         },
         {
+            fixupBadFlag: true,
             mustHave: ["-c"],
             postProcess: [{ "tagLastElement": { "source": "args", "tag": "SC-TAR-FILE" } }],
             cmd: "$0 [args...]",

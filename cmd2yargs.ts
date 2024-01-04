@@ -18,6 +18,7 @@ interface Scenario {
   categories?: string[];
   options: Options;
   fixBadLongNames?: string[];
+  fixupBadFlag?: boolean;
   captureAllAfter?: {
     name: string;
     match: string[];
@@ -137,6 +138,7 @@ export default {
           "saveLastNonOption",
           "stealFromArrayFor",
           "fixBadLongNames",
+          "fixupBadFlag",
           "fixupNonSpacedArgs",
           "mustHave",
           "postProcess",

@@ -786,7 +786,7 @@ describe("Testing rule matcher", () => {
     expect(violations).toHaveLength(0);
   });
   test("tarSomethingRmTheSomething invalid", async () => {
-    const root = parseDocker("RUN tar -zxvf curl-7.45.0.tar.gz");
+    const root = parseDocker("RUN tar zxvf curl-7.45.0.tar.gz");
     const matcher = new Matcher(root);
 
     const rule = tarSomethingRmTheSomething;
@@ -794,7 +794,7 @@ describe("Testing rule matcher", () => {
     expect(violations).toHaveLength(1);
     await violations[0].repair();
     expect(matcher.node.toString(true)).toEqual(
-      "RUN tar -zxvf curl-7.45.0.tar.gz && rm curl-7.45.0.tar.gz"
+      "RUN tar zxvf curl-7.45.0.tar.gz && rm curl-7.45.0.tar.gz"
     );
   });
 });

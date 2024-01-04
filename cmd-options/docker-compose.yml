@@ -1,0 +1,314 @@
+command:
+  providerFor:
+    - docker-compose
+  categories:
+    - VIRTUALIZATION
+  prefix: SC-DOCKER-COMPOSE
+  scenarios:
+    - cmd: $0
+      options: 
+        booleans:
+          - --compatibility
+          - --dry-run
+        strings:
+          - --ansi
+          - --env-file
+          - -f, --file
+          - --parallel
+          - --profile
+          - --progress
+          - --project-directory
+          - -p, --project-name
+      name: SC-DOCKER-COMPOSE
+    - cmd: $0 build
+      options: 
+        booleans:
+          - --dry-run
+          - --no-cache
+          - --pull
+          - --push
+          - -q, --quiet
+        strings:
+          - --build-arg
+          - --builder
+          - -m, --memory
+          - --ssh
+      name: SC-DOCKER-COMPOSE-BUILD
+    - cmd: $0 config
+      options: 
+        booleans:
+          - --dry-run
+          - --images
+          - --no-consistency
+          - --no-interpolate
+          - --no-normalize
+          - --no-path-resolution
+          - --profiles
+          - -q, --quiet
+          - --resolve-image-digests
+          - --services
+          - --volumes
+        strings:
+          - --format
+          - --hash
+          - -o, --output
+      name: SC-DOCKER-COMPOSE-CONFIG
+    - cmd: $0 cp
+      options: 
+        booleans:
+          - -a, --archive
+          - --dry-run
+          - -L, --follow-link
+        strings:
+          - --index
+      name: SC-DOCKER-COMPOSE-CP
+    - cmd: $0 create
+      options: 
+        booleans:
+          - --build
+          - --dry-run
+          - --force-recreate
+          - --no-build
+          - --no-recreate
+          - --remove-orphans
+        strings:
+          - --pull
+          - --scale
+      name: SC-DOCKER-COMPOSE-CREATE
+    - cmd: $0 down
+      options: 
+        booleans:
+          - --dry-run
+          - --remove-orphans
+          - -v, --volumes
+        strings:
+          - --rmi
+          - -t, --timeout
+      name: SC-DOCKER-COMPOSE-DOWN
+    - cmd: $0 events
+      options: 
+        booleans:
+          - --dry-run
+          - --json
+      name: SC-DOCKER-COMPOSE-EVENTS
+    - cmd: $0 exec
+      options: 
+        booleans:
+          - -d, --detach
+          - --dry-run
+          - --privileged
+        strings:
+          - -e, --env
+          - --index
+          - -T, --no-TTY
+          - -u, --user
+          - -w, --workdir
+      name: SC-DOCKER-COMPOSE-EXEC
+    - cmd: $0 images
+      options: 
+        booleans:
+          - --dry-run
+          - -q, --quiet
+        strings:
+          - --format
+      name: SC-DOCKER-COMPOSE-IMAGES
+    - cmd: $0 kill
+      options: 
+        booleans:
+          - --dry-run
+          - --remove-orphans
+        strings:
+          - -s, --signal
+      name: SC-DOCKER-COMPOSE-KILL
+    - cmd: $0 logs
+      options: 
+        booleans:
+          - --dry-run
+          - -f, --follow
+          - --no-color
+          - --no-log-prefix
+          - -t, --timestamps
+        strings:
+          - --since
+          - -n, --tail
+          - --until
+      name: SC-DOCKER-COMPOSE-LOGS
+    - cmd: $0 ls
+      options: 
+        booleans:
+          - -a, --all
+          - --dry-run
+          - -q, --quiet
+        strings:
+          - --filter
+          - --format
+      name: SC-DOCKER-COMPOSE-LS
+    - cmd: $0 pause
+      options: 
+        booleans:
+          - --dry-run
+      name: SC-DOCKER-COMPOSE-PAUSE
+    - cmd: $0 port
+      options: 
+        booleans:
+          - --dry-run
+        strings:
+          - --index
+          - --protocol
+      name: SC-DOCKER-COMPOSE-PORT
+    - cmd: $0 ps
+      options: 
+        booleans:
+          - -a, --all
+          - --dry-run
+          - -q, --quiet
+          - --services
+        strings:
+          - --filter
+          - --format
+          - --status
+      name: SC-DOCKER-COMPOSE-PS
+    - cmd: $0 pull
+      options: 
+        booleans:
+          - --dry-run
+          - --ignore-buildable
+          - --ignore-pull-failures
+          - --include-deps
+          - -q, --quiet
+        strings:
+          - --policy
+      name: SC-DOCKER-COMPOSE-PULL
+    - cmd: $0 push
+      options: 
+        booleans:
+          - --dry-run
+          - --ignore-push-failures
+          - --include-deps
+          - -q, --quiet
+      name: SC-DOCKER-COMPOSE-PUSH
+    - cmd: $0 restart
+      options: 
+        booleans:
+          - --dry-run
+          - --no-deps
+        strings:
+          - -t, --timeout
+      name: SC-DOCKER-COMPOSE-RESTART
+    - cmd: $0 rm
+      options: 
+        booleans:
+          - --dry-run
+          - -f, --force
+          - -s, --stop
+          - -v, --volumes
+      name: SC-DOCKER-COMPOSE-RM
+    - cmd: $0 run
+      options: 
+        booleans:
+          - --build
+          - -d, --detach
+          - --dry-run
+          - -i, --interactive
+          - -T, --no-TTY
+          - --no-deps
+          - --quiet-pull
+          - --remove-orphans
+          - --rm
+          - --service-ports
+          - --use-aliases
+        strings:
+          - --cap-add
+          - --cap-drop
+          - --entrypoint
+          - -e, --env
+          - -l, --label
+          - --name
+          - -p, --publish
+          - -u, --user
+          - -v, --volume
+          - -w, --workdir
+      name: SC-DOCKER-COMPOSE-RUN
+    - cmd: $0 scale
+      options: 
+        booleans:
+          - --dry-run
+          - --no-deps
+      name: SC-DOCKER-COMPOSE-SCALE
+    - cmd: $0 start
+      options: 
+        booleans:
+          - --dry-run
+      name: SC-DOCKER-COMPOSE-START
+    - cmd: $0 stop
+      options: 
+        booleans:
+          - --dry-run
+        strings:
+          - -t, --timeout
+      name: SC-DOCKER-COMPOSE-STOP
+    - cmd: $0 top
+      options: 
+        booleans:
+          - --dry-run
+      name: SC-DOCKER-COMPOSE-TOP
+    - cmd: $0 unpause
+      options: 
+        booleans:
+          - --dry-run
+      name: SC-DOCKER-COMPOSE-UNPAUSE
+    - cmd: $0 up
+      options: 
+        booleans:
+          - --abort-on-container-exit
+          - --always-recreate-deps
+          - --attach-dependencies
+          - --build
+          - -d, --detach
+          - --dry-run
+          - --force-recreate
+          - --no-build
+          - --no-color
+          - --no-deps
+          - --no-log-prefix
+          - --no-recreate
+          - --no-start
+          - --quiet-pull
+          - --remove-orphans
+          - -V, --renew-anon-volumes
+          - --timestamps
+          - --wait
+        strings:
+          - --attach
+          - --attach-dependencies.
+          - --exit-code-from
+          - --abort-on-container-exit
+          - --no-attach
+          - --force-recreate.
+          - --pull
+          - --scale
+          - -t, --timeout
+          - --wait-timeout
+      name: SC-DOCKER-COMPOSE-UP
+    - cmd: $0 version
+      options: 
+        booleans:
+          - --dry-run
+          - --short
+        strings:
+          - -f, --format
+      name: SC-DOCKER-COMPOSE-VERSION
+    - cmd: $0 wait
+      options: 
+        booleans:
+          - --down-project
+          - --dry-run
+      name: SC-DOCKER-COMPOSE-WAIT
+    - cmd: $0 watch
+      options: 
+        booleans:
+          - --dry-run
+          - --no-up
+          - --quiet
+      name: SC-DOCKER-COMPOSE-WATCH
+

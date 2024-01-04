@@ -496,6 +496,54 @@ exports.default = {
                     .option("f", { "alias": "format", "type": "string" });
             }
         },
+        {
+            cmd: "$0 compose [cmd]",
+            name: "SC-DOCKER-COMPOSE",
+            prefix: "SC-DOCKER",
+            paths: [],
+            booleans: [],
+            strings: [],
+            counts: [],
+            argv: function () {
+                return yargs()
+                    .describe("docker", "SC-DOCKER")
+                    .help(false)
+                    .version(false)
+                    .exitProcess(false)
+                    .showHelpOnFail(false)
+                    .parserConfiguration({
+                    "short-option-groups": true,
+                    "boolean-negation": false,
+                    "camel-case-expansion": false,
+                    "parse-numbers": false,
+                })
+                    .command("$0 compose [cmd]", "SC-DOCKER-COMPOSE");
+            }
+        },
+        {
+            cmd: "$0 [cmd]",
+            name: "SC-DOCKER",
+            prefix: "SC-DOCKER",
+            paths: [],
+            booleans: [],
+            strings: [],
+            counts: [],
+            argv: function () {
+                return yargs()
+                    .describe("docker", "SC-DOCKER")
+                    .help(false)
+                    .version(false)
+                    .exitProcess(false)
+                    .showHelpOnFail(false)
+                    .parserConfiguration({
+                    "short-option-groups": true,
+                    "boolean-negation": false,
+                    "camel-case-expansion": false,
+                    "parse-numbers": false,
+                })
+                    .command("$0 [cmd]", "SC-DOCKER");
+            }
+        },
     ]
 };
 //# sourceMappingURL=docker.js.map

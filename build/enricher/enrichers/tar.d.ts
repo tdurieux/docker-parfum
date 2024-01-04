@@ -4,6 +4,7 @@ declare const _default: {
     categories: string[];
     prefix: string;
     scenarios: ({
+        fixupBadFlag: boolean;
         mustHave: string[];
         postProcess: {
             tagLastElement: {
@@ -480,6 +481,7 @@ declare const _default: {
         } & {
             T: (string | number)[];
         }>;
+        fixupBadFlag?: undefined;
         mustHave?: undefined;
     })[];
 };

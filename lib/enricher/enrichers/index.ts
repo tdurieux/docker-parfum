@@ -52,6 +52,8 @@ import diff from "./diff";
 export {default as diff} from "./diff";
 import dnf from "./dnf";
 export {default as dnf} from "./dnf";
+import docker_compose from "./docker-compose";
+export {default as docker_compose} from "./docker-compose";
 import docker_php_ext_install from "./docker-php-ext-install";
 export {default as docker_php_ext_install} from "./docker-php-ext-install";
 import docker from "./docker";
@@ -189,4 +191,4 @@ export {default as yarn} from "./yarn";
 import yum from "./yum";
 export {default as yum} from "./yum";
 export const enrichers = [
-adduser,apk,apt_add_repository,apt_get,apt_key,apt,basename,bash,bundle,cargo,cat,cd,chmod,chown,cmake,codecov,composer,conda,configure,coverage,coveralls,cp,ctest,curl,cut,diff,dnf,docker_php_ext_install,docker,dotnet,dpkg_architecture,dpkg,echo,exit,_export,_false,find,firefox,gem,gh,git,go,google_chrome,gpg,gradle,grep,groupadd,head,jq,ldconfig,ln,locale_gen,ls,make,md5,mkdir,mktemp,mv,mvn,node,npm,nproc,pecl,php,pip,poetry,printf,pwd,pytest,python,rm,rpm,rustc,rustup,sed,set,sh,sha256sum,sha512sum,sleep,sort,sudo,swift,tar,tee,touch,_true,unzip,useradd,wc,wget,which,xargs,yarn,yum,]
+adduser,apk,apt_add_repository,apt_get,apt_key,apt,basename,bash,bundle,cargo,cat,cd,chmod,chown,cmake,codecov,composer,conda,configure,coverage,coveralls,cp,ctest,curl,cut,diff,dnf,docker_compose,docker_php_ext_install,docker,dotnet,dpkg_architecture,dpkg,echo,exit,_export,_false,find,firefox,gem,gh,git,go,google_chrome,gpg,gradle,grep,groupadd,head,jq,ldconfig,ln,locale_gen,ls,make,md5,mkdir,mktemp,mv,mvn,node,npm,nproc,pecl,php,pip,poetry,printf,pwd,pytest,python,rm,rpm,rustc,rustup,sed,set,sh,sha256sum,sha512sum,sleep,sort,sudo,swift,tar,tee,touch,_true,unzip,useradd,wc,wget,which,xargs,yarn,yum,]

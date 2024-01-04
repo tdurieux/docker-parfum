@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = require("yargs/yargs");
 exports.default = {
-    providerFor: ["./configure"],
+    providerFor: ["configure"],
     categories: ["BUILD_SYSTEM"],
     prefix: "SC-CONFIGURE",
     scenarios: [
@@ -15,7 +15,7 @@ exports.default = {
             strings: ["build"],
             argv: function () {
                 return yargs()
-                    .describe("./configure", "SC-CONFIGURE")
+                    .describe("configure", "SC-CONFIGURE")
                     .help(false)
                     .version(false)
                     .exitProcess(false)

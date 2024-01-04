@@ -26,6 +26,7 @@ export { default as curl } from "./curl";
 export { default as cut } from "./cut";
 export { default as diff } from "./diff";
 export { default as dnf } from "./dnf";
+export { default as docker_compose } from "./docker-compose";
 export { default as docker_php_ext_install } from "./docker-php-ext-install";
 export { default as docker } from "./docker";
 export { default as dotnet } from "./dotnet";
@@ -117,6 +118,8 @@ export declare const enrichers: ({
             help: boolean;
         }>;
         strings?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -136,6 +139,8 @@ export declare const enrichers: ({
         } & {
             s: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -145,6 +150,8 @@ export declare const enrichers: ({
             h: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -162,6 +169,8 @@ export declare const enrichers: ({
         } & {
             s: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -173,6 +182,8 @@ export declare const enrichers: ({
         } & {
             h: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -196,6 +207,8 @@ export declare const enrichers: ({
         } & {
             R: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -213,6 +226,8 @@ export declare const enrichers: ({
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -232,6 +247,8 @@ export declare const enrichers: ({
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -261,6 +278,8 @@ export declare const enrichers: ({
         } & {
             "retention-period": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -284,6 +303,8 @@ export declare const enrichers: ({
         } & {
             u: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -299,6 +320,8 @@ export declare const enrichers: ({
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -314,6 +337,8 @@ export declare const enrichers: ({
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -329,6 +354,8 @@ export declare const enrichers: ({
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -352,6 +379,8 @@ export declare const enrichers: ({
         } & {
             "server-port": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -367,6 +396,8 @@ export declare const enrichers: ({
         } & {
             f: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -382,6 +413,8 @@ export declare const enrichers: ({
             r: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -395,6 +428,8 @@ export declare const enrichers: ({
         } & {
             L: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -410,6 +445,8 @@ export declare const enrichers: ({
         } & {
             f: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -419,6 +456,8 @@ export declare const enrichers: ({
             R: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -446,6 +485,8 @@ export declare const enrichers: ({
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -479,6 +520,8 @@ export declare const enrichers: ({
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -492,6 +535,8 @@ export declare const enrichers: ({
             t: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -501,6 +546,8 @@ export declare const enrichers: ({
             L: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -536,6 +583,8 @@ export declare const enrichers: ({
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -551,6 +600,8 @@ export declare const enrichers: ({
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -564,6 +615,8 @@ export declare const enrichers: ({
         } & {
             owner: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -581,6 +634,8 @@ export declare const enrichers: ({
         } & {
             title: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -592,6 +647,8 @@ export declare const enrichers: ({
             owner: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -603,6 +660,8 @@ export declare const enrichers: ({
             id: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -634,6 +693,8 @@ export declare const enrichers: ({
         } & {
             title: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -647,6 +708,8 @@ export declare const enrichers: ({
         } & {
             owner: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -678,6 +741,8 @@ export declare const enrichers: ({
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -691,6 +756,8 @@ export declare const enrichers: ({
         } & {
             L: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -732,6 +799,8 @@ export declare const enrichers: ({
         } & {
             p: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -761,6 +830,17 @@ export declare const enrichers: ({
         } & {
             visibility: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        paths: any[];
+        booleans: any[];
+        strings: any[];
+        counts: any[];
+        argv: () => import("yargs").Argv<{}>;
     })[];
 } | {
     providerFor: string[];

@@ -32,6 +32,8 @@ declare const _default: {
         } & {
             w: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -57,6 +59,8 @@ declare const _default: {
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -128,6 +132,8 @@ declare const _default: {
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -145,6 +151,8 @@ declare const _default: {
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -160,6 +168,8 @@ declare const _default: {
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
         strings?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -181,6 +191,8 @@ declare const _default: {
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -198,6 +210,8 @@ declare const _default: {
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -217,6 +231,8 @@ declare const _default: {
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -228,6 +244,8 @@ declare const _default: {
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
         strings?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -245,6 +263,8 @@ declare const _default: {
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -260,6 +280,8 @@ declare const _default: {
         }>;
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -271,6 +293,19 @@ declare const _default: {
         captureAfterThirdNonOption?: undefined;
         postProcess?: undefined;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        paths: any[];
+        booleans: any[];
+        strings: any[];
+        counts: any[];
+        argv: () => Argv<{}>;
+        captureAfterThirdNonOption?: undefined;
+        postProcess?: undefined;
     })[];
 };
 export default _default;

@@ -393,7 +393,7 @@ exports.tarSomethingRmTheSomething = {
     scope: "INTRA-DIRECTIVE",
     name: "tarSomethingRmTheSomething",
     description: "Removing the .tar file after extracting its contents in a Dockerfile helps reduce the size of the final image and can improve build times, as well as keep the file system organized and reduce clutter.",
-    query: dinghy_1.nodeType.Q("SC-TAR", dinghy_1.nodeType.Q("SC-TAR-FILE", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-EXTENSION-TAR")))),
+    query: dinghy_1.nodeType.Q("SC-TAR-EXTRACT", dinghy_1.nodeType.Q("SC-TAR-FILE", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-EXTENSION-TAR")))),
     consequent: {
         afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-EXTENSION-TAR")))),
     },

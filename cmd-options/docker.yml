@@ -259,3 +259,7 @@ command:
         strings:
           - -f, --format
       name: SC-DOCKER-INFO
+    - cmd: $0 compose [cmd]
+      name: SC-DOCKER-COMPOSE
+    - cmd: $0 [cmd]
+      name: SC-DOCKER

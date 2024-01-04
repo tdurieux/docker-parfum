@@ -2,7 +2,7 @@ import { Argv } from "yargs";
 const yargs = require("yargs/yargs");
 
 export default {
-  providerFor: ["./configure"],
+  providerFor: ["configure"],
   categories: ["BUILD_SYSTEM"],
   prefix: "SC-CONFIGURE",
   scenarios: [
@@ -15,7 +15,7 @@ export default {
       strings: ["build"],
       argv: () => {
         return (yargs() as Argv)
-          .describe("./configure", "SC-CONFIGURE")
+          .describe("configure", "SC-CONFIGURE")
           .help(false)
           .version(false)
           .exitProcess(false)

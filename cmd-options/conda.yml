@@ -55,3 +55,6 @@ command:
     - cmd: $0 info
       options: *optionsAll
       name: SC-CONDA-INFO
+    - cmd: $0 <cmd>
+      options: *optionsAll
+      name: SC-CONDA

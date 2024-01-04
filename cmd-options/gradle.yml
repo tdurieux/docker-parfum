@@ -1,6 +1,6 @@
 command:
   providerFor:
-    - ./gradlew
+    - gradlew
     - gradle
   categories:
     - PACKAGE_MANAGEMENT

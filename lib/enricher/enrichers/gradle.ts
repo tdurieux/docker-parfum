@@ -2,7 +2,7 @@ import { Argv } from "yargs";
 const yargs = require("yargs/yargs");
 
 export default {
-  providerFor: ["./gradlew","gradle"],
+  providerFor: ["gradlew","gradle"],
   categories: ["PACKAGE_MANAGEMENT"],
   prefix: "SC-GRADLE",
   scenarios: [
@@ -17,7 +17,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("./gradlew,gradle", "SC-GRADLE")
+          .describe("gradlew,gradle", "SC-GRADLE")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -42,7 +42,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("./gradlew,gradle", "SC-GRADLE")
+          .describe("gradlew,gradle", "SC-GRADLE")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -66,7 +66,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("./gradlew,gradle", "SC-GRADLE")
+          .describe("gradlew,gradle", "SC-GRADLE")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -91,7 +91,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("./gradlew,gradle", "SC-GRADLE")
+          .describe("gradlew,gradle", "SC-GRADLE")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -115,7 +115,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("./gradlew,gradle", "SC-GRADLE")
+          .describe("gradlew,gradle", "SC-GRADLE")
           .help(false)
           .version(false)
           .exitProcess(false)
@@ -140,7 +140,7 @@ export default {
       counts: [],
       argv: () => {
         return (yargs() as Argv)
-          .describe("./gradlew,gradle", "SC-GRADLE")
+          .describe("gradlew,gradle", "SC-GRADLE")
           .help(false)
           .version(false)
           .exitProcess(false)

@@ -12,6 +12,8 @@ declare const _default: {
             help: boolean;
         }>;
         strings?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -31,6 +33,8 @@ declare const _default: {
         } & {
             s: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -40,6 +44,8 @@ declare const _default: {
             h: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -57,6 +63,8 @@ declare const _default: {
         } & {
             s: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -68,6 +76,8 @@ declare const _default: {
         } & {
             h: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -91,6 +101,8 @@ declare const _default: {
         } & {
             R: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -108,6 +120,8 @@ declare const _default: {
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -127,6 +141,8 @@ declare const _default: {
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -156,6 +172,8 @@ declare const _default: {
         } & {
             "retention-period": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -179,6 +197,8 @@ declare const _default: {
         } & {
             u: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -194,6 +214,8 @@ declare const _default: {
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -209,6 +231,8 @@ declare const _default: {
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -224,6 +248,8 @@ declare const _default: {
         } & {
             "repo-owner": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -247,6 +273,8 @@ declare const _default: {
         } & {
             "server-port": string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -262,6 +290,8 @@ declare const _default: {
         } & {
             f: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -277,6 +307,8 @@ declare const _default: {
             r: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -290,6 +322,8 @@ declare const _default: {
         } & {
             L: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -305,6 +339,8 @@ declare const _default: {
         } & {
             f: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -314,6 +350,8 @@ declare const _default: {
             R: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -341,6 +379,8 @@ declare const _default: {
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -374,6 +414,8 @@ declare const _default: {
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -387,6 +429,8 @@ declare const _default: {
             t: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -396,6 +440,8 @@ declare const _default: {
             L: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -431,6 +477,8 @@ declare const _default: {
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -446,6 +494,8 @@ declare const _default: {
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -459,6 +509,8 @@ declare const _default: {
         } & {
             owner: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -476,6 +528,8 @@ declare const _default: {
         } & {
             title: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -487,6 +541,8 @@ declare const _default: {
             owner: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -498,6 +554,8 @@ declare const _default: {
             id: string;
         }>;
         booleans?: undefined;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -529,6 +587,8 @@ declare const _default: {
         } & {
             title: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -542,6 +602,8 @@ declare const _default: {
         } & {
             owner: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -573,6 +635,8 @@ declare const _default: {
         } & {
             t: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -586,6 +650,8 @@ declare const _default: {
         } & {
             L: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -627,6 +693,8 @@ declare const _default: {
         } & {
             p: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
     } | {
         cmd: string;
         name: string;
@@ -656,6 +724,17 @@ declare const _default: {
         } & {
             visibility: string;
         }>;
+        paths?: undefined;
+        counts?: undefined;
+    } | {
+        cmd: string;
+        name: string;
+        prefix: string;
+        paths: any[];
+        booleans: any[];
+        strings: any[];
+        counts: any[];
+        argv: () => Argv<{}>;
     })[];
 };
 export default _default;

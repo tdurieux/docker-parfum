@@ -4,12 +4,12 @@ command:
   prefix: SC-GH
   scenarios:
     - cmd: $0 auth
-      options: 
+      options:
         booleans:
           - --help
       name: SC-GH-AUTH
     - cmd: $0 auth login
-      options: 
+      options:
         booleans:
           - --insecure-storage
           - -w, --web
@@ -20,12 +20,12 @@ command:
           - -s, --scopes
       name: SC-GH-AUTH-LOGIN
     - cmd: $0 auth logout
-      options: 
+      options:
         strings:
           - -h, --hostname
       name: SC-GH-AUTH-LOGOUT
     - cmd: $0 auth refresh
-      options: 
+      options:
         booleans:
           - --insecure-storage
           - --reset-scopes
@@ -35,24 +35,24 @@ command:
           - -s, --scopes
       name: SC-GH-AUTH-REFRESH
     - cmd: $0 auth setup-git
-      options: 
+      options:
         strings:
           - -h, --hostname
       name: SC-GH-AUTH-SETUP-GIT
     - cmd: $0 auth status
-      options: 
+      options:
         booleans:
           - -t, --show-token
         strings:
           - -h, --hostname
       name: SC-GH-AUTH-STATUS
     - cmd: $0 auth token
-      options: 
+      options:
         strings:
           - -h, --hostname
       name: SC-GH-AUTH-TOKEN
     - cmd: $0 browse
-      options: 
+      options:
         booleans:
           - -n, --no-browser
           - -p, --projects
@@ -65,12 +65,12 @@ command:
           - -R, --repo
       name: SC-GH-BROWSE
     - cmd: $0 codespace
-      options: 
+      options:
         booleans:
           - --help
       name: SC-GH-CODESPACE
     - cmd: $0 codespace code
-      options: 
+      options:
         booleans:
           - --insiders
           - -w, --web
@@ -80,7 +80,7 @@ command:
           - --repo-owner
       name: SC-GH-CODESPACE-CODE
     - cmd: $0 codespace cp
-      options: 
+      options:
         booleans:
           - -e, --expand
           - -r, --recursive
@@ -91,7 +91,7 @@ command:
           - --repo-owner
       name: SC-GH-CODESPACE-CP
     - cmd: $0 codespace create
-      options: 
+      options:
         booleans:
           - --default-permissions
           - -s, --status
@@ -107,7 +107,7 @@ command:
           - --retention-period
       name: SC-GH-CODESPACE-CREATE
     - cmd: $0 codespace delete
-      options: 
+      options:
         booleans:
           - --all
           - -f, --force
@@ -120,7 +120,7 @@ command:
           - -u, --user
       name: SC-GH-CODESPACE-DELETE
     - cmd: $0 codespace edit
-      options: 
+      options:
         strings:
           - -c, --codespace
           - -d, --display-name
@@ -129,14 +129,14 @@ command:
           - --repo-owner
       name: SC-GH-CODESPACE-EDIT
     - cmd: $0 codespace jupyter
-      options: 
+      options:
         strings:
           - -c, --codespace
           - -R, --repo
           - --repo-owner
       name: SC-GH-CODESPACE-JUPYTER
     - cmd: $0 codespace list
-      options: 
+      options:
         booleans:
           - -w, --web
         strings:
@@ -149,7 +149,7 @@ command:
           - -u, --user
       name: SC-GH-CODESPACE-LIST
     - cmd: $0 codespace logs
-      options: 
+      options:
         booleans:
           - -f, --follow
         strings:
@@ -158,7 +158,7 @@ command:
           - --repo-owner
       name: SC-GH-CODESPACE-LOGS
     - cmd: $0 codespace ports
-      options: 
+      options:
         strings:
           - -c, --codespace
           - -q, --jq
@@ -168,7 +168,7 @@ command:
           - -t, --template
       name: SC-GH-CODESPACE-PORTS
     - cmd: $0 codespace ports forward
-      options: 
+      options:
         booleans:
           - --help
         strings:
@@ -177,7 +177,7 @@ command:
           - --repo-owner
       name: SC-GH-CODESPACE PORTS-FORWARD
     - cmd: $0 codespace ports visibility
-      options: 
+      options:
         booleans:
           - --help
         strings:
@@ -186,7 +186,7 @@ command:
           - --repo-owner
       name: SC-GH-CODESPACE PORTS-VISIBILITY
     - cmd: $0 codespace rebuild
-      options: 
+      options:
         booleans:
           - --full
         strings:
@@ -195,7 +195,7 @@ command:
           - --repo-owner
       name: SC-GH-CODESPACE-REBUILD
     - cmd: $0 codespace ssh
-      options: 
+      options:
         booleans:
           - --config
           - -d, --debug
@@ -208,7 +208,7 @@ command:
           - --server-port
       name: SC-GH-CODESPACE-SSH
     - cmd: $0 codespace stop
-      options: 
+      options:
         strings:
           - -c, --codespace
           - -o, --org
@@ -217,7 +217,7 @@ command:
           - -u, --user
       name: SC-GH-CODESPACE-STOP
     - cmd: $0 codespace view
-      options: 
+      options:
         strings:
           - -c, --codespace
           - -q, --jq
@@ -227,17 +227,17 @@ command:
           - -t, --template
       name: SC-GH-CODESPACE-VIEW
     - cmd: $0 gist
-      options: 
+      options:
         booleans:
           - --help
       name: SC-GH-GIST
     - cmd: $0 gist clone
-      options: 
+      options:
         booleans:
           - --help
       name: SC-GH-GIST-CLONE
     - cmd: $0 gist create
-      options: 
+      options:
         booleans:
           - -p, --public
           - -w, --web
@@ -246,12 +246,12 @@ command:
           - -f, --filename
       name: SC-GH-GIST-CREATE
     - cmd: $0 gist delete
-      options: 
+      options:
         booleans:
           - --help
       name: SC-GH-GIST-DELETE
     - cmd: $0 gist edit
-      options: 
+      options:
         strings:
           - -a, --add
           - -d, --desc
@@ -259,7 +259,7 @@ command:
           - -r, --remove
       name: SC-GH-GIST-EDIT
     - cmd: $0 gist list
-      options: 
+      options:
         booleans:
           - --public
           - --secret
@@ -267,12 +267,12 @@ command:
           - -L, --limit
       name: SC-GH-GIST-LIST
     - cmd: $0 gist rename
-      options: 
+      options:
         booleans:
           - --help
       name: SC-GH-GIST-RENAME
     - cmd: $0 gist view
-      options: 
+      options:
         booleans:
           - --files
           - -r, --raw
@@ -281,12 +281,12 @@ command:
           - -f, --filename
       name: SC-GH-GIST-VIEW
     - cmd: $0 issue
-      options: 
+      options:
         strings:
           - -R, --repo
       name: SC-GH-ISSUE
     - cmd: $0 issue create
-      options: 
+      options:
         booleans:
           - -w, --web
         strings:
@@ -301,7 +301,7 @@ command:
           - -t, --title
       name: SC-GH-ISSUE-CREATE
     - cmd: $0 issue list
-      options: 
+      options:
         booleans:
           - -w, --web
         strings:
@@ -319,29 +319,29 @@ command:
           - -t, --template
       name: SC-GH-ISSUE-LIST
     - cmd: $0 issue status
-      options: 
+      options:
         strings:
           - -q, --jq
           - --json
           - -t, --template
       name: SC-GH-ISSUE-STATUS
     - cmd: $0 org
-      options: 
+      options:
         booleans:
           - --help
       name: SC-GH-ORG
     - cmd: $0 org list
-      options: 
+      options:
         strings:
           - -L, --limit
       name: SC-GH-ORG-LIST
     - cmd: $0 pr
-      options: 
+      options:
         strings:
           - -R, --repo
       name: SC-GH-PR
     - cmd: $0 pr create
-      options: 
+      options:
         booleans:
           - -d, --draft
           - -f, --fill
@@ -363,7 +363,7 @@ command:
           - -t, --title
       name: SC-GH-PR-CREATE
     - cmd: $0 pr list
-      options: 
+      options:
         booleans:
           - -d, --draft
           - -w, --web
@@ -382,7 +382,7 @@ command:
           - -t, --template
       name: SC-GH-PR-LIST
     - cmd: $0 pr status
-      options: 
+      options:
         booleans:
           - -c, --conflict-status
         strings:
@@ -391,12 +391,12 @@ command:
           - -t, --template
       name: SC-GH-PR-STATUS
     - cmd: $0 project
-      options: 
+      options:
         booleans:
           - --help
       name: SC-GH-PROJECT
     - cmd: $0 project close
-      options: 
+      options:
         booleans:
           - --undo
         strings:
@@ -404,7 +404,7 @@ command:
           - --owner
       name: SC-GH-PROJECT-CLOSE
     - cmd: $0 project copy
-      options: 
+      options:
         booleans:
           - --drafts
         strings:
@@ -414,20 +414,20 @@ command:
           - --title
       name: SC-GH-PROJECT-COPY
     - cmd: $0 project create
-      options: 
+      options:
         strings:
           - --format
           - --owner
           - --title
       name: SC-GH-PROJECT-CREATE
     - cmd: $0 project delete
-      options: 
+      options:
         strings:
           - --format
           - --owner
       name: SC-GH-PROJECT-DELETE
     - cmd: $0 project edit
-      options: 
+      options:
         strings:
           - -d, --description
           - --format
@@ -437,7 +437,7 @@ command:
           - --visibility
       name: SC-GH-PROJECT-EDIT
     - cmd: $0 project field-create
-      options: 
+      options:
         strings:
           - --data-type
           - --format
@@ -446,27 +446,27 @@ command:
           - --single-select-options
       name: SC-GH-PROJECT-FIELD-CREATE
     - cmd: $0 project field-delete
-      options: 
+      options:
         strings:
           - --format
           - --id
       name: SC-GH-PROJECT-FIELD-DELETE
     - cmd: $0 project field-list
-      options: 
+      options:
         strings:
           - --format
           - -L, --limit
           - --owner
       name: SC-GH-PROJECT-FIELD-LIST
     - cmd: $0 project item-add
-      options: 
+      options:
         strings:
           - --format
           - --owner
           - --url
       name: SC-GH-PROJECT-ITEM-ADD
     - cmd: $0 project item-archive
-      options: 
+      options:
         booleans:
           - --undo
         strings:
@@ -475,7 +475,7 @@ command:
           - --owner
       name: SC-GH-PROJECT-ITEM-ARCHIVE
     - cmd: $0 project item-create
-      options: 
+      options:
         strings:
           - --body
           - --format
@@ -483,14 +483,14 @@ command:
           - --title
       name: SC-GH-PROJECT-ITEM-CREATE
     - cmd: $0 project item-delete
-      options: 
+      options:
         strings:
           - --format
           - --id
           - --owner
       name: SC-GH-PROJECT-ITEM-DELETE
     - cmd: $0 project item-edit
-      options: 
+      options:
         booleans:
           - --clear
         strings:
@@ -507,14 +507,14 @@ command:
           - --title
       name: SC-GH-PROJECT-ITEM-EDIT
     - cmd: $0 project item-list
-      options: 
+      options:
         strings:
           - --format
           - -L, --limit
           - --owner
       name: SC-GH-PROJECT-ITEM-LIST
     - cmd: $0 project list
-      options: 
+      options:
         booleans:
           - --closed
           - -w, --web
@@ -524,7 +524,7 @@ command:
           - --owner
       name: SC-GH-PROJECT-LIST
     - cmd: $0 project mark-template
-      options: 
+      options:
         booleans:
           - --undo
         strings:
@@ -532,7 +532,7 @@ command:
           - --owner
       name: SC-GH-PROJECT-MARK-TEMPLATE
     - cmd: $0 project view
-      options: 
+      options:
         booleans:
           - -w, --web
         strings:
@@ -540,12 +540,12 @@ command:
           - --owner
       name: SC-GH-PROJECT-VIEW
     - cmd: $0 release
-      options: 
+      options:
         strings:
           - -R, --repo
       name: SC-GH-RELEASE
     - cmd: $0 release create
-      options: 
+      options:
         booleans:
           - -d, --draft
           - --generate-notes
@@ -562,7 +562,7 @@ command:
           - -t, --title
       name: SC-GH-RELEASE-CREATE
     - cmd: $0 release list
-      options: 
+      options:
         booleans:
           - --exclude-drafts
           - --exclude-pre-releases
@@ -570,12 +570,12 @@ command:
           - -L, --limit
       name: SC-GH-RELEASE-LIST
     - cmd: $0 repo
-      options: 
+      options:
         booleans:
           - --help
       name: SC-GH-REPO
     - cmd: $0 repo create
-      options: 
+      options:
         booleans:
           - --add-readme
           - -c, --clone
@@ -597,7 +597,7 @@ command:
           - -p, --template
       name: SC-GH-REPO-CREATE
     - cmd: $0 repo list
-      options: 
+      options:
         booleans:
           - --archived
           - --fork
@@ -612,4 +612,5 @@ command:
           - --topic
           - --visibility
       name: SC-GH-REPO-LIST
-
+    - cmd: $0 [cmd]
+      name: SC-GH

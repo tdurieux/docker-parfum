@@ -1737,6 +1737,30 @@ exports.default = {
                     .option("visibility", { "type": "string" });
             }
         },
+        {
+            cmd: "$0 [cmd]",
+            name: "SC-GH",
+            prefix: "SC-GH",
+            paths: [],
+            booleans: [],
+            strings: [],
+            counts: [],
+            argv: function () {
+                return yargs()
+                    .describe("gh", "SC-GH")
+                    .help(false)
+                    .version(false)
+                    .exitProcess(false)
+                    .showHelpOnFail(false)
+                    .parserConfiguration({
+                    "short-option-groups": true,
+                    "boolean-negation": false,
+                    "camel-case-expansion": false,
+                    "parse-numbers": false,
+                })
+                    .command("$0 [cmd]", "SC-GH");
+            }
+        },
     ]
 };
 //# sourceMappingURL=gh.js.map

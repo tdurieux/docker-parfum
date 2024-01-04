@@ -130,12 +130,14 @@ command:
     - cmd: $0 [args...]
       options: *options
       name: SC-TAR-EXTRACT
+      fixupBadFlag: true
       mustHave:
         - -x
       postProcess: *postProcess
     - cmd: $0 [args...]
       options: *options
       name: SC-TAR-COMPRESS
+      fixupBadFlag: true
       mustHave:
         - -c
       postProcess: *postProcess

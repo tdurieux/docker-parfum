@@ -333,5 +333,41 @@ export default {
           .option("q", {"alias":"quiet","type":"count"})
       }
     },
+    {
+      cmd: "$0 <cmd>",
+      name: "SC-CONDA",
+      prefix: "SC-CONDA",
+      paths: ["o","option","C","config"],
+      booleans: ["y","yes","h","help","v","version","purge","auto-remove","autoremove","force-yes","assume-yes","no-install-recommends","no-install-suggests"],
+      counts: ["q","quiet"],
+      argv: () => {
+        return (yargs() as Argv)
+          .describe("conda", "SC-CONDA")
+          .help(false)
+          .version(false)
+          .exitProcess(false)
+          .showHelpOnFail(false)
+          .parserConfiguration({
+            "short-option-groups": true,
+            "boolean-negation": false,
+            "camel-case-expansion": false,
+            "parse-numbers": false,
+          })
+          .command("$0 <cmd>", "SC-CONDA")
+          .option("y", {"alias":"yes","type":"boolean"})
+          .option("h", {"alias":"help","type":"boolean"})
+          .option("v", {"alias":"version","type":"boolean"})
+          .option("purge", {"type":"boolean"})
+          .option("auto-remove", {"type":"boolean"})
+          .option("autoremove", {"type":"boolean"})
+          .option("force-yes", {"type":"boolean"})
+          .option("assume-yes", {"type":"boolean"})
+          .option("no-install-recommends", {"type":"boolean"})
+          .option("no-install-suggests", {"type":"boolean"})
+          .option("o", {"alias":"option","type":"string"})
+          .option("C", {"alias":"config","type":"string"})
+          .option("q", {"alias":"quiet","type":"count"})
+      }
+    },
   ]
 };
