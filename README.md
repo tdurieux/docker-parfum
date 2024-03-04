@@ -1,10 +1,12 @@
 # Docker-Parfum
 
-Parfum is a tool to detect and repair smell in Dockerfile smells.
+[![CI](https://github.com/tdurieux/docker-parfum/actions/workflows/build-test.yml/badge.svg)](https://github.com/tdurieux/docker-parfum/actions/workflows/build-test.yml) ![NPM Version](https://img.shields.io/npm/v/%40tdurieux%2Fdocker-parfum)
 
-The impact of the smells are described in the paper "Empirical Study of the Docker Smells Impact on the Image Size".
+Parfum is a tool to detect and repair smells in Dockerfile smells.
 
-Docker-Parfum currently support 32 rules that have been partially identified by Henkel et al. in "Learning from, Understanding, and Supporting DevOps Artifacts for Docker"
+The impact of the smells is described in the paper "Empirical Study of the Docker Smells Impact on the Image Size".
+
+Docker-Parfum currently supports 32 rules that have been partially identified by Henkel et al. in "Learning from, Understanding, and Supporting DevOps Artifacts for Docker"
 
 ## Build
 
@@ -14,7 +16,7 @@ npm run build
 
 ## Usage
 
-### Web based
+### Web-based
 
 You can use the web version of Docker-Parfum https://durieux.me/docker-parfum/ (The website is purely static no data is sent).
 
@@ -96,7 +98,7 @@ ast.find(dindhy.nodeType.Q("SC-APT-PACKAGE"));
 | #   | Rule                            | Description                                                                                                                                                                                                                                                                      |
 | --- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | curlUseFlagL                    | The `-L` option in `curl` stands for "follow redirects." When this option is used, curl will follow any redirects that it encounters when making an HTTP request. This can be useful in a Dockerfile if you want to download a file from a URL that may redirect to another URL. |
-| 2   | ruleMoreThanOneInstall          | All apt-get install should group into one.                                                                                                                                                                                                                                       |
+| 2   | ruleMoreThanOneInstall          | All apt-get installs should be grouped into one.                                                                                                                                                                                                                                       |
 | 3   | curlUseFlagF                    | Using curl -f in a Dockerfile can help to prevent the build from failing if the HTTP request returns an error code >= 400.                                                                                                                                                       |
 | 4   | npmCacheCleanAfterInstall       | Running npm cache clean after npm install in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.                                                                                                                 |
 | 5   | npmCacheCleanUseForce           | Using the --force flag with npm cache clean can override the default behavior of npm and force the cache to be cleaned, even if it is not more than 3 days old or if npm is in a "read-only" state.                                                                              |
