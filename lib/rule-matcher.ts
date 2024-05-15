@@ -1,12 +1,17 @@
-import { nodeType } from "@tdurieux/dinghy";
-
-import enricher from "./enricher";
+import {
+  AbstractNode,
+  AllDockerNodes,
+  DockerFile,
+  enricher,
+} from "@tdurieux/dinghy";
 import { ALL_RULES } from "./rules";
-import { DockerFile } from "@tdurieux/dinghy/build/docker-type";
 import { Rule } from "./rules";
 
 export class Violation {
-  constructor(readonly rule: Rule, readonly node: nodeType.DockerOpsNodeType) {}
+  constructor(
+    readonly rule: Rule,
+    readonly node: AbstractNode<AllDockerNodes>
+  ) {}
 
   public async repair(opt = { clone: false }) {
     if (this.isStillValid()) {
@@ -15,7 +20,7 @@ export class Violation {
         const parent =
           this.node instanceof DockerFile
             ? this.node.clone()
-            : this.node.getParent(nodeType.DockerFile)?.clone();
+            : this.node.getParent(DockerFile)?.clone();
         if (parent == null) {
           console.error("Dockerfile not found in parent");
           return this.node;
@@ -30,7 +35,7 @@ export class Violation {
           }
         });
       }
-      await this.rule.repair(node);
+      await this.rule.repair(node as any);
       return node;
     }
     return this.node;
@@ -46,18 +51,20 @@ export class Violation {
   public toString(): string {
     return `[VIOLATION] -> ${this.rule.name} at ${this.node.position}
         ${this.rule.description}
-                ${this.node.toString(false).replace(/\n/g, "\n                ")}`;
+                ${this.node
+                  .toString(false)
+                  .replace(/\n/g, "\n                ")}`;
   }
 }
 
 export class Matcher {
-  private _root: nodeType.DockerOpsNodeType;
+  private _root: AbstractNode<AllDockerNodes>;
 
   constructor(
-    root: nodeType.DockerOpsNodeType,
+    root: AbstractNode<AllDockerNodes>,
     { toEnrich } = { toEnrich: true }
   ) {
-    this._root = toEnrich ? enricher(root) : root;
+    this._root = toEnrich ? enricher.default(root) : root;
   }
 
   /**
@@ -156,19 +163,19 @@ export class Matcher {
 }
 
 function getPreviousAndNextParentNodes(
-  node: nodeType.DockerOpsNodeType,
+  node: AbstractNode<AllDockerNodes>,
   beforeNode: boolean,
   inScript: boolean
-): nodeType.DockerOpsNodeType[] {
+): AbstractNode<AllDockerNodes>[] {
   const STOPPER = inScript ? "BASH-SCRIPT" : "DOCKER-FILE";
 
-  const candidates: nodeType.DockerOpsNodeType[] = [];
+  const candidates: AbstractNode<AllDockerNodes>[] = [];
 
   let current = node.parent;
   let previous = node;
   while (current != null) {
     if (current.children.length > 1) {
-      const parentIndex = current.children.indexOf(previous);
+      const parentIndex = current.children.indexOf(previous as any);
       current.children
         .filter((_, i) => (beforeNode ? i < parentIndex : i > parentIndex))
         .forEach((node) => candidates.push(node));

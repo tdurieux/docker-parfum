@@ -41,7 +41,7 @@ exports.default = {
     scope: "INTRA-DIRECTIVE",
     name: "DL3029",
     description: "Specifying --platform= in the docker file FROM clause forces the Image to build only one target platform.",
-    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.DockerFlag, dinghy_1.nodeType.Q(dinghy_1.nodeType.DockerName, "platform")),
+    query: (0, dinghy_1.Q)(dinghy_1.DockerFlag, (0, dinghy_1.Q)(dinghy_1.DockerName, "platform")),
     source: "https://github.com/hadolint/hadolint/wiki/DL3029",
     consequent: {},
     repair: function (node) { return __awaiter(void 0, void 0, void 0, function () {

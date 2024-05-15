@@ -42,23 +42,15 @@ exports.default = {
     scope: "INTRA-DIRECTIVE",
     name: "yarnCacheCleanAfterInstall",
     description: "yarn keeps a local cache of downloaded packages. This unnecessarily increases image size. It can be cleared by executing yarn cache clean.",
-    query: dinghy_1.nodeType.Q("SC-YARN-INSTALL"),
+    query: (0, dinghy_1.Q)("SC-YARN-INSTALL"),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q("SC-YARN-CACHE-CLEAN"),
+        afterNode: (0, dinghy_1.Q)("SC-YARN-CACHE-CLEAN"),
     },
     source: "https://github.com/hadolint/hadolint/wiki/DL3060",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
-        var _a, _b;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0:
-                    _a = utils_1.postFixWith;
-                    _b = [violation];
-                    return [4, (0, dinghy_1.parseShell)("yarn cache clean;")];
-                case 1:
-                    _a.apply(void 0, _b.concat([_c.sent()]));
-                    return [2];
-            }
+        return __generator(this, function (_a) {
+            (0, utils_1.postFixWith)(violation, (0, dinghy_1.parseShell)("yarn cache clean;"));
+            return [2];
         });
     }); },
 };

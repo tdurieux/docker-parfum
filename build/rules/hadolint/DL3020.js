@@ -41,14 +41,14 @@ exports.default = {
     scope: "INTRA-DIRECTIVE",
     name: "DL3020",
     description: "Use COPY instead of ADD for files and folders.",
-    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.DockerAdd),
+    query: (0, dinghy_1.Q)(dinghy_1.DockerAdd),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("ABS-EXTENSION-TAR"),
+        inNode: (0, dinghy_1.Q)("ABS-EXTENSION-TAR"),
     },
     source: "https://github.com/hadolint/hadolint/wiki/DL3020",
     repair: function (node) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            node.getChild(dinghy_1.nodeType.DockerKeyword).value = "COPY";
+            node.getChild(dinghy_1.DockerKeyword).value = "COPY";
             return [2];
         });
     }); },

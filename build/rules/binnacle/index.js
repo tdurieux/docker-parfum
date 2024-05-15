@@ -43,18 +43,18 @@ exports.curlUseFlagF = {
     scope: "INTRA-DIRECTIVE",
     name: "curlUseFlagF",
     description: "Using curl -f in a Dockerfile can help to prevent the build from failing if the HTTP request returns an error code >= 400.",
-    query: dinghy_1.nodeType.Q("SC-CURL"),
+    query: (0, dinghy_1.Q)("SC-CURL"),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-CURL-F-FAIL"),
+        inNode: (0, dinghy_1.Q)("SC-CURL-F-FAIL"),
     },
     source: "https://github.com/docker-library/python/pull/73/commits/033320b278e78732e5739f19bca5f8f29573b553",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[0].position)
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("-f"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("-f"))));
             return [2];
         });
     }); },
@@ -63,9 +63,9 @@ exports.npmCacheCleanAfterInstall = {
     scope: "INTRA-DIRECTIVE",
     name: "npmCacheCleanAfterInstall",
     description: "Running npm cache clean after npm install in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.",
-    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.QOR("SC-NPM-INSTALL", "SC-NPM-CI")),
+    query: (0, dinghy_1.Q)((0, dinghy_1.QOR)("SC-NPM-INSTALL", "SC-NPM-CI")),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q("SC-NPM-CACHE-CLEAN"),
+        afterNode: (0, dinghy_1.Q)("SC-NPM-CACHE-CLEAN"),
     },
     source: "https://github.com/docker-library/ghost/pull/186/commits/c3bac502046ed5bea16fee67cc48ba993baeaea8",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -79,9 +79,9 @@ exports.npmCacheCleanUseForce = {
     scope: "INTRA-DIRECTIVE",
     name: "npmCacheCleanUseForce",
     description: "Using the --force flag with npm cache clean can override the default behavior of npm and force the cache to be cleaned, even if it is not more than 3 days old or if npm is in a \"read-only\" state.",
-    query: dinghy_1.nodeType.Q("SC-NPM-CACHE-CLEAN"),
+    query: (0, dinghy_1.Q)("SC-NPM-CACHE-CLEAN"),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-NPM-F-FORCE"),
+        inNode: (0, dinghy_1.Q)("SC-NPM-F-FORCE"),
     },
     source: "https://github.com/docker-library/ghost/pull/186/commits/c3bac502046ed5bea16fee67cc48ba993baeaea8",
     notes: "Had to split into two rules to describe both adding npm cache clean and using the --force flag",
@@ -89,9 +89,9 @@ exports.npmCacheCleanUseForce = {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[2].position)
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("--force"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("--force"))));
             return [2];
         });
     }); },
@@ -100,9 +100,9 @@ exports.rmRecursiveAfterMktempD = {
     scope: "INTRA-DIRECTIVE",
     name: "rmRecursiveAfterMktempD",
     description: "Using mktemp -d followed by rm -r in a Dockerfile can create and delete a temporary directory, helping to keep the image small and clean up sensitive data.",
-    query: dinghy_1.nodeType.Q("SC-MKTEMP", dinghy_1.nodeType.Q("SC-MKTEMP-F-DIRECTORY")),
+    query: (0, dinghy_1.Q)("SC-MKTEMP", (0, dinghy_1.Q)("SC-MKTEMP-F-DIRECTORY")),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-F-FORCE")),
+        afterNode: (0, dinghy_1.Q)("SC-RM", (0, dinghy_1.Q)("SC-RM-F-FORCE")),
     },
     source: "IMPLICIT --- you should remove temporary dirs in docker images",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -119,9 +119,9 @@ exports.curlUseHttpsUrl = {
     scope: "INTRA-DIRECTIVE",
     name: "curlUseHttpsUrl",
     description: "Using https instead of http with curl in a Dockerfile can provide an encrypted connection for transferring data and ensure that curl can access resources that may require https.",
-    query: dinghy_1.nodeType.Q("SC-CURL", dinghy_1.nodeType.Q("SC-CURL-URL", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-URL-PROTOCOL-HTTP")))),
+    query: (0, dinghy_1.Q)("SC-CURL", (0, dinghy_1.Q)("SC-CURL-URL", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-URL-PROTOCOL-HTTP")))),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("ABS-URL-PROTOCOL-HTTPS"),
+        inNode: (0, dinghy_1.Q)("ABS-URL-PROTOCOL-HTTPS"),
     },
     source: "https://github.com/docker-library/php/pull/293/commits/2f96a00aaa90ee1c503140724936ca7005273df5",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -129,10 +129,11 @@ exports.curlUseHttpsUrl = {
         return __generator(this, function (_a) {
             node = violation;
             node.traverse(function (x) {
-                if (x instanceof dinghy_1.nodeType.DockerOpsValueNode &&
+                if (x instanceof dinghy_1.AbstractValueNode &&
                     x.value &&
                     x.value.includes("http:")) {
                     x.value = x.value.replace("http", "https");
+                    x.isChanged = true;
                 }
             });
             return [2];
@@ -143,9 +144,9 @@ exports.wgetUseHttpsUrl = {
     scope: "INTRA-DIRECTIVE",
     name: "wgetUseHttpsUrl",
     description: "Using https instead of http with wget in a Dockerfile can provide an encrypted connection for transferring data and ensure that wget can access resources that may require https.",
-    query: dinghy_1.nodeType.Q("SC-WGET", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-WGET-URL", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-URL-PROTOCOL-HTTP"))))),
+    query: (0, dinghy_1.Q)("SC-WGET", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("SC-WGET-URL", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-URL-PROTOCOL-HTTP"))))),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("ABS-URL-PROTOCOL-HTTPS"),
+        inNode: (0, dinghy_1.Q)("ABS-URL-PROTOCOL-HTTPS"),
     },
     source: "https://github.com/docker-library/php/pull/293/commits/2f96a00aaa90ee1c503140724936ca7005273df5",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -153,7 +154,7 @@ exports.wgetUseHttpsUrl = {
         return __generator(this, function (_a) {
             node = violation;
             node.traverse(function (x) {
-                if (x instanceof dinghy_1.nodeType.DockerOpsValueNode &&
+                if (x instanceof dinghy_1.AbstractValueNode &&
                     x.value &&
                     x.value.includes("http:")) {
                     x.value = x.value.replace("http", "https");
@@ -167,19 +168,19 @@ exports.pipUseNoCacheDir = {
     scope: "INTRA-DIRECTIVE",
     name: "pipUseNoCacheDir",
     description: "Using the --no-cache-dir flag with pip in a Dockerfile can disable the package cache, ensuring that the latest version of a package and its dependencies are installed.",
-    query: dinghy_1.nodeType.Q("SC-PIP-INSTALL"),
+    query: (0, dinghy_1.Q)("SC-PIP-INSTALL"),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-PIP-F-NO-CACHE-DIR"),
-        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("HOME-CACHE-PIP"))),
+        inNode: (0, dinghy_1.Q)("SC-PIP-F-NO-CACHE-DIR"),
+        afterNode: (0, dinghy_1.Q)("SC-RM", (0, dinghy_1.Q)("SC-RM-PATH", (0, dinghy_1.Q)("HOME-CACHE-PIP"))),
     },
     source: "https://github.com/docker-library/python/pull/50/commits/7663560df7547e69d13b1b548675502f4e0917d1",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[1].position)
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("--no-cache-dir"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("--no-cache-dir"))));
             return [2];
         });
     }); },
@@ -188,9 +189,9 @@ exports.mkdirUsrSrcThenRemove = {
     scope: "INTRA-DIRECTIVE",
     name: "mkdirUsrSrcThenRemove",
     description: "Running rm -rf /usr/src* after creating the /usr/src directory in a Dockerfile helps keep the file system organized, reduce clutter, and free up space, but it is important to be cautious when using the rm -rf command.",
-    query: dinghy_1.nodeType.Q("SC-MKDIR", dinghy_1.nodeType.Q("SC-MKDIR-PATH", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-USR-SRC-DIR")))),
+    query: (0, dinghy_1.Q)("SC-MKDIR", (0, dinghy_1.Q)("SC-MKDIR-PATH", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-USR-SRC-DIR")))),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-USR-SRC-DIR")))),
+        afterNode: (0, dinghy_1.Q)("SC-RM", (0, dinghy_1.Q)("SC-RM-PATH", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-USR-SRC-DIR")))),
     },
     source: "https://github.com/docker-library/python/pull/20/commits/ce7da0b874784e6b69e3966b5d7ba995e873163e",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -198,8 +199,8 @@ exports.mkdirUsrSrcThenRemove = {
         return __generator(this, function (_b) {
             (0, utils_1.postFixWith)(violation, (0, dinghy_1.parseShell)("rm -rf " +
                 ((_a = violation
-                    .find(dinghy_1.nodeType.Q("SC-MKDIR-PATH"))[0]
-                    .getElement(dinghy_1.nodeType.BashLiteral)) === null || _a === void 0 ? void 0 : _a.toString(true))));
+                    .find((0, dinghy_1.Q)("SC-MKDIR-PATH"))[0]
+                    .getElement(dinghy_1.BashLiteral)) === null || _a === void 0 ? void 0 : _a.toString(true))));
             return [2];
         });
     }); },
@@ -208,18 +209,18 @@ exports.configureShouldUseBuildFlag = {
     scope: "INTRA-DIRECTIVE",
     name: "configureShouldUseBuildFlag",
     description: "Passing the --build flag to ./configure in a Dockerfile can help to ensure that the configure script correctly detects the current build environment and generates the correct Makefiles.",
-    query: dinghy_1.nodeType.Q("SC-CONFIGURE"),
+    query: (0, dinghy_1.Q)("SC-CONFIGURE"),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-CONFIGURE-BUILD"),
+        inNode: (0, dinghy_1.Q)("SC-CONFIGURE-BUILD"),
     },
     source: "https://github.com/docker-library/ruby/pull/127/commits/be55938d970a392e7d41f17131a091b0a9f4bebc",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[0].position.clone())
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral('--build="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"'))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral('--build="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"'))));
             return [2];
         });
     }); },
@@ -228,9 +229,9 @@ exports.gemUpdateSystemRmRootGem = {
     scope: "INTRA-DIRECTIVE",
     name: "gemUpdateSystemRmRootGem",
     description: "Removing the /root/.gem directory after running gem update --system can ensure that all of the installed gems are compatible with the new version of gem and that the image starts with a clean slate.",
-    query: dinghy_1.nodeType.Q("SC-GEM-UPDATE"),
+    query: (0, dinghy_1.Q)("SC-GEM-UPDATE"),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ABS-PATH-ABSOLUTE"), dinghy_1.nodeType.Q("ABS-PATH-DOT-GEM"), dinghy_1.nodeType.Q("ABS-PATH-ROOT-DIR"))),
+        afterNode: (0, dinghy_1.Q)("SC-RM", (0, dinghy_1.Q)("SC-RM-PATH", (0, dinghy_1.Q)("ABS-PATH-ABSOLUTE"), (0, dinghy_1.Q)("ABS-PATH-DOT-GEM"), (0, dinghy_1.Q)("ABS-PATH-ROOT-DIR"))),
     },
     source: "https://github.com/docker-library/ruby/pull/185/commits/c9a4472a019d18aba1fdab6a63b96474b40ca191",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -252,9 +253,9 @@ exports.sha256sumEchoOneSpaces = {
     scope: "INTRA-DIRECTIVE",
     name: "sha256sumEchoOneSpaces",
     description: "The sha256sum command reads input from stdin with one space as a separator in order to distinguish the input from a filename.",
-    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinary, dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinaryLhs, dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-SINGLE-SPACE"))))), dinghy_1.nodeType.Q(dinghy_1.nodeType.BashConditionBinaryRhs, dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-SHA-256-SUM", dinghy_1.nodeType.Q("SC-SHA-256-SUM-F-CHECK"))))),
+    query: (0, dinghy_1.Q)(dinghy_1.BashConditionBinary, (0, dinghy_1.Q)(dinghy_1.BashConditionBinaryLhs, (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("SC-ECHO", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-SINGLE-SPACE"))))), (0, dinghy_1.Q)(dinghy_1.BashConditionBinaryRhs, (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("SC-SHA-256-SUM", (0, dinghy_1.Q)("SC-SHA-256-SUM-F-CHECK"))))),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-DOUBLE-SPACE"))),
+        inNode: (0, dinghy_1.Q)("SC-ECHO", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-DOUBLE-SPACE"))),
     },
     source: "https://github.com/docker-library/memcached/pull/6/commits/a8c4206768821aa47579c6413be85be914875caa",
     notes: "sha1sum is old --- transliterated to use more modern sha256sum which most images are using",
@@ -263,20 +264,18 @@ exports.sha256sumEchoOneSpaces = {
             var node, echoWithDoubleSpace;
             return __generator(this, function (_a) {
                 node = violation;
-                echoWithDoubleSpace = node.find(dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-SINGLE-SPACE"))));
+                echoWithDoubleSpace = node.find((0, dinghy_1.Q)("SC-ECHO", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-SINGLE-SPACE"))));
                 if (echoWithDoubleSpace) {
                     echoWithDoubleSpace.forEach(function (n) {
                         return n
-                            .find(dinghy_1.nodeType.Q("ABS-SINGLE-SPACE"))
-                            .filter(function (n) {
-                            return n instanceof dinghy_1.nodeType.DockerOpsValueNode || n.children.length == 1;
-                        })
+                            .find((0, dinghy_1.Q)("ABS-SINGLE-SPACE"))
+                            .filter(function (n) { return n instanceof dinghy_1.AbstractValueNode || n.children.length == 1; })
                             .forEach(function (doubleSpace) {
-                            if (doubleSpace instanceof dinghy_1.nodeType.DockerOpsValueNode) {
+                            if (doubleSpace instanceof dinghy_1.AbstractValueNode) {
                                 doubleSpace.value = doubleSpace.value.replace(/ /g, "  ");
                             }
                             else if (doubleSpace.children.length == 1 &&
-                                doubleSpace.children[0] instanceof dinghy_1.nodeType.DockerOpsValueNode) {
+                                doubleSpace.children[0] instanceof dinghy_1.AbstractValueNode) {
                                 doubleSpace.children[0].value =
                                     doubleSpace.children[0].value.replace(/ /g, "  ");
                             }
@@ -292,31 +291,26 @@ exports.gemUpdateNoDocument = {
     scope: "INTER-DIRECTIVE",
     name: "gemUpdateNoDocument",
     description: "Adding the --no-document flag to the .gemrc config file or using it with gem update can speed up the update process by skipping the installation of documentation for updated gems.",
-    query: dinghy_1.nodeType.Q("SC-GEM-UPDATE"),
+    query: (0, dinghy_1.Q)("SC-GEM-UPDATE"),
     consequent: {
-        beforeNode: dinghy_1.nodeType.Q("SC-ECHO", dinghy_1.nodeType.Q("SC-ECHO-ITEM", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-CONFIG-NO-DOCUMENT")))),
+        beforeNode: (0, dinghy_1.Q)("SC-ECHO", (0, dinghy_1.Q)("SC-ECHO-ITEM", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-CONFIG-NO-DOCUMENT")))),
     },
     source: "https://github.com/docker-library/ruby/pull/49/files",
     notes: "Either gem update or gem install leads us to wanting the --no-document/--no-rdoc flag to be set.",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node, dFile, dRun, setup;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    node = violation;
-                    dFile = node.getParent(dinghy_1.nodeType.DockerFile);
-                    dRun = node.getParent(dinghy_1.nodeType.DockerRun);
-                    if (dFile == null || dRun == null)
-                        return [2];
-                    return [4, (0, dinghy_1.parseDocker)("RUN mkdir -p /usr/local/etc \\\n  && { \\\n    echo 'install: --no-document'; \\\n    echo 'update: --no-document'; \\\n  } >> /usr/local/etc/gemrc;\n")];
-                case 1:
-                    setup = (_a.sent()).getElement(dinghy_1.nodeType.DockerRun);
-                    if (setup) {
-                        setup.position.lineStart = dRun.position.lineStart - 1;
-                        dFile.addChild(setup);
-                    }
-                    return [2];
+            node = violation;
+            dFile = node.getParent(dinghy_1.DockerFile);
+            dRun = node.getParent(dinghy_1.DockerRun);
+            if (dFile == null || dRun == null)
+                return [2];
+            setup = (0, dinghy_1.parseDocker)("RUN mkdir -p /usr/local/etc \\\n  && { \\\n    echo 'install: --no-document'; \\\n    echo 'update: --no-document'; \\\n  } >> /usr/local/etc/gemrc;\n").getElement(dinghy_1.DockerRun);
+            if (setup) {
+                setup.position.lineStart = dRun.position.lineStart - 2;
+                dFile.addChild(setup);
             }
+            return [2];
         });
     }); },
 };
@@ -324,9 +318,9 @@ exports.gpgVerifyAscRmAsc = {
     scope: "INTRA-DIRECTIVE",
     name: "gpgVerifyAscRmAsc",
     description: "It is generally good practice to remove the .asc file after verifying its signature because the .asc file serves no further purpose once the signature has been verified.",
-    query: dinghy_1.nodeType.Q("SC-GPG", dinghy_1.nodeType.Q("SC-GPG-VERIFY", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-EXTENSION-ASC")))),
+    query: (0, dinghy_1.Q)("SC-GPG", (0, dinghy_1.Q)("SC-GPG-VERIFY", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-EXTENSION-ASC")))),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH")),
+        afterNode: (0, dinghy_1.Q)("SC-RM", (0, dinghy_1.Q)("SC-RM-PATH")),
     },
     source: "https://github.com/docker-library/php/pull/196/commits/8943e1e6a930768994fbc29f4df89d0a3fd65e12",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -336,7 +330,7 @@ exports.gpgVerifyAscRmAsc = {
                 case 0:
                     _a = utils_1.postFixWith;
                     _b = [violation];
-                    return [4, (0, dinghy_1.parseShell)("rm " + violation.find(dinghy_1.nodeType.Q("ABS-EXTENSION-ASC"))[0].toString())];
+                    return [4, (0, dinghy_1.parseShell)("rm " + violation.find((0, dinghy_1.Q)("ABS-EXTENSION-ASC"))[0].toString())];
                 case 1:
                     _a.apply(void 0, _b.concat([_c.sent()]));
                     return [2];
@@ -348,18 +342,18 @@ exports.yumInstallForceYes = {
     scope: "INTRA-DIRECTIVE",
     name: "yumInstallForceYes",
     description: "Using the -y flag with yum install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.",
-    query: dinghy_1.nodeType.Q("SC-YUM-INSTALL"),
+    query: (0, dinghy_1.Q)("SC-YUM-INSTALL"),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-YUM-F-ASSUMEYES"),
+        inNode: (0, dinghy_1.Q)("SC-YUM-F-ASSUMEYES"),
     },
     source: "IMPLICIT -- based on apt-get install -y rule",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[1].position)
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("-y"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("-y"))));
             return [2];
         });
     }); },
@@ -368,9 +362,9 @@ exports.yumInstallRmVarCacheYum = {
     scope: "INTRA-DIRECTIVE",
     name: "yumInstallRmVarCacheYum",
     description: "Removing the /var/cache/yum directory after running yum install in a Dockerfile helps reduce the size of the final image and can improve build times, as well as prevent issues caused by outdated or inconsistent cache data.",
-    query: dinghy_1.nodeType.Q("SC-YUM-INSTALL"),
+    query: (0, dinghy_1.Q)("SC-YUM-INSTALL"),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-F-RECURSIVE"), dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-VAR-CACHE-YUM")))),
+        afterNode: (0, dinghy_1.Q)("SC-RM", (0, dinghy_1.Q)("SC-RM-F-RECURSIVE"), (0, dinghy_1.Q)("SC-RM-PATH", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-VAR-CACHE-YUM")))),
     },
     source: "https://github.com/docker-library/ruby/pull/7/commits/950a673e59df846608f624ee55321d36ba1f89ba",
     notes: "The source here is for apt-get. This rule is the natural translation to yum.",
@@ -393,9 +387,9 @@ exports.tarSomethingRmTheSomething = {
     scope: "INTRA-DIRECTIVE",
     name: "tarSomethingRmTheSomething",
     description: "Removing the .tar file after extracting its contents in a Dockerfile helps reduce the size of the final image and can improve build times, as well as keep the file system organized and reduce clutter.",
-    query: dinghy_1.nodeType.Q("SC-TAR-EXTRACT", dinghy_1.nodeType.Q("SC-TAR-FILE", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-EXTENSION-TAR")))),
+    query: (0, dinghy_1.Q)("SC-TAR-EXTRACT", (0, dinghy_1.Q)("SC-TAR-FILE", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-EXTENSION-TAR")))),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-EXTENSION-TAR")))),
+        afterNode: (0, dinghy_1.Q)("SC-RM", (0, dinghy_1.Q)("SC-RM-PATH", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-EXTENSION-TAR")))),
     },
     source: "IMPLICIT --- no reason to keep around duplicates (the compressed version and the uncompressed version)",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -404,7 +398,7 @@ exports.tarSomethingRmTheSomething = {
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
-                    file = (_c = violation.find(dinghy_1.nodeType.Q("ABS-EXTENSION-TAR"))[0]) === null || _c === void 0 ? void 0 : _c.toString();
+                    file = (_c = violation.find((0, dinghy_1.Q)("ABS-EXTENSION-TAR"))[0]) === null || _c === void 0 ? void 0 : _c.toString();
                     if (file.startsWith("-") && file.includes("=")) {
                         file = file.split("=")[1];
                     }
@@ -425,18 +419,18 @@ exports.gpgUseBatchFlag = {
     scope: "INTRA-DIRECTIVE",
     name: "gpgUseBatchFlag",
     description: "Using the --batch flag with gpg in a Dockerfile allows the command to run without user input, but it is important to carefully consider the implications of using the flag to ensure that it is appropriate for the task at hand.",
-    query: dinghy_1.nodeType.Q("SC-GPG"),
+    query: (0, dinghy_1.Q)("SC-GPG"),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-GPG-F-BATCH"),
+        inNode: (0, dinghy_1.Q)("SC-GPG-F-BATCH"),
     },
     source: "https://github.com/docker-library/php/pull/747/commits/b99209cc078ebb7bf4614e870c2d69e0b3bed399",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[0].position)
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("--batch"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("--batch"))));
             return [2];
         });
     }); },
@@ -445,9 +439,9 @@ exports.gpgUseHaPools = {
     scope: "INTRA-DIRECTIVE",
     name: "gpgUseHaPools",
     description: "Using ha.pool.* instead of pool.* with gpg in a Dockerfile improves key server access reliability and efficiency.",
-    query: dinghy_1.nodeType.Q("SC-GPG", dinghy_1.nodeType.Q("SC-GPG-KEYSERVER", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("ABS-URL-POOL")))),
+    query: (0, dinghy_1.Q)("SC-GPG", (0, dinghy_1.Q)("SC-GPG-KEYSERVER", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("ABS-URL-POOL")))),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("ABS-URL-HA-POOL"),
+        inNode: (0, dinghy_1.Q)("ABS-URL-HA-POOL"),
     },
     source: "https://github.com/docker-library/httpd/pull/5/commits/63cd0ad57a12c76ff70d0f501f6c2f1580fa40f5",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -455,7 +449,7 @@ exports.gpgUseHaPools = {
         return __generator(this, function (_a) {
             node = violation;
             node
-                .getElements(dinghy_1.nodeType.BashLiteral)
+                .getElements(dinghy_1.BashLiteral)
                 .filter(function (e) { return e.value.includes("pool."); })
                 .forEach(function (e) { return (e.value = e.value.replace("pool.", "ha.pool.")); });
             return [2];
@@ -466,18 +460,18 @@ exports.aptGetInstallUseY = {
     scope: "INTRA-DIRECTIVE",
     name: "aptGetInstallUseY",
     description: "Using the -y flag with apt-get install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.",
-    query: dinghy_1.nodeType.Q("SC-APT-INSTALL"),
+    query: (0, dinghy_1.Q)("SC-APT-INSTALL"),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-APT-F-YES"),
+        inNode: (0, dinghy_1.Q)("SC-APT-F-YES"),
     },
     source: "IMPLICIT --- need to use non-interactive mode during image build except for very rare exceptions.",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[1].position.clone())
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("-y"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("-y"))));
             return [2];
         });
     }); },
@@ -486,43 +480,43 @@ exports.aptGetUpdatePrecedesInstall = {
     scope: "INTRA-DIRECTIVE",
     name: "aptGetUpdatePrecedesInstall",
     description: "Running apt-get update and apt-get install in a single layer in a Dockerfile improves efficiency, reliability, and readability.",
-    query: dinghy_1.nodeType.Q("SC-APT-INSTALL"),
+    query: (0, dinghy_1.Q)("SC-APT-INSTALL"),
     consequent: {
-        beforeNode: dinghy_1.nodeType.Q("SC-APT-UPDATE"),
+        beforeNode: (0, dinghy_1.Q)("SC-APT-UPDATE"),
     },
     source: "IMPLICIT --- one of Hadolint's recommendations and a docker best practice.",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var root, installs, updates, install, update, updatePosition, script, child, binary;
         return __generator(this, function (_a) {
-            root = violation.getParent(dinghy_1.nodeType.DockerFile);
-            installs = root.find(dinghy_1.nodeType.Q("SC-APT-INSTALL"));
+            root = violation.getParent(dinghy_1.DockerFile);
+            installs = root.find((0, dinghy_1.Q)("SC-APT-INSTALL"));
             if (installs.length !== 1) {
                 return [2];
             }
-            updates = root.find(dinghy_1.nodeType.Q("SC-APT-UPDATE"));
+            updates = root.find((0, dinghy_1.Q)("SC-APT-UPDATE"));
             if (updates.length !== 1) {
                 return [2];
             }
             install = installs[0];
             update = updates[0];
-            if (update.parent instanceof dinghy_1.nodeType.BashScript) {
-                update.getParent(dinghy_1.nodeType.DockerRun).remove();
+            if (update.parent instanceof dinghy_1.BashScript) {
+                update.getParent(dinghy_1.DockerRun).remove();
                 updatePosition = update.position;
                 update.setPosition(null);
-                if (update instanceof dinghy_1.nodeType.BashStatement) {
+                if (update instanceof dinghy_1.BashStatement) {
                     update.semicolon = false;
                 }
-                script = install.getParent(dinghy_1.nodeType.BashScript);
+                script = install.getParent(dinghy_1.BashScript);
                 child = script.children[0];
                 updatePosition.lineEnd = child.position.lineEnd;
                 updatePosition.columnEnd = child.position.columnEnd;
                 update.setPosition(child.position.clone());
-                binary = new dinghy_1.nodeType.BashConditionBinary()
-                    .addChild(new dinghy_1.nodeType.BashConditionBinaryOp().addChild(new dinghy_1.nodeType.BashOp("10")))
-                    .addChild(new dinghy_1.nodeType.BashConditionBinaryLhs().addChild(update))
-                    .addChild(new dinghy_1.nodeType.BashConditionBinaryRhs().addChild(child.clone().setPosition(updatePosition)));
+                binary = new dinghy_1.BashConditionBinary()
+                    .addChild(new dinghy_1.BashConditionBinaryOp().addChild(new dinghy_1.BashOp("10")))
+                    .addChild(new dinghy_1.BashConditionBinaryLhs().addChild(update))
+                    .addChild(new dinghy_1.BashConditionBinaryRhs().addChild(child.clone().setPosition(updatePosition)));
                 child.replace(binary);
-                child.getParent(dinghy_1.nodeType.DockerRun).setPosition(updatePosition);
+                child.getParent(dinghy_1.DockerRun).setPosition(updatePosition);
                 binary.setPosition(updatePosition);
             }
             return [2];
@@ -533,18 +527,18 @@ exports.aptGetInstallUseNoRec = {
     name: "aptGetInstallUseNoRec",
     scope: "INTRA-DIRECTIVE",
     description: "Using the --no-install-recommends flag with apt-get install in a Dockerfile helps save layer space, improve build times, and reduce the size and attack surface of the final image, as well as prevent hidden dependencies.",
-    query: dinghy_1.nodeType.Q("SC-APT-INSTALL", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-APT-PACKAGE"))),
+    query: (0, dinghy_1.Q)("SC-APT-INSTALL", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("SC-APT-PACKAGE"))),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-APT-F-NO-INSTALL-RECOMMENDS"),
+        inNode: (0, dinghy_1.Q)("SC-APT-F-NO-INSTALL-RECOMMENDS"),
     },
     source: "https://github.com/docker-library/openjdk/pull/193/commits/1d6fa42735002d61625d18378f1ca2df39cb26a0",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[1].position)
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("--no-install-recommends"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("--no-install-recommends"))));
             return [2];
         });
     }); },
@@ -553,9 +547,9 @@ exports.aptGetInstallThenRemoveAptLists = {
     scope: "INTRA-DIRECTIVE",
     name: "aptGetInstallThenRemoveAptLists",
     description: "Running rm -rf /var/lib/apt/lists/* after apt-get install in a Dockerfile can improve efficiency and reduce the size of the image.",
-    query: dinghy_1.nodeType.Q("SC-APT-INSTALL", dinghy_1.nodeType.Q("ALL", dinghy_1.nodeType.Q("SC-APT-PACKAGE"))),
+    query: (0, dinghy_1.Q)("SC-APT-INSTALL", (0, dinghy_1.Q)("ALL", (0, dinghy_1.Q)("SC-APT-PACKAGE"))),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ABS-GLOB-STAR"), dinghy_1.nodeType.Q("ABS-APT-LISTS"), dinghy_1.nodeType.Q("ABS-PATH-VAR"))),
+        afterNode: (0, dinghy_1.Q)("SC-RM", (0, dinghy_1.Q)("SC-RM-PATH", (0, dinghy_1.Q)("ABS-GLOB-STAR"), (0, dinghy_1.Q)("ABS-APT-LISTS"), (0, dinghy_1.Q)("ABS-PATH-VAR"))),
     },
     source: "https://github.com/docker-library/ruby/pull/7/commits/950a673e59df846608f624ee55321d36ba1f89ba",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
@@ -577,19 +571,19 @@ exports.apkAddUseNoCache = {
     scope: "INTRA-DIRECTIVE",
     name: "apkAddUseNoCache",
     description: "Using the --no-cache flag with apk add in a Dockerfile can help prevent issues caused by installing outdated packages and ensure that the latest version of a package is installed, but it can increase build times.",
-    query: dinghy_1.nodeType.Q("SC-APK-ADD"),
+    query: (0, dinghy_1.Q)("SC-APK-ADD"),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-APK-F-NO-CACHE"),
-        afterNode: dinghy_1.nodeType.Q("SC-RM", dinghy_1.nodeType.Q("SC-RM-PATH", dinghy_1.nodeType.Q("ABS-VAR-CACHE-APK"))),
+        inNode: (0, dinghy_1.Q)("SC-APK-F-NO-CACHE"),
+        afterNode: (0, dinghy_1.Q)("SC-RM", (0, dinghy_1.Q)("SC-RM-PATH", (0, dinghy_1.Q)("ABS-VAR-CACHE-APK"))),
     },
     source: "https://github.com/docker-library/php/pull/228/commits/85d48c88b3e3dae303118275202327f14a8106f4",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[1].position)
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("--no-cache"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("--no-cache"))));
             return [2];
         });
     }); },

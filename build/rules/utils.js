@@ -35,13 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postFixWith = void 0;
 var dinghy_1 = require("@tdurieux/dinghy");
-var enricher_1 = __importDefault(require("../enricher"));
 function postFixWith(node, toInsert) {
     return __awaiter(this, void 0, void 0, function () {
         var script, newScript, child, _i, _a, c, position, binary;
@@ -50,17 +46,17 @@ function postFixWith(node, toInsert) {
                 console.error("[REPAIR] toInsert is null");
                 return [2];
             }
-            if (toInsert instanceof dinghy_1.nodeType.BashScript) {
+            if (toInsert instanceof dinghy_1.BashScript) {
                 toInsert = toInsert.children[0];
             }
-            (0, enricher_1.default)(toInsert);
-            script = node.getParent(dinghy_1.nodeType.BashIfThen)
-                ? node.getParent(dinghy_1.nodeType.BashIfThen)
-                : node.getParent(dinghy_1.nodeType.BashScript)
-                    ? node.getParent(dinghy_1.nodeType.BashScript)
-                    : node.getParent(dinghy_1.nodeType.DockerJSONInstruction);
-            if (script instanceof dinghy_1.nodeType.DockerJSONInstruction) {
-                newScript = new dinghy_1.nodeType.BashScript().setPosition(script.position);
+            dinghy_1.enricher.default(toInsert);
+            script = node.getParent(dinghy_1.BashIfThen)
+                ? node.getParent(dinghy_1.BashIfThen)
+                : node.getParent(dinghy_1.BashScript)
+                    ? node.getParent(dinghy_1.BashScript)
+                    : node.getParent(dinghy_1.DockerJSONInstruction);
+            if (script instanceof dinghy_1.DockerJSONInstruction) {
+                newScript = new dinghy_1.BashScript().setPosition(script.position);
                 newScript.children = script.children;
                 newScript.traverse(function (n) {
                     n.isChanged = true;
@@ -80,24 +76,22 @@ function postFixWith(node, toInsert) {
             toInsert.traverse(function (n) {
                 n.setPosition(position);
             }, { includeSelf: true });
-            if (child instanceof dinghy_1.nodeType.BashStatement && child.semicolon) {
+            if (child instanceof dinghy_1.BashStatement && child.semicolon) {
                 script.addChild(toInsert);
             }
             else {
-                binary = new dinghy_1.nodeType.BashConditionBinary();
+                binary = new dinghy_1.BashConditionBinary();
                 binary.parent = child.parent;
                 child.replace(binary);
                 binary
-                    .addChild(new dinghy_1.nodeType.BashConditionBinaryLhs()
-                    .setPosition(child.position)
-                    .addChild(child))
-                    .addChild(new dinghy_1.nodeType.BashConditionBinaryOp()
+                    .addChild(new dinghy_1.BashConditionBinaryLhs().setPosition(child.position).addChild(child))
+                    .addChild(new dinghy_1.BashConditionBinaryOp()
                     .setPosition(position)
-                    .addChild(new dinghy_1.nodeType.BashOp("10").setPosition(position)))
-                    .addChild(new dinghy_1.nodeType.BashConditionBinaryRhs()
+                    .addChild(new dinghy_1.BashOp("10").setPosition(position)))
+                    .addChild(new dinghy_1.BashConditionBinaryRhs()
                     .setPosition(position)
                     .addChild(toInsert.setPosition(position)));
-                (0, enricher_1.default)(binary);
+                dinghy_1.enricher.default(binary);
             }
             return [2];
         });

@@ -1,4 +1,4 @@
-import { nodeType } from "@tdurieux/dinghy";
+import { Q } from "@tdurieux/dinghy";
 import { Rule } from "..";
 
 /**
@@ -15,11 +15,7 @@ export default {
   name: "ruleMoreThanOneInstall",
   description: "All apt-get install should group into one.",
   source: "IMPLICIT --- slow down the build",
-  query: nodeType.Q(
-    "ANY",
-    nodeType.Q("SC-APT-INSTALL"),
-    nodeType.Q("SC-APT-INSTALL")
-  ),
+  query: Q("ANY", Q("SC-APT-INSTALL"), Q("SC-APT-INSTALL")),
   consequent: {},
   repair: async (violation) => {
     throw new Error("Not implemented");

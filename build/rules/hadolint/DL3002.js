@@ -41,9 +41,9 @@ exports.default = {
     scope: "INTRA-DIRECTIVE",
     name: "DL3002",
     description: "Switching to the root USER opens up certain security risks if an attacker gets access to the container. In order to mitigate this, switch back to a non privileged user after running the commands you need as root.",
-    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.DockerUser, dinghy_1.nodeType.Q(dinghy_1.nodeType.DockerLiteral, "root")),
+    query: (0, dinghy_1.Q)(dinghy_1.DockerUser, (0, dinghy_1.Q)(dinghy_1.DockerLiteral, "root")),
     consequent: {
-        afterNode: dinghy_1.nodeType.Q(dinghy_1.nodeType.DockerUser),
+        afterNode: (0, dinghy_1.Q)(dinghy_1.DockerUser),
     },
     source: "https://github.com/hadolint/hadolint/wiki/DL3002",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {

@@ -42,7 +42,7 @@ exports.default = {
     name: "ruleMoreThanOneInstall",
     description: "All apt-get install should group into one.",
     source: "IMPLICIT --- slow down the build",
-    query: dinghy_1.nodeType.Q("ANY", dinghy_1.nodeType.Q("SC-APT-INSTALL"), dinghy_1.nodeType.Q("SC-APT-INSTALL")),
+    query: (0, dinghy_1.Q)("ANY", (0, dinghy_1.Q)("SC-APT-INSTALL"), (0, dinghy_1.Q)("SC-APT-INSTALL")),
     consequent: {},
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {

@@ -1,17 +1,17 @@
-import { nodeType } from "@tdurieux/dinghy";
+import { AllDockerNodes, QueryI } from "@tdurieux/dinghy";
 export interface Rule {
     scope: "INTRA-DIRECTIVE" | "INTER-DIRECTIVE";
     name: string;
     description: string;
     notes?: string;
     source: string;
-    query: nodeType.QueryI;
+    query: QueryI;
     consequent: {
-        inNode?: nodeType.QueryI;
-        beforeNode?: nodeType.QueryI;
-        afterNode?: nodeType.QueryI;
+        inNode?: QueryI;
+        beforeNode?: QueryI;
+        afterNode?: QueryI;
     };
-    repair: (node: nodeType.DockerOpsNodeType) => Promise<void>;
+    repair: (node: AllDockerNodes) => Promise<void>;
 }
 export { rules as BINNACLE_RULES } from "./binnacle";
 export { rules as HADOLINT_RULES } from "./hadolint";

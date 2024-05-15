@@ -41,16 +41,16 @@ exports.default = {
     scope: "INTRA-DIRECTIVE",
     name: "DL3046",
     description: "Without the -l or the --no-log-init flag, useradd will add the user to the lastlog and faillog databases..",
-    query: dinghy_1.nodeType.Q("SC-USER-ADD"),
+    query: (0, dinghy_1.Q)("SC-USER-ADD"),
     source: "https://github.com/hadolint/hadolint/wiki/DL3046",
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-USER-ADD-F-NO-LOG-INIT"),
+        inNode: (0, dinghy_1.Q)("SC-USER-ADD-F-NO-LOG-INIT"),
     },
     repair: function (node) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[1].position)
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("--no-log-init"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("--no-log-init"))));
             return [2];
         });
     }); },

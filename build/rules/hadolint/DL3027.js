@@ -41,12 +41,12 @@ exports.default = {
     scope: "INTRA-DIRECTIVE",
     name: "DL3027",
     description: "apt is discouraged by the linux distributions as an unattended tool as its interface may suffer changes between versions. Better use the more stable apt-get and apt-cache",
-    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.BashCommandCommand, dinghy_1.nodeType.Q(dinghy_1.nodeType.BashWord, dinghy_1.nodeType.Q(dinghy_1.nodeType.DockerLiteral, "apt"))),
+    query: (0, dinghy_1.Q)(dinghy_1.BashCommandCommand, (0, dinghy_1.Q)(dinghy_1.BashWord, (0, dinghy_1.Q)(dinghy_1.DockerLiteral, "apt"))),
     consequent: {},
     source: "https://github.com/hadolint/hadolint/wiki/DL3027",
     repair: function (node) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            node.getElement(dinghy_1.nodeType.BashLiteral).value = "apt-get";
+            node.getElement(dinghy_1.BashLiteral).value = "apt-get";
             return [2];
         });
     }); },

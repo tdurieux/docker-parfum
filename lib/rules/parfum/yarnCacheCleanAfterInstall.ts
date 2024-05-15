@@ -1,4 +1,4 @@
-import { nodeType, parseShell } from "@tdurieux/dinghy";
+import { parseShell, Q } from "@tdurieux/dinghy";
 import { postFixWith } from "../utils";
 import { Rule } from "..";
 
@@ -14,12 +14,12 @@ export default {
   scope: "INTRA-DIRECTIVE",
   name: "yarnCacheCleanAfterInstall",
   description: `yarn keeps a local cache of downloaded packages. This unnecessarily increases image size. It can be cleared by executing yarn cache clean.`,
-  query: nodeType.Q("SC-YARN-INSTALL"),
+  query: Q("SC-YARN-INSTALL"),
   consequent: {
-    afterNode: nodeType.Q("SC-YARN-CACHE-CLEAN"),
+    afterNode: Q("SC-YARN-CACHE-CLEAN"),
   },
   source: "https://github.com/hadolint/hadolint/wiki/DL3060",
   repair: async (violation) => {
-    postFixWith(violation, await parseShell("yarn cache clean;"));
+    postFixWith(violation, parseShell("yarn cache clean;"));
   },
 } as Rule;

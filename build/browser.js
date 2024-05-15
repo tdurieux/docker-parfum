@@ -35,7 +35,8 @@ var rule_matcher_2 = require("./rule-matcher");
 Object.defineProperty(exports, "Violation", { enumerable: true, get: function () { return rule_matcher_2.Violation; } });
 Object.defineProperty(exports, "Matcher", { enumerable: true, get: function () { return rule_matcher_2.Matcher; } });
 exports.dinghy = __importStar(require("@tdurieux/dinghy"));
-exports.enricher = __importStar(require("./enricher"));
+var dinghy_2 = require("@tdurieux/dinghy");
+Object.defineProperty(exports, "enricher", { enumerable: true, get: function () { return dinghy_2.enricher; } });
 function parseAndMatch(dockerfile) {
     var ast = (0, dinghy_1.parseDocker)(new dinghy_1.File(null, dockerfile));
     return new rule_matcher_1.Matcher(ast).matchAll();

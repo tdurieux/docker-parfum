@@ -37,22 +37,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var dinghy_1 = require("@tdurieux/dinghy");
-var docker_type_1 = require("@tdurieux/dinghy/build/docker-type");
 exports.default = {
     scope: "INTRA-DIRECTIVE",
     name: "DL3004",
     description: "Do not use sudo as it leads to unpredictable behavior. Use a tool like gosu to enforce root.",
-    query: dinghy_1.nodeType.Q(dinghy_1.nodeType.BashCommandCommand, dinghy_1.nodeType.Q(docker_type_1.BashWord, dinghy_1.nodeType.Q(dinghy_1.nodeType.DockerLiteral, "sudo"))),
+    query: (0, dinghy_1.Q)(dinghy_1.BashCommandCommand, (0, dinghy_1.Q)(dinghy_1.BashWord, (0, dinghy_1.Q)(dinghy_1.DockerLiteral, "sudo"))),
     consequent: {},
     source: "https://github.com/hadolint/hadolint/wiki/DL3004",
     repair: function (node) { return __awaiter(void 0, void 0, void 0, function () {
         var cmd;
         return __generator(this, function (_a) {
             cmd = node.parent;
-            if (!cmd.getChild(dinghy_1.nodeType.BashCommand).semicolon) {
-                cmd.getChild(dinghy_1.nodeType.BashCommand).semicolon = cmd.semicolon;
+            if (!cmd.getChild(dinghy_1.BashCommand).semicolon) {
+                cmd.getChild(dinghy_1.BashCommand).semicolon = cmd.semicolon;
             }
-            cmd.replace(cmd.getChild(dinghy_1.nodeType.BashCommand));
+            cmd.replace(cmd.getChild(dinghy_1.BashCommand));
             return [2];
         });
     }); },

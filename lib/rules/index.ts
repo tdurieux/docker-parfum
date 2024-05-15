@@ -1,4 +1,4 @@
-import { nodeType } from "@tdurieux/dinghy";
+import { AllDockerNodes, DockerAbstractNode, QueryI } from "@tdurieux/dinghy";
 import {
   rules as BINNACLE_RULES,
   apkAddUseNoCache,
@@ -24,13 +24,13 @@ export interface Rule {
   description: string;
   notes?: string;
   source: string;
-  query: nodeType.QueryI;
+  query: QueryI;
   consequent: {
-    inNode?: nodeType.QueryI;
-    beforeNode?: nodeType.QueryI;
-    afterNode?: nodeType.QueryI;
+    inNode?: QueryI;
+    beforeNode?: QueryI;
+    afterNode?: QueryI;
   };
-  repair: (node: nodeType.DockerOpsNodeType) => Promise<void>;
+  repair: (node: AllDockerNodes) => Promise<void>;
 }
 
 export { rules as BINNACLE_RULES } from "./binnacle";

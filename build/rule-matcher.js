@@ -35,15 +35,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Matcher = exports.Violation = void 0;
 var dinghy_1 = require("@tdurieux/dinghy");
-var enricher_1 = __importDefault(require("./enricher"));
 var rules_1 = require("./rules");
-var docker_type_1 = require("@tdurieux/dinghy/build/docker-type");
 var Violation = (function () {
     function Violation(rule, node) {
         this.rule = rule;
@@ -61,9 +56,9 @@ var Violation = (function () {
                         if (!this.isStillValid()) return [3, 2];
                         node_1 = this.node;
                         if (opt.clone) {
-                            parent = this.node instanceof docker_type_1.DockerFile
+                            parent = this.node instanceof dinghy_1.DockerFile
                                 ? this.node.clone()
-                                : (_a = this.node.getParent(dinghy_1.nodeType.DockerFile)) === null || _a === void 0 ? void 0 : _a.clone();
+                                : (_a = this.node.getParent(dinghy_1.DockerFile)) === null || _a === void 0 ? void 0 : _a.clone();
                             if (parent == null) {
                                 console.error("Dockerfile not found in parent");
                                 return [2, this.node];
@@ -90,7 +85,9 @@ var Violation = (function () {
         return newViolations.length > 0;
     };
     Violation.prototype.toString = function () {
-        return "[VIOLATION] -> ".concat(this.rule.name, " at ").concat(this.node.position, "\n        ").concat(this.rule.description, "\n                ").concat(this.node.toString(false).replace(/\n/g, "\n                "));
+        return "[VIOLATION] -> ".concat(this.rule.name, " at ").concat(this.node.position, "\n        ").concat(this.rule.description, "\n                ").concat(this.node
+            .toString(false)
+            .replace(/\n/g, "\n                "));
     };
     return Violation;
 }());
@@ -98,7 +95,7 @@ exports.Violation = Violation;
 var Matcher = (function () {
     function Matcher(root, _a) {
         var _b = _a === void 0 ? { toEnrich: true } : _a, toEnrich = _b.toEnrich;
-        this._root = toEnrich ? (0, enricher_1.default)(root) : root;
+        this._root = toEnrich ? dinghy_1.enricher.default(root) : root;
     }
     Object.defineProperty(Matcher.prototype, "node", {
         get: function () {

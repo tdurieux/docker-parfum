@@ -6,7 +6,7 @@ export function praseFile(file: string) {
   const dockerParser = new DockerParser(new File(filePath));
   const ast = dockerParser.parse();
   expect(dockerParser.errors).toHaveLength(0);
-  const printer = new Printer(ast);
+  const printer = ast.printer();
   printer.print();
   expect(printer.errors).toHaveLength(0);
   return ast;

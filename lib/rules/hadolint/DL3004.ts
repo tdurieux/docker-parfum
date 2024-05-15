@@ -1,22 +1,24 @@
-import { nodeType } from "@tdurieux/dinghy";
+import {
+  BashCommand,
+  BashCommandCommand,
+  BashWord,
+  DockerLiteral,
+  Q,
+} from "@tdurieux/dinghy";
 import { Rule } from "..";
-import { BashCommand, BashWord } from "@tdurieux/dinghy/build/docker-type";
 
 export default {
   scope: "INTRA-DIRECTIVE",
   name: "DL3004",
   description: `Do not use sudo as it leads to unpredictable behavior. Use a tool like gosu to enforce root.`,
-  query: nodeType.Q(
-    nodeType.BashCommandCommand,
-    nodeType.Q(BashWord, nodeType.Q(nodeType.DockerLiteral, "sudo"))
-  ),
+  query: Q(BashCommandCommand, Q(BashWord, Q(DockerLiteral, "sudo"))),
   consequent: {},
   source: "https://github.com/hadolint/hadolint/wiki/DL3004",
   repair: async (node) => {
     const cmd = node.parent as BashCommand;
-    if (!cmd.getChild(nodeType.BashCommand).semicolon) {
-      cmd.getChild(nodeType.BashCommand).semicolon = cmd.semicolon;
+    if (!cmd.getChild(BashCommand).semicolon) {
+      cmd.getChild(BashCommand).semicolon = cmd.semicolon;
     }
-    cmd.replace(cmd.getChild(nodeType.BashCommand));
+    cmd.replace(cmd.getChild(BashCommand));
   },
 } as Rule;

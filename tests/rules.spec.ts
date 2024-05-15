@@ -1,5 +1,4 @@
-import { readFileSync } from "fs";
-import { parseShell, parseDocker, nodeType } from "@tdurieux/dinghy";
+import { parseShell, parseDocker, Q, DockerRun } from "@tdurieux/dinghy";
 import { Matcher } from "../lib/rule-matcher";
 import {
   apkAddUseNoCache,
@@ -213,7 +212,7 @@ describe("Testing rule matcher", () => {
 
     await violations[0].repair();
     expect(matcher.node.toString(true)).toEqual(
-      "RUN mktemp -d fold && rm -rf fold\n"
+      "RUN mktemp -d fold && rm -rf fold"
     );
   });
   test("rmRecursiveAfterMktempD valid", () => {
@@ -406,7 +405,7 @@ describe("Testing rule matcher", () => {
   && { \\
     echo 'install: --no-document'; \\
     echo 'update: --no-document'; \\
-  } >> /usr/local/etc/gemrc;\nRUN gem update --system \$RUBYGEMS_VERSION`
+  } >> /usr/local/etc/gemrc; RUN gem update --system \$RUBYGEMS_VERSION`
     );
   });
   test("gemUpdateNoDocument valid", () => {
@@ -549,14 +548,7 @@ describe("Testing rule matcher", () => {
     await matcher.match(aptGetInstallUseNoRec)[0].repair();
     await violations[0].repair();
     expect(
-      root
-        .find(
-          nodeType.Q(
-            nodeType.DockerRun,
-            nodeType.Q("ALL", nodeType.Q("SC-APT-UPDATE"))
-          )
-        )[0]
-        .toString(true)
+      root.find(Q(DockerRun, Q("ALL", Q("SC-APT-UPDATE"))))[0].toString(true)
     ).toEqual(
       "RUN apt-get update -qq && apt-get install --no-install-recommends -yq make gcc flex bison libcap-ng-dev"
     );

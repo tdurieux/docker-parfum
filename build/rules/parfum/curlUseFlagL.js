@@ -41,18 +41,18 @@ exports.default = {
     scope: "INTRA-DIRECTIVE",
     name: "curlUseFlagL",
     description: "The `-L` option in `curl` stands for \"follow redirects.\" When this option is used, curl will follow any redirects that it encounters when making an HTTP request. This can be useful in a Dockerfile if you want to download a file from a URL that may redirect to another URL.",
-    query: dinghy_1.nodeType.Q("SC-CURL"),
+    query: (0, dinghy_1.Q)("SC-CURL"),
     consequent: {
-        inNode: dinghy_1.nodeType.Q("SC-CURL-F-LOCATION"),
+        inNode: (0, dinghy_1.Q)("SC-CURL-F-LOCATION"),
     },
     source: "Implicit",
     repair: function (violation) { return __awaiter(void 0, void 0, void 0, function () {
         var node;
         return __generator(this, function (_a) {
             node = violation;
-            node.addChild(new dinghy_1.nodeType.BashCommandArgs()
+            node.addChild(new dinghy_1.BashCommandArgs()
                 .setPosition(node.children[0].position)
-                .addChild(new dinghy_1.nodeType.BashWord().addChild(new dinghy_1.nodeType.BashLiteral("-L"))));
+                .addChild(new dinghy_1.BashWord().addChild(new dinghy_1.BashLiteral("-L"))));
             return [2];
         });
     }); },

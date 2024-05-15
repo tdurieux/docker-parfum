@@ -60,6 +60,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var fs_1 = require("fs");
 var commander_1 = require("commander");
 var rule_matcher_1 = require("../rule-matcher");
 var Diff = __importStar(require("diff"));
@@ -71,22 +72,17 @@ program
     .command("rules")
     .description("List the supported rules")
     .action(function () {
-    return __awaiter(this, void 0, void 0, function () {
-        var index, _i, ALL_RULES_1, rule;
-        return __generator(this, function (_a) {
-            index = 0;
-            for (_i = 0, ALL_RULES_1 = rules_1.ALL_RULES; _i < ALL_RULES_1.length; _i++) {
-                rule = ALL_RULES_1[_i];
-                console.log("\t ".concat(++index, ". [").concat(rule.name, "] ").concat(rule.description));
-            }
-            return [2];
-        });
-    });
+    var index = 0;
+    for (var _i = 0, ALL_RULES_1 = rules_1.ALL_RULES; _i < ALL_RULES_1.length; _i++) {
+        var rule = ALL_RULES_1[_i];
+        console.log("".concat(rule.name));
+    }
 });
 program
     .command("repair")
     .description("Repair the Dockerfile smells")
-    .argument("<file>", "The filepath to the Dockerfile")
+    .argument("[file]", "The filepath to the Dockerfile")
+    .option("--stdin", "Read the Dockerfile from stdin", false)
     .option("-o, --output <output>", "the output destination of the repair")
     .action(function (file, options) {
     return __awaiter(this, void 0, void 0, function () {
@@ -94,10 +90,15 @@ program
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    if (!options.stdin && !file) {
+                        console.error("Please provide a Dockerfile file");
+                        process.exit(1);
+                    }
+                    if (options.stdin && !file) {
+                        file = stdinToString();
+                    }
                     parser = new dinghy_1.DockerParser(new dinghy_1.File(file));
-                    return [4, parser.parse()];
-                case 1:
-                    dockerfile = _a.sent();
+                    dockerfile = parser.parse();
                     matcher = new rule_matcher_1.Matcher(dockerfile);
                     smells = matcher.matchAll();
                     if (smells.length == 0) {
@@ -107,34 +108,34 @@ program
                         console.log("Found ".concat(smells.length, " smells in ").concat(file, "."));
                     }
                     _i = 0, smells_1 = smells;
-                    _a.label = 2;
-                case 2:
-                    if (!(_i < smells_1.length)) return [3, 7];
+                    _a.label = 1;
+                case 1:
+                    if (!(_i < smells_1.length)) return [3, 6];
                     smell = smells_1[_i];
                     console.log(smell.toString());
-                    _a.label = 3;
-                case 3:
-                    _a.trys.push([3, 5, , 6]);
+                    _a.label = 2;
+                case 2:
+                    _a.trys.push([2, 4, , 5]);
                     return [4, smell.repair()];
-                case 4:
+                case 3:
                     _a.sent();
-                    return [3, 6];
-                case 5:
+                    return [3, 5];
+                case 4:
                     error_1 = _a.sent();
-                    return [3, 6];
-                case 6:
+                    return [3, 5];
+                case 5:
                     _i++;
-                    return [3, 2];
-                case 7:
+                    return [3, 1];
+                case 6:
                     repairedOutput = matcher.node.toString(true);
                     diff = Diff.createTwoFilesPatch(file, file, parser.file.content, repairedOutput);
-                    if (!options.output) return [3, 9];
+                    if (!options.output) return [3, 8];
                     return [4, (0, promises_1.writeFile)(options.output, repairedOutput, { encoding: "utf-8" })];
-                case 8:
+                case 7:
                     _a.sent();
                     console.log("The repaired Dockerfile was written in ".concat(options.output));
-                    _a.label = 9;
-                case 9:
+                    _a.label = 8;
+                case 8:
                     console.log("The changes:\n");
                     console.log(diff);
                     return [2];
@@ -142,29 +143,56 @@ program
         });
     });
 });
+function stdinToString() {
+    var BUFSIZE = 256;
+    var buf = Buffer.alloc(BUFSIZE);
+    var bytesRead;
+    var stdin = "";
+    do {
+        bytesRead = 0;
+        try {
+            bytesRead = (0, fs_1.readSync)(process.stdin.fd, buf, 0, BUFSIZE, null);
+        }
+        catch (e) {
+            if (e.code === "EAGAIN") {
+                throw "ERROR: interactive stdin input not supported.";
+            }
+            else if (e.code === "EOF") {
+                break;
+            }
+            throw e;
+        }
+        if (bytesRead === 0) {
+            break;
+        }
+        stdin += buf.toString(undefined, 0, bytesRead);
+    } while (bytesRead > 0);
+    return stdin;
+}
 program
     .command("analyze")
     .description("Analyze a Dockerfile file for smells")
-    .argument("<file>", "The filepath to the Dockerfile")
-    .action(function (file) { return __awaiter(void 0, void 0, void 0, function () {
-    var dockerfile, matcher, smells;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4, (0, dinghy_1.parseDocker)(file)];
-            case 1:
-                dockerfile = _a.sent();
-                matcher = new rule_matcher_1.Matcher(dockerfile);
-                smells = matcher.matchAll();
-                if (smells.length == 0) {
-                    console.log("Well done, no smells found was found in ".concat(file, "!"));
-                }
-                else {
-                    console.log("Found ".concat(smells.length, " smells in ").concat(file, "."));
-                }
-                smells.forEach(function (e) { return console.log(e.toString()); });
-                return [2];
-        }
-    });
-}); });
+    .option("--stdin", "Read the Dockerfile from stdin", false)
+    .argument("[file]", "The filepath to the Dockerfile")
+    .action(function (file, options) {
+    if (!options.stdin && !file) {
+        console.error("Please provide a Dockerfile file");
+        process.exit(1);
+    }
+    if (options.stdin && !file) {
+        file = stdinToString();
+    }
+    console.log("Analyzing ".concat(file));
+    var dockerfile = (0, dinghy_1.parseDocker)(file);
+    var matcher = new rule_matcher_1.Matcher(dockerfile);
+    var smells = matcher.matchAll();
+    if (smells.length == 0) {
+        console.log("Well done, no smells found was found in ".concat(file, "!"));
+    }
+    else {
+        console.log("Found ".concat(smells.length, " smells in ").concat(file, "."));
+    }
+    smells.forEach(function (e) { return console.log(e.toString()); });
+});
 program.parse();
 //# sourceMappingURL=index.js.map

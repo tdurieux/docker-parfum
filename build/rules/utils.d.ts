@@ -1,2 +1,2 @@
-import { nodeType } from "@tdurieux/dinghy";
-export declare function postFixWith(node: nodeType.DockerOpsNodeType, toInsert: nodeType.DockerOpsNodeType): Promise<void>;
+import { AllDockerNodes } from "@tdurieux/dinghy";
+export declare function postFixWith(node: AllDockerNodes, toInsert: AllDockerNodes): Promise<void>;

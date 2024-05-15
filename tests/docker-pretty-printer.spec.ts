@@ -16,7 +16,7 @@ async function parseAndRepair(name: string) {
 describe("Testing docker-pretty-printer", () => {
   test("print reprint_issue", () => {
     const dockerfile = praseFile("reprint_issue");
-    expect(dockerfile.toString(true)).toBe(dockerfile.position.file.content);
+    expect(dockerfile.toString(true)).toBe(dockerfile.position.file?.content);
   });
   test("test repair non sha256", async () => {
     await parseAndRepair("non_sha256echo");
