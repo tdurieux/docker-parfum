@@ -1,25 +1,30 @@
-# Docker-Parfum
+<div align="center">
 
-[![CI](https://github.com/tdurieux/docker-parfum/actions/workflows/build-test.yml/badge.svg)](https://github.com/tdurieux/docker-parfum/actions/workflows/build-test.yml) ![NPM Version](https://img.shields.io/npm/v/%40tdurieux%2Fdocker-parfum)
+# 🐳 docker-parfum
 
-Parfum is a tool to detect and repair smells in Dockerfile smells.
+**Detect and automatically repair Dockerfile smells that inflate image size and attack surface.**
 
-The impact of the smells is described in the paper "Empirical Study of the Docker Smells Impact on the Image Size".
+[![CI](https://github.com/tdurieux/docker-parfum/actions/workflows/build-test.yml/badge.svg)](https://github.com/tdurieux/docker-parfum/actions/workflows/build-test.yml)
+[![npm](https://img.shields.io/npm/v/@tdurieux/docker-parfum?logo=npm)](https://www.npmjs.com/package/@tdurieux/docker-parfum)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Docker-Parfum currently supports 32 rules that have been partially identified by Henkel et al. in "Learning from, Understanding, and Supporting DevOps Artifacts for Docker"
+[Try it in the browser](https://durieux.me/docker-parfum/) · [Rules](#supported-rules) · [Paper](https://arxiv.org/abs/2312.13888)
 
-## Build
+</div>
 
-```
-npm run build
-```
+## What it does
+
+Dockerfiles quietly accumulate *smells* — missing flags, leftover package caches, insecure defaults — that make images larger and less secure. They are hard to spot because they hide across both the Dockerfile instructions and the shell commands inside `RUN`.
+
+docker-parfum parses the Dockerfile **and its embedded shell** into a single AST (via [Dinghy](https://github.com/tdurieux/Dinghy)), matches it against **32 rules**, and can **rewrite the file to fix the violations automatically**.
+
+The impact of these smells is measured in the paper *[Empirical Study of the Docker Smells Impact on the Image Size](https://arxiv.org/abs/2312.13888)* (ICSE 2024). The rule set builds on smells identified by Henkel et al., *Learning from, Understanding, and Supporting DevOps Artifacts for Docker*.
 
 ## Usage
 
-### Web-based
+### Browser
 
-You can use the web version of Docker-Parfum https://durieux.me/docker-parfum/ (The website is purely static no data is sent).
-
+Use the fully static web version — no data leaves your machine: **<https://durieux.me/docker-parfum/>**
 
 ### CLI
 
@@ -31,13 +36,10 @@ docker-parfum repair <dockerfile>
 ```
 Usage: docker-parfum [options] [command]
 
-Options:
-  -h, --help               display help for command
-
 Commands:
   rules                    List the supported rules
+  analyze <file>           Analyze a Dockerfile for smells
   repair [options] <file>  Repair the Dockerfile smells
-  analyze <file>           Analyze a Dockerfile file for smells
   help [command]           display help for command
 ```
 
@@ -47,86 +49,107 @@ Commands:
 import { DockerParser, File } from "@tdurieux/dinghy";
 import { Matcher, rules } from "@tdurieux/docker-parfum";
 
-const dockerParser = new DockerParser(new File(<filePath>,<filecontent>)); // the path or the content can be provided
+// The path or the content can be provided
+const dockerParser = new DockerParser(new File(filePath, fileContent));
 const ast = await dockerParser.parse();
-const matcher = new Matcher(dockerfile);
-const violations = matcher.match(rules.aptGetInstallThenRemoveAptLists); // look for a specific rule
-const allViolations = matcher.matchAll();
+
+const matcher = new Matcher(ast);
+matcher.match(rules.aptGetInstallThenRemoveAptLists); // a specific rule
+const allViolations = matcher.matchAll();               // every rule
 
 for (const violation of allViolations) {
-  await violation.repair(); // repair the violation
+  await violation.repair();
 }
 
 const repairedDockerfile = ast.toString(true);
 ```
 
-**Browser**
+<details>
+<summary>Browser build & semantic enricher</summary>
+
+**Browser build**
 
 ```javascript
 const dockerParser = new dockerParfum.dinghy.dockerfileParser.DockerParser(
   new dockerParfum.dinghy.File(undefined, dockerfile)
 );
-
 const ast = await dockerParser.parse();
 const matcher = new dockerParfum.Matcher(ast);
-const violations = matcher.match(
-  dockerParfum.rules.aptGetInstallThenRemoveAptLists
-); // look for a specific rule
-const violations = matcher.matchAll();
-
-for (const violation of allViolations) {
-  await violation.repair(); // repair the violation
+for (const violation of matcher.matchAll()) {
+  await violation.repair();
 }
-
 const repairedDockerfile = ast.toString(true);
 ```
 
-## Enricher
+**Enricher** — annotate the AST with semantic node types:
 
 ```typescript
-import * as dindhy from "@tdurieux/dinghy";
+import * as dinghy from "@tdurieux/dinghy";
 import { enricher } from "@tdurieux/docker-parfum";
 
-const ast = await dindhy.parseDocker(/* file */);
+const ast = await dinghy.parseDocker(/* file */);
 enricher.enrich(ast);
-ast.find(dindhy.nodeType.Q("SC-APT-PACKAGE"));
+ast.find(dinghy.nodeType.Q("SC-APT-PACKAGE"));
 ```
 
+</details>
 
-## Supported Rules
+## Building from source
 
-| #   | Rule                            | Description                                                                                                                                                                                                                                                                      |
-| --- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | curlUseFlagL                    | The `-L` option in `curl` stands for "follow redirects." When this option is used, curl will follow any redirects that it encounters when making an HTTP request. This can be useful in a Dockerfile if you want to download a file from a URL that may redirect to another URL. |
-| 2   | ruleMoreThanOneInstall          | All apt-get installs should be grouped into one.                                                                                                                                                                                                                                       |
-| 3   | curlUseFlagF                    | Using curl -f in a Dockerfile can help to prevent the build from failing if the HTTP request returns an error code >= 400.                                                                                                                                                       |
-| 4   | npmCacheCleanAfterInstall       | Running npm cache clean after npm install in a Dockerfile can help to reduce the size of the image and ensure that the latest version of packages are installed.                                                                                                                 |
-| 5   | npmCacheCleanUseForce           | Using the --force flag with npm cache clean can override the default behavior of npm and force the cache to be cleaned, even if it is not more than 3 days old or if npm is in a "read-only" state.                                                                              |
-| 6   | yarnCacheCleanAfterInstall      | yarn keeps a local cache of downloaded packages. This unnecessarily increases image size. It can be cleared by executing yarn cache clean.                                                                                                                                       |
-| 7   | rmRecursiveAfterMktempD         | Using mktemp -d followed by rm -r in a Dockerfile can create and delete a temporary directory, helping to keep the image small and clean up sensitive data.                                                                                                                      |
-| 8   | curlUseHttpsUrl                 | Using https instead of http with curl in a Dockerfile can provide an encrypted connection for transferring data and ensure that curl can access resources that may require https.                                                                                                |
-| 9   | wgetUseHttpsUrl                 | Using https instead of http with wget in a Dockerfile can provide an encrypted connection for transferring data and ensure that wget can access resources that may require https.                                                                                                |
-| 10  | pipUseNoCacheDir                | Using the --no-cache-dir flag with pip in a Dockerfile can disable the package cache, ensuring that the latest version of a package and its dependencies are installed.                                                                                                          |
-| 11  | mkdirUsrSrcThenRemove           | Running rm -rf /usr/src\* after creating the /usr/src directory in a Dockerfile helps keep the file system organized, reduce clutter, and free up space, but it is important to be cautious when using the rm -rf command.                                                       |
-| 12  | configureShouldUseBuildFlag     | Passing the --build flag to ./configure in a Dockerfile can help to ensure that the configure script correctly detects the current build environment and generates the correct Makefiles.                                                                                        |
-| 13  | gemUpdateSystemRmRootGem        | Removing the /root/.gem directory after running gem update --system can ensure that all of the installed gems are compatible with the new version of gem and that the image starts with a clean slate.                                                                           |
-| 14  | sha256sumEchoOneSpaces          | The sha256sum command reads input from stdin with one space as a separator in order to distinguish the input from a filename.                                                                                                                                                    |
-| 15  | gemUpdateNoDocument             | Adding the --no-document flag to the .gemrc config file or using it with gem update can speed up the update process by skipping the installation of documentation for updated gems.                                                                                              |
-| 16  | gpgVerifyAscRmAsc               | It is generally good practice to remove the .asc file after verifying its signature because the .asc file serves no further purpose once the signature has been verified.                                                                                                        |
-| 17  | yumInstallForceYes              | Using the -y flag with yum install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.                                                               |
-| 18  | yumInstallRmVarCacheYum         | Removing the /var/cache/yum directory after running yum install in a Dockerfile helps reduce the size of the final image and can improve build times, as well as prevent issues caused by outdated or inconsistent cache data.                                                   |
-| 19  | tarSomethingRmTheSomething      | Removing the .tar file after extracting its contents in a Dockerfile helps reduce the size of the final image and can improve build times, as well as keep the file system organized and reduce clutter.                                                                         |
-| 20  | gpgUseBatchFlag                 | Using the --batch flag with gpg in a Dockerfile allows the command to run without user input, but it is important to carefully consider the implications of using the flag to ensure that it is appropriate for the task at hand.                                                |
-| 21  | gpgUseHaPools                   | Using ha.pool._ instead of pool._ with gpg in a Dockerfile improves key server access reliability and efficiency.                                                                                                                                                                |
-| 22  | aptGetInstallUseY               | Using the -y flag with apt-get install in a Dockerfile allows for fully automated package installation, but it is important to carefully consider the packages being installed to avoid potential issues or conflicts.                                                           |
-| 23  | aptGetInstallUseNoRec           | Using the --no-install-recommends flag with apt-get install in a Dockerfile helps save layer space, improve build times, and reduce the size and attack surface of the final image, as well as prevent hidden dependencies.                                                      |
-| 24  | aptGetUpdatePrecedesInstall     | Running apt-get update and apt-get install in a single layer in a Dockerfile improves efficiency, reliability, and readability.                                                                                                                                                  |
-| 25  | aptGetInstallThenRemoveAptLists | Running rm -rf /var/lib/apt/lists/\* after apt-get install in a Dockerfile can improve efficiency and reduce the size of the image.                                                                                                                                              |
-| 26  | apkAddUseNoCache                | Using the --no-cache flag with apk add in a Dockerfile can help prevent issues caused by installing outdated packages and ensure that the latest version of a package is installed, but it can increase build times.                                                             |
-| 27  | DL3002                          | Switching to the root USER opens up certain security risks if an attacker gets access to the container. In order to mitigate this, switch back to a non privileged user after running the commands you need as root.                                                             |
-| 28  | DL3004                          | Do not use sudo as it leads to unpredictable behavior. Use a tool like gosu to enforce root.                                                                                                                                                                                     |
-| 29  | DL3020                          | Use COPY instead of ADD for files and folders.                                                                                                                                                                                                                                   |
-| 30  | DL3027                          | apt is discouraged by the linux distributions as an unattended tool as its interface may suffer changes between versions. Better use the more stable apt-get and apt-cache                                                                                                       |
-| 31  | DL3029                          | Specifying --platform= in the docker file FROM clause forces the Image to build only one target platform.                                                                                                                                                                        |
-| 32  | DL3046                          | Without the -l or the --no-log-init flag, useradd will add the user to the lastlog and faillog databases.                                                                                                                                                                        |
+```bash
+npm run build
+```
 
+## Supported rules
+
+docker-parfum ships **32 rules**, covering package managers (`apt-get`, `apk`, `yum`, `npm`, `yarn`, `pip`, `gem`), download tools (`curl`, `wget`), archive/cleanup hygiene, and a set of Hadolint-style checks (`DL3002`, `DL3004`, `DL3020`, `DL3027`, `DL3029`, `DL3046`).
+
+<details>
+<summary>Full list of 32 rules</summary>
+
+| #   | Rule                            | Description                                                                                                             |
+| --- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| 1   | curlUseFlagL                    | Use `-L` with `curl` to follow redirects when downloading.                                                             |
+| 2   | ruleMoreThanOneInstall          | Group all `apt-get install` calls into a single command.                                                               |
+| 3   | curlUseFlagF                    | Use `curl -f` to fail the build on HTTP error codes (≥ 400).                                                           |
+| 4   | npmCacheCleanAfterInstall       | Run `npm cache clean` after `npm install` to reduce image size.                                                        |
+| 5   | npmCacheCleanUseForce           | Use `--force` with `npm cache clean` so it actually clears.                                                            |
+| 6   | yarnCacheCleanAfterInstall      | Clear the yarn cache with `yarn cache clean` to shrink the image.                                                      |
+| 7   | rmRecursiveAfterMktempD         | Remove temporary directories created with `mktemp -d`.                                                                 |
+| 8   | curlUseHttpsUrl                 | Prefer `https` over `http` with `curl`.                                                                                |
+| 9   | wgetUseHttpsUrl                 | Prefer `https` over `http` with `wget`.                                                                                |
+| 10  | pipUseNoCacheDir                | Use `--no-cache-dir` with `pip` to avoid caching packages.                                                            |
+| 11  | mkdirUsrSrcThenRemove           | Clean up `/usr/src*` after use.                                                                                        |
+| 12  | configureShouldUseBuildFlag     | Pass the build flag to `./configure` so it detects the environment.                                                    |
+| 13  | gemUpdateSystemRmRootGem        | Remove `/root/.gem` after `gem update --system`.                                                                       |
+| 14  | sha256sumEchoOneSpaces          | `sha256sum` expects a single space separator when reading from stdin.                                                  |
+| 15  | gemUpdateNoDocument             | Skip gem docs with `--no-document` to speed up updates.                                                                |
+| 16  | gpgVerifyAscRmAsc               | Remove the `.asc` file once its signature is verified.                                                                 |
+| 17  | yumInstallForceYes              | Use `-y` with `yum install` for non-interactive builds.                                                               |
+| 18  | yumInstallRmVarCacheYum         | Remove `/var/cache/yum` after `yum install`.                                                                           |
+| 19  | tarSomethingRmTheSomething      | Remove the `.tar` archive after extracting it.                                                                         |
+| 20  | gpgUseBatchFlag                 | Use `--batch` with `gpg` for non-interactive runs.                                                                    |
+| 21  | gpgUseHaPools                   | Prefer `ha.pool.*` key servers with `gpg`.                                                                            |
+| 22  | aptGetInstallUseY               | Use `-y` with `apt-get install` for non-interactive builds.                                                           |
+| 23  | aptGetInstallUseNoRec           | Use `--no-install-recommends` to reduce size and attack surface.                                                       |
+| 24  | aptGetUpdatePrecedesInstall     | Run `apt-get update` and `install` in the same layer.                                                                 |
+| 25  | aptGetInstallThenRemoveAptLists | Remove `/var/lib/apt/lists/*` after `apt-get install`.                                                                |
+| 26  | apkAddUseNoCache                | Use `--no-cache` with `apk add`.                                                                                       |
+| 27  | DL3002                          | Switch back to a non-privileged `USER` after root operations.                                                          |
+| 28  | DL3004                          | Do not use `sudo`; prefer a tool like `gosu`.                                                                         |
+| 29  | DL3020                          | Use `COPY` instead of `ADD` for files and folders.                                                                    |
+| 30  | DL3027                          | Prefer `apt-get`/`apt-cache` over the less stable `apt`.                                                              |
+| 31  | DL3029                          | Avoid `--platform` in `FROM` to keep the image multi-platform.                                                        |
+| 32  | DL3046                          | Use `-l`/`--no-log-init` with `useradd` to avoid huge sparse log files.                                              |
+
+</details>
+
+## Citation
+
+If you use docker-parfum in your research, please cite the paper (see [`CITATION.cff`](CITATION.cff)):
+
+> T. Durieux. *Empirical Study of the Docker Smells Impact on the Image Size.* ICSE 2024. <https://arxiv.org/abs/2312.13888>
+
+## License
+
+[MIT](LICENSE) © [Thomas Durieux](https://durieux.me)
